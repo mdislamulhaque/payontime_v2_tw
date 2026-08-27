@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+label {
+  @apply text-start;
+}
