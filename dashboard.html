@@ -2603,7 +2603,7 @@
                       Add New Recipient
                     </h3>
                     <button
-                      onclick="closeModal()"
+                      onclick="closeRecipientModal()"
                       class="text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer"
                     >
                       ✕
@@ -2732,7 +2732,7 @@
                     >
                       <button
                         type="button"
-                        onclick="closeModal()"
+                        onclick="closeRecipientModal()"
                         class="py-2.5 px-5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 cursor-pointer"
                       >
                         Cancel
@@ -4536,7 +4536,7 @@
         document.getElementById("view-modal").classList.remove("hidden");
       }
 
-      function closeModal() {
+      function closeRecipientModal() {
         document.getElementById("recipient-modal").classList.add("hidden");
       }
 
@@ -4569,7 +4569,7 @@
           recipients.unshift(recData);
         }
 
-        closeModal();
+        closeRecipientModal();
         filterRecipients();
       }
 
