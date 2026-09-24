@@ -943,30 +943,30 @@
                               value="0"
                               min="0"
                               step="0.01"
-                              class="w-full bg-transparent pt-4 pb-1 px-3 text-xl font-black text-slate-900 focus:outline-none"
+                              class="w-1/2 min-w-0 bg-transparent pt-4 pb-1 px-3 text-xl font-black text-slate-900 focus:outline-none"
                             />
 
                             <!-- Custom Searchable Select (Send) -->
                             <div
-                              class="shrink-0 border-l border-slate-200 pl-2 relative"
+                              class="w-1/2 min-w-0 relative"
                               id="send-dropdown-wrapper"
                             >
                               <button
                                 type="button"
                                 id="send-select-btn"
-                                class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
+                                class="w-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
                               >
                                 <span id="send-selected-label">🇺🇸 USD</span>
                                 <i
                                   data-lucide="chevron-down"
-                                  class="w-3.5 h-3.5 text-slate-400"
+                                  class="w-3.5 h-3.5 text-slate-100"
                                 ></i>
                               </button>
 
                               <!-- Dropdown Menu -->
                               <div
                                 id="send-menu"
-                                class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2"
+                                class="hidden absolute right-0 top-full mt-2 w-full bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2"
                               >
                                 <input
                                   type="text"
@@ -1014,30 +1014,30 @@
                               type="number"
                               id="receive-amount"
                               readonly
-                              class="w-full bg-transparent pt-4 pb-1 px-3 text-xl font-black text-[#36b647] focus:outline-none cursor-default"
+                              class="w-1/2 min-w-0 bg-transparent pt-4 pb-1 px-3 text-xl font-black text-[#36b647] focus:outline-none cursor-default"
                             />
 
                             <!-- Custom Searchable Select (Receive) -->
                             <div
-                              class="shrink-0 border-l border-slate-200 pl-2 relative"
+                              class="w-1/2 min-w-0 relative"
                               id="receive-dropdown-wrapper"
                             >
                               <button
                                 type="button"
                                 id="receive-select-btn"
-                                class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
+                                class="w-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
                               >
                                 <span id="receive-selected-label">🇧🇩 BDT</span>
                                 <i
                                   data-lucide="chevron-down"
-                                  class="w-3.5 h-3.5 text-slate-400"
+                                  class="w-3.5 h-3.5 text-slate-100"
                                 ></i>
                               </button>
 
                               <!-- Dropdown Menu -->
                               <div
                                 id="receive-menu"
-                                class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2"
+                                class="hidden absolute right-0 top-full mt-2 w-full bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2"
                               >
                                 <input
                                   type="text"
