@@ -3,86 +3,307 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Hidmona</title>
+  <title>Login | PayOnTime</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Slider fade animation for App Showcase */
+    .app-slide { 
+      position: absolute; 
+      inset: 0; 
+      opacity: 0; 
+      transition: opacity 0.8s ease-in-out; 
+      pointer-events: none;
+    }
+    .app-slide.active { 
+      opacity: 1; 
+      pointer-events: auto;
+    }
+
+    /* Slider dots */
+    .dot { width: 6px; height: 6px; border-radius: 9999px; background: #a7f3d0; transition: all 0.35s; cursor: pointer; }
+    .dot.active { width: 22px; background: #059669; }
+  </style>
 </head>
-<body class="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-  <main class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
-    <header class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-6 text-white">
-      <div class="flex items-center gap-2 mb-5">
-        <div class="w-9 h-9 rounded-xl bg-[#E53935] flex items-center justify-center font-bold shadow-lg shadow-red-500/30">H</div>
-        <span class="font-bold text-xl tracking-tight">Hidmona</span>
-      </div>
-      <h1 class="text-xl font-bold">Welcome Back</h1>
-      <p class="text-xs text-slate-300 mt-1">Sign in to send money worldwide with guaranteed exchange rates.</p>
-    </header>
+<body class="bg-white min-h-screen w-full flex text-slate-900">
 
-    <section class="p-6">
-      <div id="message" class="hidden mb-4 p-3 rounded-xl text-xs font-medium"></div>
+  <main class="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2">
 
-      <div class="bg-slate-100 p-1 rounded-xl flex items-center text-xs font-semibold text-slate-600 mb-4">
-        <button id="emailTab" type="button" class="flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm font-bold">Email Login</button>
-        <button id="smsTab" type="button" class="flex-1 py-2 rounded-lg hover:text-slate-900">SMS Login</button>
+    <!-- ====== LEFT PANEL: Light Green Gradient Showcase ====== -->
+    <div class="hidden lg:flex relative flex-col justify-between p-10 xl:p-12 text-slate-800 overflow-hidden bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100 border-r border-emerald-100">
+
+      <!-- Background Glow Effect -->
+      <div class="absolute inset-0 z-0 opacity-60 pointer-events-none">
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-blue-200/50 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-200/50 rounded-full blur-3xl"></div>
       </div>
 
-      <form id="loginForm" class="space-y-4">
-        <div>
-          <label id="identifierLabel" class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
-          <input id="identifier" type="email" required placeholder="name@example.com"
-            class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#E53935] focus:bg-white transition-all">
+      <!-- Top Branding -->
+      <div class="relative z-10 flex items-center gap-3">
+        <img src="./public/logo.png" alt="PayOnTime Logo" class="h-10 rounded-xl object-contain shadow-md shadow-emerald-900/10 bg-white p-0.5 border border-emerald-100">
+      </div>
+
+      <!-- Middle: Mobile App Showcase + Buttons underneath -->
+      <div class="relative z-10 my-auto py-4 flex flex-col items-center justify-center gap-6">
+        
+        <!-- App Image Slider Container -->
+        <div class="relative w-full max-w-xs xl:max-w-sm h-80 overflow-hidden rounded-2xl shadow-xl shadow-emerald-900/10 border-2 border-white bg-emerald-900/5">
+          
+          <!-- Slide 1 -->
+          <div class="app-slide active flex items-center justify-center h-full w-full">
+            <img src="./public/image1.webp" alt="PayOnTime App Preview 1" class="w-full h-full object-contain transform hover:scale-[1.02] transition-all duration-300">
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="app-slide flex items-center justify-center h-full w-full">
+            <img src="./public/image2.webp" alt="PayOnTime App Preview 2" class="w-full h-full object-contain transform hover:scale-[1.02] transition-all duration-300">
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="app-slide flex items-center justify-center h-full w-full">
+            <img src="./public/image1.webp" alt="PayOnTime App Preview 3" class="w-full h-full object-contain transform hover:scale-[1.02] transition-all duration-300">
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="app-slide flex items-center justify-center h-full w-full">
+            <img src="./public/image2.webp" alt="PayOnTime App Preview 4" class="w-full h-full object-contain transform hover:scale-[1.02] transition-all duration-300">
+          </div>
+
         </div>
 
+        <!-- App Store & Play Store Buttons (Right under the image) -->
+        <div class="flex items-center gap-3 w-full justify-center">
+          <!-- App Store -->
+          <a href="#" class="flex items-center gap-2.5 px-4 py-2.5 bg-emerald-900 hover:bg-emerald-950 text-white rounded-xl shadow-md shadow-emerald-950/10 transition-all hover:scale-105 border border-emerald-800">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.62-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.36-.58.68-1.09 1.76-.95 2.8.11.01 2.06.31 2.68-.69z"/>
+            </svg>
+            <div class="text-left leading-none">
+              <span class="block text-[9px] uppercase tracking-wider text-emerald-200">Download on the</span>
+              <span class="text-xs font-bold text-white">App Store</span>
+            </div>
+          </a>
+
+          <!-- Google Play -->
+          <a href="#" class="flex items-center gap-2.5 px-4 py-2.5 bg-emerald-900 hover:bg-emerald-950 text-white rounded-xl shadow-md shadow-emerald-950/10 transition-all hover:scale-105 border border-emerald-800">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L18.81,13.12C19.15,12.78 19.34,12.32 19.34,11.83C19.34,11.34 19.15,10.88 18.81,10.54L16.81,8.54L14.81,10.54L16.81,12.54M15.1,13.41L5.25,23.26C5.5,23.5 5.86,23.65 6.25,23.65C6.55,23.65 6.85,23.55 7.1,23.4L15.1,10.25L7.1,5.62C6.85,5.46 6.55,5.37 6.25,5.37C5.86,5.37 5.5,5.5 5.25,5.76L15.1,15.61"/>
+            </svg>
+            <div class="text-left leading-none">
+              <span class="block text-[9px] uppercase tracking-wider text-emerald-200">Get it on</span>
+              <span class="text-xs font-bold text-white">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom: Text Banner + Dots -->
+      <div class="relative z-10 space-y-3 max-w-lg">
         <div>
-          <div class="flex items-center justify-between mb-1">
-            <label class="block text-xs font-bold text-slate-700">Password</label>
-            <a href="#" id="forgot" class="text-xs font-semibold text-[#E53935] hover:underline">Forgot?</a>
-          </div>
-          <div class="relative">
-            <input id="password" type="password" required placeholder="••••••••"
-              class="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#E53935] focus:bg-white transition-all">
-            <button id="togglePassword" type="button" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">👁</button>
-          </div>
+          <span class="px-3 py-1 bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-full text-xs font-semibold uppercase tracking-wider">Fast &amp; Secure</span>
+          <h2 id="sliderTitle" class="text-3xl xl:text-4xl font-extrabold leading-tight text-emerald-500 mt-2 transition-all">Send Money Worldwide Effortlessly.</h2>
+          <p id="sliderDesc" class="text-xs xl:text-sm text-emerald-800/90 mt-1 transition-all">Enjoy guaranteed exchange rates and instant transfers to your loved ones anytime, anywhere.</p>
         </div>
 
-        <button type="submit"
-          class="w-full py-3.5 px-4 bg-[#E53935] hover:bg-[#D32F2F] active:scale-[0.99] text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all text-sm">
-          Sign In Securely
-        </button>
-      </form>
-
-      <div class="text-center pt-5">
-        <p class="text-xs text-slate-500">
-          Don't have an account?
-          <a href="signup.html" class="font-bold text-[#E53935] hover:underline">Sign Up Now</a>
-        </p>
+        <!-- Slide Dots -->
+        <div id="sliderDots" class="flex items-center gap-2 pt-1">
+          <div class="dot active" data-index="0"></div>
+          <div class="dot" data-index="1"></div>
+          <div class="dot" data-index="2"></div>
+          <div class="dot" data-index="3"></div>
+        </div>
       </div>
 
-      <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-center gap-2 text-xs text-slate-400 font-medium">
-        <span class="text-emerald-500">✓</span>
-        Secured with 256-bit SSL Encryption
+    </div><!-- /LEFT PANEL -->
+
+    <!-- ====== RIGHT PANEL: Login Form ====== -->
+    <div class="relative flex flex-col justify-center items-center w-full py-6 px-4 bg-slate-50/50">
+
+      <!-- Back to Home Button -->
+      <a href="/" class="absolute top-6 right-6 lg:top-8 lg:right-6 flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow">
+        <span>←</span> Back to Home
+      </a>
+
+      <!-- Form Container Card -->
+      <div class="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl border border-slate-100/80 space-y-2 mt-12 lg:mt-0">
+
+        <!-- Header -->
+        <header>
+          <div class="flex items-center gap-2 mb-6 lg:hidden">
+            <img src="./public/logo.png" alt="PayOnTime" class="w-9 h-9 rounded-xl object-contain bg-white border border-slate-100 shadow p-0.5">
+            <span class="font-bold text-xl tracking-tight text-slate-900">PayOnTime</span>
+          </div>
+          <h1 class="text-2xl font-extrabold text-slate-900">Welcome Back</h1>
+          <p class="text-xs text-slate-500 mt-1">Sign in to send money worldwide with guaranteed exchange rates.</p>
+        </header>
+
+        <!-- Main Form Section -->
+        <section>
+          <div id="message" class="hidden mb-4 p-3 rounded-xl text-xs font-medium"></div>
+
+          <!-- Email/SMS Toggle -->
+          <div class="bg-slate-100 p-1 rounded-xl flex items-center text-xs font-semibold text-slate-600 mb-6">
+            <button id="emailTab" type="button" class="flex-1 py-2.5 rounded-lg bg-white text-slate-900 shadow-sm font-bold transition-all">Email Login</button>
+            <button id="smsTab" type="button" class="flex-1 py-2.5 rounded-lg hover:text-slate-900 transition-all">SMS Login</button>
+          </div>
+
+          <form id="loginForm" class="space-y-4">
+            <div>
+              <label id="identifierLabel" class="block text-xs font-bold text-slate-700 mb-1.5">Email Address</label>
+              <input id="identifier" type="email" required placeholder="name@example.com"
+                class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-xs font-bold text-slate-700">Password</label>
+                <a href="#" id="forgot" class="text-xs font-semibold text-green-500 hover:underline">Forgot?</a>
+              </div>
+              <div class="relative">
+                <input id="password" type="password" required placeholder="••••••••"
+                  class="w-full px-4 py-3 pr-11 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all">
+                <button id="togglePassword" type="button" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">👁</button>
+              </div>
+            </div>
+
+            <button type="submit"
+              class="w-full py-3.5 px-4 bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-bold rounded-xl shadow-lg shadow-green-500/20 transition-all text-sm mt-2">
+              Sign In Securely
+            </button>
+
+            <!-- Divider: Or you can -->
+            <div class="relative flex py-2 items-center my-4">
+              <div class="flex-grow border-t border-slate-200"></div>
+              <span class="flex-shrink mx-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Or you can</span>
+              <div class="flex-grow border-t border-slate-200"></div>
+            </div>
+
+            <!-- Social / eID Login Buttons -->
+            <div class="space-y-3">
+              <!-- BankID Sweden -->
+              <a href="#" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs border border-slate-200 rounded-xl shadow-sm hover:shadow transition-all group">
+                <svg class="w-5 h-5 object-contain" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill="#231F20" d="M3 3h18v18H3z"/>
+                  <path fill="#0077C8" d="M6 6h12v12H6z"/>
+                </svg>
+                <span class="group-hover:text-green-500 transition-colors">Login with BankID for Sweden</span>
+              </a>
+
+              <!-- MitID Denmark -->
+              <a href="#" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs border border-slate-200 rounded-xl shadow-sm hover:shadow transition-all group">
+                <svg class="w-5 h-5 object-contain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9" stroke="#0052B4"/>
+                  <path d="M12 8v8M8 12h8" stroke="#0052B4"/>
+                </svg>
+                <span class="group-hover:text-green-500 transition-colors">Login with MitID for Denmark</span>
+              </a>
+
+              <!-- FTN Finland -->
+              <a href="#" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs border border-slate-200 rounded-xl shadow-sm hover:shadow transition-all group">
+                <span class="w-5 h-5 rounded-full bg-indigo-900 flex items-center justify-center text-[10px] text-white font-black">FTN</span>
+                <span class="group-hover:text-green-500 transition-colors">Login with FTN for Finland</span>
+              </a>
+
+              <!-- bankID Norway -->
+              <a href="#" class="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs border border-slate-200 rounded-xl shadow-sm hover:shadow transition-all group">
+                <span class="w-5 h-5 rounded bg-[#2A1137] flex items-center justify-center text-[9px] text-white font-bold tracking-tighter">bID</span>
+                <span class="group-hover:text-green-500 transition-colors">Login with bankID for Norway</span>
+              </a>
+            </div>
+          </form>
+
+          <div class="text-center pt-6">
+            <p class="text-xs text-slate-500">
+              Don't have an account?
+              <a href="/signup.html" class="font-bold text-green-500 hover:underline">Sign Up Now</a>
+            </p>
+          </div>
+        </section>
+
       </div>
-    </section>
+    </div><!-- /RIGHT PANEL -->
+
   </main>
 
 <script>
+/* ── App Image Slider & Content ── */
+const slides = document.querySelectorAll('.app-slide');
+const dots   = document.querySelectorAll('.dot');
+const sliderTitle = document.getElementById('sliderTitle');
+const sliderDesc = document.getElementById('sliderDesc');
+
+// Content for each slide
+const slideContents = [
+  {
+    title: "Send Money Worldwide Effortlessly.",
+    desc: "Enjoy guaranteed exchange rates and instant transfers to your loved ones anytime, anywhere."
+  },
+  {
+    title: "Track Your Transfers in Real-Time.",
+    desc: "Stay updated with live status notifications from transfer initiation to pickup."
+  },
+  {
+    title: "Lowest Transfer Fees Guaranteed.",
+    desc: "Transparent pricing with no hidden charges so your family gets more."
+  },
+  {
+    title: "Bank-Grade Security for Peace of Mind.",
+    desc: "Your transactions are shielded with 256-bit encryption and advanced fraud protection."
+  }
+];
+
+let current = 0;
+let timer;
+
+function goTo(idx) {
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  
+  current = idx;
+  
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+
+  // Update text content with subtle animation
+  if (sliderTitle && sliderDesc) {
+    sliderTitle.textContent = slideContents[current].title;
+    sliderDesc.textContent = slideContents[current].desc;
+  }
+}
+
+function next() { goTo((current + 1) % slides.length); }
+
+function startSlider() { timer = setInterval(next, 4000); }
+function stopSlider()  { clearInterval(timer); }
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    stopSlider();
+    goTo(parseInt(dot.dataset.index));
+    startSlider();
+  });
+});
+
+startSlider();
+
+/* ── Login Form ── */
 const $ = id => document.getElementById(id);
 let mode = "email";
 
 $("emailTab").onclick = () => {
   mode = "email";
-  $("emailTab").className = "flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm font-bold";
-  $("smsTab").className = "flex-1 py-2 rounded-lg hover:text-slate-900";
+  $("emailTab").className = "flex-1 py-2.5 rounded-lg bg-white text-slate-900 shadow-sm font-bold transition-all";
+  $("smsTab").className   = "flex-1 py-2.5 rounded-lg hover:text-slate-900 transition-all";
   $("identifierLabel").textContent = "Email Address";
-  $("identifier").type = "email";
+  $("identifier").type        = "email";
   $("identifier").placeholder = "name@example.com";
 };
 
 $("smsTab").onclick = () => {
   mode = "sms";
-  $("smsTab").className = "flex-1 py-2 rounded-lg bg-white text-slate-900 shadow-sm font-bold";
-  $("emailTab").className = "flex-1 py-2 rounded-lg hover:text-slate-900";
+  $("smsTab").className   = "flex-1 py-2.5 rounded-lg bg-white text-slate-900 shadow-sm font-bold transition-all";
+  $("emailTab").className = "flex-1 py-2.5 rounded-lg hover:text-slate-900 transition-all";
   $("identifierLabel").textContent = "Registered Mobile Number";
-  $("identifier").type = "tel";
+  $("identifier").type        = "tel";
   $("identifier").placeholder = "+880 1XXXXXXXXX";
 };
 
@@ -106,10 +327,10 @@ $("loginForm").onsubmit = e => {
   e.preventDefault();
 
   const identifier = $("identifier").value.trim();
-  const password = $("password").value;
+  const password   = $("password").value;
 
-  const users = JSON.parse(localStorage.getItem("hidmonaUsers") || "[]");
-  const user = users.find(u =>
+  const users = JSON.parse(localStorage.getItem("payOnTimeUsers") || "[]");
+  const user  = users.find(u =>
     mode === "email"
       ? u.email.toLowerCase() === identifier.toLowerCase() && u.password === password
       : u.phone === identifier && u.password === password
@@ -120,12 +341,10 @@ $("loginForm").onsubmit = e => {
     return;
   }
 
-  localStorage.setItem("hidmonaCurrentUser", JSON.stringify(user));
+  localStorage.setItem("payOnTimeCurrentUser", JSON.stringify(user));
   showMessage("Login successful! Redirecting...", true);
 
-  setTimeout(() => {
-    window.location.href = "index.html";
-  }, 700);
+  setTimeout(() => { window.location.href = "/"; }, 700);
 };
 </script>
 </body>

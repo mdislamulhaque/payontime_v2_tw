@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hidmona</title>
+  <title>payontime</title>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body class="bg-slate-100 font-sans text-slate-900 antialiased">
@@ -16,9 +17,9 @@
       <div class="max-w-7xl mx-auto flex items-center justify-between">
         <div class="flex items-center gap-4 text-[11px] sm:text-xs">
           <span class="flex items-center gap-1.5 text-emerald-600 font-semibold">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <!-- <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             Live Rates Active
-          </span>
+          </span> -->
           <span class="hidden md:inline text-slate-500 font-medium">
             ⚡ Guaranteed 0% Hidden Fees • 256-Bit SSL Encrypted
           </span>
@@ -26,16 +27,16 @@
 
         <div class="flex items-center gap-4">
           <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" 
-             className="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-700 font-bold transition-colors" 
-             title="Chat with Hidmona Support on WhatsApp">
+             class="flex items-center gap-1.5 text-emerald-600 hover:text-emerald-700 font-bold transition-colors" 
+             title="Chat with Pay On Time Support on WhatsApp">
             <i data-lucide="message-square" class="w-3.5 h-3.5 text-emerald-600"></i>
             <span class="hidden sm:inline">WhatsApp Support</span>
           </a>
 
-          <a href="mailto:support@hidmona.com" 
+          <a href="mailto:support@payOnTime.com" 
              class="flex items-center gap-1.5 hover:text-slate-900 transition-colors text-slate-500 font-medium">
             <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-            <span class="hidden sm:inline">support@hidmona.com</span>
+            <span class="hidden sm:inline">support@payontime.com</span>
           </a>
         </div>
       </div>
@@ -44,18 +45,18 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
       
       <div id="brand-logo" class="flex items-center gap-2.5 cursor-pointer group">
-        <div class="w-10 h-10 bg-[#E53935] rounded-xl flex items-center justify-center text-white shadow-lg shadow-red-200 group-hover:scale-105 transition-transform">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        </div>
-        <span class="text-2xl font-bold text-slate-900 tracking-tight">Hidmona</span>
+        <img src="./public/logo.png"
+     alt="Pay On Time Logo"
+     class="w-full h-10 rounded-lg object-cover">
       </div>
 
       <nav class="hidden lg:flex items-center gap-8" id="desktop-nav">
-        <button data-section="hero" class="nav-btn text-sm transition-all py-1 font-bold text-[#E53935] border-b-2 border-[#E53935]">Home</button>
+        <button data-section="hero" class="nav-btn text-sm transition-all py-1 font-bold text-green-400 border-b-2 border-green-400">Home</button>
         <button data-section="why-us" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">Why Us</button>
         <button data-section="services" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">Services</button>
         <button data-section="debit-card" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">Debit Card</button>
         <button data-section="locations" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">Location</button>
+        <button data-section="app" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">App</button>
         <button data-section="contact" class="nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900">Contact Us</button>
       </nav>
 
@@ -80,13 +81,13 @@
           <button id="login-btn" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
             Log In
           </button>
-          <button id="signup-btn" class="px-6 py-2.5 bg-[#E53935] text-white text-sm font-bold rounded-lg shadow-md shadow-red-200 hover:bg-[#D32F2F] transition-all cursor-pointer">
+          <button id="signup-btn" class="px-6 py-2.5 bg-[#108d2c] text-white text-sm font-bold rounded-lg shadow-md shadow-green-200 hover:bg-[#0b671f] transition-all cursor-pointer">
             Sign Up
           </button>
         </div>
 
         <div id="logged-in-view" class="hidden items-center gap-2">
-          <button id="dashboard-btn" class="flex items-center gap-2 px-5 py-2.5 bg-[#E53935] text-white text-sm font-bold rounded-lg shadow-md shadow-red-200 hover:bg-[#D32F2F] transition-all">
+          <button id="dashboard-btn" class="flex items-center gap-2 px-5 py-2.5 bg-green-500 text-white text-sm font-bold rounded-lg shadow-md shadow-red-200 hover:bg-[#D32F2F] transition-all">
             <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
             <span class="hidden sm:inline">Dashboard</span>
           </button>
@@ -105,921 +106,2071 @@
 
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 p-4 space-y-3">
       <nav class="flex flex-col gap-2 font-medium text-sm text-slate-700" id="mobile-nav">
-        <button data-section="hero" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors bg-red-50 font-bold text-[#E53935]">Home</button>
+        <button data-section="hero" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors bg-green-50  font-bold text-green-500">Home</button>
         <button data-section="why-us" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">Why Us</button>
         <button data-section="services" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">Services</button>
         <button data-section="debit-card" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">Debit Card</button>
         <button data-section="locations" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">Location</button>
+        <button data-section="app" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">App</button>
         <button data-section="contact" class="mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700">Contact Us</button>
       </nav>
 
       <div id="mobile-auth-actions" class="pt-2 border-t border-slate-100 flex gap-2">
         <button id="mobile-login-btn" class="flex-1 py-2.5 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm text-center hover:bg-slate-50">Log In</button>
-        <button id="mobile-signup-btn" class="flex-1 py-2.5 rounded-lg bg-[#E53935] text-white font-bold text-sm text-center shadow-md shadow-red-200 hover:bg-[#D32F2F]">Sign Up</button>
+        <button id="mobile-signup-btn" class="flex-1 py-2.5 rounded-lg bg-green-500 text-white font-bold text-sm text-center shadow-md shadow-red-200 hover:bg-[#D32F2F]">Sign Up</button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-16">
-    <!-- hero section  -->
-    <section id="hero" class="relative bg-slate-50 text-slate-900 py-12 lg:py-16 overflow-hidden">
-    <!-- Background soft glow -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+ <div class="bg-slate-100 font-sans text-slate-900 antialiased scroll-smooth">
+    <main class="max-w-7xl mx-auto px-4 sm:px-4 py-2 space-y-16">
+        <!-- hero section  -->
+        <section id="hero" class="relative  text-slate-900  overflow-hidden">
+            <!-- Background soft glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- Left Column: Carousel & Marketing -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <!-- Live FX Rates Badge -->
+                        <!-- <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-green-50  text-green-500 text-xs font-bold rounded-full border border-green-100 shadow-sm">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-50 0"></span>
+                            </span>
+                            <span>LIVE FX RATES ACTIVE</span>
+                        </div> -->
+
+                        <!-- Title -->
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#108d2c] leading-[1.1] tracking-tight">
+                            Sending Money <br />
+                            <span class="text-[#071b79]">Home</span> Made Easy.
+                        </h1>
+
+                        <!-- Carousel Slider -->
+                        <div class="min-h-[140px] transition-all duration-300" id="carousel-container">
+                            <div class="inline-block px-3 py-1 rounded-lg bg-red-100/60 text-green-500 text-xs font-bold tracking-wide mb-3" id="slide-badge">
+                                ⚡ Instant Express Transfers
+                            </div>
+                            <p class="text-base sm:text-lg text-slate-500 leading-relaxed max-w-lg" id="slide-desc">
+                                Transfer directly to bKash, Nagad, Mobile Wallets, and Bank Accounts across East Africa & South Asia with locked-in FX rates.
+                            </p>
+                        </div>
+
+                        <!-- Slide Navigation Controls -->
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex items-center gap-2" id="dots-container">
+                                <!-- Dots generated by JS -->
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <button id="prev-btn" class="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors shadow-sm cursor-pointer">
+                                    <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                </button>
+                                <button id="next-btn" class="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors shadow-sm cursor-pointer">
+                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats Grid -->
+                        <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/80">
+                            <div class="flex flex-col gap-1">
+                                <div class="text-3xl font-extrabold text-slate-900">0.0%</div>
+                                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Transfer Fee</div>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <div class="text-3xl font-extrabold text-slate-900">120+</div>
+                                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Countries</div>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <div class="text-3xl font-extrabold text-slate-900">24/7</div>
+                                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Support</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Live Transfer Calculator Widget -->
+                    <div class="lg:col-span-6 flex items-center justify-center p-2 sm:p-6  rounded-3xl relative">
+                        <div class="absolute right-0 top-0 w-64 h-64 bg-green-50 0/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+                        <div class="w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                                    <i data-lucide="arrow-left-right" class="w-5 h-5 text-green-500"></i>
+                                    Calculate Transfer
+                                </h2>
+
+                                <button id="refresh-btn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer">
+                                    <i data-lucide="refresh-cw" id="refresh-icon" class="w-3.5 h-3.5"></i>
+                                    <span class="hidden sm:inline">Refresh</span>
+                                </button>
+                            </div>
+
+                            <!-- Inputs Form -->
+                            <div class="space-y-4">
+                                <!-- You Send Input -->
+                                <div class="relative">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">You Send</label>
+                                    <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
+                                        <input type="number" id="send-amount" value="1000" min="10" class="w-full bg-transparent  px-3 text-md font-black text-slate-900 focus:outline-none">
+
+                                        <!-- Custom Searchable Select (Send) -->
+                                        <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
+                                            <button type="button" id="send-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
+                                                <span id="send-selected-label">🇺🇸 USD</span>
+                                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+                                            </button>
+
+                                            <!-- Dropdown Menu -->
+                                            <div id="send-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
+                                                <input type="text" id="send-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
+                                                <div id="send-options" class="max-h-36 overflow-y-auto space-y-1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Swap Button -->
+                                <div class="flex justify-center my-2 relative z-20">
+                                    <div class="bg-white p-1.5 rounded-full border border-slate-200 shadow-md hover:scale-105 transition-transform">
+                                        <button type="button" id="swap-btn" class="w-5 h-5 bg-[#108d2c] hover:bg-[#0b671f] active:scale-95 transition-all rounded-full flex items-center justify-center text-white cursor-pointer shadow-sm">
+                                            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- They Receive Input -->
+                                <div class="relative">
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">They Receive</label>
+                                    <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
+                                        <input type="number" id="receive-amount" readonly class="w-full bg-transparent  px-3 text-md font-black text-green-500 focus:outline-none cursor-default">
+
+                                        <!-- Custom Searchable Select (Receive) -->
+                                        <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
+                                            <button type="button" id="receive-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
+                                                <span id="receive-selected-label">🇧🇩 BDT</span>
+                                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+                                            </button>
+
+                                            <!-- Dropdown Menu -->
+                                            <div id="receive-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
+                                                <input type="text" id="receive-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
+                                                <div id="receive-options" class="max-h-36 overflow-y-auto space-y-1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delivery Method -->
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Delivery Method</label>
+                                    <div class="relative">
+                                        <select id="delivery-method" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 pr-8 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer appearance-none">
+                                            <option value="bKash">⚡ bKash / Nagad (Instant)</option>
+                                            <option value="Bank">Bank Deposit</option>
+                                            <option value="Cash">Cash Pickup</option>
+                                        </select>
+                                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Calculation Breakdown -->
+                                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400 font-medium">Exchange Rate</span>
+                                        <span class="text-slate-900 font-bold" id="rate-text">1 USD = 117.5 BDT</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400 font-medium">Transfer Fee</span>
+                                        <span class="text-green-600 font-bold" id="fee-text">FREE</span>
+                                    </div>
+                                    <div class="h-[1px] bg-slate-200 my-2"></div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-slate-900 font-bold">Total to Pay</span>
+                                        <span class="text-slate-900 font-extrabold" id="total-text">1000 USD</span>
+                                    </div>
+                                </div>
+
+                                <!-- CTA Button -->
+                                <button id="send-now-btn" class="w-full py-2 bg-[#108d2c] text-white font-bold rounded-2xl shadow-lg shadow-green-200 hover:bg-[#0b671f] transition-all flex items-center justify-center gap-2 text-base cursor-pointer">
+                                    <span>Send Money Now</span>
+                                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- why us section  -->
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="py-20">
+             <!-- Background soft glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                        Why Choose Us
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                        Why Choose Pay On Time Money Transfer?
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+                        Engineered for reliability, speed, and absolute financial security. Built by experts to keep your loved ones connected without exorbitant fees.
+                    </p>
+                </div>
+
+                <!-- Features Grid (Hardcoded Content) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="zap" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Lightning Fast Delivery</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Mobile wallet transfers to bKash, Nagad, and M-Pesa arrive in under 60 seconds directly into recipient accounts.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="percent" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Guaranteed Best FX Rates</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Lock in real-time competitive exchange rates with zero hidden markups. What you calculate is exactly what is delivered.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Bank-Grade Security</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Protected by 256-bit SSL encryption, automated anti-fraud monitoring, and licensed international compliance.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="headphones" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">24/7 WhatsApp & Phone Support</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Our dedicated multilingual support team is available around the clock via WhatsApp, email, and live phone call.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="smartphone" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Seamless Mobile Experience</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Send money, track transaction statuses in real-time, and save recipients with a few taps on any mobile device.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
+                        <div class="w-12 h-12 rounded-2xl bg-green-50  border border-green-100 flex items-center justify-center mb-5 transition-colors">
+                            <i data-lucide="globe" class="w-6 h-6 text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Wide Payout Network</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Over 100,000+ cash pickup locations and bank direct partners across East Africa, Europe, and South Asia.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- services section  -->
+        <!-- Our Services Section -->
+        <section id="services" class="py-20">
+             <!-- Background soft glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                        Financial Solutions
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                        Our Services - Premium Financial Solutions
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+                        Tailored financial products designed for individuals, families, and growing international businesses.
+                    </p>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    <!-- Service Card 1 -->
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
+                                    <i data-lucide="send" class="w-6 h-6 text-green-500"></i>
+                                </div>
+                                <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
+                                    Popular
+                                </span>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Global Money Transfer</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Send funds instantly to family and friends with locked-in FX rates, zero hidden fees, and transparent tracking.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-4 border-t border-slate-200/60">
+                            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Explore Service</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
+                                    <i data-lucide="wallet" class="w-6 h-6 text-green-500"></i>
+                                </div>
+                                <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
+                                    New Feature
+                                </span>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Multi-Currency Wallets</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Hold, convert, and manage EUR, USD, SEK, GBP, and local currencies simultaneously in one unified digital account.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-4 border-t border-slate-200/60">
+                            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Explore Service</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
+                                    <i data-lucide="building-2" class="w-6 h-6 text-green-500"></i>
+                                </div>
+                                <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
+                                    Enterprise
+                                </span>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Business & Merchant Payments</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Seamless B2B bulk payouts, invoice settlements, and supplier payments across international corridors.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-4 border-t border-slate-200/60">
+                            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Explore Service</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
+                                    <i data-lucide="store" class="w-6 h-6 text-green-500"></i>
+                                </div>
+                                <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
+                                    100k+ Agents
+                                </span>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 mb-2">Over-The-Counter Cash Pickup</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Instant cash pickup at thousands of verified agent counters across East Africa and South Asia.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-4 border-t border-slate-200/60">
+                            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                                <span>Explore Service</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- debit card section  -->
+        <!-- Debit Card Suite Section -->
+        <section id="debit-card" class="py-20 overflow-hidden relative">
+             <!-- Background soft glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- Left Column: Interactive Card Preview -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+
+                        <!-- Debit Card Graphic -->
+                        <div
+                            id="debit-card-graphic"
+                            class="w-full max-w-sm h-56 rounded-3xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 bg-gradient-to-br from-slate-950 via-slate-900 to-[#D32F2F] border border-slate-700/80 shadow-green-50 0/20">
+                            <!-- Card Header -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center font-black text-white text-sm">
+                                        P
+                                    </div>
+                                    <span class="font-extrabold tracking-tight text-white text-base">
+                                        Pay On Time
+                                    </span>
+                                </div>
+                                <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-white/10 text-white backdrop-blur">
+                                    PREMIUM VISA
+                                </span>
+                            </div>
+
+                            <!-- Chip & Wireless -->
+                            <div class="flex items-center gap-4 my-2">
+                                <div class="w-10 h-7 rounded-md bg-gradient-to-r from-amber-200 to-amber-400 border border-amber-500/40 shadow-inner"></div>
+                                <div class="text-slate-400">
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Card Number & Details -->
+                            <div>
+                                <div class="text-xs font-mono tracking-widest text-slate-300 flex items-center justify-between">
+                                    <span id="card-number">•••• •••• •••• 8812</span>
+                                    <button
+                                        id="toggle-card-number-btn"
+                                        type="button"
+                                        class="p-1 text-slate-400 hover:text-white cursor-pointer"
+                                        aria-label="Toggle card number visibility">
+                                        <i data-lucide="eye" id="eye-icon" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Footer Details -->
+                                <div class="flex justify-between items-end mt-3 text-[11px]">
+                                    <div>
+                                        <span class="block text-slate-400 text-[9px] uppercase font-bold">
+                                            Cardholder
+                                        </span>
+                                        <span class="font-bold text-white uppercase">
+                                            ALEXANDER WRIGHT
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-slate-400 text-[9px] uppercase font-bold">
+                                            Expires
+                                        </span>
+                                        <span class="font-bold text-white">12/28</span>
+                                    </div>
+                                    <div class="font-bold italic text-white text-base">VISA</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Controls Interactive Bar -->
+                        <div class="mt-4 flex items-center gap-3">
+                            <button
+                                id="freeze-card-btn"
+                                type="button"
+                                class="px-4 py-2 rounded-xl text-xs font-bold transition-all border bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900 shadow-sm cursor-pointer">
+                                Freeze Card
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Features & 3-Step Process -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                                Pay On Time Debit Card
+                            </span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                                Spend Anywhere Worldwide with 0% Foreign Fees
+                            </h2>
+                            <p class="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+                                Connect your multi-currency balance directly to a physical or virtual Pay On Time Visa Debit Card. Pay in 150+ countries with interbank exchange rates.
+                            </p>
+                        </div>
+
+                        <!-- Card Features List -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                                <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200/60 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="zap" class="w-4 h-4 text-amber-500"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-slate-900">0% Foreign Transaction Fees</h3>
+                                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                                        No hidden FX markup on POS purchases or global online shopping.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-slate-900">Apple Pay & Google Wallet</h3>
+                                    <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                                        Add virtual card instantly to your phone for touchless payments.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3-Step Card Issue Process -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
+                                3-Step Card Issue Process
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                                <div class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                                    <span class="text-green-500 font-black text-sm block mb-1">01.</span>
+                                    <h4 class="font-bold text-slate-900">Register & Verify</h4>
+                                    <p class="text-slate-600 text-[11px] mt-0.5">Quick 1-minute ID check</p>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                                    <span class="text-green-500 font-black text-sm block mb-1">02.</span>
+                                    <h4 class="font-bold text-slate-900">Choose Card</h4>
+                                    <p class="text-slate-600 text-[11px] mt-0.5">Instant virtual or physical</p>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+                                    <span class="text-green-500 font-black text-sm block mb-1">03.</span>
+                                    <h4 class="font-bold text-slate-900">Spend Worldwide</h4>
+                                    <p class="text-slate-600 text-[11px] mt-0.5">Over 50M+ Visa merchants</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Card CTA Button -->
+                        <div class="pt-2">
+                            <button
+                                id="order-card-btn"
+                                type="button"
+                                class="py-3.5 px-6 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-bold text-sm shadow-xl shadow-green-500/20 transition-all flex items-center gap-2 cursor-pointer">
+                                <i data-lucide="credit-card" class="w-4 h-4"></i>
+                                <span>Get Your Free Pay On Time Card</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Global Locations Section -->
+        <section id="locations" class="py-20 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+                <!-- Section Header & Filter Tabs -->
+                <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                            Payout Coverage
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                            Global Network & Payout Locations
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-2 max-w-xl">
+                            Delivering money safely through banks, mobile wallets, and cash agent pickup counters across continents.
+                        </p>
+                    </div>
+
+                    <!-- Region Filter Tabs -->
+                    <div class="flex bg-slate-200 p-1 rounded-2xl text-xs font-bold text-slate-700">
+                        <button
+                            type="button"
+                            data-region="all"
+                            class="region-btn px-4 py-2 rounded-xl capitalize transition-all bg-white text-slate-900 shadow-sm font-extrabold cursor-pointer">
+                            All
+                        </button>
+                        <button
+                            type="button"
+                            data-region="africa"
+                            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer">
+                            Africa
+                        </button>
+                        <button
+                            type="button"
+                            data-region="asia"
+                            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer">
+                            Asia
+                        </button>
+                        <button
+                            type="button"
+                            data-region="europe"
+                            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer">
+                            Europe
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Locations Grid Container -->
+                <div id="locations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Javascript dynamically renders cards here -->
+                </div>
+
+            </div>
+        </section>
+        <!-- App Showcase Section -->
+        <!-- Mobile App Section -->
+        <section id="app" class="py-20 overflow-hidden relative">
+            <!-- Background soft glow -->
+            <div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-50 0/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+            <div class="max-w-8xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+
+                    <!-- Left Column: 3-Phone Showcase -->
+                    <div class="lg:col-span-7 flex items-center justify-center relative select-none py-4">
+
+                        <!-- PHONE 1: Main Device Frame (Left/Foreground) -->
+                        <div class="w-[280px] sm:w-[290px] h-[560px] bg-slate-950 rounded-[46px] p-3 shadow-2xl shadow-slate-900/20 border-4 border-slate-800 relative flex flex-col justify-between overflow-hidden z-20 shrink-0 ring-1 ring-white/20">
+
+                            <!-- Dynamic Island -->
+                            <div class="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-30 flex items-center justify-between px-2.5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-900 ring-1 ring-slate-800"></div>
+                                <div class="w-2 h-2 rounded-full bg-emerald-500/80"></div>
+                            </div>
+
+                            <!-- Screen Container -->
+                            <div class="w-full h-full bg-white rounded-[38px] overflow-hidden flex flex-col justify-between relative text-slate-900">
+
+                                <!-- Screen Header & Status Bar -->
+                                <div class="pt-2 px-5 bg-gradient-to-b from-green-50 /80 via-green-50 /30 to-white">
+                                    <div class="flex items-center justify-between text-[11px] font-bold text-slate-800 pt-1 pb-2">
+                                        <span>8:00</span>
+                                        <div class="flex items-center gap-1.5 text-slate-700">
+                                            <!-- Signal -->
+                                            <div class="flex items-end gap-0.5 h-2.5">
+                                                <div class="w-0.5 h-1 bg-slate-700 rounded-xs"></div>
+                                                <div class="w-0.5 h-1.5 bg-slate-700 rounded-xs"></div>
+                                                <div class="w-0.5 h-2 bg-slate-700 rounded-xs"></div>
+                                                <div class="w-0.5 h-2.5 bg-slate-700 rounded-xs"></div>
+                                            </div>
+                                            <!-- WiFi -->
+                                            <i data-lucide="wifi" class="w-3 h-3"></i>
+                                            <!-- Battery -->
+                                            <div class="w-4 h-2 rounded-xs border border-slate-700 flex items-center p-0.5">
+                                                <div class="w-full h-full bg-slate-700 rounded-2xs"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Logo in Phone 1 -->
+                                    <div class="text-center py-2">
+                                        <img src="{{ asset('backend/images/logo.png') }}" alt="Pay On Time" class="h-6 mx-auto object-contain">
+                                    </div>
+                                </div>
+
+                                <!-- Background Login Form Under Sheet -->
+                                <div class="px-5 space-y-3 pt-1 flex-1">
+                                    <div class="text-center">
+                                        <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-widest">LOGIN</span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-400 text-[11px]">
+                                            Enter email
+                                        </div>
+                                        <div class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-400 text-[11px]">
+                                            Enter password
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] text-slate-400 font-medium">Forgot Password?</span>
+                                    </div>
+                                    <button type="button" class="w-full py-2 bg-green-500 text-white rounded-xl text-xs font-bold shadow-md shadow-green-50 0/20">
+                                        Log In
+                                    </button>
+                                </div>
+
+                                <!-- Slide-Up Bottom Sheet Modal (e-ID Authentication) -->
+                                <div class="bg-white rounded-t-3xl border-t border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] p-4 pt-2.5 space-y-2 z-20">
+                                    <!-- Sheet Handle -->
+                                    <div class="w-10 h-1 bg-slate-300 rounded-full mx-auto mb-2.5"></div>
+
+                                    <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 text-center pb-1">
+                                        Secure e-ID Verification
+                                    </div>
+
+                                    <!-- e-ID Option 1: Sweden -->
+                                    <div class="flex items-center justify-between p-2 rounded-xl border border-red-200/80 bg-green-50 /40 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-green-50  transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-md bg-white border border-red-200 flex items-center justify-center text-xs shadow-2xs">
+                                                🇸🇪
+                                            </div>
+                                            <span>BankID for Sweden</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-green-500"></i>
+                                    </div>
+
+                                    <!-- e-ID Option 2: Denmark -->
+                                    <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
+                                                🇩🇰
+                                            </div>
+                                            <span>MitID for Denmark</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    </div>
+
+                                    <!-- e-ID Option 3: Finland -->
+                                    <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
+                                                🇫🇮
+                                            </div>
+                                            <span>FTN for Finland</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    </div>
+
+                                    <!-- e-ID Option 4: Norway -->
+                                    <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
+                                                🇳🇴
+                                            </div>
+                                            <span>BankID for Norway</span>
+                                        </div>
+                                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- PHONE 2: Middle Screen (Splash & Brand Showcase) -->
+                        <div class="hidden sm:flex w-[230px] lg:w-[245px] h-[500px] bg-white rounded-[40px] p-4 shadow-xl border border-slate-200/80 flex-col justify-between overflow-hidden shrink-0 -ml-12 lg:-ml-8 z-10 opacity-95 transition-all hover:opacity-100 hover:scale-[1.03] hover:z-30">
+
+                            <!-- Top Curve Gradient & Status Bar -->
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] font-bold text-slate-700 pb-2">
+                                    <span>8:00</span>
+                                    <div class="flex items-center gap-1">
+                                        <i data-lucide="wifi" class="w-3 h-3 text-slate-600"></i>
+                                        <div class="w-3.5 h-2 rounded-xs border border-slate-700 p-0.5">
+                                            <div class="w-full h-full bg-slate-700 rounded-2xs"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="h-24 rounded-2xl bg-gradient-to-br from-red-100/60 via-green-50 /30 to-white -mx-2 px-4 flex items-center justify-center">
+                                    <div class="w-12 h-12 rounded-2xl bg-white shadow-md border border-green-100 flex items-center justify-center">
+                                        <i data-lucide="send" class="w-6 h-6 text-green-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Center Branding -->
+                            <div class="text-center py-4 space-y-2">
+                                <img src="{{ asset('backend/images/logo.png') }}" alt="Pay On Time" class="h-7 mx-auto object-contain">
+                                <p class="text-[11px] text-slate-500 font-semibold px-2">
+                                    A fast and secure way to send money home
+                                </p>
+                                <div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span>Bank-grade 256-bit SSL</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Action Buttons -->
+                            <div class="space-y-2 pt-2">
+                                <button type="button" class="w-full py-2.5 px-4 rounded-xl border border-red-300 text-green-500 hover:bg-green-50  font-bold text-xs transition-colors cursor-pointer text-center">
+                                    Create Account
+                                </button>
+                                <button type="button" class="w-full py-2.5 px-4 rounded-xl bg-green-500 hover:bg-[#D32F2F] text-white font-bold text-xs shadow-md shadow-green-50 0/20 transition-colors cursor-pointer text-center">
+                                    Log In
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- PHONE 3: Right Screen (Welcome Back & Biometrics) -->
+                        <div class="hidden md:flex w-[230px] lg:w-[245px] h-[500px] bg-white rounded-[40px] p-4 shadow-xl border border-slate-200/80 flex-col justify-between overflow-hidden shrink-0 -ml-12 lg:-ml-8 z-0 opacity-90 transition-all hover:opacity-100 hover:scale-[1.03] hover:z-30">
+
+                            <!-- Top Curve Gradient & Status Bar -->
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] font-bold text-slate-700 pb-2">
+                                    <span>8:00</span>
+                                    <div class="flex items-center gap-1">
+                                        <i data-lucide="wifi" class="w-3 h-3 text-slate-600"></i>
+                                        <div class="w-3.5 h-2 rounded-xs border border-slate-700 p-0.5">
+                                            <div class="w-full h-full bg-slate-700 rounded-2xs"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="h-16 rounded-2xl bg-gradient-to-br from-emerald-100/50 via-emerald-50/20 to-white -mx-2 px-4 flex items-center justify-between">
+                                    <span class="text-xs font-bold text-slate-800">Welcome Back!</span>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full">Verified</span>
+                                </div>
+                            </div>
+
+                            <!-- User Info & Password Input -->
+                            <div class="space-y-3 py-1">
+                                <div>
+                                    <h4 class="text-xs font-extrabold text-slate-900">John Wright</h4>
+                                    <p class="text-[10px] text-slate-500">john.wright@example.com</p>
+                                </div>
+
+                                <div>
+                                    <label class="text-[10px] font-semibold text-slate-500 block mb-1">Enter password</label>
+                                    <div class="w-full py-2 px-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 flex items-center justify-between">
+                                        <span>••••••••</span>
+                                        <i data-lucide="eye" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="w-full py-2.5 bg-[#108d2c] hover:bg-[#0b671f] text-white text-xs font-bold rounded-xl shadow-md shadow-green-600/20 transition-all cursor-pointer">
+                                    Log In
+                                </button>
+                            </div>
+
+                            <!-- Biometric Login Area (Face ID / Fingerprint) -->
+                            <div class="text-center pt-2 border-t border-slate-100 space-y-2">
+                                <span class="text-[10px] text-slate-400 font-medium">or Login with</span>
+
+                                <div class="flex justify-center">
+                                    <div class="w-12 h-12 rounded-2xl bg-green-50  border border-red-200/80 flex items-center justify-center text-green-500 shadow-xs hover:scale-105 transition-transform cursor-pointer">
+                                        <i data-lucide="scan-face" class="w-6 h-6"></i>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] text-slate-500 font-bold block">Face ID / Touch ID</span>
+
+                                <a href="javascript:void(0)" class="text-[10px] text-slate-400 hover:text-slate-700 underline block pt-1">
+                                    Login with other Account
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Content, Checklist & Store Badges -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                                Pay On Time Mobile App
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-green-800 mt-4 tracking-tight leading-[1.15]">
+                                A fast and secure way to <br class="hidden sm:inline" />
+                                <span class="text-[#071b79]">send money</span> on the go
+                            </h2>
+                            <p class="text-sm sm:text-base text-slate-600 mt-4 leading-relaxed">
+                                Experience instant transactions with top-notch encryption, ensuring your funds are safe while you stay connected.
+                            </p>
+                        </div>
+
+                        <!-- 3 Feature Bullets -->
+                        <div class="space-y-3.5 pt-2">
+                            <!-- Safe -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </div>
+                                <span class="text-base font-bold text-slate-900">Safe</span>
+                            </div>
+
+                            <!-- Fast -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </div>
+                                <span class="text-base font-bold text-slate-900">Fast</span>
+                            </div>
+
+                            <!-- Reliable -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+                                </div>
+                                <span class="text-base font-bold text-slate-900">Reliable</span>
+                            </div>
+                        </div>
+
+                        <!-- Store Download Buttons -->
+                        <div class="pt-4 flex items-center gap-4">
+                            <!-- Google Play Store Button -->
+                            <a
+                                href="https://play.google.com/store"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex items-center gap-3 px-3 py-3 rounded-2xl bg-black hover:bg-slate-900 text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] border border-slate-800 cursor-pointer">
+                                <svg class="w-6 h-6 shrink-0" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3.609 1.814L13.792 12 3.61 22.186A2.25 2.25 0 0 1 3 20.625V3.375c0-.622.253-1.185.609-1.561z" fill="#00D3FF"/>
+                                    <path d="M17.207 8.586l-3.415 3.414 3.415 3.414 3.864-2.196c1.107-.63 1.107-1.806 0-2.436l-3.864-2.196z" fill="#FFCE00"/>
+                                    <path d="M3.609 1.814l10.183 10.186 3.415-3.414L5.617.702c-.752-.428-1.53-.255-2.008.212z" fill="#00F076"/>
+                                    <path d="M13.792 12L3.61 22.186c.477.467 1.255.64 2.007.212l11.59-6.584-3.415-3.414z" fill="#FF3A44"/>
+                                </svg>
+                                <div class="text-left">
+                                    <div class="text-[10px] uppercase font-semibold tracking-wider text-slate-300 leading-none">GET IT ON</div>
+                                    <div class="text-base font-bold text-white tracking-tight leading-tight mt-0.5">Google Play</div>
+                                </div>
+                            </a>
+
+                            <!-- Apple App Store Button -->
+                            <a
+                                href="https://www.apple.com/app-store/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex items-center gap-3 px-5 py-3 rounded-2xl bg-black hover:bg-slate-900 text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] border border-slate-800 cursor-pointer">
+                                <svg class="w-6 h-6 shrink-0 fill-current" viewBox="0 0 24 24">
+                                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.96.04-2.13.64-2.77 1.39-.58.67-.99 1.74-.95 2.78 1.08.08 2.19-.55 2.71-1.3z"/>
+                                </svg>
+                                <div class="text-left">
+                                    <div class="text-[10px] uppercase font-semibold tracking-wider text-slate-300 leading-none">Download on the</div>
+                                    <div class="text-base font-bold text-white tracking-tight leading-tight mt-0.5">App Store</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- contact section  -->
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 overflow-hidden relative">
+            <!-- Background soft glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- LEFT COLUMN: Contact Information -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="inline-block px-3 py-1 rounded-full bg-green-100 text-green-500 text-xs font-extrabold uppercase tracking-wider">
+                            24/7 Dedicated Support
+                        </span>
+
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+                            Need Help with Your Money Transfer?
+                        </h2>
+
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
+                            Our support desk is available 24/7 to answer transfer inquiries, verify payment status, and assist with account setup in English, Swedish, Tigrinya, Arabic, and Bengali.
+                        </p>
+
+                        <!-- Quick Action Buttons -->
+                        <div class="pt-2 flex flex-wrap gap-4">
+                            <!-- WhatsApp Button -->
+                            <a
+                                href="https://wa.me/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/30 transition-all flex items-center gap-2 active:scale-[0.98] cursor-pointer">
+                                <i data-lucide="message-square" class="w-4 h-4 fill-white/20"></i>
+                                <span>Chat on WhatsApp</span>
+                            </a>
+
+                            <!-- Email Support Button -->
+                            <a
+                                href="mailto:support@payontime.com"
+                                class="py-3.5 px-6 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold text-sm transition-all flex items-center gap-2 shadow-sm cursor-pointer">
+                                <i data-lucide="mail" class="w-4 h-4 text-green-500"></i>
+                                <span>Email Us</span>
+                            </a>
+                        </div>
+
+                        <!-- Contact Details Card -->
+                        <div class="bg-white border border-slate-200/80 p-6 rounded-3xl shadow-md space-y-4 text-xs mt-6">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-green-50  border border-green-100 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="phone" class="w-4 h-4 text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Customer Support Hotline</h4>
+                                    <p class="text-slate-600 mt-0.5">+46 8 123 4567 (International Hotline)</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 pt-3 border-t border-slate-100">
+                                <div class="w-9 h-9 rounded-xl bg-green-50  border border-green-100 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Headquarters</h4>
+                                    <p class="text-slate-600 mt-0.5">Kungsgatan 42, 111 35 Stockholm, Sweden</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 pt-3 border-t border-slate-100">
+                                <div class="w-9 h-9 rounded-xl bg-green-50  border border-green-100 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="clock" class="w-4 h-4 text-green-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Operating Hours</h4>
+                                    <p class="text-slate-600 mt-0.5">24 Hours / 7 Days a week continuous service</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN: Contact Form -->
+                    <div class="lg:col-span-6 bg-white border border-slate-100 p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-300/50">
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Send Us a Message</h3>
+                        <p class="text-xs text-slate-500 mb-6">Fill out the form below and our team will get back to you within 15 minutes.</p>
+
+                        <form id="contact-form" class="space-y-4">
+                            <!-- Name Input -->
+                            <div>
+                                <label for="name" class="block text-xs font-semibold text-slate-700 mb-1.5">Full Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    required
+                                    placeholder="John Doe"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-green-500 focus:bg-white transition-all" />
+                            </div>
+
+                            <!-- Email Input -->
+                            <div>
+                                <label for="email" class="block text-xs font-semibold text-slate-700 mb-1.5">Email Address</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    required
+                                    placeholder="john@example.com"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-green-500 focus:bg-white transition-all" />
+                            </div>
+
+                            <!-- Subject Input -->
+                            <div>
+                                <label for="subject" class="block text-xs font-semibold text-slate-700 mb-1.5">Subject</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    required
+                                    placeholder="Transfer Status Inquiry"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-green-500 focus:bg-white transition-all" />
+                            </div>
+
+                            <!-- Message Textarea -->
+                            <div>
+                                <label for="message" class="block text-xs font-semibold text-slate-700 mb-1.5">Message</label>
+                                <textarea
+                                    id="message"
+                                    rows="4"
+                                    required
+                                    placeholder="Describe your issue or question..."
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:border-green-500 focus:bg-white transition-all resize-none"></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button
+                                type="submit"
+                                class="w-full py-3.5 px-6 rounded-xl bg-[#108d2c] hover:bg-[#0b5d1c] text-white font-bold text-sm shadow-lg shadow-green-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>Send Message</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+     <!-- FOOTER COMPONENT -->
+    <footer class="bg-slate-900 text-slate-400 text-sm">
+        <!-- Sleek Partner Header Bar -->
+        <div class="border-b border-slate-800 py-6 px-6 sm:px-12">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex flex-wrap items-center gap-6">
+                    <div class="text-slate-500 text-xs font-bold uppercase tracking-widest">
+                        Our Partners
+                    </div>
+                    <div class="flex items-center gap-6 opacity-80 hover:opacity-100 transition-all">
+                        <span class="text-white font-black italic tracking-tighter text-xl">VISA</span>
+                        <span class="text-white font-black italic tracking-tighter text-xl">mastercard</span>
+                        <span class="text-white font-bold tracking-tight text-xl text-pink-400">bKash</span>
+                        <span class="text-white font-bold tracking-tight text-xl text-orange-400">Nagad</span>
+                        <span class="text-white font-extrabold tracking-wider text-sm text-blue-400">SWIFT</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 text-slate-500 text-[11px] font-medium">
+                    <span class="px-2.5 py-1 bg-slate-800 rounded-md text-slate-300 font-semibold border border-slate-700">
+                        256-bit SSL Secure
+                    </span>
+                    <span>© <span id="year"></span> Pay On Time Financial. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links -->
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Col 1: Brand Info -->
+            <div class="space-y-3">
+                <div class="flex items-center gap-2.5">
+                    <img class=" h-10" src="./public/logo.png"
+     alt="Pay On Time Logo"
+                    >
+                </div>
+
+                <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                    Licensed & regulated global financial technology platform. Direct API payout integrations to bank accounts & mobile wallets globally.
+                </p>
+            </div>
+
+            <!-- Col 2: Navigation -->
+            <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+                    Quick Links
+                </h4>
+                <ul class="space-y-2 text-xs">
+                    <li>
+                        <button id="nav-home-btn" class="hover:text-white transition-colors cursor-pointer text-left">
+                            Home
+                        </button>
+                    </li>
+                    <li>
+                        <button id="nav-send-btn" class="hover:text-white transition-colors text-[#108d2c] font-semibold cursor-pointer text-left">
+                            Send Money Now
+                        </button>
+                    </li>
+                    <li>
+                        <a href="#why-us" class="hover:text-white transition-colors">
+                            Why Choose Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#debit-card" class="hover:text-white transition-colors">
+                            Pay On Time Card
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#app" class="hover:text-white transition-colors">
+                            Mobile App
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Compliance & Legal -->
+            <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+                    Compliance & Legal
+                </h4>
+                <ul class="space-y-2 text-xs">
+                    <li>
+                        <a href="#terms" class="hover:text-white transition-colors">
+                            Terms of Service
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privacy" class="hover:text-white transition-colors">
+                            Privacy Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#aml" class="hover:text-white transition-colors">
+                            AML & KYC Policy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#security" class="hover:text-white transition-colors">
+                            Security Guarantee
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Contact & Support -->
+            <div>
+                <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+                    24/7 Support
+                </h4>
+                <div class="space-y-2 text-xs text-slate-300">
+                    <p>Kungsgatan 42, Stockholm, Sweden</p>
+                    <p>+46 8 123 4567</p>
+                    <p>support@Pay On Time.com</p>
+                    <div class="pt-1">
+                        <button id="scroll-top-btn" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
+                            <span>Back to top</span>
+                            <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+
+
+    <!-- Header navigation, language switcher, mobile menu, and section highlighting -->
+    <script >
         
-        <!-- Left Column: Carousel & Marketing -->
-        <div class="lg:col-span-6 space-y-6">
-          <!-- Live FX Rates Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-red-50 text-[#E53935] text-xs font-bold rounded-full border border-red-100 shadow-sm">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+ // ================================
+// State Management
+// ================================
+let selectedLang = 'EN';
+let isMobileMenuOpen = false;
+let isLangOpen = false;
+
+const languages = [
+  { code: 'EN', label: 'English (EN)', flag: '🇬🇧' },
+  { code: 'FR', label: 'French (FR)', flag: '🇫🇷' },
+  { code: 'ES', label: 'Spanish (ES)', flag: '🇪🇸' },
+  { code: 'DE', label: 'German (DE)', flag: '🇩🇪' },
+  { code: 'AR', label: 'Arabic (AR)', flag: '🇸🇦' },
+];
+
+const navItems = [
+  'hero',
+  'why-us',
+  'services',
+  'debit-card',
+  'locations',
+  'app',
+  'contact'
+];
+
+
+// ================================
+// Initialize Lucide Icons
+// ================================
+lucide.createIcons();
+
+
+// ================================
+// DOM Elements
+// ================================
+const langBtn = document.getElementById('lang-btn');
+const langDropdown = document.getElementById('lang-dropdown');
+const langOptionsContainer = document.getElementById('lang-options');
+const activeFlag = document.getElementById('active-flag');
+const activeLangCode = document.getElementById('active-lang-code');
+
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIconOpen = document.getElementById('menu-icon-open');
+const menuIconClose = document.getElementById('menu-icon-close');
+
+const loginBtn = document.getElementById('login-btn');
+const signupBtn = document.getElementById('signup-btn');
+
+const mobileLoginBtn = document.getElementById('mobile-login-btn');
+const mobileSignupBtn = document.getElementById('mobile-signup-btn');
+
+const brandLogo = document.getElementById('brand-logo');
+
+
+// ================================
+// Language Dropdown
+// ================================
+function renderLanguageOptions() {
+  langOptionsContainer.innerHTML = '';
+
+  languages.forEach((lang) => {
+    const isSelected = lang.code === selectedLang;
+
+    const btn = document.createElement('button');
+
+    btn.type = 'button';
+
+    btn.className = `
+      w-full text-left px-3 py-2 text-xs font-medium
+      flex items-center justify-between
+      transition-colors
+      ${
+        isSelected
+          ? 'bg-green-50  text-green-500 font-bold'
+          : 'text-slate-700 hover:bg-slate-50'
+      }
+    `;
+
+    btn.innerHTML = `
+      <span>${lang.flag} ${lang.label}</span>
+      ${isSelected ? '<span class="text-green-500">✓</span>' : ''}
+    `;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      selectedLang = lang.code;
+
+      activeFlag.textContent = lang.flag;
+      activeLangCode.textContent = lang.code;
+
+      langDropdown.classList.add('hidden');
+
+      isLangOpen = false;
+
+      renderLanguageOptions();
+    });
+
+    langOptionsContainer.appendChild(btn);
+  });
+}
+
+
+// ================================
+// Language Dropdown Toggle
+// ================================
+langBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  isLangOpen = !isLangOpen;
+
+  langDropdown.classList.toggle(
+    'hidden',
+    !isLangOpen
+  );
+});
+
+
+// Close language dropdown when clicking outside
+document.addEventListener('click', () => {
+  if (isLangOpen) {
+    langDropdown.classList.add('hidden');
+
+    isLangOpen = false;
+  }
+});
+
+
+// ================================
+// Mobile Menu Toggle
+// ================================
+mobileMenuBtn.addEventListener('click', () => {
+  isMobileMenuOpen = !isMobileMenuOpen;
+
+  mobileMenu.classList.toggle(
+    'hidden',
+    !isMobileMenuOpen
+  );
+
+  menuIconOpen.classList.toggle(
+    'hidden',
+    isMobileMenuOpen
+  );
+
+  menuIconClose.classList.toggle(
+    'hidden',
+    !isMobileMenuOpen
+  );
+});
+
+
+// ================================
+// Smooth Scroll Navigation
+// ================================
+function scrollToSection(id) {
+  const targetElement = document.getElementById(id);
+
+  if (targetElement) {
+    targetElement.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+
+  // Close mobile menu after navigation
+  if (isMobileMenuOpen) {
+    mobileMenuBtn.click();
+  }
+}
+
+
+// ================================
+// Navigation Buttons
+// ================================
+document
+  .querySelectorAll('.nav-btn, .mobile-nav-btn')
+  .forEach((btn) => {
+
+    btn.addEventListener('click', (e) => {
+      const sectionId =
+        e.currentTarget.getAttribute('data-section');
+
+      scrollToSection(sectionId);
+    });
+
+  });
+
+
+// ================================
+// Brand Logo
+// ================================
+brandLogo.addEventListener('click', () => {
+  scrollToSection('hero');
+});
+
+
+// ================================
+// Scroll Observer
+// ================================
+window.addEventListener('scroll', () => {
+
+  const scrollPosition =
+    window.scrollY + 200;
+
+  for (const id of navItems) {
+
+    const element =
+      document.getElementById(id);
+
+    if (element) {
+
+      const top =
+        element.offsetTop;
+
+      const height =
+        element.offsetHeight;
+
+      if (
+        scrollPosition >= top &&
+        scrollPosition < top + height
+      ) {
+
+        updateActiveNavStyles(id);
+
+        break;
+      }
+    }
+  }
+});
+
+
+// ================================
+// Active Navigation Styles
+// ================================
+function updateActiveNavStyles(activeId) {
+
+  // Desktop navigation
+  document
+    .querySelectorAll('.nav-btn')
+    .forEach((btn) => {
+
+      const id =
+        btn.getAttribute('data-section');
+
+      if (id === activeId) {
+
+        btn.className =
+          'nav-btn text-sm transition-all py-1 font-bold text-green-400 border-b-2 border-green-400';
+
+      } else {
+
+        btn.className =
+          'nav-btn text-sm transition-all py-1 font-medium text-slate-500 hover:text-slate-900';
+
+      }
+
+    });
+
+
+  // Mobile navigation
+  document
+    .querySelectorAll('.mobile-nav-btn')
+    .forEach((btn) => {
+
+      const id =
+        btn.getAttribute('data-section');
+
+      if (id === activeId) {
+
+        btn.className =
+          'mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors bg-green-50  font-bold text-green-500';
+
+      } else {
+
+        btn.className =
+          'mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors hover:bg-slate-50 text-slate-700';
+
+      }
+
+    });
+}
+
+
+// ================================
+// LOGIN / SIGNUP NAVIGATION
+// ================================
+
+// Desktop Login
+if (loginBtn) {
+  loginBtn.addEventListener('click', () => {
+    window.location.href = '/login';
+  });
+}
+
+
+// Desktop Sign Up
+if (signupBtn) {
+  signupBtn.addEventListener('click', () => {
+    window.location.href = '/signup';
+  });
+}
+
+
+// Mobile Login
+if (mobileLoginBtn) {
+  mobileLoginBtn.addEventListener('click', () => {
+    window.location.href = '/login';
+  });
+}
+
+
+// Mobile Sign Up
+if (mobileSignupBtn) {
+  mobileSignupBtn.addEventListener('click', () => {
+    window.location.href = '/signup';
+  });
+}
+const sendNowBtn = document.getElementById('send-now-btn');
+sendNowBtn.addEventListener('click', () => {
+  window.location.href = '/userdashboard';
+});
+
+
+// ================================
+// Initialization
+// ================================
+renderLanguageOptions();
+  
+
+    // footer js 
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dynamically set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll To Top Handler
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    document.getElementById('scroll-top-btn').addEventListener('click', scrollToTop);
+
+    // Custom Actions for Home and Send Money buttons
+    document.getElementById('nav-home-btn').addEventListener('click', () => {
+      scrollToTop();
+      // Add custom navigation logic if needed
+    });
+
+    document.getElementById('nav-send-btn').addEventListener('click', () => {
+      alert('Redirecting to Send Money Dashboard...');
+      // Add custom dashboard tab switch logic if needed
+    });
+    </script>
+    <!-- Hero carousel and marketing slider -->
+    <script>
+// Initialize Icons
+lucide.createIcons();
+
+// --- 1. CAROUSEL SLIDER LOGIC ---
+const slides = [
+  {
+    badge: "⚡ Instant Express Transfers",
+    description: "Transfer directly to bKash, Nagad, Mobile Wallets, and Bank Accounts across East Africa & South Asia with locked-in FX rates."
+  },
+  {
+    badge: "💎 Best Exchange Rates Guaranteed",
+    description: "We match real interbank market rates with zero hidden markups or surprise transfer fees. What you see is what your family gets."
+  },
+  {
+    badge: "🛡️ Bank-Grade Security",
+    description: "Your hard-earned money is protected by multi-factor security protocols and end-to-end encrypted transaction audits."
+  }
+];
+
+let currentSlide = 0;
+const slideBadge = document.getElementById("slide-badge");
+const slideDesc = document.getElementById("slide-desc");
+const dotsContainer = document.getElementById("dots-container");
+const prevBtn = document.getElementById("prev-btn");
+const nextBtn = document.getElementById("next-btn");
+
+// Generate Dots
+function renderDots() {
+  dotsContainer.innerHTML = "";
+  slides.forEach((_, idx) => {
+    const dot = document.createElement("button");
+    dot.className = `h-2 rounded-full transition-all cursor-pointer ${
+      currentSlide === idx ? "w-8 bg-green-500" : "w-2 bg-slate-200 hover:bg-slate-300"
+    }`;
+    dot.addEventListener("click", () => goToSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  slideBadge.textContent = slides[currentSlide].badge;
+  slideDesc.textContent = slides[currentSlide].description;
+  renderDots();
+}
+
+prevBtn.addEventListener("click", () => {
+  const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+  goToSlide(newIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+  const newIndex = (currentSlide + 1) % slides.length;
+  goToSlide(newIndex);
+});
+
+// Auto Slide every 5.5 seconds
+setInterval(() => {
+  const newIndex = (currentSlide + 1) % slides.length;
+  goToSlide(newIndex);
+}, 5500);
+
+renderDots();
+
+// --- 2. CALCULATOR & FX RATE LOGIC ---
+// Available Currencies List
+const currencies = [
+  { code: 'united states', label: '🇺🇸 USD', rateToBase: 1 },
+  { code: 'EUR', label: '🇪🇺 EUR', rateToBase: 1.08 },
+  { code: 'GBP', label: '🇬🇧 GBP', rateToBase: 1.26 },
+  { code: 'BDT', label: '🇧🇩 BDT', rateToBase: 0.0085 },
+  { code: 'INR', label: '🇮🇳 INR', rateToBase: 0.012 },
+  { code: 'PKR', label: '🇵🇰 PKR', rateToBase: 0.0036 }
+];
+
+let selectedSend = currencies[0];     // USD
+let selectedReceive = currencies[3];  // BDT
+
+const sendAmountInput = document.getElementById("send-amount");
+const receiveAmountInput = document.getElementById("receive-amount");
+const rateText = document.getElementById("rate-text");
+const totalText = document.getElementById("total-text");
+const swapBtn = document.getElementById("swap-btn");
+const refreshBtn = document.getElementById("refresh-btn");
+const refreshIcon = document.getElementById("refresh-icon");
+
+// --- Searchable Dropdown Generator ---
+function setupSearchableDropdown(type) {
+  const btn = document.getElementById(`${type}-select-btn`);
+  const menu = document.getElementById(`${type}-menu`);
+  const searchInput = document.getElementById(`${type}-search`);
+  const optionsContainer = document.getElementById(`${type}-options`);
+  const selectedLabel = document.getElementById(`${type}-selected-label`);
+
+  function renderOptions(filter = "") {
+    optionsContainer.innerHTML = "";
+    const filtered = currencies.filter(c => 
+      c.code.toLowerCase().includes(filter.toLowerCase()) || 
+      c.label.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    filtered.forEach(curr => {
+      const opt = document.createElement("div");
+      opt.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
+      opt.innerHTML = `<span>${curr.label}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+      
+      opt.addEventListener("click", () => {
+        if (type === "send") selectedSend = curr;
+        else selectedReceive = curr;
+
+        selectedLabel.textContent = curr.label;
+        menu.classList.add("hidden");
+        calculateTransfer();
+      });
+
+      optionsContainer.appendChild(opt);
+    });
+  }
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("hidden");
+    if (!menu.classList.contains("hidden")) {
+      searchInput.value = "";
+      renderOptions();
+      searchInput.focus();
+    }
+  });
+
+  searchInput.addEventListener("input", (e) => renderOptions(e.target.value));
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
+    }
+  });
+}
+
+setupSearchableDropdown("send");
+setupSearchableDropdown("receive");
+
+// --- Exchange Rate Calculator ---
+function calculateTransfer() {
+  const amount = parseFloat(sendAmountInput.value) || 0;
+  
+  // Calculate relative exchange rate (Send / Receive)
+  const currentRate = (selectedSend.rateToBase / selectedReceive.rateToBase).toFixed(2);
+  const totalReceived = (amount * currentRate).toFixed(2);
+
+  receiveAmountInput.value = totalReceived;
+  rateText.textContent = `1 ${selectedSend.code} = ${currentRate} ${selectedReceive.code}`;
+  totalText.textContent = `${amount} ${selectedSend.code}`;
+}
+
+// Input Listeners
+sendAmountInput.addEventListener("input", calculateTransfer);
+
+// --- Swap Button Logic ---
+swapBtn.addEventListener("click", () => {
+  // Swap Values
+  const temp = selectedSend;
+  selectedSend = selectedReceive;
+  selectedReceive = temp;
+
+  // Update Labels
+  document.getElementById("send-selected-label").textContent = selectedSend.label;
+  document.getElementById("receive-selected-label").textContent = selectedReceive.label;
+
+  calculateTransfer();
+});
+
+// Refresh Rates Animation
+refreshBtn.addEventListener("click", () => {
+  refreshIcon.classList.add("animate-spin");
+  setTimeout(() => {
+    refreshIcon.classList.remove("animate-spin");
+    calculateTransfer();
+  }, 800);
+});
+
+// Initial Run
+calculateTransfer();
+    </script>
+    <!-- Debit card controls for visibility, freeze, and ordering -->
+    <script>
+// Elements & State Variables
+    let showCardNumber = false;
+    let isFrozen = false;
+
+    const cardNumberEl = document.getElementById('card-number');
+    const toggleCardNumberBtn = document.getElementById('toggle-card-number-btn');
+    const eyeIconEl = document.getElementById('eye-icon');
+    
+    const cardGraphicEl = document.getElementById('debit-card-graphic');
+    const freezeCardBtn = document.getElementById('freeze-card-btn');
+    const orderCardBtn = document.getElementById('order-card-btn');
+
+    // 1. Toggle Card Number Visibility
+    toggleCardNumberBtn.addEventListener('click', () => {
+      showCardNumber = !showCardNumber;
+      cardNumberEl.textContent = showCardNumber ? '4242 •••• •••• 8812' : '•••• •••• •••• 8812';
+      
+      // Update Lucide Icon dynamically
+      eyeIconEl.setAttribute('data-lucide', showCardNumber ? 'eye-off' : 'eye');
+      lucide.createIcons();
+    });
+
+    // 2. Freeze / Unfreeze Card Functionality
+    freezeCardBtn.addEventListener('click', () => {
+      isFrozen = !isFrozen;
+
+      if (isFrozen) {
+        // Frozen State Styling
+        cardGraphicEl.className = 'w-full max-w-sm h-56 rounded-3xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 border-2 border-dashed border-sky-400/50 opacity-80';
+        freezeCardBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all border bg-sky-500 text-white border-sky-400 shadow-sm cursor-pointer';
+        freezeCardBtn.textContent = '❄️ Card Frozen (Click to Unfreeze)';
+      } else {
+        // Active State Styling
+        cardGraphicEl.className = 'w-full max-w-sm h-56 rounded-3xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 bg-gradient-to-br from-slate-950 via-slate-900 to-[#D32F2F] border border-slate-700/80 shadow-green-50 0/20';
+        freezeCardBtn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all border bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900 shadow-sm cursor-pointer';
+        freezeCardBtn.textContent = 'Freeze Card';
+      }
+    });
+
+    // 3. Order Card Button Handler
+    orderCardBtn.addEventListener('click', () => {
+      alert('Your virtual Pay On Time Card request has been initiated!');
+    });
+    </script>
+    <script>
+        // 1. Data Array
+    const locations = [
+      {
+        country: 'Bangladesh',
+        code: 'BD',
+        flag: '🇧🇩',
+        region: 'asia',
+        payoutMethods: ['bKash (Instant)', 'Nagad (Instant)', 'Bank Transfer', 'Cash Pickup'],
+        agents: '25,000+ Agents',
+      },
+      {
+        country: 'Eritrea',
+        code: 'ER',
+        flag: '🇪🇷',
+        region: 'africa',
+        payoutMethods: ['Cash Pickup (Commercial Bank)', 'Direct Bank Transfer'],
+        agents: '1,200+ Counters',
+      },
+      {
+        country: 'Kenya',
+        code: 'KE',
+        flag: '🇰🇪',
+        region: 'africa',
+        payoutMethods: ['M-Pesa Mobile Wallet', 'Bank Transfer', 'Equity Cash Pickup'],
+        agents: '45,000+ Agents',
+      },
+      {
+        country: 'Ethiopia',
+        code: 'ET',
+        flag: '🇪🇹',
+        region: 'africa',
+        payoutMethods: ['CBE Birr Wallet', 'Telebirr', 'Commercial Bank of Ethiopia'],
+        agents: '15,000+ Branches',
+      },
+      {
+        country: 'Sweden & EU',
+        code: 'SE',
+        flag: '🇸🇪',
+        region: 'europe',
+        payoutMethods: ['Bank Direct', 'SEPA Transfer', 'Card Payout'],
+        agents: 'Digital Instant',
+      },
+      {
+        country: 'India',
+        code: 'IN',
+        flag: '🇮🇳',
+        region: 'asia',
+        payoutMethods: ['UPI Payment', 'IMPS Bank Transfer', 'Cash Pickup'],
+        agents: '60,000+ Locations',
+      },
+    ];
+
+    let currentRegion = 'all';
+    const gridContainer = document.getElementById('locations-grid');
+    const regionButtons = document.querySelectorAll('.region-btn');
+
+    // 2. Render Location Cards Function
+    function renderLocations() {
+      const filteredLocations = locations.filter(
+        loc => currentRegion === 'all' || loc.region === currentRegion
+      );
+
+      gridContainer.innerHTML = filteredLocations.map(loc => `
+        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="text-3xl">${loc.flag}</span>
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">${loc.country}</h3>
+                <span class="text-[11px] text-slate-500 font-medium">${loc.agents}</span>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Active Corridor
             </span>
-            <span>LIVE FX RATES ACTIVE</span>
           </div>
 
-          <!-- Title -->
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
-            Sending Money <br />
-            <span class="text-[#E53935]">Home</span> Made Easy.
-          </h1>
-
-          <!-- Carousel Slider -->
-          <div class="min-h-[140px] transition-all duration-300" id="carousel-container">
-            <div class="inline-block px-3 py-1 rounded-lg bg-red-100/60 text-[#E53935] text-xs font-bold tracking-wide mb-3" id="slide-badge">
-              ⚡ Instant Express Transfers
-            </div>
-            <p class="text-base sm:text-lg text-slate-500 leading-relaxed max-w-lg" id="slide-desc">
-              Transfer directly to bKash, Nagad, Mobile Wallets, and Bank Accounts across East Africa & South Asia with locked-in FX rates.
-            </p>
+          <div class="space-y-1.5 pt-2 border-t border-slate-100">
+            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+              Supported Delivery Channels
+            </span>
+            ${loc.payoutMethods.map(pm => `
+              <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i>
+                <span>${pm}</span>
+              </div>
+            `).join('')}
           </div>
 
-          <!-- Slide Navigation Controls -->
-          <div class="flex items-center justify-between pt-1">
-            <div class="flex items-center gap-2" id="dots-container">
-              <!-- Dots generated by JS -->
-            </div>
-
-            <div class="flex items-center gap-2">
-              <button id="prev-btn" class="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors shadow-sm cursor-pointer">
-                <i data-lucide="chevron-left" class="w-4 h-4"></i>
-              </button>
-              <button id="next-btn" class="p-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 transition-colors shadow-sm cursor-pointer">
-                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- Quick Stats Grid -->
-          <div class="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200/80">
-            <div class="flex flex-col gap-1">
-              <div class="text-3xl font-extrabold text-slate-900">0.0%</div>
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Transfer Fee</div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <div class="text-3xl font-extrabold text-slate-900">120+</div>
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Countries</div>
-            </div>
-            <div class="flex flex-col gap-1">
-              <div class="text-3xl font-extrabold text-slate-900">24/7</div>
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Support</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Live Transfer Calculator Widget -->
-<div class="lg:col-span-6 flex items-center justify-center p-2 sm:p-6 bg-slate-100/50 rounded-3xl relative">
-  <div class="absolute right-0 top-0 w-64 h-64 bg-red-500/5 blur-[100px] rounded-full pointer-events-none"></div>
-
-  <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative">
-    <!-- Header -->
-    <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
-      <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-        <i data-lucide="arrow-left-right" class="w-5 h-5 text-[#E53935]"></i>
-        Calculate Transfer
-      </h2>
-
-      <button id="refresh-btn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer">
-        <i data-lucide="refresh-cw" id="refresh-icon" class="w-3.5 h-3.5"></i>
-        <span class="hidden sm:inline">Refresh</span>
-      </button>
-    </div>
-
-    <!-- Inputs Form -->
-    <div class="space-y-4">
-      <!-- You Send Input -->
-      <div class="relative">
-        <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">You Send</label>
-        <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
-          <input type="number" id="send-amount" value="1000" min="10" class="w-full bg-transparent pt-4 pb-1 px-3 text-xl font-black text-slate-900 focus:outline-none">
-          
-          <!-- Custom Searchable Select (Send) -->
-          <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
-            <button type="button" id="send-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-              <span id="send-selected-label">🇺🇸 USD</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
+          <div class="pt-4 mt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onclick="handleSendMoney('${loc.country}')"
+              class="text-xs font-bold text-green-500 hover:underline flex items-center gap-1 cursor-pointer"
+            >
+              <span>Send to ${loc.country}</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </button>
-
-            <!-- Dropdown Menu -->
-            <div id="send-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
-              <input type="text" id="send-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
-              <div id="send-options" class="max-h-36 overflow-y-auto space-y-1"></div>
-            </div>
           </div>
         </div>
-      </div>
+      `).join('');
 
-      <!-- Swap Button -->
-      <div class="flex justify-center my-2 relative z-20">
-        <div class="bg-white p-1.5 rounded-full border border-slate-200 shadow-md hover:scale-105 transition-transform">
-          <button type="button" id="swap-btn" class="w-9 h-9 bg-[#E53935] hover:bg-[#D32F2F] active:scale-95 transition-all rounded-full flex items-center justify-center text-white cursor-pointer shadow-sm">
-            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
+      // Re-initialize Lucide Icons after DOM update
+      lucide.createIcons();
+    }
 
-      <!-- They Receive Input -->
-      <div class="relative">
-        <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">They Receive</label>
-        <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
-          <input type="number" id="receive-amount" readonly class="w-full bg-transparent pt-4 pb-1 px-3 text-xl font-black text-[#E53935] focus:outline-none cursor-default">
-          
-          <!-- Custom Searchable Select (Receive) -->
-          <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
-            <button type="button" id="receive-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-              <span id="receive-selected-label">🇧🇩 BDT</span>
-              <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
-            </button>
+    // 3. Tab Filtering Event Listeners
+    regionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentRegion = btn.getAttribute('data-region');
 
-            <!-- Dropdown Menu -->
-            <div id="receive-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
-              <input type="text" id="receive-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
-              <div id="receive-options" class="max-h-36 overflow-y-auto space-y-1"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+        // Update active tab styles
+        regionButtons.forEach(b => {
+          if (b.getAttribute('data-region') === currentRegion) {
+            b.className = 'region-btn px-4 py-2 rounded-xl capitalize transition-all bg-white text-slate-900 shadow-sm font-extrabold cursor-pointer';
+          } else {
+            b.className = 'region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer';
+          }
+        });
 
-      <!-- Delivery Method -->
-      <div>
-        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Delivery Method</label>
-        <div class="relative">
-          <select id="delivery-method" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 pr-8 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#E53935] cursor-pointer appearance-none">
-            <option value="bKash">⚡ bKash / Nagad (Instant)</option>
-            <option value="Bank">Bank Deposit</option>
-            <option value="Cash">Cash Pickup</option>
-          </select>
-          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-        </div>
-      </div>
+        // Re-render filtered items
+        renderLocations();
+      });
+    });
 
-      <!-- Calculation Breakdown -->
-      <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
-        <div class="flex justify-between text-xs">
-          <span class="text-slate-400 font-medium">Exchange Rate</span>
-          <span class="text-slate-900 font-bold" id="rate-text">1 USD = 117.5 BDT</span>
-        </div>
-        <div class="flex justify-between text-xs">
-          <span class="text-slate-400 font-medium">Transfer Fee</span>
-          <span class="text-green-600 font-bold" id="fee-text">FREE</span>
-        </div>
-        <div class="h-[1px] bg-slate-200 my-2"></div>
-        <div class="flex justify-between text-sm">
-          <span class="text-slate-900 font-bold">Total to Pay</span>
-          <span class="text-slate-900 font-extrabold" id="total-text">1000 USD</span>
-        </div>
-      </div>
+    // 4. Send Money Click Action Handler
+    function handleSendMoney(country) {
+      alert(`Navigating to Transfer page for ${country}...`);
+    }
 
-      <!-- CTA Button -->
-      <button id="send-now-btn" class="w-full py-4 bg-[#E53935] text-white font-bold rounded-2xl shadow-lg shadow-red-200 hover:bg-[#D32F2F] transition-all flex items-center justify-center gap-2 text-base cursor-pointer">
-        <span>Send Money Now</span>
-        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-      </button>
-    </div>
-  </div>
+    // Initial Render
+    renderLocations();
+    </script>
+
 </div>
 
-      </div>
-    </div>
-  </section>
-  <!-- why us section  -->
-    <!-- Why Choose Us Section -->
-  <section id="why-us" class="py-20 bg-slate-50 border-y border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="px-3 py-1 rounded-full bg-red-100 text-[#E53935] text-xs font-extrabold uppercase tracking-wider">
-          Why Choose Us
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
-          Why Choose Hidmona Money Transfer?
-        </h2>
-        <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-          Engineered for reliability, speed, and absolute financial security. Built by experts to keep your loved ones connected without exorbitant fees.
-        </p>
-      </div>
+<!-- footer  -->
+@include('frontend.layout.footer')
+@endsection
+@section('custom_js')
+<!-- Language selector with Google Translate integration and saved preference -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageToggleBtn = document.getElementById('languageToggleBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLanguage = document.getElementById('currentLanguage');
+        const languageOptions = document.querySelectorAll('.language-option');
 
-      <!-- Features Grid (Hardcoded Content) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Feature 1 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="zap" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Lightning Fast Delivery</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Mobile wallet transfers to bKash, Nagad, and M-Pesa arrive in under 60 seconds directly into recipient accounts.
-          </p>
-        </div>
+        // Hide Google Translate widget
+        function hideGoogleTranslate() {
+            const elements = [
+                '.goog-te-banner-frame',
+                '.goog-te-menu-value',
+                '.skiptranslate',
+                '.goog-te-banner'
+            ];
 
-        <!-- Feature 2 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="percent" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Guaranteed Best FX Rates</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Lock in real-time competitive exchange rates with zero hidden markups. What you calculate is exactly what is delivered.
-          </p>
-        </div>
+            elements.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
 
-        <!-- Feature 3 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="shield-check" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Bank-Grade Security</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Protected by 256-bit SSL encryption, automated anti-fraud monitoring, and licensed international compliance.
-          </p>
-        </div>
+            document.body.style.top = '0';
+        }
 
-        <!-- Feature 4 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="headphones" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">24/7 WhatsApp & Phone Support</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Our dedicated multilingual support team is available around the clock via WhatsApp, email, and live phone call.
-          </p>
-        </div>
+        // Toggle dropdown
+        languageToggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isVisible = languageDropdown.style.display === 'block';
+            languageDropdown.style.display = isVisible ? 'none' : 'block';
+        });
 
-        <!-- Feature 5 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="smartphone" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Seamless Mobile Experience</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Send money, track transaction statuses in real-time, and save recipients with a few taps on any mobile device.
-          </p>
-        </div>
+        // Handle language change
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                const flagCode = this.getAttribute('data-flag');
 
-        <!-- Feature 6 -->
-        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group">
-          <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 transition-colors">
-            <i data-lucide="globe" class="w-6 h-6 text-[#E53935]"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Wide Payout Network</h3>
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Over 100,000+ cash pickup locations and bank direct partners across East Africa, Europe, and South Asia.
-          </p>
-        </div>
+                // Update current display
+                currentFlag.src = `https://flagcdn.com/w40/${flagCode}.png`;
+                currentLanguage.textContent = lang === 'en' ? 'English' : 'French';
 
-      </div>
-    </div>
-  </section>
-    <!-- services section  -->
-    <!-- Our Services Section -->
-  <section id="services" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="px-3 py-1 rounded-full bg-red-100 text-[#E53935] text-xs font-extrabold uppercase tracking-wider">
-          Financial Solutions
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
-          Our Services - Premium Financial Solutions
-        </h2>
-        <p class="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-          Tailored financial products designed for individuals, families, and growing international businesses.
-        </p>
-      </div>
+                // Trigger Google Translate
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.value = lang;
+                    const event = new Event('change', {
+                        bubbles: true
+                    });
+                    select.dispatchEvent(event);
+                }
 
-      <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Service Card 1 -->
-        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
-                <i data-lucide="send" class="w-6 h-6 text-[#E53935]"></i>
-              </div>
-              <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
-                Popular
-              </span>
-            </div>
+                // Hide dropdown
+                languageDropdown.style.display = 'none';
 
-            <h3 class="text-lg font-bold text-slate-900 mb-2">Global Money Transfer</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Send funds instantly to family and friends with locked-in FX rates, zero hidden fees, and transparent tracking.
-            </p>
-          </div>
+                // Save to localStorage
+                localStorage.setItem('preferred-language', lang);
+            });
+        });
 
-          <div class="pt-6 mt-4 border-t border-slate-200/60">
-            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-              <span>Explore Service</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            languageDropdown.style.display = 'none';
+        });
 
-        <!-- Service Card 2 -->
-        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
-                <i data-lucide="wallet" class="w-6 h-6 text-[#E53935]"></i>
-              </div>
-              <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
-                New Feature
-              </span>
-            </div>
+        // Initialize with saved language
+        const savedLang = localStorage.getItem('preferred-language') || 'en';
+        const savedFlagCode = savedLang === 'en' ? 'gb' : 'fr';
+        const savedLanguageText = savedLang === 'en' ? 'English' : 'French';
 
-            <h3 class="text-lg font-bold text-slate-900 mb-2">Multi-Currency Wallets</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Hold, convert, and manage EUR, USD, SEK, GBP, and local currencies simultaneously in one unified digital account.
-            </p>
-          </div>
+        currentFlag.src = `https://flagcdn.com/w40/${savedFlagCode}.png`;
+        currentLanguage.textContent = savedLanguageText;
 
-          <div class="pt-6 mt-4 border-t border-slate-200/60">
-            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-              <span>Explore Service</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
+        // Set Google Translate to saved language
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            select.value = savedLang;
+        }
 
-        <!-- Service Card 3 -->
-        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
-                <i data-lucide="building-2" class="w-6 h-6 text-[#E53935]"></i>
-              </div>
-              <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
-                Enterprise
-              </span>
-            </div>
+        // Continuously hide Google Translate elements
+        setInterval(hideGoogleTranslate, 500);
 
-            <h3 class="text-lg font-bold text-slate-900 mb-2">Business & Merchant Payments</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Seamless B2B bulk payouts, invoice settlements, and supplier payments across international corridors.
-            </p>
-          </div>
-
-          <div class="pt-6 mt-4 border-t border-slate-200/60">
-            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-              <span>Explore Service</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Service Card 4 -->
-        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
-                <i data-lucide="store" class="w-6 h-6 text-[#E53935]"></i>
-              </div>
-              <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-200 text-slate-800 uppercase tracking-wide">
-                100k+ Agents
-              </span>
-            </div>
-
-            <h3 class="text-lg font-bold text-slate-900 mb-2">Over-The-Counter Cash Pickup</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Instant cash pickup at thousands of verified agent counters across East Africa and South Asia.
-            </p>
-          </div>
-
-          <div class="pt-6 mt-4 border-t border-slate-200/60">
-            <button class="w-full py-2.5 px-4 bg-white hover:bg-slate-900 hover:text-white text-slate-900 font-bold text-xs rounded-xl border border-slate-300 transition-all flex items-center justify-center gap-1.5 cursor-pointer">
-              <span>Explore Service</span>
-              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-    <!-- debit card section  -->
-   <!-- Debit Card Suite Section -->
-  <section id="debit-card" class="py-20 bg-slate-900 text-white overflow-hidden relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <!-- Left Column: Interactive Card Preview -->
-        <div class="lg:col-span-5 flex flex-col items-center">
-          
-          <!-- Debit Card Graphic -->
-          <div
-            id="debit-card-graphic"
-            class="w-full max-w-sm h-56 rounded-3xl p-6 flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 bg-gradient-to-br from-slate-950 via-slate-900 to-[#D32F2F] border border-slate-700/80 shadow-red-500/20"
-          >
-            <!-- Card Header -->
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-[#E53935] flex items-center justify-center font-black text-white text-sm">
-                  H
-                </div>
-                <span class="font-extrabold tracking-tight text-white text-base">
-                  Hidmona
-                </span>
-              </div>
-              <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-white/10 text-white backdrop-blur">
-                PREMIUM VISA
-              </span>
-            </div>
-
-            <!-- Chip & Wireless -->
-            <div class="flex items-center gap-4 my-2">
-              <div class="w-10 h-7 rounded-md bg-gradient-to-r from-amber-200 to-amber-400 border border-amber-500/40 shadow-inner"></div>
-              <div class="text-slate-400">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                </svg>
-              </div>
-            </div>
-
-            <!-- Card Number & Details -->
-            <div>
-              <div class="text-xs font-mono tracking-widest text-slate-300 flex items-center justify-between">
-                <span id="card-number">•••• •••• •••• 8812</span>
-                <button
-                  id="toggle-card-number-btn"
-                  type="button"
-                  class="p-1 text-slate-400 hover:text-white cursor-pointer"
-                  aria-label="Toggle card number visibility"
-                >
-                  <i data-lucide="eye" id="eye-icon" class="w-4 h-4"></i>
-                </button>
-              </div>
-
-              <!-- Footer Details -->
-              <div class="flex justify-between items-end mt-3 text-[11px]">
-                <div>
-                  <span class="block text-slate-400 text-[9px] uppercase font-bold">
-                    Cardholder
-                  </span>
-                  <span class="font-bold text-white uppercase">
-                    ALEXANDER WRIGHT
-                  </span>
-                </div>
-                <div>
-                  <span class="block text-slate-400 text-[9px] uppercase font-bold">
-                    Expires
-                  </span>
-                  <span class="font-bold text-white">12/28</span>
-                </div>
-                <div class="font-bold italic text-white text-base">VISA</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card Controls Interactive Bar -->
-          <div class="mt-4 flex items-center gap-3">
-            <button
-              id="freeze-card-btn"
-              type="button"
-              class="px-4 py-2 rounded-xl text-xs font-bold transition-all border bg-slate-800 text-slate-300 border-slate-700 hover:text-white cursor-pointer"
-            >
-              Freeze Card
-            </button>
-          </div>
-        </div>
-
-        <!-- Right Column: Features & 3-Step Process -->
-        <div class="lg:col-span-7 space-y-6">
-          <div>
-            <span class="px-3 py-1 rounded-full bg-red-950 text-[#E53935] text-xs font-extrabold uppercase tracking-wider border border-red-800/50">
-              Hidmona Debit Card
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">
-              Spend Anywhere Worldwide with 0% Foreign Fees
-            </h2>
-            <p class="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
-              Connect your multi-currency balance directly to a physical or virtual Hidmona Visa Debit Card. Pay in 150+ countries with interbank exchange rates.
-            </p>
-          </div>
-
-          <!-- Card Features List -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-800/60 border border-slate-700">
-              <i data-lucide="zap" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
-              <div>
-                <h3 class="text-sm font-bold text-white">0% Foreign Transaction Fees</h3>
-                <p class="text-xs text-slate-400 mt-1">
-                  No hidden FX markup on POS purchases or global online shopping.
-                </p>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3 p-4 rounded-2xl bg-slate-800/60 border border-slate-700">
-              <i data-lucide="smartphone" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
-              <div>
-                <h3 class="text-sm font-bold text-white">Apple Pay & Google Wallet</h3>
-                <p class="text-xs text-slate-400 mt-1">
-                  Add virtual card instantly to your phone for touchless payments.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3-Step Card Issue Process -->
-          <div class="pt-4 border-t border-slate-800">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">
-              3-Step Card Issue Process
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                <span class="text-[#E53935] font-black text-sm block mb-1">01.</span>
-                <h4 class="font-bold text-white">Register & Verify</h4>
-                <p class="text-slate-400 text-[11px] mt-0.5">Quick 1-minute ID check</p>
-              </div>
-
-              <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                <span class="text-[#E53935] font-black text-sm block mb-1">02.</span>
-                <h4 class="font-bold text-white">Choose Card</h4>
-                <p class="text-slate-400 text-[11px] mt-0.5">Instant virtual or physical</p>
-              </div>
-
-              <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                <span class="text-[#E53935] font-black text-sm block mb-1">03.</span>
-                <h4 class="font-bold text-white">Spend Worldwide</h4>
-                <p class="text-slate-400 text-[11px] mt-0.5">Over 50M+ Visa merchants</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Order Card CTA Button -->
-          <div class="pt-2">
-            <button
-              id="order-card-btn"
-              type="button"
-              class="py-3.5 px-6 rounded-2xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-sm shadow-xl shadow-red-500/20 transition-all flex items-center gap-2 cursor-pointer"
-            >
-              <i data-lucide="credit-card" class="w-4 h-4"></i>
-              <span>Get Your Free Hidmona Card</span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-    <!-- Global Locations Section -->
-  <section id="locations" class="py-20 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      
-      <!-- Section Header & Filter Tabs -->
-      <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-12">
-        <div>
-          <span class="px-3 py-1 rounded-full bg-red-100 text-[#E53935] text-xs font-extrabold uppercase tracking-wider">
-            Payout Coverage
-          </span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
-            Global Network & Payout Locations
-          </h2>
-          <p class="text-sm text-slate-600 mt-2 max-w-xl">
-            Delivering money safely through banks, mobile wallets, and cash agent pickup counters across continents.
-          </p>
-        </div>
-
-        <!-- Region Filter Tabs -->
-        <div class="flex bg-slate-200 p-1 rounded-2xl text-xs font-bold text-slate-700">
-          <button
-            type="button"
-            data-region="all"
-            class="region-btn px-4 py-2 rounded-xl capitalize transition-all bg-white text-slate-900 shadow-sm font-extrabold cursor-pointer"
-          >
-            All
-          </button>
-          <button
-            type="button"
-            data-region="africa"
-            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer"
-          >
-            Africa
-          </button>
-          <button
-            type="button"
-            data-region="asia"
-            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer"
-          >
-            Asia
-          </button>
-          <button
-            type="button"
-            data-region="europe"
-            class="region-btn px-4 py-2 rounded-xl capitalize transition-all hover:text-slate-900 cursor-pointer"
-          >
-            Europe
-          </button>
-        </div>
-      </div>
-
-      <!-- Locations Grid Container -->
-      <div id="locations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Javascript dynamically renders cards here -->
-      </div>
-
-    </div>
-  </section>
-    <!-- contact section  -->
-    <!-- Contact Section -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
-        
-        <!-- Accent decoration -->
-        <div class="absolute top-0 right-0 w-80 h-80 bg-[#E53935]/20 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-          
-          <!-- LEFT COLUMN: All Existing Content -->
-          <div class="lg:col-span-6 space-y-6">
-            <span class="inline-block px-3 py-1 rounded-full bg-red-500/20 text-[#E53935] text-xs font-bold uppercase tracking-wider border border-red-500/30">
-              24/7 Dedicated Support
-            </span>
-
-            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Need Help with Your Money Transfer?
-            </h2>
-
-            <p class="text-sm text-slate-300 leading-relaxed max-w-xl">
-              Our support desk is available 24/7 to answer transfer inquiries, verify payment status, and assist with account setup in English, Swedish, Tigrinya, Arabic, and Bengali.
-            </p>
-
-            <!-- Quick Action Buttons -->
-            <div class="pt-2 flex flex-wrap gap-4">
-              <!-- WhatsApp Button -->
-              <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/30 transition-all flex items-center gap-2 active:scale-[0.98]"
-              >
-                <i data-lucide="message-square" class="w-4 h-4 fill-white/20"></i>
-                <span>Chat on WhatsApp</span>
-              </a>
-
-              <!-- Email Support Button -->
-              <a
-                href="mailto:support@hidmona.com"
-                class="py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold text-sm transition-all flex items-center gap-2"
-              >
-                <i data-lucide="mail" class="w-4 h-4"></i>
-                <span>Email Us</span>
-              </a>
-            </div>
-
-            <!-- Contact Details Card -->
-            <div class="bg-slate-950/80 border border-slate-800 p-6 rounded-2xl space-y-4 text-xs mt-6">
-              <div class="flex items-start gap-3">
-                <i data-lucide="phone" class="w-5 h-5 text-[#E53935] shrink-0 mt-0.5"></i>
-                <div>
-                  <h4 class="font-bold text-white text-sm">Customer Support Hotline</h4>
-                  <p class="text-slate-400 mt-0.5">+46 8 123 4567 (International Hotline)</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-3 pt-3 border-t border-slate-800">
-                <i data-lucide="map-pin" class="w-5 h-5 text-[#E53935] shrink-0 mt-0.5"></i>
-                <div>
-                  <h4 class="font-bold text-white text-sm">Headquarters</h4>
-                  <p class="text-slate-400 mt-0.5">Kungsgatan 42, 111 35 Stockholm, Sweden</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-3 pt-3 border-t border-slate-800">
-                <i data-lucide="clock" class="w-5 h-5 text-[#E53935] shrink-0 mt-0.5"></i>
-                <div>
-                  <h4 class="font-bold text-white text-sm">Operating Hours</h4>
-                  <p class="text-slate-400 mt-0.5">24 Hours / 7 Days a week continuous service</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT COLUMN: Contact Form -->
-          <div class="lg:col-span-6 bg-slate-950/90 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl">
-            <h3 class="text-xl font-bold text-white mb-1">Send Us a Message</h3>
-            <p class="text-xs text-slate-400 mb-6">Fill out the form below and our team will get back to you within 15 minutes.</p>
-
-            <form id="contact-form" class="space-y-4">
-              <!-- Name Input -->
-              <div>
-                <label for="name" class="block text-xs font-semibold text-slate-300 mb-1.5">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  placeholder="John Doe"
-                  class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#E53935] transition-all"
-                />
-              </div>
-
-              <!-- Email Input -->
-              <div>
-                <label for="email" class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  placeholder="john@example.com"
-                  class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#E53935] transition-all"
-                />
-              </div>
-
-              <!-- Subject Input -->
-              <div>
-                <label for="subject" class="block text-xs font-semibold text-slate-300 mb-1.5">Subject</label>
-                <input
-                  type="text"
-                  id="subject"
-                  required
-                  placeholder="Transfer Status Inquiry"
-                  class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#E53935] transition-all"
-                />
-              </div>
-
-              <!-- Message Textarea -->
-              <div>
-                <label for="message" class="block text-xs font-semibold text-slate-300 mb-1.5">Message</label>
-                <textarea
-                  id="message"
-                  rows="4"
-                  required
-                  placeholder="Describe your issue or question..."
-                  class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#E53935] transition-all resize-none"
-                ></textarea>
-              </div>
-
-              <!-- Submit Button -->
-              <button
-                type="submit"
-                class="w-full py-3.5 px-6 rounded-xl bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-sm shadow-lg shadow-red-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
-              >
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span>Send Message</span>
-              </button>
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-  </main>
-
-  <!-- FOOTER COMPONENT -->
-  <footer class="bg-slate-900 text-slate-400 text-sm">
-    <!-- Sleek Partner Header Bar -->
-    <div class="border-b border-slate-800 py-6 px-6 sm:px-12">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex flex-wrap items-center gap-6">
-          <div class="text-slate-500 text-xs font-bold uppercase tracking-widest">
-            Our Partners
-          </div>
-          <div class="flex items-center gap-6 opacity-80 hover:opacity-100 transition-all">
-            <span class="text-white font-black italic tracking-tighter text-xl">VISA</span>
-            <span class="text-white font-black italic tracking-tighter text-xl">mastercard</span>
-            <span class="text-white font-bold tracking-tight text-xl text-pink-400">bKash</span>
-            <span class="text-white font-bold tracking-tight text-xl text-orange-400">Nagad</span>
-            <span class="text-white font-extrabold tracking-wider text-sm text-blue-400">SWIFT</span>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-4 text-slate-500 text-[11px] font-medium">
-          <span class="px-2.5 py-1 bg-slate-800 rounded-md text-slate-300 font-semibold border border-slate-700">
-            256-bit SSL Secure
-          </span>
-          <span>© <span id="year"></span> Hidmona Financial. All rights reserved.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Footer Links -->
-    <div class="max-w-7xl mx-auto px-6 sm:px-12 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Col 1: Brand Info -->
-      <div class="space-y-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 bg-[#E53935] rounded-xl flex items-center justify-center text-white shadow-md shadow-red-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
-          </div>
-          <span class="font-bold text-xl text-white tracking-tight">Hidmona</span>
-        </div>
-
-        <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
-          Licensed & regulated global financial technology platform. Direct API payout integrations to bank accounts & mobile wallets globally.
-        </p>
-      </div>
-
-      <!-- Col 2: Navigation -->
-      <div>
-        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
-          Quick Links
-        </h4>
-        <ul class="space-y-2 text-xs">
-          <li>
-            <button id="nav-home-btn" class="hover:text-white transition-colors cursor-pointer text-left">
-              Home
-            </button>
-          </li>
-          <li>
-            <button id="nav-send-btn" class="hover:text-white transition-colors text-[#E53935] font-semibold cursor-pointer text-left">
-              Send Money Now
-            </button>
-          </li>
-          <li>
-            <a href="#why-us" class="hover:text-white transition-colors">
-              Why Choose Us
-            </a>
-          </li>
-          <li>
-            <a href="#debit-card" class="hover:text-white transition-colors">
-              Hidmona Card
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Col 3: Compliance & Legal -->
-      <div>
-        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
-          Compliance & Legal
-        </h4>
-        <ul class="space-y-2 text-xs">
-          <li>
-            <a href="#terms" class="hover:text-white transition-colors">
-              Terms of Service
-            </a>
-          </li>
-          <li>
-            <a href="#privacy" class="hover:text-white transition-colors">
-              Privacy Policy
-            </a>
-          </li>
-          <li>
-            <a href="#aml" class="hover:text-white transition-colors">
-              AML & KYC Policy
-            </a>
-          </li>
-          <li>
-            <a href="#security" class="hover:text-white transition-colors">
-              Security Guarantee
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Col 4: Contact & Support -->
-      <div>
-        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
-          24/7 Support
-        </h4>
-        <div class="space-y-2 text-xs text-slate-300">
-          <p>Kungsgatan 42, Stockholm, Sweden</p>
-          <p>+46 8 123 4567</p>
-          <p>support@hidmona.com</p>
-          <div class="pt-1">
-            <button id="scroll-top-btn" class="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
-              <span>Back to top</span>
-              <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  
-  <script type="module" src="/src/main.js"></script>
-  <script type="module" src="/src/hero.js"></script>
-  <script type="module" src="/src/debit.js"></script>
-  <script type="module" src="/src/location.js"></script>
+        // Initial hide
+        hideGoogleTranslate();
+    });
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- Scroll animation initialization -->
+<script>
+    AOS.init({
+        duration: 700,
+        once: true,
+    });
+    // ================================
+// Initialize Lucide Icons
+// ================================
+lucide.createIcons();
+</script>
   
 </body>
 </html>
