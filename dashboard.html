@@ -25,9 +25,20 @@
         --brand-green-hover: #2d963b;
       }
       #sidebar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
         background-color: #ffffff !important;
         color: var(--brand-navy) !important;
         border-color: #e2e8f0 !important;
+      }
+      @media (min-width: 1024px) {
+        #dashboardShell { padding-left: 16rem; transition: padding-left .3s ease; }
+        #dashboardShell.sidebar-collapsed { padding-left: 0; }
       }
       #sidebar .border-slate-800,
       #sidebar [class*="border-slate-700"] { border-color: #e2e8f0 !important; }
