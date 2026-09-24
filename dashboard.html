@@ -4071,10 +4071,16 @@
       });
       refreshBtn.addEventListener("click", () => {
         selectedSend = null;
+        selectedReceive = null;
         sendAmountInput.value = "0";
+        receiveAmountInput.value = "";
         document.getElementById("send-selected-label").textContent = "Select country";
+        document.getElementById("receive-selected-label").textContent = "Select country";
         document.getElementById("send-search").value = "";
+        document.getElementById("receive-search").value = "";
         document.getElementById("send-menu").classList.add("hidden");
+        document.getElementById("receive-menu").classList.add("hidden");
+        deliveryMethod.value = "bKash";
         calculateTransfer();
       });
 
