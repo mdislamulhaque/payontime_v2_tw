@@ -878,7 +878,7 @@
                 >
                   <div class="pb-4 border-b border-slate-100">
                     <h3 class="text-xl font-extrabold text-slate-900">
-                      Step 1: Transfer Details
+                      Step 1: Transfer
                     </h3>
                     <p class="text-xs text-slate-500 mt-0.5">
                       Enter send amount and transfer channel.
@@ -903,6 +903,7 @@
                         </h2>
 
                         <button
+                          type="button"
                           id="refresh-btn"
                           class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer"
                         >
@@ -921,7 +922,7 @@
                         <div class="relative">
                           <label
                             class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10"
-                            >You Send</label
+                            >I'm sending</label
                           >
                           <div
                             class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-green-200 transition-all p-1.5"
@@ -929,8 +930,9 @@
                             <input
                               type="number"
                               id="send-amount"
-                              value="1000"
-                              min="10"
+                              value="0"
+                              min="0"
+                              step="0.01"
                               class="w-full bg-transparent pt-4 pb-1 px-3 text-xl font-black text-slate-900 focus:outline-none"
                             />
 
@@ -959,7 +961,7 @@
                                 <input
                                   type="text"
                                   id="send-search"
-                                  placeholder="Search currency..."
+                                  placeholder="Search country..."
                                   class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-green-400"
                                 />
                                 <div
@@ -993,7 +995,7 @@
                         <div class="relative">
                           <label
                             class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10"
-                            >They Receive</label
+                            >To someone dear in</label
                           >
                           <div
                             class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5"
@@ -1030,7 +1032,7 @@
                                 <input
                                   type="text"
                                   id="receive-search"
-                                  placeholder="Search currency..."
+                                  placeholder="Search country..."
                                   class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-green-400"
                                 />
                                 <div
@@ -1067,38 +1069,14 @@
                         </div>
 
                         <!-- Calculation Breakdown -->
-                        <div
-                          class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2"
-                        >
-                          <div class="flex justify-between text-xs">
-                            <span class="text-slate-400 font-medium"
-                              >Exchange Rate</span
-                            >
-                            <span
-                              class="text-slate-900 font-bold"
-                              id="rate-text"
-                              >1 USD = 117.5 BDT</span
-                            >
-                          </div>
-                          <div class="flex justify-between text-xs">
-                            <span class="text-slate-400 font-medium"
-                              >Transfer Fee</span
-                            >
-                            <span class="text-green-600 font-bold" id="fee-text"
-                              >FREE</span
-                            >
-                          </div>
-                          <div class="h-[1px] bg-slate-200 my-2"></div>
-                          <div class="flex justify-between text-sm">
-                            <span class="text-slate-900 font-bold"
-                              >Total to Pay</span
-                            >
-                            <span
-                              class="text-slate-900 font-extrabold"
-                              id="total-text"
-                              >1000 USD</span
-                            >
-                          </div>
+                        <div id="transaction-info" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Amount to send</span><span class="text-slate-900 font-bold" id="amount-text">0.00 SEK</span></div>
+                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Exchange Rate</span><span class="text-slate-900 font-bold" id="rate-text">1 SEK = 0.096 USD</span></div>
+                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Our fee</span><span class="text-green-600 font-bold" id="fee-text">0 SEK</span></div>
+                          <div class="h-px bg-slate-200 my-2"></div>
+                          <div class="flex justify-between text-sm"><span class="text-slate-900 font-bold">Total to pay</span><span class="text-slate-900 font-extrabold" id="total-text">0 SEK</span></div>
+                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Recipient receives</span><span class="text-slate-900 font-bold" id="recipient-receives-text">0.000 USD</span></div>
+                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Recipient Receives In USD</span><span class="text-slate-900 font-bold" id="recipient-usd-text">0.000 USD</span></div>
                         </div>
                       </div>
                     </div>
@@ -1108,7 +1086,7 @@
                         onclick="goToStep(2)"
                         class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all"
                       >
-                        Next: Select Recipient →
+                        Next: Recipient →
                       </button>
                     </div>
                   </div>
@@ -1124,7 +1102,7 @@
                   >
                     <div>
                       <h3 class="text-xl font-extrabold text-slate-900">
-                        Step 2: Recipient Information
+                        Step 2: Recipient
                       </h3>
                       <p class="text-xs text-slate-500 mt-0.5">
                         Choose a saved recipient or add a new contact for
@@ -1272,6 +1250,14 @@
                       </p>
                     </div>
 
+                    <section class="pt-5 border-t border-slate-100 space-y-3">
+                      <div>
+                        <h4 class="text-sm font-extrabold text-slate-900">Transfer purpose</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Choose why you are sending this money.</p>
+                      </div>
+                      <div id="purpose-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                    </section>
+
                     <!-- Navigation Buttons -->
                     <div
                       class="pt-4 flex items-center justify-between border-t border-slate-100"
@@ -1301,7 +1287,7 @@
                         onclick="goToStep(3)"
                         class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
                       >
-                        <span>Next: Transfer Purpose</span>
+                        <span>Next: Review</span>
                         <svg
                           class="w-4 h-4"
                           viewBox="0 0 24 24"
@@ -1469,44 +1455,10 @@
                   id="step-3"
                   class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
-                  <div class="pb-4 border-b border-slate-100">
-                    <h3 class="text-xl font-extrabold text-slate-900">
-                      Step 3: Reason for Transfer
-                    </h3>
-                    <p class="text-xs text-slate-500 mt-0.5">
-                      Select purpose for regulatory compliance.
-                    </p>
-                  </div>
-                  <div
-                    id="purpose-list"
-                    class="grid grid-cols-1 sm:grid-cols-2 gap-3"
-                  ></div>
-                  <div
-                    class="pt-4 flex items-center justify-between border-t border-slate-100"
-                  >
-                    <button
-                      onclick="goToStep(2)"
-                      class="py-3 px-6 rounded-2xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50"
-                    >
-                      ← Previous
-                    </button>
-                    <button
-                      onclick="goToStep(4)"
-                      class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20"
-                    >
-                      Next: Review & Declare →
-                    </button>
-                  </div>
-                </div>
-
-                <div
-                  id="step-4"
-                  class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
-                >
                   <!-- Step Header -->
                   <div class="pb-4 border-b border-slate-100">
                     <h3 class="text-xl font-extrabold text-slate-900">
-                      Step 4: Review & Compliance Declaration
+                      Step 3: Review & Compliance
                     </h3>
                     <p class="text-xs text-slate-500 mt-0.5">
                       Review your transfer details and answer mandatory
@@ -1772,7 +1724,7 @@
                   >
                     <button
                       type="button"
-                      onclick="goToStep(3)"
+                      onclick="goToStep(2)"
                       class="py-3 px-6 rounded-2xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-1.5"
                     >
                       <!-- ArrowLeft Icon -->
@@ -1793,7 +1745,7 @@
 
                     <button
                       type="button"
-                      onclick="goToStep(5)"
+                      onclick="goToStep(4)"
                       class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
                     >
                       <span>Proceed to Payment</span>
@@ -1815,7 +1767,7 @@
                 </div>
 
                 <div
-                  id="step-5"
+                  id="step-4"
                   class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
                   <!-- Step Header -->
@@ -1824,7 +1776,7 @@
                   >
                     <div>
                       <h3 class="text-xl font-extrabold text-slate-900">
-                        Step 5: Payment Details
+                        Step 4: Pay
                       </h3>
                       <p class="text-xs text-slate-500 mt-0.5">
                         Your Transaction Amount:
@@ -2069,7 +2021,7 @@
                     >
                       <button
                         type="button"
-                        onclick="goToStep(4)"
+                        onclick="goToStep(3)"
                         class="py-3 px-6 rounded-2xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-1.5"
                       >
                         <!-- ArrowLeft Icon -->
@@ -2150,7 +2102,7 @@
                     </div>
 
                     <h3 class="text-xl font-extrabold text-slate-900">
-                      Step 6: Security OTP Verification
+                      Step 4: Verify Payment
                     </h3>
                     <p
                       class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed"
@@ -3884,13 +3836,10 @@
       let selectedPurpose = "Family Support";
 
       const stepsList = [
-        { number: 1, label: "Amount" },
+        { number: 1, label: "Transfer" },
         { number: 2, label: "Recipient" },
-        { number: 3, label: "Reason" },
-        { number: 4, label: "Review" },
-        { number: 5, label: "Payment" },
-        { number: 6, label: "Security" },
-        { number: 7, label: "Success" },
+        { number: 3, label: "Review" },
+        { number: 4, label: "Pay" },
       ];
 
       const recipientsData = {
@@ -3953,12 +3902,21 @@
 
       // Navigation Switcher
       function goToStep(stepNum) {
-        if (stepNum === 5 && !document.getElementById("terms-agree").checked) {
+        if (stepNum === 2 && (!selectedSend || !selectedReceive || (parseFloat(sendAmountInput.value) || 0) <= 0)) {
+          alert("Choose both countries and enter an amount first.");
+          return;
+        }
+        if (stepNum === 3 && !document.getElementById("recipient-select").value) {
+          alert("Choose a recipient to continue.");
+          return;
+        }
+        if (stepNum === 4 && !document.getElementById("terms-agree").checked) {
           alert("Please accept Terms & Conditions before proceeding.");
           return;
         }
 
-        currentStep = stepNum;
+        currentStep = Math.min(stepNum, 4);
+        if (stepNum === 3) updateReviewSummary();
 
         // Hide all steps
         document
@@ -3972,12 +3930,21 @@
         renderStepper();
       }
 
-      // Step 1 Calculation
-      document.getElementById("send-amount")?.addEventListener("input", (e) => {
-        const val = parseFloat(e.target.value) || 0;
-        document.getElementById("net-receiving").innerText =
-          (val * 1.15).toFixed(2) + " USD";
-      });
+
+      function updateReviewSummary() {
+        const recipient = recipientsData[document.getElementById("recipient-select").value];
+        if (!recipient || !selectedSend || !selectedReceive) return;
+        document.getElementById("review-send-amount").textContent = amountText.textContent;
+        document.getElementById("review-receive-amount").textContent = recipientReceivesText.textContent;
+        document.getElementById("review-exchange-rate").textContent = rateText.textContent;
+        document.getElementById("review-fee").textContent = feeText.textContent;
+        document.getElementById("review-total-payable").textContent = totalText.textContent;
+        document.getElementById("review-rec-name").textContent = recipient.name;
+        document.getElementById("review-rec-country").textContent = recipient.country;
+        document.getElementById("review-rec-phone").textContent = recipient.phone;
+        document.getElementById("review-rec-delivery").textContent = deliveryMethod.options[deliveryMethod.selectedIndex].text;
+        document.getElementById("review-rec-purpose").textContent = selectedPurpose;
+      }
 
       // Step 2 Recipient Display
       function renderRecipientCard() {
@@ -3986,6 +3953,12 @@
 
         if (val && recipientsData[val]) {
           card.classList.remove("hidden");
+          const recipientCurrency = currencies.find((currency) => currency.country === recipientsData[val].country);
+          if (recipientCurrency) {
+            selectedReceive = recipientCurrency;
+            document.getElementById("receive-selected-label").textContent = recipientCurrency.country;
+            calculateTransfer();
+          }
           document.getElementById("rec-name").innerText =
             recipientsData[val].name;
           document.getElementById("rec-info").innerText =
@@ -4057,26 +4030,35 @@
       
  // Available Currencies List
       const currencies = [
-        { code: "USD", label: "🇺🇸 USD", rateToBase: 1 },
-        { code: "EUR", label: "🇪🇺 EUR", rateToBase: 1.08 },
-        { code: "GBP", label: "🇬🇧 GBP", rateToBase: 1.26 },
-        { code: "BDT", label: "🇧🇩 BDT", rateToBase: 0.0085 },
-        { code: "INR", label: "🇮🇳 INR", rateToBase: 0.012 },
-        { code: "PKR", label: "🇵🇰 PKR", rateToBase: 0.0036 },
+        { country: "Sweden", code: "SEK", label: "Sweden - SEK", rateToBase: 0.096 },
+        { country: "United States", code: "USD", label: "United States - USD", rateToBase: 1 },
+        { country: "Bangladesh", code: "BDT", label: "Bangladesh - BDT", rateToBase: 0.0085 },
+        { country: "India", code: "INR", label: "India - INR", rateToBase: 0.012 },
+        { country: "Pakistan", code: "PKR", label: "Pakistan - PKR", rateToBase: 0.0036 },
+        { country: "United Kingdom", code: "GBP", label: "United Kingdom - GBP", rateToBase: 1.26 },
+        { country: "Eurozone", code: "EUR", label: "Eurozone - EUR", rateToBase: 1.08 },
+        { country: "Kenya", code: "KES", label: "Kenya - KES", rateToBase: 0.0077 },
+        { country: "Ethiopia", code: "ETB", label: "Ethiopia - ETB", rateToBase: 0.0069 },
+        { country: "Eritrea", code: "ERN", label: "Eritrea - ERN", rateToBase: 0.056 },
+        { country: "Somalia", code: "SOS", label: "Somalia - SOS", rateToBase: 0.00175 },
       ];
 
-      let selectedSend = currencies[0]; // USD
-      let selectedReceive = currencies[3]; // BDT
-
+      let selectedSend = null;
+      let selectedReceive = null;
       const sendAmountInput = document.getElementById("send-amount");
       const receiveAmountInput = document.getElementById("receive-amount");
       const rateText = document.getElementById("rate-text");
       const totalText = document.getElementById("total-text");
+      const amountText = document.getElementById("amount-text");
+      const feeText = document.getElementById("fee-text");
+      const recipientReceivesText = document.getElementById("recipient-receives-text");
+      const recipientUsdText = document.getElementById("recipient-usd-text");
+      const transactionInfo = document.getElementById("transaction-info");
+      const deliveryMethod = document.getElementById("delivery-method");
       const swapBtn = document.getElementById("swap-btn");
       const refreshBtn = document.getElementById("refresh-btn");
       const refreshIcon = document.getElementById("refresh-icon");
 
-      // --- Searchable Dropdown Generator ---
       function setupSearchableDropdown(type) {
         const btn = document.getElementById(`${type}-select-btn`);
         const menu = document.getElementById(`${type}-menu`);
@@ -4086,33 +4068,25 @@
 
         function renderOptions(filter = "") {
           optionsContainer.innerHTML = "";
-          const filtered = currencies.filter(
-            (c) =>
-              c.code.toLowerCase().includes(filter.toLowerCase()) ||
-              c.label.toLowerCase().includes(filter.toLowerCase()),
-          );
-
-          filtered.forEach((curr) => {
-            const opt = document.createElement("div");
-            opt.className =
-              "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-            opt.innerHTML = `<span>${curr.label}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
-
-            opt.addEventListener("click", () => {
-              if (type === "send") selectedSend = curr;
-              else selectedReceive = curr;
-
-              selectedLabel.textContent = curr.label;
-              menu.classList.add("hidden");
-              calculateTransfer();
+          const query = filter.toLowerCase();
+          currencies.filter((c) => c.country.toLowerCase().includes(query) || c.code.toLowerCase().includes(query))
+            .forEach((curr) => {
+              const option = document.createElement("div");
+              option.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
+              option.innerHTML = `<span>${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+              option.addEventListener("click", () => {
+                if (type === "send") selectedSend = curr;
+                else selectedReceive = curr;
+                selectedLabel.textContent = curr.country;
+                menu.classList.add("hidden");
+                calculateTransfer();
+              });
+              optionsContainer.appendChild(option);
             });
-
-            optionsContainer.appendChild(opt);
-          });
         }
 
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
+        btn.addEventListener("click", (event) => {
+          event.stopPropagation();
           menu.classList.toggle("hidden");
           if (!menu.classList.contains("hidden")) {
             searchInput.value = "";
@@ -4120,63 +4094,62 @@
             searchInput.focus();
           }
         });
-
-        searchInput.addEventListener("input", (e) =>
-          renderOptions(e.target.value),
-        );
-
-        // Close dropdown when clicking outside
-        document.addEventListener("click", (e) => {
-          if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.classList.add("hidden");
-          }
+        searchInput.addEventListener("input", (event) => renderOptions(event.target.value));
+        document.addEventListener("click", (event) => {
+          if (!btn.contains(event.target) && !menu.contains(event.target)) menu.classList.add("hidden");
         });
       }
 
       setupSearchableDropdown("send");
       setupSearchableDropdown("receive");
+      document.getElementById("send-selected-label").textContent = "Select country";
+      document.getElementById("receive-selected-label").textContent = "Select country";
 
-      // --- Exchange Rate Calculator ---
       function calculateTransfer() {
         const amount = parseFloat(sendAmountInput.value) || 0;
-
-        // Calculate relative exchange rate (Send / Receive)
-        const currentRate = (
-          selectedSend.rateToBase / selectedReceive.rateToBase
-        ).toFixed(2);
-        const totalReceived = (amount * currentRate).toFixed(2);
-
-        receiveAmountInput.value = totalReceived;
-        rateText.textContent = `1 ${selectedSend.code} = ${currentRate} ${selectedReceive.code}`;
-        totalText.textContent = `${amount} ${selectedSend.code}`;
+        const ready = Boolean(selectedSend && selectedReceive && amount > 0);
+        transactionInfo.classList.toggle("hidden", !ready);
+        if (!selectedSend || !selectedReceive) {
+          receiveAmountInput.value = "";
+          amountText.textContent = "Select countries and amount";
+          rateText.textContent = "Select both countries to see the rate";
+          feeText.textContent = "-";
+          totalText.textContent = "-";
+          recipientReceivesText.textContent = "-";
+          recipientUsdText.textContent = "-";
+          return;
+        }
+        const exchangeRate = selectedSend.rateToBase / selectedReceive.rateToBase;
+        const receiveAmount = amount * exchangeRate;
+        const usdAmount = receiveAmount * selectedReceive.rateToBase;
+        const fee = { bKash: 0, Bank: 5, Cash: 10 }[deliveryMethod.value] ?? 0;
+        receiveAmountInput.value = receiveAmount.toFixed(3);
+        amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
+        rateText.textContent = `1 ${selectedSend.code} = ${exchangeRate.toFixed(3)} ${selectedReceive.code}`;
+        feeText.textContent = `${fee} ${selectedSend.code}`;
+        totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
+        recipientReceivesText.textContent = `${receiveAmount.toFixed(3)} ${selectedReceive.code}`;
+        recipientUsdText.textContent = `${usdAmount.toFixed(3)} USD`;
+        const paymentTotal = document.getElementById("payment-total-amount");
+        const payButtonText = document.getElementById("btn-pay-text");
+        if (paymentTotal) paymentTotal.textContent = totalText.textContent;
+        if (payButtonText) payButtonText.textContent = `Pay ${(amount + fee).toFixed(2)} ${selectedSend.code}`;
       }
 
-      // Input Listeners
       sendAmountInput.addEventListener("input", calculateTransfer);
-
-      // --- Swap Button Logic ---
+      deliveryMethod.addEventListener("change", calculateTransfer);
       swapBtn.addEventListener("click", () => {
-        // Swap Values
-        const temp = selectedSend;
-        selectedSend = selectedReceive;
-        selectedReceive = temp;
-
-        // Update Labels
-        document.getElementById("send-selected-label").textContent =
-          selectedSend.label;
-        document.getElementById("receive-selected-label").textContent =
-          selectedReceive.label;
-
+        if (!selectedSend || !selectedReceive) return;
+        [selectedSend, selectedReceive] = [selectedReceive, selectedSend];
+        document.getElementById("send-selected-label").textContent = selectedSend.country;
+        document.getElementById("receive-selected-label").textContent = selectedReceive.country;
         calculateTransfer();
       });
-
-      // Refresh Rates Animation
       refreshBtn.addEventListener("click", () => {
-        refreshIcon.classList.add("animate-spin");
-        setTimeout(() => {
-          refreshIcon.classList.remove("animate-spin");
-          calculateTransfer();
-        }, 800);
+        selectedSend = null;
+        sendAmountInput.value = "0";
+        document.getElementById("send-selected-label").textContent = "Select country";
+        calculateTransfer();
       });
 
       // Initial Run
