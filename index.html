@@ -204,9 +204,9 @@
                                     Calculate Transfer
                                 </h2>
 
-                                <button id="refresh-btn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer">
+                                <button type="button" id="refresh-btn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer">
                                     <i data-lucide="refresh-cw" id="refresh-icon" class="w-3.5 h-3.5"></i>
-                                    <span class="hidden sm:inline">Refresh</span>
+                                    <span class="hidden sm:inline" id="refresh-status">Refresh rates</span>
                                 </button>
                             </div>
 
@@ -214,20 +214,20 @@
                             <div class="space-y-4">
                                 <!-- You Send Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">You Send</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">I'm sending</label>
                                     <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
-                                        <input type="number" id="send-amount" value="1000" min="10" class="w-full bg-transparent  px-3 text-md font-black text-slate-900 focus:outline-none">
+                                        <input type="number" id="send-amount" value="0" min="0" step="0.01" class="w-full bg-transparent  px-3 text-md font-black text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
                                             <button type="button" id="send-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-                                                <span id="send-selected-label">🇺🇸 USD</span>
+                                                <span id="send-selected-label">Select country</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
 
                                             <!-- Dropdown Menu -->
                                             <div id="send-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
-                                                <input type="text" id="send-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
+                                                <input type="text" id="send-search" placeholder="Search country..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
                                                 <div id="send-options" class="max-h-36 overflow-y-auto space-y-1"></div>
                                             </div>
                                         </div>
@@ -245,20 +245,20 @@
 
                                 <!-- They Receive Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">They Receive</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">To someone dear in</label>
                                     <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
                                         <input type="number" id="receive-amount" readonly class="w-full bg-transparent  px-3 text-md font-black text-green-500 focus:outline-none cursor-default">
 
                                         <!-- Custom Searchable Select (Receive) -->
                                         <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
                                             <button type="button" id="receive-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-                                                <span id="receive-selected-label">🇧🇩 BDT</span>
+                                                <span id="receive-selected-label">Select country</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
 
                                             <!-- Dropdown Menu -->
                                             <div id="receive-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
-                                                <input type="text" id="receive-search" placeholder="Search currency..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
+                                                <input type="text" id="receive-search" placeholder="Search country..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
                                                 <div id="receive-options" class="max-h-36 overflow-y-auto space-y-1"></div>
                                             </div>
                                         </div>
@@ -279,19 +279,31 @@
                                 </div>
 
                                 <!-- Calculation Breakdown -->
-                                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                                <div id="transaction-info" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400 font-medium">Amount to send</span>
+                                        <span class="text-slate-900 font-bold" id="amount-text">0.00 SEK</span>
+                                    </div>
                                     <div class="flex justify-between text-xs">
                                         <span class="text-slate-400 font-medium">Exchange Rate</span>
                                         <span class="text-slate-900 font-bold" id="rate-text">1 USD = 117.5 BDT</span>
                                     </div>
                                     <div class="flex justify-between text-xs">
-                                        <span class="text-slate-400 font-medium">Transfer Fee</span>
-                                        <span class="text-green-600 font-bold" id="fee-text">FREE</span>
+                                        <span class="text-slate-400 font-medium">Our fee</span>
+                                        <span class="text-green-600 font-bold" id="fee-text">0 SEK</span>
                                     </div>
                                     <div class="h-[1px] bg-slate-200 my-2"></div>
                                     <div class="flex justify-between text-sm">
-                                        <span class="text-slate-900 font-bold">Total to Pay</span>
-                                        <span class="text-slate-900 font-extrabold" id="total-text">1000 USD</span>
+                                        <span class="text-slate-900 font-bold">Total to pay</span>
+                                        <span class="text-slate-900 font-extrabold" id="total-text">0 SEK</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400 font-medium">Recipient receives</span>
+                                        <span class="text-slate-900 font-bold" id="recipient-receives-text">0.000 USD</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-400 font-medium">Recipient Receives In USD</span>
+                                        <span class="text-slate-900 font-bold" id="recipient-usd-text">0.000 USD</span>
                                     </div>
                                 </div>
 
@@ -1766,21 +1778,32 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { code: 'united states', label: '🇺🇸 USD', rateToBase: 1 },
-  { code: 'EUR', label: '🇪🇺 EUR', rateToBase: 1.08 },
-  { code: 'GBP', label: '🇬🇧 GBP', rateToBase: 1.26 },
-  { code: 'BDT', label: '🇧🇩 BDT', rateToBase: 0.0085 },
-  { code: 'INR', label: '🇮🇳 INR', rateToBase: 0.012 },
-  { code: 'PKR', label: '🇵🇰 PKR', rateToBase: 0.0036 }
+  { country: 'Sweden', code: 'SEK', label: 'Sweden - SEK', rateToBase: 0.096 },
+  { country: 'United States', code: 'USD', label: 'United States - USD', rateToBase: 1 },
+  { country: 'Bangladesh', code: 'BDT', label: 'Bangladesh - BDT', rateToBase: 0.0085 },
+  { country: 'India', code: 'INR', label: 'India - INR', rateToBase: 0.012 },
+  { country: 'Pakistan', code: 'PKR', label: 'Pakistan - PKR', rateToBase: 0.0036 },
+  { country: 'United Kingdom', code: 'GBP', label: 'United Kingdom - GBP', rateToBase: 1.26 },
+  { country: 'Eurozone', code: 'EUR', label: 'Eurozone - EUR', rateToBase: 1.08 },
+  { country: 'Kenya', code: 'KES', label: 'Kenya - KES', rateToBase: 0.0077 },
+  { country: 'Ethiopia', code: 'ETB', label: 'Ethiopia - ETB', rateToBase: 0.0069 },
+  { country: 'Eritrea', code: 'ERN', label: 'Eritrea - ERN', rateToBase: 0.056 },
+  { country: 'Somalia', code: 'SOS', label: 'Somalia - SOS', rateToBase: 0.00175 }
 ];
 
-let selectedSend = currencies[0];     // USD
-let selectedReceive = currencies[3];  // BDT
+let selectedSend = null;
+let selectedReceive = null;
 
 const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
 const rateText = document.getElementById("rate-text");
 const totalText = document.getElementById("total-text");
+const amountText = document.getElementById("amount-text");
+const feeText = document.getElementById("fee-text");
+const recipientReceivesText = document.getElementById("recipient-receives-text");
+const recipientUsdText = document.getElementById("recipient-usd-text");
+const transactionInfo = document.getElementById("transaction-info");
+const deliveryMethod = document.getElementById("delivery-method");
 const swapBtn = document.getElementById("swap-btn");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
@@ -1796,6 +1819,7 @@ function setupSearchableDropdown(type) {
   function renderOptions(filter = "") {
     optionsContainer.innerHTML = "";
     const filtered = currencies.filter(c => 
+      c.country.toLowerCase().includes(filter.toLowerCase()) ||
       c.code.toLowerCase().includes(filter.toLowerCase()) || 
       c.label.toLowerCase().includes(filter.toLowerCase())
     );
@@ -1803,7 +1827,7 @@ function setupSearchableDropdown(type) {
     filtered.forEach(curr => {
       const opt = document.createElement("div");
       opt.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-      opt.innerHTML = `<span>${curr.label}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+      opt.innerHTML = `<span>${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
         if (type === "send") selectedSend = curr;
@@ -1844,18 +1868,34 @@ setupSearchableDropdown("receive");
 // --- Exchange Rate Calculator ---
 function calculateTransfer() {
   const amount = parseFloat(sendAmountInput.value) || 0;
-  
-  // Calculate relative exchange rate (Send / Receive)
-  const currentRate = (selectedSend.rateToBase / selectedReceive.rateToBase).toFixed(2);
-  const totalReceived = (amount * currentRate).toFixed(2);
+  transactionInfo.classList.toggle("hidden", !selectedSend || !selectedReceive || amount <= 0);
+  if (!selectedSend || !selectedReceive) {
+    receiveAmountInput.value = "";
+    amountText.textContent = selectedSend ? `${amount.toFixed(2)} ${selectedSend.code}` : "Select a sending country";
+    rateText.textContent = "Select both countries to see the rate";
+    feeText.textContent = "-";
+    totalText.textContent = "-";
+    recipientReceivesText.textContent = "-";
+    recipientUsdText.textContent = "-";
+    return;
+  }
+  const currentRate = selectedSend.rateToBase / selectedReceive.rateToBase;
+  const fee = { bKash: 0, Bank: 5, Cash: 10 }[deliveryMethod.value] ?? 0;
+  const totalReceived = amount * currentRate;
+  const usdReceived = totalReceived * selectedReceive.rateToBase;
 
-  receiveAmountInput.value = totalReceived;
-  rateText.textContent = `1 ${selectedSend.code} = ${currentRate} ${selectedReceive.code}`;
-  totalText.textContent = `${amount} ${selectedSend.code}`;
+  receiveAmountInput.value = totalReceived.toFixed(3);
+  rateText.textContent = `1 ${selectedSend.code} = ${currentRate.toFixed(3)} ${selectedReceive.code}`;
+  amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
+  feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
+  totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
+  recipientReceivesText.textContent = `${totalReceived.toFixed(3)} ${selectedReceive.code}`;
+  recipientUsdText.textContent = `${usdReceived.toFixed(3)} USD`;
 }
 
 // Input Listeners
 sendAmountInput.addEventListener("input", calculateTransfer);
+deliveryMethod.addEventListener("change", calculateTransfer);
 
 // --- Swap Button Logic ---
 swapBtn.addEventListener("click", () => {
@@ -1871,13 +1911,12 @@ swapBtn.addEventListener("click", () => {
   calculateTransfer();
 });
 
-// Refresh Rates Animation
+// Reset the From country and amount
 refreshBtn.addEventListener("click", () => {
-  refreshIcon.classList.add("animate-spin");
-  setTimeout(() => {
-    refreshIcon.classList.remove("animate-spin");
-    calculateTransfer();
-  }, 800);
+  selectedSend = null;
+  sendAmountInput.value = "0";
+  document.getElementById("send-selected-label").textContent = "Select country";
+  calculateTransfer();
 });
 
 // Initial Run
