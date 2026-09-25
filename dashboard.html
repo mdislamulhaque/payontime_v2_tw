@@ -896,11 +896,6 @@
                   id="step-1"
                   class="step-container bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
-                  <div class="pb-4 border-b border-slate-100">
-                    <p class="text-xs text-slate-500 mt-0.5">
-                      Enter send amount and transfer channel.
-                    </p>
-                  </div>
                   <div class="space-y-4">
                     <div
                       class="w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative"
@@ -1078,9 +1073,10 @@
                           <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Amount to send</span><span class="text-slate-900 font-bold" id="amount-text">0.00 SEK</span></div>
                           <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Exchange Rate</span><span class="text-slate-900 font-bold" id="rate-text">1 SEK = 0.096 USD</span></div>
                           <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Our fee</span><span class="text-green-600 font-bold" id="fee-text">0 SEK</span></div>
-                          <div class="h-px bg-slate-200 my-2"></div>
-                          <div class="flex justify-between text-sm"><span class="text-slate-900 font-bold">Total to pay</span><span class="text-slate-900 font-extrabold" id="total-text">0 SEK</span></div>
-                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Recipient receives</span><span class="text-slate-900 font-bold" id="recipient-receives-text">0.000 USD</span></div>
+                          <div class="rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 space-y-2.5 shadow-sm ring-1 ring-emerald-100">
+                            <div class="flex justify-between items-center text-sm"><span class="text-slate-700 font-bold">Total to pay</span><span class="text-emerald-800 font-extrabold" id="total-text">0 SEK</span></div>
+                            <div class="flex justify-between items-center text-sm border-t border-emerald-200 pt-2"><span class="text-slate-600 font-semibold">Recipient receives</span><span class="text-slate-900 font-extrabold" id="recipient-receives-text">0.000 USD</span></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1100,18 +1096,6 @@
                   id="step-2"
                   class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
-                  <!-- Step Header -->
-                  <div
-                    class="flex items-center justify-between pb-4 border-b border-slate-100"
-                  >
-                    <div>
-                      <p class="text-xs text-slate-500 mt-0.5">
-                        Choose a saved recipient or add a new contact for
-                        payout.
-                      </p>
-                    </div>
-                  </div>
-
                   <div class="space-y-4">
                     <!-- Dropdown Selector Row -->
                     <div>
@@ -1465,14 +1449,6 @@
                   id="step-3"
                   class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
-                  <!-- Step Header -->
-                  <div class="pb-4 border-b border-slate-100">
-                    <p class="text-xs text-slate-500 mt-0.5">
-                      Review your transfer details and answer mandatory
-                      compliance questions.
-                    </p>
-                  </div>
-
                   <!-- Review Cards Section -->
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <!-- Card 1: Your Money Information -->
@@ -1731,18 +1707,6 @@
                   <div
                     class="pb-4 border-b border-slate-100 flex items-center justify-between flex-wrap gap-2"
                   >
-                    <div>
-                      <p class="text-xs text-slate-500 mt-0.5">
-                        Your Transaction Amount:
-                        <span
-                          id="payment-total-amount"
-                          class="font-extrabold text-[#36b647]"
-                        >
-                          100.00 CHF
-                        </span>
-                      </p>
-                    </div>
-
                     <!-- Security Badge -->
                     <div
                       class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200 flex items-center gap-1.5"
@@ -3740,10 +3704,10 @@
       let selectedPurpose = "";
 
       const stepsList = [
-        { number: 1, label: "Transfer" },
-        { number: 2, label: "Recipient" },
-        { number: 3, label: "Review" },
-        { number: 4, label: "Pay" },
+        { number: 1 },
+        { number: 2 },
+        { number: 3 },
+        { number: 4 },
       ];
 
       const recipientsData = {
@@ -3791,7 +3755,6 @@
             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center font-black text-xs transition-all ${circleBg}">
               ${isCompleted ? "✓" : step.number}
             </div>
-            <span class="text-[10px] font-bold hidden md:inline ${isActive ? "text-slate-900" : "text-slate-400"}">${step.label}</span>
           </div>
         `;
 
