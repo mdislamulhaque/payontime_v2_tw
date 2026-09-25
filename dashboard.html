@@ -1123,6 +1123,7 @@
 
                         <!-- Integrated Add Recipient Modal Trigger Icon Button -->
                         <button
+                          id="recipient-add-button"
                           type="button"
                           onclick="openAddRecipientModal()"
                           class="p-3.5 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white transition-colors shrink-0 shadow-md shadow-green-500/20"
@@ -1148,6 +1149,12 @@
                           </svg>
                         </button>
                       </div>
+                    </div>
+
+                    <div id="tplus-recipient-lookup" class="hidden">
+                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient mobile number</label>
+                      <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+                      <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
                     </div>
 
                     <!-- Selected Recipient Preview Card -->
@@ -1208,6 +1215,13 @@
                       </div>
                     </div>
 
+                    <div id="tplus-city-wrapper" class="hidden">
+                      <label for="tplus-city" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient City</label>
+                      <select id="tplus-city" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
+                        <option value="" selected disabled>City</option>
+                      </select>
+                    </div>
+
                     <!-- Empty State Placeholder -->
                     <div
                       id="recipient-card-empty"
@@ -1229,7 +1243,7 @@
                         <path d="M22 21v-2a4 4 0 0 3-3.87"></path>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                       </svg>
-                      <p class="text-xs text-slate-500">
+                      <p id="recipient-empty-message" class="text-xs text-slate-500">
                         No recipient selected yet. Choose one from the dropdown
                         or click the Red '+' button to add.
                       </p>
@@ -3727,6 +3741,11 @@
         },
       };
 
+      Object.entries(recipientsData).forEach(([recipientId, recipient]) => {
+        const option = document.querySelector(`#recipient-select option[value="${recipientId}"]`);
+        if (option) option.textContent = `${recipient.name} | ${recipient.phone}`;
+      });
+
       const purposes = [
         "Family Support",
         "Medical Expenses",
@@ -3777,8 +3796,8 @@
           alert("Choose both countries and enter an amount first.");
           return;
         }
-        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value)) {
-          alert("Choose a recipient, transfer purpose, and payment method to continue.");
+        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value))) {
+          alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, and payout method to continue." : "Choose a recipient, transfer purpose, and payout method to continue.");
           return;
         }
         if (stepNum === 4 && !document.getElementById("terms-agree").checked) {
@@ -3824,35 +3843,89 @@
         const val = document.getElementById("recipient-select").value;
         const card = document.getElementById("recipient-card-display");
         const emptyState = document.getElementById("recipient-card-empty");
+        const selectedRecipient = recipientsData[val];
 
-        if (val && recipientsData[val]) {
+        if (val && selectedRecipient) {
           card.classList.remove("hidden");
           emptyState.classList.add("hidden");
-          const recipientCurrency = currencies.find((currency) => currency.country === recipientsData[val].country);
+          const recipientCurrency = currencies.find((currency) => currency.country === selectedRecipient.country);
           if (recipientCurrency) {
             selectedReceive = recipientCurrency;
             const recipientFlag = { Sweden: "🇸🇪", Kenya: "🇰🇪", Somalia: "🇸🇴" }[recipientCurrency.country] || "🌐";
             document.getElementById("receive-selected-label").textContent = `${recipientFlag} ${recipientCurrency.country} · ${recipientCurrency.code}`;
             calculateTransfer();
           }
-          document.getElementById("rec-name").innerText =
-            recipientsData[val].name;
+          document.getElementById("rec-name").innerText = selectedRecipient.name;
           document.getElementById("rec-info").innerText =
-            `${recipientsData[val].country} | ${recipientsData[val].phone}`;
+            `${selectedRecipient.country} | ${selectedRecipient.phone}`;
           document.getElementById("rec-details").innerHTML = `
             <div class="space-y-2 text-start">
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${recipientsData[val].name}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${recipientsData[val].country}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${recipientsData[val].phone}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${recipientsData[val].deliveryMethod}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${recipientsData[val].payoutDetails}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${selectedRecipient.name}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${selectedRecipient.country}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${selectedRecipient.phone}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${selectedRecipient.deliveryMethod}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${selectedRecipient.payoutDetails}</span></div>
             </div>`;
+          if (deliveryMethod.value === "tplus") {
+            document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
+            document.getElementById("tplus-recipient-status").classList.add("hidden");
+          }
+          updateTplusCityOptions(selectedRecipient.country);
 
         } else {
           card.classList.add("hidden");
-          emptyState.classList.remove("hidden");
+          if (typeof selectedReceive !== "undefined") {
+            selectedReceive = null;
+            calculateTransfer();
+          }
+          document.getElementById("tplus-city").value = "";
         }
+        updateTplusRecipientFields();
       }
+
+      function updateTplusRecipientFields() {
+        const tplus = deliveryMethod.value === "tplus";
+        const recipientSelected = Boolean(document.getElementById("recipient-select").value);
+        document.getElementById("recipient-add-button").classList.toggle("hidden", tplus);
+        document.getElementById("tplus-recipient-lookup").classList.toggle("hidden", !tplus);
+        document.getElementById("recipient-card-empty").classList.toggle("hidden", tplus || recipientSelected);
+        document.getElementById("tplus-city-wrapper").classList.toggle("hidden", !tplus || !recipientSelected);
+        document.getElementById("tplus-city").required = tplus && recipientSelected;
+      }
+
+      function updateTplusCityOptions(country) {
+        const citySelect = document.getElementById("tplus-city");
+        const citiesByCountry = {
+          Ethiopia: ["Addis Ababa", "Dire Dawa", "Hawassa", "Mekelle"],
+          Bangladesh: ["Dhaka", "Chattogram", "Khulna", "Sylhet"],
+          Kenya: ["Nairobi", "Mombasa", "Kisumu", "Nakuru"],
+          Somalia: ["Mogadishu", "Hargeisa", "Kismayo", "Bosaso"],
+        };
+        const cities = citiesByCountry[country] || [];
+        citySelect.innerHTML = '<option value="" disabled selected>City</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join("");
+      }
+
+      document.getElementById("tplus-recipient-phone").addEventListener("input", (event) => {
+        const enteredPhone = event.target.value.replace(/\D/g, "");
+        const status = document.getElementById("tplus-recipient-status");
+        const match = Object.entries(recipientsData).find(([, recipient]) => recipient.phone.replace(/\D/g, "") === enteredPhone);
+        if (match) {
+          document.getElementById("recipient-select").value = match[0];
+          status.textContent = "Saved recipient selected.";
+          status.classList.remove("hidden", "text-amber-600");
+          status.classList.add("text-emerald-600");
+          renderRecipientCard();
+        } else {
+          if (document.getElementById("recipient-select").value) {
+            document.getElementById("recipient-select").value = "";
+            renderRecipientCard();
+          }
+          status.classList.toggle("hidden", !enteredPhone);
+          status.classList.remove("text-emerald-600");
+          status.classList.add("text-amber-600");
+          status.textContent = enteredPhone ? "No saved recipient matches this number." : "";
+        }
+      });
 
       // Step 3 Purpose Renderer
       function renderPurposes() {
@@ -4021,7 +4094,12 @@
 
       sendAmountInput.addEventListener("input", () => calculateTransfer("send"));
       receiveAmountInput.addEventListener("input", () => calculateTransfer("receive"));
-      deliveryMethod.addEventListener("change", calculateTransfer);
+      deliveryMethod.addEventListener("change", () => {
+        calculateTransfer();
+        const recipientSelect = document.getElementById("recipient-select");
+        if (recipientSelect.value) renderRecipientCard();
+        else updateTplusRecipientFields();
+      });
       refreshBtn.addEventListener("click", () => {
         sendAmountInput.value = "";
         receiveAmountInput.value = "";
@@ -4035,6 +4113,7 @@
 
       // Initial Run
       calculateTransfer();
+      updateTplusRecipientFields();
     </script>
     <!-- recipient JavaScript -->
     <script>
