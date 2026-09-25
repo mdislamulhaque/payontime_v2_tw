@@ -196,8 +196,9 @@
       function switchTab(tabId) {
         state.dashboardTab = tabId;
 
-        // Update Navbar Active States
-        document.querySelectorAll(".nav-btn[data-tab]").forEach((btn) => {
+        // Only sidebar items receive active navigation styling.
+        // Header profile and dashboard call-to-action buttons keep their own styles.
+        document.querySelectorAll("#sidebar .nav-btn[data-tab]").forEach((btn) => {
           const isTarget = btn.getAttribute("data-tab") === tabId;
           if (isTarget) {
             btn.classList.add(
