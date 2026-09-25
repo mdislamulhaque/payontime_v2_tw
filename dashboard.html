@@ -950,18 +950,20 @@
 
                             <!-- Custom Searchable Select (Send) -->
                             <div
-                              class="w-1/2 min-w-0 relative"
+                              class="w-1/2 min-w-0 self-stretch flex items-stretch relative"
                               id="send-dropdown-wrapper"
                             >
                               <button
                                 type="button"
                                 id="send-select-btn"
-                                class="w-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
+                                disabled
+                                aria-label="Sending country: Sweden"
+                                class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 cursor-not-allowed opacity-80 shadow-sm"
                               >
                                 <span id="send-selected-label">🇺🇸 USD</span>
                                 <i
                                   data-lucide="chevron-down"
-                                  class="w-3.5 h-3.5 text-slate-100"
+                                  class="w-3.5 h-3.5 text-slate-500"
                                 ></i>
                               </button>
 
@@ -1010,18 +1012,18 @@
 
                             <!-- Custom Searchable Select (Receive) -->
                             <div
-                              class="w-1/2 min-w-0 relative"
+                              class="w-1/2 min-w-0 self-stretch flex items-stretch relative"
                               id="receive-dropdown-wrapper"
                             >
                               <button
                                 type="button"
                                 id="receive-select-btn"
-                                class="w-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
+                                class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
                               >
                                 <span id="receive-selected-label">🇧🇩 BDT</span>
                                 <i
                                   data-lucide="chevron-down"
-                                  class="w-3.5 h-3.5 text-slate-100"
+                                  class="w-3.5 h-3.5 text-slate-500"
                                 ></i>
                               </button>
 
@@ -1119,6 +1121,7 @@
                           <option value="rec_2">
                             Rahim Ahmed (Bangladesh • bKash / Nagad)
                           </option>
+                          <option value="rec_3">MAXAMED CALI JAAMAC | 252619333207</option>
                         </select>
 
                         <!-- Integrated Add Recipient Modal Trigger Icon Button -->
@@ -1152,9 +1155,13 @@
                     </div>
 
                     <div id="tplus-recipient-lookup" class="hidden">
-                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient mobile number</label>
+                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient mobile number <span class="font-medium text-slate-400">(Test: 252619333207)</span></label>
                       <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
+                      <div id="bank-account-field" class="hidden mt-4">
+                        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-slate-400">(Test: 31052160)</span></label>
+                        <input id="recipient-bank-account" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+                      </div>
                     </div>
 
                     <!-- Selected Recipient Preview Card -->
@@ -3739,6 +3746,14 @@
           deliveryMethod: "bKash / Nagad Wallet",
           payoutDetails: "Mobile wallet payout",
         },
+        rec_3: {
+          name: "MAXAMED CALI JAAMAC",
+          country: "Somalia",
+          phone: "252619333207",
+          deliveryMethod: "Bank",
+          payoutDetails: "Bank account: 31052160",
+          bankAccountNumber: "31052160",
+        },
       };
 
       Object.entries(recipientsData).forEach(([recipientId, recipient]) => {
@@ -3796,7 +3811,7 @@
           alert("Choose both countries and enter an amount first.");
           return;
         }
-        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value))) {
+        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value) || (deliveryMethod.value === "bank-deposit" && !document.getElementById("recipient-bank-account").value.trim()))) {
           alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, and payout method to continue." : "Choose a recipient, transfer purpose, and payout method to continue.");
           return;
         }
@@ -3852,7 +3867,7 @@
           if (recipientCurrency) {
             selectedReceive = recipientCurrency;
             const recipientFlag = { Sweden: "🇸🇪", Kenya: "🇰🇪", Somalia: "🇸🇴" }[recipientCurrency.country] || "🌐";
-            document.getElementById("receive-selected-label").textContent = `${recipientFlag} ${recipientCurrency.country} · ${recipientCurrency.code}`;
+            document.getElementById("receive-selected-label").textContent = `${recipientFlag} ${recipientCurrency.country} · USD`;
             calculateTransfer();
           }
           document.getElementById("rec-name").innerText = selectedRecipient.name;
@@ -3866,9 +3881,12 @@
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${selectedRecipient.deliveryMethod}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${selectedRecipient.payoutDetails}</span></div>
             </div>`;
-          if (deliveryMethod.value === "tplus") {
+          if (deliveryMethod.value === "tplus" || deliveryMethod.value === "bank-deposit") {
             document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
             document.getElementById("tplus-recipient-status").classList.add("hidden");
+          }
+          if (deliveryMethod.value === "bank-deposit") {
+            document.getElementById("recipient-bank-account").value = selectedRecipient.bankAccountNumber || "";
           }
           updateTplusCityOptions(selectedRecipient.country);
 
@@ -3885,12 +3903,23 @@
 
       function updateTplusRecipientFields() {
         const tplus = deliveryMethod.value === "tplus";
+        const bankDeposit = deliveryMethod.value === "bank-deposit";
+        const recipientLookupMode = tplus || bankDeposit;
         const recipientSelected = Boolean(document.getElementById("recipient-select").value);
-        document.getElementById("recipient-add-button").classList.toggle("hidden", tplus);
-        document.getElementById("tplus-recipient-lookup").classList.toggle("hidden", !tplus);
-        document.getElementById("recipient-card-empty").classList.toggle("hidden", tplus || recipientSelected);
+        const selectedRecipient = recipientsData[document.getElementById("recipient-select").value];
+        document.getElementById("recipient-add-button").classList.toggle("hidden", recipientLookupMode);
+        document.getElementById("tplus-recipient-lookup").classList.toggle("hidden", !recipientLookupMode);
+        document.getElementById("recipient-card-empty").classList.toggle("hidden", recipientLookupMode || recipientSelected);
         document.getElementById("tplus-city-wrapper").classList.toggle("hidden", !tplus || !recipientSelected);
         document.getElementById("tplus-city").required = tplus && recipientSelected;
+        document.getElementById("bank-account-field").classList.toggle("hidden", !bankDeposit);
+        document.getElementById("recipient-bank-account").required = bankDeposit;
+        if (recipientLookupMode && selectedRecipient) {
+          document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
+        }
+        if (bankDeposit && selectedRecipient?.bankAccountNumber && !document.getElementById("recipient-bank-account").value) {
+          document.getElementById("recipient-bank-account").value = selectedRecipient.bankAccountNumber;
+        }
       }
 
       function updateTplusCityOptions(country) {
@@ -3905,26 +3934,45 @@
         citySelect.innerHTML = '<option value="" disabled selected>City</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join("");
       }
 
-      document.getElementById("tplus-recipient-phone").addEventListener("input", (event) => {
-        const enteredPhone = event.target.value.replace(/\D/g, "");
+      function findRecipientByNumber(value, field) {
+        const enteredNumber = value.replace(/\D/g, "");
+        if (!enteredNumber) return null;
+        return Object.entries(recipientsData).find(([, recipient]) => {
+          const savedNumber = field === "phone" ? recipient.phone : recipient.bankAccountNumber;
+          return savedNumber && savedNumber.replace(/\D/g, "") === enteredNumber;
+        }) || null;
+      }
+
+      function selectRecipientFromNumber(value, field) {
         const status = document.getElementById("tplus-recipient-status");
-        const match = Object.entries(recipientsData).find(([, recipient]) => recipient.phone.replace(/\D/g, "") === enteredPhone);
+        const match = findRecipientByNumber(value, field);
+        const recipientSelect = document.getElementById("recipient-select");
         if (match) {
-          document.getElementById("recipient-select").value = match[0];
+          recipientSelect.value = match[0];
           status.textContent = "Saved recipient selected.";
           status.classList.remove("hidden", "text-amber-600");
           status.classList.add("text-emerald-600");
           renderRecipientCard();
         } else {
-          if (document.getElementById("recipient-select").value) {
-            document.getElementById("recipient-select").value = "";
+          if (recipientSelect.value) {
+            recipientSelect.value = "";
             renderRecipientCard();
           }
-          status.classList.toggle("hidden", !enteredPhone);
+          if (field === "phone") document.getElementById("recipient-bank-account").value = "";
+          else document.getElementById("tplus-recipient-phone").value = "";
+          const enteredNumber = value.replace(/\D/g, "");
+          status.classList.toggle("hidden", !enteredNumber);
           status.classList.remove("text-emerald-600");
           status.classList.add("text-amber-600");
-          status.textContent = enteredPhone ? "No saved recipient matches this number." : "";
+          status.textContent = enteredNumber ? "No saved recipient matches this number." : "";
         }
+      }
+
+      document.getElementById("tplus-recipient-phone").addEventListener("input", (event) => {
+        selectRecipientFromNumber(event.target.value, "phone");
+      });
+      document.getElementById("recipient-bank-account").addEventListener("input", (event) => {
+        selectRecipientFromNumber(event.target.value, "account");
       });
 
       // Step 3 Purpose Renderer
@@ -4024,7 +4072,7 @@
               option.innerHTML = `<span>${flag} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
               option.addEventListener("click", () => {
                 if (type === "receive") selectedReceive = curr;
-                selectedLabel.textContent = `${flag} ${curr.country} · ${curr.code}`;
+                selectedLabel.textContent = `${flag} ${curr.country} · ${type === "receive" ? "USD" : curr.code}`;
                 menu.classList.add("hidden");
                 calculateTransfer();
               });
@@ -4157,6 +4205,7 @@
           otherLabel.textContent = `${method === "cash" ? "Cash" : "Swish"} payout selected.`;
           formOther.classList.remove("hidden");
         }
+        if (typeof updateTplusRecipientFields === "function") updateTplusRecipientFields();
       }
 
       function handlePaymentSubmit(event) {

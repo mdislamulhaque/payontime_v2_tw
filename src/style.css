@@ -7,3 +7,14 @@ button {
   box-shadow: none !important;
 }
 
+#send-select-btn,
+#receive-select-btn {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+#send-select-btn:hover,
+#receive-select-btn:hover {
+  background-color: #f1f5f9 !important;
+}
+

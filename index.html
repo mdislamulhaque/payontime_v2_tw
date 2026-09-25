@@ -219,8 +219,8 @@
                                         <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
-                                        <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
-                                            <button type="button" id="send-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
+                                        <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
+                                            <button type="button" id="send-select-btn" disabled aria-label="Sending country: Sweden" class="h-full bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm cursor-not-allowed opacity-80">
                                                 <span id="send-selected-label">🇸🇪 Sweden · SEK</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
@@ -246,8 +246,8 @@
                                         <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-green-600 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Receive) -->
-                                        <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
-                                            <button type="button" id="receive-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
+                                        <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
+                                            <button type="button" id="receive-select-btn" class="h-full bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
                                                 <span id="receive-selected-label">Select country</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
@@ -1770,8 +1770,8 @@ renderDots();
 // Available Currencies List
 const currencies = [
   { country: 'Sweden', code: 'SEK', label: '🇸🇪 Sweden · SEK', flag: '🇸🇪' },
-  { country: 'Somalia', code: 'SOS', label: '🇸🇴 Somalia · SOS', flag: '🇸🇴' },
-  { country: 'Kenya', code: 'KES', label: '🇰🇪 Kenya · KES', flag: '🇰🇪' }
+  { country: 'Somalia', code: 'SOS', label: '🇸🇴 Somalia · USD', flag: '🇸🇴' },
+  { country: 'Kenya', code: 'KES', label: '🇰🇪 Kenya · USD', flag: '🇰🇪' }
 ];
 
 const selectedSend = currencies[0];
