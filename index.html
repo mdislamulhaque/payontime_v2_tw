@@ -64,7 +64,7 @@
         
         <div class="relative">
           <button id="lang-btn" class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200 cursor-pointer hover:bg-slate-200/70 transition-colors">
-            <span id="active-flag" class="text-sm">ðŸ‡¬ðŸ‡§</span>
+            <span id="active-flag" class="text-sm">&#x1F1EC;&#x1F1E7;</span>
             <span id="active-lang-code" class="text-xs font-bold text-slate-700 uppercase">EN</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
           </button>
@@ -206,7 +206,7 @@
 
                                 <button type="button" id="refresh-btn" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors flex items-center gap-1 text-xs font-semibold cursor-pointer">
                                     <i data-lucide="refresh-cw" id="refresh-icon" class="w-3.5 h-3.5"></i>
-                                    <span class="hidden sm:inline" id="refresh-status">Refresh rates</span>
+                                    <span class="hidden sm:inline" id="refresh-status">Clear amounts</span>
                                 </button>
                             </div>
 
@@ -214,14 +214,14 @@
                             <div class="space-y-4">
                                 <!-- You Send Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">I'm sending</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">I'm sending (SEK)</label>
                                     <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
-                                        <input type="number" id="send-amount" value="0" min="0" step="0.01" class="w-full bg-transparent  px-3 text-md font-black text-slate-900 focus:outline-none">
+                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
                                             <button type="button" id="send-select-btn" class="bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-                                                <span id="send-selected-label">Select country</span>
+                                                <span id="send-selected-label">🇸🇪 Sweden · SEK</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
 
@@ -234,20 +234,16 @@
                                     </div>
                                 </div>
 
-                                <!-- Swap Button -->
-                                <div class="flex justify-center my-2 relative z-20">
-                                    <div class="bg-white p-1.5 rounded-full border border-slate-200 shadow-md hover:scale-105 transition-transform">
-                                        <button type="button" id="swap-btn" class="w-5 h-5 bg-[#108d2c] hover:bg-[#0b671f] active:scale-95 transition-all rounded-full flex items-center justify-center text-white cursor-pointer shadow-sm">
-                                            <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
-                                        </button>
-                                    </div>
+                                <!-- Exchange Rate -->
+                                <div class="flex justify-center -my-1 relative z-10">
+                                    <span id="inline-rate" class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">1 SEK = 0.096 USD</span>
                                 </div>
 
                                 <!-- They Receive Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">To someone dear in</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">Recipient receives (USD)</label>
                                     <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
-                                        <input type="number" id="receive-amount" readonly class="w-full bg-transparent  px-3 text-md font-black text-green-500 focus:outline-none cursor-default">
+                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-green-600 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Receive) -->
                                         <div class="shrink-0 border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
@@ -270,9 +266,10 @@
                                     <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Delivery Method</label>
                                     <div class="relative">
                                         <select id="delivery-method" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 pr-8 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer appearance-none">
-                                            <option value="bKash">âš¡ bKash / Nagad (Instant)</option>
-                                            <option value="Bank">Bank Deposit</option>
-                                            <option value="Cash">Cash Pickup</option>
+                                            <option value="tplus">T-plus</option>
+                                            <option value="mobile-money">Mobile-money</option>
+                                            <option value="bank-deposit">Bank deposit</option>
+                                            <option value="cash-pickup">Cash pickup</option>
                                         </select>
                                         <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
                                     </div>
@@ -300,10 +297,6 @@
                                     <div class="flex justify-between text-xs">
                                         <span class="text-slate-400 font-medium">Recipient receives</span>
                                         <span class="text-slate-900 font-bold" id="recipient-receives-text">0.000 USD</span>
-                                    </div>
-                                    <div class="flex justify-between text-xs">
-                                        <span class="text-slate-400 font-medium">Recipient Receives In USD</span>
-                                        <span class="text-slate-900 font-bold" id="recipient-usd-text">0.000 USD</span>
                                     </div>
                                 </div>
 
@@ -1775,21 +1768,14 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { country: 'Sweden', code: 'SEK', label: 'Sweden - SEK', rateToBase: 0.096 },
-  { country: 'United States', code: 'USD', label: 'United States - USD', rateToBase: 1 },
-  { country: 'Bangladesh', code: 'BDT', label: 'Bangladesh - BDT', rateToBase: 0.0085 },
-  { country: 'India', code: 'INR', label: 'India - INR', rateToBase: 0.012 },
-  { country: 'Pakistan', code: 'PKR', label: 'Pakistan - PKR', rateToBase: 0.0036 },
-  { country: 'United Kingdom', code: 'GBP', label: 'United Kingdom - GBP', rateToBase: 1.26 },
-  { country: 'Eurozone', code: 'EUR', label: 'Eurozone - EUR', rateToBase: 1.08 },
-  { country: 'Kenya', code: 'KES', label: 'Kenya - KES', rateToBase: 0.0077 },
-  { country: 'Ethiopia', code: 'ETB', label: 'Ethiopia - ETB', rateToBase: 0.0069 },
-  { country: 'Eritrea', code: 'ERN', label: 'Eritrea - ERN', rateToBase: 0.056 },
-  { country: 'Somalia', code: 'SOS', label: 'Somalia - SOS', rateToBase: 0.00175 }
+  { country: 'Sweden', code: 'SEK', label: '🇸🇪 Sweden · SEK', flag: '🇸🇪' },
+  { country: 'Somalia', code: 'SOS', label: '🇸🇴 Somalia · SOS', flag: '🇸🇴' },
+  { country: 'Kenya', code: 'KES', label: '🇰🇪 Kenya · KES', flag: '🇰🇪' }
 ];
 
-let selectedSend = null;
+const selectedSend = currencies[0];
 let selectedReceive = null;
+const SEK_TO_USD_RATE = 0.096;
 
 const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
@@ -1798,12 +1784,11 @@ const totalText = document.getElementById("total-text");
 const amountText = document.getElementById("amount-text");
 const feeText = document.getElementById("fee-text");
 const recipientReceivesText = document.getElementById("recipient-receives-text");
-const recipientUsdText = document.getElementById("recipient-usd-text");
 const transactionInfo = document.getElementById("transaction-info");
 const deliveryMethod = document.getElementById("delivery-method");
-const swapBtn = document.getElementById("swap-btn");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
+const inlineRate = document.getElementById("inline-rate");
 
 // --- Searchable Dropdown Generator ---
 function setupSearchableDropdown(type) {
@@ -1815,7 +1800,8 @@ function setupSearchableDropdown(type) {
 
   function renderOptions(filter = "") {
     optionsContainer.innerHTML = "";
-    const filtered = currencies.filter(c => 
+    const availableCurrencies = type === "send" ? [currencies[0]] : currencies.slice(1);
+    const filtered = availableCurrencies.filter(c =>
       c.country.toLowerCase().includes(filter.toLowerCase()) ||
       c.code.toLowerCase().includes(filter.toLowerCase()) || 
       c.label.toLowerCase().includes(filter.toLowerCase())
@@ -1824,15 +1810,14 @@ function setupSearchableDropdown(type) {
     filtered.forEach(curr => {
       const opt = document.createElement("div");
       opt.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-      opt.innerHTML = `<span>${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+      opt.innerHTML = `<span>${curr.flag} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
-        if (type === "send") selectedSend = curr;
-        else selectedReceive = curr;
+        if (type === "receive") selectedReceive = curr;
 
         selectedLabel.textContent = curr.label;
         menu.classList.add("hidden");
-        calculateTransfer();
+        calculateTransfer("send");
       });
 
       optionsContainer.appendChild(opt);
@@ -1863,56 +1848,54 @@ setupSearchableDropdown("send");
 setupSearchableDropdown("receive");
 
 // --- Exchange Rate Calculator ---
-function calculateTransfer() {
-  const amount = parseFloat(sendAmountInput.value) || 0;
-  transactionInfo.classList.toggle("hidden", !selectedSend || !selectedReceive || amount <= 0);
-  if (!selectedSend || !selectedReceive) {
+function calculateTransfer(changedField = "send") {
+  let amount = parseFloat(sendAmountInput.value);
+  let received = parseFloat(receiveAmountInput.value);
+  if (changedField === "receive" && Number.isFinite(received)) {
+    amount = received / SEK_TO_USD_RATE;
+    sendAmountInput.value = amount ? amount.toFixed(2) : "";
+  } else if (Number.isFinite(amount)) {
+    received = amount * SEK_TO_USD_RATE;
+    receiveAmountInput.value = received ? received.toFixed(2) : "";
+  } else {
+    amount = 0;
+    received = 0;
     receiveAmountInput.value = "";
-    amountText.textContent = selectedSend ? `${amount.toFixed(2)} ${selectedSend.code}` : "Select a sending country";
-    rateText.textContent = "Select both countries to see the rate";
+  }
+  transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
+  if (!selectedReceive) {
+    amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
+    rateText.textContent = "Select a receiving country to see the rate";
     feeText.textContent = "-";
     totalText.textContent = "-";
     recipientReceivesText.textContent = "-";
-    recipientUsdText.textContent = "-";
     return;
   }
-  const currentRate = selectedSend.rateToBase / selectedReceive.rateToBase;
-  const fee = { bKash: 0, Bank: 5, Cash: 10 }[deliveryMethod.value] ?? 0;
-  const totalReceived = amount * currentRate;
-  const usdReceived = totalReceived * selectedReceive.rateToBase;
-
-  receiveAmountInput.value = totalReceived.toFixed(3);
-  rateText.textContent = `1 ${selectedSend.code} = ${currentRate.toFixed(3)} ${selectedReceive.code}`;
+  const feesByMethod = {
+    "tplus": 0,
+    "mobile-money": 10,
+    "bank-deposit": 15,
+    "cash-pickup": 20
+  };
+  const fee = feesByMethod[deliveryMethod.value] ?? 0;
+  const exchangeRate = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
+  inlineRate.textContent = exchangeRate;
+  rateText.textContent = exchangeRate;
   amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
   feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
   totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
-  recipientReceivesText.textContent = `${totalReceived.toFixed(3)} ${selectedReceive.code}`;
-  recipientUsdText.textContent = `${usdReceived.toFixed(3)} USD`;
+  recipientReceivesText.textContent = `${received.toFixed(2)} USD`;
 }
 
 // Input Listeners
-sendAmountInput.addEventListener("input", calculateTransfer);
+sendAmountInput.addEventListener("input", () => calculateTransfer("send"));
+receiveAmountInput.addEventListener("input", () => calculateTransfer("receive"));
 deliveryMethod.addEventListener("change", calculateTransfer);
-
-// --- Swap Button Logic ---
-swapBtn.addEventListener("click", () => {
-  // Swap Values
-  const temp = selectedSend;
-  selectedSend = selectedReceive;
-  selectedReceive = temp;
-
-  // Update Labels
-  document.getElementById("send-selected-label").textContent = selectedSend.label;
-  document.getElementById("receive-selected-label").textContent = selectedReceive.label;
-
-  calculateTransfer();
-});
 
 // Reset the From country and amount
 refreshBtn.addEventListener("click", () => {
-  selectedSend = null;
-  sendAmountInput.value = "0";
-  document.getElementById("send-selected-label").textContent = "Select country";
+  sendAmountInput.value = "";
+  receiveAmountInput.value = "";
   calculateTransfer();
 });
 
