@@ -73,7 +73,7 @@
       input[type="checkbox"], input[type="radio"] { accent-color: var(--brand-green); }
       *, *::before, *::after { box-sizing: border-box; }
       html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-      body { min-width: 320px; }
+      body { min-width: 280px; }
       body > div { min-width: 0; }
       img, svg, video, canvas { max-width: 100%; }
       input, select, textarea, button { max-width: 100%; }
@@ -880,7 +880,7 @@
           <!-- send-money Tabs -->
           <div
             id="tab-send"
-            class="tab-content hidden bg-white p-8 rounded-3xl border border-slate-200 text-center"
+            class="tab-content hidden bg-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-slate-200 text-center"
           >
             <div class="max-w-4xl mx-auto space-y-6">
               <div
@@ -895,11 +895,11 @@
               <div id="flow-content">
                 <div
                   id="step-1"
-                  class="step-container bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
+                  class="step-container bg-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
                 >
                   <div class="space-y-4">
                     <div
-                      class="w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative"
+                      class="calculator-card w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative"
                     >
                       <!-- Header -->
                       <div
@@ -938,7 +938,7 @@
                             >I'm sending (SEK)</label
                           >
                           <div
-                            class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-green-200 transition-all p-1.5"
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-green-200 transition-all p-1.5"
                           >
                             <input
                               type="number"
@@ -1000,7 +1000,7 @@
                             >Recipient receives (USD)</label
                           >
                           <div
-                            class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5"
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5"
                           >
                             <input
                               type="number"
@@ -1112,7 +1112,7 @@
                         <select
                           id="recipient-select"
                           onchange="renderRecipientCard()"
-                          class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                          class="min-w-0 flex-1 w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
                         >
                           <option value="" disabled selected>
                             -- Choose Recipient --
@@ -1813,7 +1813,7 @@
                         </div>
                       </div>
 
-                      <div class="grid grid-cols-2 gap-3">
+                      <div class="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
                         <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"

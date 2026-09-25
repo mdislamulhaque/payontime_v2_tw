@@ -18,3 +18,130 @@ button {
   background-color: #f1f5f9 !important;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .calculator-card {
+    padding: 1rem !important;
+  }
+
+  .calculator-card > .flex.items-center.justify-between {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .calculator-card h2 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .mobile-currency-row {
+    flex-wrap: wrap;
+  }
+
+  .mobile-currency-row > input {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .mobile-currency-row > [id$="-dropdown-wrapper"] {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    border-left: 0;
+    border-top: 1px solid #e2e8f0;
+    padding: 0.375rem 0 0;
+  }
+
+  .mobile-currency-row #send-select-btn,
+  .mobile-currency-row #receive-select-btn {
+    width: 100%;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  #send-selected-label,
+  #receive-selected-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #tab-send {
+    text-align: left !important;
+  }
+
+  #step-2 #recipient-card-display > .flex {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  #step-3 .flex.justify-between {
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+  }
+
+  #step-3 .flex.justify-between > :last-child {
+    overflow-wrap: anywhere;
+    text-align: right;
+    margin-left: auto;
+  }
+
+  #step-4 form > .flex.items-center.justify-between {
+    gap: 0.75rem;
+  }
+
+  #otp-inputs-container {
+    gap: clamp(0.25rem, 1.5vw, 0.625rem);
+  }
+
+  #otp-inputs-container input {
+    width: clamp(1.75rem, 8vw, 2.75rem);
+    height: 3rem;
+    padding: 0;
+  }
+
+  #add-recipient-modal > div,
+  #recipient-modal > div,
+  #view-modal > div {
+    padding: 1rem !important;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+  }
+
+  #add-recipient-modal,
+  #recipient-modal,
+  #view-modal {
+    align-items: flex-start;
+  }
+
+  #recipient-modal .grid.grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  #step-4 form > .flex.items-center.justify-between button {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+
+  #step-7 .flex.justify-between {
+    align-items: flex-start;
+    gap: 0.35rem 0.75rem;
+  }
+}
+

@@ -46,7 +46,7 @@
       <div id="brand-logo" class="flex items-center gap-2.5 cursor-pointer group">
         <img src="./public/logo.png"
      alt="Pay On Time Logo"
-     class="w-full h-10 rounded-lg object-cover">
+     class="w-36 sm:w-40 h-10 rounded-lg object-contain">
       </div>
 
       <nav class="hidden lg:flex items-center gap-8" id="desktop-nav">
@@ -195,7 +195,7 @@
                     <div class="lg:col-span-6 flex items-center justify-center  sm:p-6  rounded-3xl relative">
                         <div class="absolute right-0 top-0 w-64 h-64 bg-green-50 0/5 blur-[100px] rounded-full pointer-events-none"></div>
 
-                        <div class="w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative">
+                        <div class="calculator-card w-full max-w-full bg-white rounded-3xl shadow-2xl shadow-slate-300/50 border border-slate-100 p-6 sm:p-8 z-10 relative">
                             <!-- Header -->
                             <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
                                 <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
@@ -214,7 +214,7 @@
                                 <!-- You Send Input -->
                                 <div class="relative">
                                     <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">I'm sending (SEK)</label>
-                                    <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
+                                    <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
                                         <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
@@ -241,7 +241,7 @@
                                 <!-- They Receive Input -->
                                 <div class="relative">
                                     <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">Recipient receives (USD)</label>
-                                    <div class="flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
+                                    <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
                                         <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-green-600 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Receive) -->
@@ -720,7 +720,7 @@
                     </div>
 
                     <!-- Region Filter Tabs -->
-                    <div class="flex bg-slate-200 p-1 rounded-2xl text-xs font-bold text-slate-700">
+                    <div class="flex flex-wrap bg-slate-200 p-1 rounded-2xl text-xs font-bold text-slate-700">
                         <button
                             type="button"
                             data-region="all"
