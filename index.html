@@ -213,9 +213,9 @@
                             <div class="space-y-4">
                                 <!-- You Send Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">I'm sending (SEK)</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">I'm sending (SEK)</label>
                                     <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
-                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-slate-900 focus:outline-none">
+                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-3 text-md font-black text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
@@ -234,15 +234,15 @@
                                 </div>
 
                                 <!-- Exchange Rate -->
-                                <div class="flex justify-center -my-1 relative z-10">
+                                <div class="flex justify-center my-2 relative z-10">
                                     <span id="inline-rate" class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">1 SEK = 0.096 USD</span>
                                 </div>
 
                                 <!-- They Receive Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 -top-4 z-10">Recipient receives (USD)</label>
+                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">Recipient receives (USD)</label>
                                     <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
-                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md font-black text-green-600 focus:outline-none">
+                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-3 text-md font-black text-green-600 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Receive) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
