@@ -1,4 +1,5 @@
-
+// Landing page navigation, language menu, mobile menu, and section highlighting.
+        
  // ================================
 // State Management
 // ================================
@@ -7,12 +8,13 @@ let isMobileMenuOpen = false;
 let isLangOpen = false;
 
 const languages = [
-  { code: 'EN', label: 'English (EN)', flag: '🇬🇧' },
-  { code: 'FR', label: 'French (FR)', flag: '🇫🇷' },
-  { code: 'ES', label: 'Spanish (ES)', flag: '🇪🇸' },
-  { code: 'DE', label: 'German (DE)', flag: '🇩🇪' },
-  { code: 'AR', label: 'Arabic (AR)', flag: '🇸🇦' },
+  { code: 'EN', label: 'English (EN)', flagCode: 'gb' },
+  { code: 'SV', label: 'Swedish (SV)', flagCode: 'se' },
 ];
+
+function flagImageMarkup(code, label = '') {
+  return `<img src="https://flagcdn.com/w40/${code.toLowerCase()}.png" alt="${label} flag" class="inline-block w-5 h-auto rounded-sm align-middle" loading="lazy">`;
+}
 
 const navItems = [
   'hero',
@@ -20,6 +22,7 @@ const navItems = [
   'services',
   'debit-card',
   'locations',
+  'app',
   'contact'
 ];
 
@@ -38,6 +41,7 @@ const langDropdown = document.getElementById('lang-dropdown');
 const langOptionsContainer = document.getElementById('lang-options');
 const activeFlag = document.getElementById('active-flag');
 const activeLangCode = document.getElementById('active-lang-code');
+activeFlag.innerHTML = flagImageMarkup('gb', 'English');
 
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -72,14 +76,14 @@ function renderLanguageOptions() {
       transition-colors
       ${
         isSelected
-          ? 'bg-red-50 text-[#E53935] font-bold'
+          ? 'bg-green-50  text-green-500 font-bold'
           : 'text-slate-700 hover:bg-slate-50'
       }
     `;
 
     btn.innerHTML = `
-      <span>${lang.flag} ${lang.label}</span>
-      ${isSelected ? '<span class="text-[#E53935]">✓</span>' : ''}
+      <span class="inline-flex items-center gap-2">${flagImageMarkup(lang.flagCode, lang.label)} ${lang.label}</span>
+      ${isSelected ? '<span class="text-green-500">âœ“</span>' : ''}
     `;
 
     btn.addEventListener('click', (e) => {
@@ -87,7 +91,7 @@ function renderLanguageOptions() {
 
       selectedLang = lang.code;
 
-      activeFlag.textContent = lang.flag;
+      activeFlag.innerHTML = flagImageMarkup(lang.flagCode, lang.label);
       activeLangCode.textContent = lang.code;
 
       langDropdown.classList.add('hidden');
@@ -245,7 +249,7 @@ function updateActiveNavStyles(activeId) {
       if (id === activeId) {
 
         btn.className =
-          'nav-btn text-sm transition-all py-1 font-bold text-[#E53935] border-b-2 border-[#E53935]';
+          'nav-btn text-sm transition-all py-1 font-bold text-green-400 border-b-2 border-green-400';
 
       } else {
 
@@ -268,7 +272,7 @@ function updateActiveNavStyles(activeId) {
       if (id === activeId) {
 
         btn.className =
-          'mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors bg-red-50 font-bold text-[#E53935]';
+          'mobile-nav-btn text-left py-2 px-3 rounded-lg transition-colors bg-green-50  font-bold text-green-500';
 
       } else {
 
@@ -288,7 +292,7 @@ function updateActiveNavStyles(activeId) {
 // Desktop Login
 if (loginBtn) {
   loginBtn.addEventListener('click', () => {
-    window.location.href = 'login.html';
+    window.location.href = '/login.html';
   });
 }
 
@@ -296,7 +300,7 @@ if (loginBtn) {
 // Desktop Sign Up
 if (signupBtn) {
   signupBtn.addEventListener('click', () => {
-    window.location.href = 'signup.html';
+    window.location.href = '/signup.html';
   });
 }
 
@@ -304,7 +308,7 @@ if (signupBtn) {
 // Mobile Login
 if (mobileLoginBtn) {
   mobileLoginBtn.addEventListener('click', () => {
-    window.location.href = 'login.html';
+    window.location.href = '/login';
   });
 }
 
@@ -312,9 +316,13 @@ if (mobileLoginBtn) {
 // Mobile Sign Up
 if (mobileSignupBtn) {
   mobileSignupBtn.addEventListener('click', () => {
-    window.location.href = 'signup.html';
+    window.location.href = '/signup';
   });
 }
+const sendNowBtn = document.getElementById('send-now-btn');
+sendNowBtn.addEventListener('click', () => {
+  window.location.href = '/dashboard.html';
+});
 
 
 // ================================
@@ -348,3 +356,4 @@ renderLanguageOptions();
       alert('Redirecting to Send Money Dashboard...');
       // Add custom dashboard tab switch logic if needed
     });
+    

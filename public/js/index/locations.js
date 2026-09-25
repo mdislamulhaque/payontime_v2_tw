@@ -1,9 +1,10 @@
-// 1. Data Array
+// Transfer corridor cards and country selection interactions.
+        // 1. Data Array
     const locations = [
       {
         country: 'Bangladesh',
         code: 'BD',
-        flag: '🇧🇩',
+        flagCode: 'bd',
         region: 'asia',
         payoutMethods: ['bKash (Instant)', 'Nagad (Instant)', 'Bank Transfer', 'Cash Pickup'],
         agents: '25,000+ Agents',
@@ -11,7 +12,7 @@
       {
         country: 'Eritrea',
         code: 'ER',
-        flag: '🇪🇷',
+        flagCode: 'er',
         region: 'africa',
         payoutMethods: ['Cash Pickup (Commercial Bank)', 'Direct Bank Transfer'],
         agents: '1,200+ Counters',
@@ -19,7 +20,7 @@
       {
         country: 'Kenya',
         code: 'KE',
-        flag: '🇰🇪',
+        flagCode: 'ke',
         region: 'africa',
         payoutMethods: ['M-Pesa Mobile Wallet', 'Bank Transfer', 'Equity Cash Pickup'],
         agents: '45,000+ Agents',
@@ -27,7 +28,7 @@
       {
         country: 'Ethiopia',
         code: 'ET',
-        flag: '🇪🇹',
+        flagCode: 'et',
         region: 'africa',
         payoutMethods: ['CBE Birr Wallet', 'Telebirr', 'Commercial Bank of Ethiopia'],
         agents: '15,000+ Branches',
@@ -35,7 +36,7 @@
       {
         country: 'Sweden & EU',
         code: 'SE',
-        flag: '🇸🇪',
+        flagCode: 'se',
         region: 'europe',
         payoutMethods: ['Bank Direct', 'SEPA Transfer', 'Card Payout'],
         agents: 'Digital Instant',
@@ -43,7 +44,7 @@
       {
         country: 'India',
         code: 'IN',
-        flag: '🇮🇳',
+        flagCode: 'in',
         region: 'asia',
         payoutMethods: ['UPI Payment', 'IMPS Bank Transfer', 'Cash Pickup'],
         agents: '60,000+ Locations',
@@ -64,7 +65,7 @@
         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2.5">
-              <span class="text-3xl">${loc.flag}</span>
+              <img src="https://flagcdn.com/w40/${loc.flagCode}.png" alt="${loc.country} flag" class="w-8 h-auto rounded-sm" loading="lazy">
               <div>
                 <h3 class="text-base font-extrabold text-slate-900">${loc.country}</h3>
                 <span class="text-[11px] text-slate-500 font-medium">${loc.agents}</span>
@@ -81,7 +82,7 @@
             </span>
             ${loc.payoutMethods.map(pm => `
               <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-[#E53935]"></i>
+                <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i>
                 <span>${pm}</span>
               </div>
             `).join('')}
@@ -91,8 +92,7 @@
             <button
               type="button"
               onclick="handleSendMoney('${loc.country}')"
-              className="text-xs font-bold text-[#E53935] hover:underline flex items-center gap-1 cursor-pointer"
-              class="text-xs font-bold text-[#E53935] hover:underline flex items-center gap-1 cursor-pointer"
+              class="text-xs font-bold text-green-500 hover:underline flex items-center gap-1 cursor-pointer"
             >
               <span>Send to ${loc.country}</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -131,3 +131,4 @@
 
     // Initial Render
     renderLocations();
+    

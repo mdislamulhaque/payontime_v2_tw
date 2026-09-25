@@ -45,18 +45,22 @@ Tailwind CSS and its official Vite plugin are project dependencies. The plugin i
 
 Both `index.html` and `dashboard.html` load this local stylesheet. When adding Tailwind classes, Vite detects the classes and includes the generated styles during development and production builds. There is no Tailwind CDN script to configure.
 
-## Project files
+## Project structure
 
 ```text
-index.html        Main website
-dashboard.html    User dashboard
-login.html        Login page
-signup.html       Sign-up page
-src/style.css     Tailwind entry point and shared styles
-src/              JavaScript modules and assets
-public/           Static public assets
-vite.config.js    Vite and Tailwind configuration
-package.json      Scripts and dependencies
+.
+├── index.html       Main website
+├── dashboard.html   User dashboard
+├── login.html       Login page
+├── signup.html      Sign-up page
+├── src/
+│   └── style.css    Tailwind entry point and shared styles
+├── public/
+│   ├── js/           Page scripts grouped by page and feature
+│   └── ...           Images and other static assets
+├── vite.config.js   Vite and Tailwind configuration
+├── package.json     Scripts and dependencies
+└── README.md        Setup and run instructions
 ```
 
 ## Useful commands

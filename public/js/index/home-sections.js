@@ -1,14 +1,15 @@
+// Landing page hero carousel and its controls.
 // Initialize Icons
 lucide.createIcons();
 
 // --- 1. CAROUSEL SLIDER LOGIC ---
 const slides = [
   {
-    badge: "⚡ Instant Express Transfers",
+    badge: "âš¡ Instant Express Transfers",
     description: "Transfer directly to bKash, Nagad, Mobile Wallets, and Bank Accounts across East Africa & South Asia with locked-in FX rates."
   },
   {
-    badge: "💎 Best Exchange Rates Guaranteed",
+    badge: "ðŸ’Ž Best Exchange Rates Guaranteed",
     description: "We match real interbank market rates with zero hidden markups or surprise transfer fees. What you see is what your family gets."
   },
   {
@@ -30,7 +31,7 @@ function renderDots() {
   slides.forEach((_, idx) => {
     const dot = document.createElement("button");
     dot.className = `h-2 rounded-full transition-all cursor-pointer ${
-      currentSlide === idx ? "w-8 bg-[#E53935]" : "w-2 bg-slate-200 hover:bg-slate-300"
+      currentSlide === idx ? "w-8 bg-green-500" : "w-2 bg-slate-200 hover:bg-slate-300"
     }`;
     dot.addEventListener("click", () => goToSlide(idx));
     dotsContainer.appendChild(dot);
@@ -65,24 +66,27 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { code: 'USD', label: '🇺🇸 USD', rateToBase: 1 },
-  { code: 'EUR', label: '🇪🇺 EUR', rateToBase: 1.08 },
-  { code: 'GBP', label: '🇬🇧 GBP', rateToBase: 1.26 },
-  { code: 'BDT', label: '🇧🇩 BDT', rateToBase: 0.0085 },
-  { code: 'INR', label: '🇮🇳 INR', rateToBase: 0.012 },
-  { code: 'PKR', label: '🇵🇰 PKR', rateToBase: 0.0036 }
+  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se' },
+  { country: 'Somalia', code: 'SOS', label: 'Somalia · USD', flagCode: 'so' },
+  { country: 'Kenya', code: 'KES', label: 'Kenya · USD', flagCode: 'ke' }
 ];
 
-let selectedSend = currencies[0];     // USD
-let selectedReceive = currencies[3];  // BDT
+const selectedSend = currencies[0];
+let selectedReceive = null;
+const SEK_TO_USD_RATE = 0.096;
 
 const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
 const rateText = document.getElementById("rate-text");
 const totalText = document.getElementById("total-text");
-const swapBtn = document.getElementById("swap-btn");
+const amountText = document.getElementById("amount-text");
+const feeText = document.getElementById("fee-text");
+const recipientReceivesText = document.getElementById("recipient-receives-text");
+const transactionInfo = document.getElementById("transaction-info");
+const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
+const inlineRate = document.getElementById("inline-rate");
 
 // --- Searchable Dropdown Generator ---
 function setupSearchableDropdown(type) {
@@ -94,7 +98,9 @@ function setupSearchableDropdown(type) {
 
   function renderOptions(filter = "") {
     optionsContainer.innerHTML = "";
-    const filtered = currencies.filter(c => 
+    const availableCurrencies = type === "send" ? [currencies[0]] : currencies.slice(1);
+    const filtered = availableCurrencies.filter(c =>
+      c.country.toLowerCase().includes(filter.toLowerCase()) ||
       c.code.toLowerCase().includes(filter.toLowerCase()) || 
       c.label.toLowerCase().includes(filter.toLowerCase())
     );
@@ -102,15 +108,14 @@ function setupSearchableDropdown(type) {
     filtered.forEach(curr => {
       const opt = document.createElement("div");
       opt.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-      opt.innerHTML = `<span>${curr.label}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+      opt.innerHTML = `<span class="inline-flex items-center gap-2">${flagImageMarkup(curr.flagCode, curr.country)} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
-        if (type === "send") selectedSend = curr;
-        else selectedReceive = curr;
+        if (type === "receive") selectedReceive = curr;
 
-        selectedLabel.textContent = curr.label;
+        selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} ${curr.label}`;
         menu.classList.add("hidden");
-        calculateTransfer();
+        calculateTransfer("send");
       });
 
       optionsContainer.appendChild(opt);
@@ -141,43 +146,57 @@ setupSearchableDropdown("send");
 setupSearchableDropdown("receive");
 
 // --- Exchange Rate Calculator ---
-function calculateTransfer() {
-  const amount = parseFloat(sendAmountInput.value) || 0;
-  
-  // Calculate relative exchange rate (Send / Receive)
-  const currentRate = (selectedSend.rateToBase / selectedReceive.rateToBase).toFixed(2);
-  const totalReceived = (amount * currentRate).toFixed(2);
-
-  receiveAmountInput.value = totalReceived;
-  rateText.textContent = `1 ${selectedSend.code} = ${currentRate} ${selectedReceive.code}`;
-  totalText.textContent = `${amount} ${selectedSend.code}`;
+function calculateTransfer(changedField = "send") {
+  let amount = parseFloat(sendAmountInput.value);
+  let received = parseFloat(receiveAmountInput.value);
+  if (changedField === "receive" && Number.isFinite(received)) {
+    amount = received / SEK_TO_USD_RATE;
+    sendAmountInput.value = amount ? amount.toFixed(2) : "";
+  } else if (Number.isFinite(amount)) {
+    received = amount * SEK_TO_USD_RATE;
+    receiveAmountInput.value = received ? received.toFixed(2) : "";
+  } else {
+    amount = 0;
+    received = 0;
+    receiveAmountInput.value = "";
+  }
+  transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
+  if (!selectedReceive) {
+    amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
+    rateText.textContent = "Select a receiving country to see the rate";
+    feeText.textContent = "-";
+    totalText.textContent = "-";
+    recipientReceivesText.textContent = "-";
+    return;
+  }
+  const feesByMethod = {
+    "tplus": 0,
+    "mobile-money": 10,
+    "bank-deposit": 15,
+    "cash-pickup": 20
+  };
+  const fee = feesByMethod[deliveryMethod.value] ?? 0;
+  const exchangeRate = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
+  inlineRate.textContent = exchangeRate;
+  rateText.textContent = exchangeRate;
+  amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
+  feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
+  totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
+  recipientReceivesText.textContent = `${received.toFixed(2)} USD`;
 }
 
 // Input Listeners
-sendAmountInput.addEventListener("input", calculateTransfer);
+sendAmountInput.addEventListener("input", () => calculateTransfer("send"));
+receiveAmountInput.addEventListener("input", () => calculateTransfer("receive"));
+deliveryMethod.addEventListener("change", calculateTransfer);
 
-// --- Swap Button Logic ---
-swapBtn.addEventListener("click", () => {
-  // Swap Values
-  const temp = selectedSend;
-  selectedSend = selectedReceive;
-  selectedReceive = temp;
-
-  // Update Labels
-  document.getElementById("send-selected-label").textContent = selectedSend.label;
-  document.getElementById("receive-selected-label").textContent = selectedReceive.label;
-
-  calculateTransfer();
-});
-
-// Refresh Rates Animation
+// Reset the From country and amount
 refreshBtn.addEventListener("click", () => {
-  refreshIcon.classList.add("animate-spin");
-  setTimeout(() => {
-    refreshIcon.classList.remove("animate-spin");
-    calculateTransfer();
-  }, 800);
+  sendAmountInput.value = "";
+  receiveAmountInput.value = "";
+  calculateTransfer();
 });
 
 // Initial Run
 calculateTransfer();
+    
