@@ -13,7 +13,7 @@ const languages = [
 ];
 
 function flagImageMarkup(code, label = '') {
-  return `<img src="https://flagcdn.com/w40/${code.toLowerCase()}.png" alt="${label} flag" class="inline-block w-5 h-auto rounded-sm align-middle" loading="lazy">`;
+  return `<img src="https://flagcdn.com/w40/${code.toLowerCase()}.png" alt="${label} flag" class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5" loading="lazy">`;
 }
 
 const navItems = [

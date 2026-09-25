@@ -65,7 +65,7 @@
         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2.5">
-              <img src="https://flagcdn.com/w40/${loc.flagCode}.png" alt="${loc.country} flag" class="w-8 h-auto rounded-sm" loading="lazy">
+              <img src="https://flagcdn.com/w40/${loc.flagCode}.png" alt="${loc.country} flag" class="w-8 h-auto rounded-sm mr-1.5" loading="lazy">
               <div>
                 <h3 class="text-base font-extrabold text-slate-900">${loc.country}</h3>
                 <span class="text-[11px] text-slate-500 font-medium">${loc.agents}</span>

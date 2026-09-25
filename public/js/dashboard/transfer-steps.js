@@ -44,7 +44,7 @@
 
       function countryFlagMarkup(country, altText = country) {
         const code = countryFlags[country];
-        return code ? `<img src="https://flagcdn.com/w40/${code}.png" alt="${altText} flag" class="inline-block w-5 h-auto rounded-sm align-middle" loading="lazy">` : "";
+        return code ? `<img src="https://flagcdn.com/w40/${code}.png" alt="${altText} flag" class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5" loading="lazy">` : "";
       }
 
       function updateFormCountryFlag(country) {

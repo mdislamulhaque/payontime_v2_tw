@@ -87,8 +87,7 @@ canvas {
   #send-selected-label img,
   #receive-selected-label img {
     flex: 0 0 auto;
-    width: 1.25rem;
-    margin: 0;
+    width: 2rem;
   }
 
   #tab-send {
