@@ -64,7 +64,7 @@
         
         <div class="relative">
           <button id="lang-btn" class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200 cursor-pointer hover:bg-slate-200/70 transition-colors">
-            <span id="active-flag" class="text-sm">&#x1F1EC;&#x1F1E7;</span>
+            <span id="active-flag" class="inline-flex items-center"></span>
             <span id="active-lang-code" class="text-xs font-bold text-slate-700 uppercase">EN</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
           </button>
@@ -221,7 +221,7 @@
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
                                             <button type="button" id="send-select-btn" disabled aria-label="Sending country: Sweden" class="h-full bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm cursor-not-allowed opacity-80">
-                                                <span id="send-selected-label">🇸🇪 Sweden · SEK</span>
+                                                <span id="send-selected-label"><img src="https://flagcdn.com/w40/se.png" alt="Sweden flag" class="inline-block w-5 h-auto rounded-sm mr-1.5">Sweden · SEK</span>
                                                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
                                             </button>
 
@@ -841,9 +841,7 @@
                                     <!-- e-ID Option 1: Sweden -->
                                     <div class="flex items-center justify-between p-2 rounded-xl border border-red-200/80 bg-green-50 /40 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-green-50  transition-colors cursor-pointer">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-5 h-5 rounded-md bg-white border border-red-200 flex items-center justify-center text-xs shadow-2xs">
-                                                ðŸ‡¸ðŸ‡ª
-                                            </div>
+                                            <img src="https://flagcdn.com/w40/se.png" alt="Sweden flag" class="w-5 h-5 rounded-md object-cover" loading="lazy">
                                             <span>BankID for Sweden</span>
                                         </div>
                                         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-green-500"></i>
@@ -852,9 +850,7 @@
                                     <!-- e-ID Option 2: Denmark -->
                                     <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
-                                                ðŸ‡©ðŸ‡°
-                                            </div>
+                                            <img src="https://flagcdn.com/w40/dk.png" alt="Denmark flag" class="w-5 h-5 rounded-md object-cover" loading="lazy">
                                             <span>MitID for Denmark</span>
                                         </div>
                                         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -863,9 +859,7 @@
                                     <!-- e-ID Option 3: Finland -->
                                     <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
-                                                ðŸ‡«ðŸ‡®
-                                            </div>
+                                            <img src="https://flagcdn.com/w40/fi.png" alt="Finland flag" class="w-5 h-5 rounded-md object-cover" loading="lazy">
                                             <span>FTN for Finland</span>
                                         </div>
                                         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -874,9 +868,7 @@
                                     <!-- e-ID Option 4: Norway -->
                                     <div class="flex items-center justify-between p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-[11px] font-bold shadow-xs hover:bg-slate-100 transition-colors cursor-pointer">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-5 h-5 rounded-md bg-white border border-slate-200 flex items-center justify-center text-xs shadow-2xs">
-                                                ðŸ‡³ðŸ‡´
-                                            </div>
+                                            <img src="https://flagcdn.com/w40/no.png" alt="Norway flag" class="w-5 h-5 rounded-md object-cover" loading="lazy">
                                             <span>BankID for Norway</span>
                                         </div>
                                         <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -1356,9 +1348,13 @@ let isMobileMenuOpen = false;
 let isLangOpen = false;
 
 const languages = [
-  { code: 'EN', label: 'English (EN)', flag: '\u{1F1EC}\u{1F1E7}' },
-  { code: 'SV', label: 'Swedish (SV)', flag: '\u{1F1F8}\u{1F1EA}' },
+  { code: 'EN', label: 'English (EN)', flagCode: 'gb' },
+  { code: 'SV', label: 'Swedish (SV)', flagCode: 'se' },
 ];
+
+function flagImageMarkup(code, label = '') {
+  return `<img src="https://flagcdn.com/w40/${code.toLowerCase()}.png" alt="${label} flag" class="inline-block w-5 h-auto rounded-sm align-middle" loading="lazy">`;
+}
 
 const navItems = [
   'hero',
@@ -1385,6 +1381,7 @@ const langDropdown = document.getElementById('lang-dropdown');
 const langOptionsContainer = document.getElementById('lang-options');
 const activeFlag = document.getElementById('active-flag');
 const activeLangCode = document.getElementById('active-lang-code');
+activeFlag.innerHTML = flagImageMarkup('gb', 'English');
 
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -1425,7 +1422,7 @@ function renderLanguageOptions() {
     `;
 
     btn.innerHTML = `
-      <span>${lang.flag} ${lang.label}</span>
+      <span class="inline-flex items-center gap-2">${flagImageMarkup(lang.flagCode, lang.label)} ${lang.label}</span>
       ${isSelected ? '<span class="text-green-500">âœ“</span>' : ''}
     `;
 
@@ -1434,7 +1431,7 @@ function renderLanguageOptions() {
 
       selectedLang = lang.code;
 
-      activeFlag.textContent = lang.flag;
+      activeFlag.innerHTML = flagImageMarkup(lang.flagCode, lang.label);
       activeLangCode.textContent = lang.code;
 
       langDropdown.classList.add('hidden');
@@ -1769,9 +1766,9 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { country: 'Sweden', code: 'SEK', label: '🇸🇪 Sweden · SEK', flag: '🇸🇪' },
-  { country: 'Somalia', code: 'SOS', label: '🇸🇴 Somalia · USD', flag: '🇸🇴' },
-  { country: 'Kenya', code: 'KES', label: '🇰🇪 Kenya · USD', flag: '🇰🇪' }
+  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se' },
+  { country: 'Somalia', code: 'SOS', label: 'Somalia · USD', flagCode: 'so' },
+  { country: 'Kenya', code: 'KES', label: 'Kenya · USD', flagCode: 'ke' }
 ];
 
 const selectedSend = currencies[0];
@@ -1811,12 +1808,12 @@ function setupSearchableDropdown(type) {
     filtered.forEach(curr => {
       const opt = document.createElement("div");
       opt.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-      opt.innerHTML = `<span>${curr.flag} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+      opt.innerHTML = `<span class="inline-flex items-center gap-2">${flagImageMarkup(curr.flagCode, curr.country)} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
         if (type === "receive") selectedReceive = curr;
 
-        selectedLabel.textContent = curr.label;
+        selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} ${curr.label}`;
         menu.classList.add("hidden");
         calculateTransfer("send");
       });
@@ -1955,7 +1952,7 @@ calculateTransfer();
       {
         country: 'Bangladesh',
         code: 'BD',
-        flag: 'ðŸ‡§ðŸ‡©',
+        flagCode: 'bd',
         region: 'asia',
         payoutMethods: ['bKash (Instant)', 'Nagad (Instant)', 'Bank Transfer', 'Cash Pickup'],
         agents: '25,000+ Agents',
@@ -1963,7 +1960,7 @@ calculateTransfer();
       {
         country: 'Eritrea',
         code: 'ER',
-        flag: 'ðŸ‡ªðŸ‡·',
+        flagCode: 'er',
         region: 'africa',
         payoutMethods: ['Cash Pickup (Commercial Bank)', 'Direct Bank Transfer'],
         agents: '1,200+ Counters',
@@ -1971,7 +1968,7 @@ calculateTransfer();
       {
         country: 'Kenya',
         code: 'KE',
-        flag: 'ðŸ‡°ðŸ‡ª',
+        flagCode: 'ke',
         region: 'africa',
         payoutMethods: ['M-Pesa Mobile Wallet', 'Bank Transfer', 'Equity Cash Pickup'],
         agents: '45,000+ Agents',
@@ -1979,7 +1976,7 @@ calculateTransfer();
       {
         country: 'Ethiopia',
         code: 'ET',
-        flag: 'ðŸ‡ªðŸ‡¹',
+        flagCode: 'et',
         region: 'africa',
         payoutMethods: ['CBE Birr Wallet', 'Telebirr', 'Commercial Bank of Ethiopia'],
         agents: '15,000+ Branches',
@@ -1987,7 +1984,7 @@ calculateTransfer();
       {
         country: 'Sweden & EU',
         code: 'SE',
-        flag: 'ðŸ‡¸ðŸ‡ª',
+        flagCode: 'se',
         region: 'europe',
         payoutMethods: ['Bank Direct', 'SEPA Transfer', 'Card Payout'],
         agents: 'Digital Instant',
@@ -1995,7 +1992,7 @@ calculateTransfer();
       {
         country: 'India',
         code: 'IN',
-        flag: 'ðŸ‡®ðŸ‡³',
+        flagCode: 'in',
         region: 'asia',
         payoutMethods: ['UPI Payment', 'IMPS Bank Transfer', 'Cash Pickup'],
         agents: '60,000+ Locations',
@@ -2016,7 +2013,7 @@ calculateTransfer();
         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-all">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2.5">
-              <span class="text-3xl">${loc.flag}</span>
+              <img src="https://flagcdn.com/w40/${loc.flagCode}.png" alt="${loc.country} flag" class="w-8 h-auto rounded-sm" loading="lazy">
               <div>
                 <h3 class="text-base font-extrabold text-slate-900">${loc.country}</h3>
                 <span class="text-[11px] text-slate-500 font-medium">${loc.agents}</span>

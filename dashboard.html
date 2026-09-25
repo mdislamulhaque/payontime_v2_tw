@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
     <style>
       body { font-family: "Plus Jakarta Sans", sans-serif; }
       label { text-align: left !important; }
@@ -401,7 +401,8 @@
           <!-- Right Controls -->
           <div class="flex items-center gap-2 sm:gap-3">
             <label class="sr-only" for="languageSelector">Select language</label>
-            <select id="languageSelector" aria-label="Select language" class="max-w-[5.5rem] sm:max-w-none rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
+            <img id="language-flag" src="https://flagcdn.com/w40/gb.png" alt="English flag" class="w-5 h-auto rounded-sm" />
+            <select id="languageSelector" aria-label="Select language" class="max-w-[7rem] sm:max-w-none rounded-xl border border-slate-200 bg-white px-2 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
               <option value="en">English</option>
               <option value="sv">Swedish</option>
             </select>
@@ -960,7 +961,7 @@
                                 aria-label="Sending country: Sweden"
                                 class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 cursor-not-allowed opacity-80 shadow-sm"
                               >
-                                <span id="send-selected-label">🇺🇸 USD</span>
+                                <span id="send-selected-label"><img src="https://flagcdn.com/w40/se.png" alt="Sweden flag" class="inline-block w-5 h-auto rounded-sm align-middle"> Sweden · SEK</span>
                                 <i
                                   data-lucide="chevron-down"
                                   class="w-3.5 h-3.5 text-slate-500"
@@ -1020,7 +1021,7 @@
                                 id="receive-select-btn"
                                 class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
                               >
-                                <span id="receive-selected-label">🇧🇩 BDT</span>
+                                <span id="receive-selected-label">Select country</span>
                                 <i
                                   data-lucide="chevron-down"
                                   class="w-3.5 h-3.5 text-slate-500"
@@ -1107,6 +1108,7 @@
                         Select Recipient
                       </label>
                       <div class="flex items-center gap-2">
+                        <img id="recipient-select-flag" class="hidden w-6 h-auto rounded-sm" alt="Recipient country flag" />
                         <select
                           id="recipient-select"
                           onchange="renderRecipientCard()"
@@ -1401,8 +1403,12 @@
                             class="block text-xs font-bold text-slate-700 mb-1"
                             >Country</label
                           >
+                          <div class="flex items-center gap-2">
+                            <img id="recipient-country-flag" class="hidden w-7 h-auto rounded-sm" alt="Country flag" />
                           <select
+                            id="recipient-modal-country"
                             required
+                            onchange="updateRecipientCountryFlag(this.value)"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
                           >
                             <option value="" disabled selected>
@@ -1413,6 +1419,7 @@
                             <option value="IN">India</option>
                             <option value="PH">Philippines</option>
                           </select>
+                          </div>
                         </div>
                         <div>
                           <label
@@ -2489,13 +2496,16 @@
                           class="block text-xs font-bold text-slate-700 mb-1"
                           >Country</label
                         >
-                        <input
-                          type="text"
-                          id="form-country"
-                          required
-                          class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
-                          placeholder="e.g. United States"
-                        />
+                        <div class="flex items-center gap-2">
+                          <img id="form-country-flag" class="hidden w-7 h-auto rounded-sm" alt="Country flag" />
+                          <input
+                            type="text"
+                            id="form-country"
+                            required
+                            class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
+                            placeholder="e.g. United States"
+                          />
+                        </div>
                       </div>
                       <div>
                         <label
@@ -3537,7 +3547,7 @@
             </div>
             <div>
               <h4 class="text-xs font-bold text-slate-900">${rec.fullName}</h4>
-              <p class="text-[11px] text-slate-500">${rec.country} • ${rec.deliveryMethod}</p>
+              <p class="text-[11px] text-slate-500">${countryFlagMarkup(rec.country)} ${rec.country} • ${rec.deliveryMethod}</p>
             </div>
           </div>
           <svg class="w-4 h-4 text-slate-400 group-hover:text-[#36b647] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
@@ -3659,9 +3669,18 @@
         } catch (error) {
           // Keep the selector usable when browser storage is unavailable.
         }
+        const languageFlag = document.getElementById("language-flag");
+        const updateLanguageFlag = () => {
+          const language = languageSelector.value === "sv" ? "Swedish" : "English";
+          const flagCode = languageSelector.value === "sv" ? "se" : "gb";
+          languageFlag.src = `https://flagcdn.com/w40/${flagCode}.png`;
+          languageFlag.alt = `${language} flag`;
+        };
+        updateLanguageFlag();
         document.documentElement.lang = languageSelector.value;
         languageSelector.addEventListener("change", () => {
           document.documentElement.lang = languageSelector.value;
+          updateLanguageFlag();
           try {
             localStorage.setItem("payontime-language", languageSelector.value);
           } catch (error) {
@@ -3756,6 +3775,30 @@
         },
       };
 
+      const countryFlags = {
+        Sweden: "se", "Sweden & EU": "se", Somalia: "so", Kenya: "ke",
+        Ethiopia: "et", Bangladesh: "bd", India: "in", Pakistan: "pk",
+        "United States": "us", "United Kingdom": "gb", Eurozone: "eu",
+        Eritrea: "er", Philippines: "ph", Singapore: "sg", Switzerland: "ch",
+      };
+
+      function countryFlagMarkup(country, altText = country) {
+        const code = countryFlags[country];
+        return code ? `<img src="https://flagcdn.com/w40/${code}.png" alt="${altText} flag" class="inline-block w-5 h-auto rounded-sm align-middle" loading="lazy">` : "";
+      }
+
+      function updateFormCountryFlag(country) {
+        const image = document.getElementById("form-country-flag");
+        const name = Object.keys(countryFlags).find((candidate) => candidate.toLowerCase() === country.trim().toLowerCase());
+        image.classList.toggle("hidden", !name);
+        if (name) {
+          image.src = `https://flagcdn.com/w40/${countryFlags[name]}.png`;
+          image.alt = `${name} flag`;
+        }
+      }
+
+      document.getElementById("form-country").addEventListener("input", (event) => updateFormCountryFlag(event.target.value));
+
       Object.entries(recipientsData).forEach(([recipientId, recipient]) => {
         const option = document.querySelector(`#recipient-select option[value="${recipientId}"]`);
         if (option) option.textContent = `${recipient.name} | ${recipient.phone}`;
@@ -3846,7 +3889,7 @@
         document.getElementById("review-fee").textContent = feeText.textContent;
         document.getElementById("review-total-payable").textContent = totalText.textContent;
         document.getElementById("review-rec-name").textContent = recipient.name;
-        document.getElementById("review-rec-country").textContent = recipient.country;
+        document.getElementById("review-rec-country").innerHTML = `${countryFlagMarkup(recipient.country)} ${recipient.country}`;
         document.getElementById("review-rec-phone").textContent = recipient.phone;
         document.getElementById("review-rec-payout").textContent = recipient.payoutDetails;
         document.getElementById("review-rec-delivery").textContent = recipient.deliveryMethod;
@@ -3864,20 +3907,26 @@
         if (val && selectedRecipient) {
           card.classList.remove("hidden");
           emptyState.classList.add("hidden");
+          const recipientSelectFlag = document.getElementById("recipient-select-flag");
+          const recipientFlagCode = countryFlags[selectedRecipient.country];
+          recipientSelectFlag.classList.toggle("hidden", !recipientFlagCode);
+          if (recipientFlagCode) {
+            recipientSelectFlag.src = `https://flagcdn.com/w40/${recipientFlagCode}.png`;
+            recipientSelectFlag.alt = `${selectedRecipient.country} flag`;
+          }
           const recipientCurrency = currencies.find((currency) => currency.country === selectedRecipient.country);
           if (recipientCurrency) {
             selectedReceive = recipientCurrency;
-            const recipientFlag = { Sweden: "🇸🇪", Kenya: "🇰🇪", Somalia: "🇸🇴" }[recipientCurrency.country] || "🌐";
-            document.getElementById("receive-selected-label").textContent = `${recipientFlag} ${recipientCurrency.country} · USD`;
+            document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(recipientCurrency.country)} ${recipientCurrency.country} · USD`;
             calculateTransfer();
           }
           document.getElementById("rec-name").innerText = selectedRecipient.name;
-          document.getElementById("rec-info").innerText =
-            `${selectedRecipient.country} | ${selectedRecipient.phone}`;
+          document.getElementById("rec-info").innerHTML =
+            `${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country} | ${selectedRecipient.phone}`;
           document.getElementById("rec-details").innerHTML = `
             <div class="space-y-2 text-start">
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${selectedRecipient.name}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${selectedRecipient.country}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${selectedRecipient.phone}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${selectedRecipient.deliveryMethod}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${selectedRecipient.payoutDetails}</span></div>
@@ -3893,6 +3942,7 @@
 
         } else {
           card.classList.add("hidden");
+          document.getElementById("recipient-select-flag").classList.add("hidden");
           if (typeof selectedReceive !== "undefined") {
             selectedReceive = null;
             calculateTransfer();
@@ -4069,11 +4119,10 @@
             .forEach((curr) => {
               const option = document.createElement("div");
               option.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
-              const flag = { Sweden: "🇸🇪", Kenya: "🇰🇪", Somalia: "🇸🇴" }[curr.country] || "🌐";
-              option.innerHTML = `<span>${flag} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
+              option.innerHTML = `<span class="inline-flex items-center gap-2">${countryFlagMarkup(curr.country)} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
               option.addEventListener("click", () => {
                 if (type === "receive") selectedReceive = curr;
-                selectedLabel.textContent = `${flag} ${curr.country} · ${type === "receive" ? "USD" : curr.code}`;
+                selectedLabel.innerHTML = `${countryFlagMarkup(curr.country)} ${curr.country} · ${type === "receive" ? "USD" : curr.code}`;
                 menu.classList.add("hidden");
                 calculateTransfer();
               });
@@ -4098,7 +4147,7 @@
 
       setupSearchableDropdown("send");
       setupSearchableDropdown("receive");
-      document.getElementById("send-selected-label").textContent = "🇸🇪 Sweden · SEK";
+      document.getElementById("send-selected-label").innerHTML = `${countryFlagMarkup("Sweden")} Sweden · SEK`;
       document.getElementById("receive-selected-label").textContent = "Select country";
 
       function calculateTransfer(changedField = "send") {
@@ -4166,6 +4215,14 @@
     </script>
     <!-- recipient JavaScript -->
     <script>
+      function updateRecipientCountryFlag(countryCode) {
+        const flag = document.getElementById("recipient-country-flag");
+        flag.classList.toggle("hidden", !countryCode);
+        if (!countryCode) return;
+        flag.src = `https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`;
+        flag.alt = `${countryCode} flag`;
+      }
+
       function openAddRecipientModal() {
         document
           .getElementById("add-recipient-modal")
@@ -4526,7 +4583,7 @@
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
-            <span>${rec.country}</span>
+            <span>${countryFlagMarkup(rec.country)} ${rec.country}</span>
           </div>
         </td>
         <td class="p-4 font-mono text-slate-800 font-semibold">${rec.phone}</td>
@@ -4597,6 +4654,7 @@
         document.getElementById("form-name").value = rec.fullName;
         document.getElementById("form-email").value = rec.email || "";
         document.getElementById("form-country").value = rec.country;
+        updateFormCountryFlag(rec.country);
         document.getElementById("form-phone").value = rec.phone;
         document.getElementById("form-method").value = rec.deliveryMethod;
         document.getElementById("form-bank-name").value = rec.bankName || "";
@@ -4618,7 +4676,7 @@
           .toUpperCase();
         document.getElementById("view-name").innerText = rec.fullName;
         document.getElementById("view-email").innerText = rec.email || "N/A";
-        document.getElementById("view-country").innerText = rec.country;
+        document.getElementById("view-country").innerHTML = `${countryFlagMarkup(rec.country)} ${rec.country}`;
         document.getElementById("view-phone").innerText = rec.phone;
         document.getElementById("view-method").innerText = rec.deliveryMethod;
         document.getElementById("view-details").innerText = rec.accountNumber
