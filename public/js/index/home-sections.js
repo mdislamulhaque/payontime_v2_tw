@@ -199,4 +199,22 @@ refreshBtn.addEventListener("click", () => {
 
 // Initial Run
 calculateTransfer();
+
+// Carry the calculator choices into the dashboard transfer form.
+document.getElementById("send-now-btn").addEventListener("click", () => {
+  const transferDraft = {
+    sendAmount: sendAmountInput.value,
+    receiveAmount: receiveAmountInput.value,
+    receiveCountry: selectedReceive?.country ?? "",
+    deliveryMethod: deliveryMethod.value,
+  };
+
+  try {
+    sessionStorage.setItem("payontime:index-transfer", JSON.stringify(transferDraft));
+  } catch (error) {
+    // The dashboard still opens if browser storage is unavailable.
+  }
+
+  window.location.href = "/dashboard.html?tab=send";
+});
     

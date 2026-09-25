@@ -319,12 +319,6 @@ if (mobileSignupBtn) {
     window.location.href = '/signup';
   });
 }
-const sendNowBtn = document.getElementById('send-now-btn');
-sendNowBtn.addEventListener('click', () => {
-  window.location.href = '/dashboard.html';
-});
-
-
 // ================================
 // Initialization
 // ================================

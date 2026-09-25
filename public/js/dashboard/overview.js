@@ -372,5 +372,13 @@
         document
           .getElementById("closeTxModalFooterBtn")
           .addEventListener("click", closeTxModal);
+
+        restoreLandingTransfer();
+
+        const requestedTab = new URLSearchParams(window.location.search).get("tab");
+        const availableTabs = ["overview", "send", "recipients", "transactions", "profile"];
+        if (availableTabs.includes(requestedTab)) {
+          switchTab(requestedTab);
+        }
       });
     

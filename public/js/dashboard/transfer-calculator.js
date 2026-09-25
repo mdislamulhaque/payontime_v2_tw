@@ -88,10 +88,10 @@
         if (changedField === "receive" && Number.isFinite(receiveAmount)) {
           amount = receiveAmount / SEK_TO_USD_RATE;
           sendAmountInput.value = amount ? amount.toFixed(2) : "";
-        } else if (Number.isFinite(amount)) {
+        } else if (changedField === "send" && Number.isFinite(amount)) {
           receiveAmount = amount * SEK_TO_USD_RATE;
           receiveAmountInput.value = receiveAmount ? receiveAmount.toFixed(2) : "";
-        } else {
+        } else if (!Number.isFinite(amount)) {
           amount = 0;
           receiveAmount = 0;
           receiveAmountInput.value = "";
@@ -120,6 +120,39 @@
         const payButtonText = document.getElementById("btn-pay-text");
         if (paymentTotal) paymentTotal.textContent = totalText.textContent;
         if (payButtonText) payButtonText.textContent = `Pay ${(amount + fee).toFixed(2)} ${selectedSend.code}`;
+      }
+
+      function restoreLandingTransfer() {
+        let transferDraft;
+        try {
+          const savedDraft = sessionStorage.getItem("payontime:index-transfer");
+          sessionStorage.removeItem("payontime:index-transfer");
+          if (!savedDraft) return;
+          transferDraft = JSON.parse(savedDraft);
+        } catch (error) {
+          return;
+        }
+
+        const receiveCurrency = currencies.find((currency) => currency.country === transferDraft.receiveCountry);
+        if (receiveCurrency) {
+          selectedReceive = receiveCurrency;
+          document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(receiveCurrency.country)} ${receiveCurrency.country} Â· USD`;
+        }
+
+        const restoreAmount = (input, value) => {
+          if (typeof value !== "string" || !value.trim()) return;
+          const amount = Number(value);
+          if (Number.isFinite(amount) && amount >= 0) input.value = value;
+        };
+        restoreAmount(sendAmountInput, transferDraft.sendAmount);
+        restoreAmount(receiveAmountInput, transferDraft.receiveAmount);
+
+        const validDeliveryMethods = ["tplus", "mobile-money", "bank-deposit", "cash-pickup"];
+        if (validDeliveryMethods.includes(transferDraft.deliveryMethod)) {
+          deliveryMethod.value = transferDraft.deliveryMethod;
+        }
+
+        calculateTransfer("restore");
       }
 
       sendAmountInput.addEventListener("input", () => calculateTransfer("send"));
