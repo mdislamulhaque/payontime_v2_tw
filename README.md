@@ -1,119 +1,29 @@
-# Tailwind CSS Project
+# Payontime
 
-A modern, responsive web project built with **Tailwind CSS v4** and **Vite**.
+Payontime is a multi-page website built with HTML, JavaScript, Vite, and Tailwind CSS v4. Tailwind is compiled locally by Vite; the pages do not load Tailwind from a CDN.
 
-## 🚀 Tech Stack
+## Requirements
 
-* **HTML5**
-* **CSS3**
-* **Tailwind CSS v4**
-* **Vite**
-* **JavaScript**
-* **Node.js**
-* **npm**
+- Node.js (current LTS version recommended)
+- npm (included with Node.js)
+- Git
 
-## 📁 Project Structure
-
-```text
-project/
-│
-├── public/
-│   └── assets/
-│
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   ├── main.js
-│   └── style.css
-│
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-> Project structure may vary depending on the application's requirements.
-
-## ⚙️ Requirements
-
-Before running the project, make sure you have installed:
-
-* Node.js 20+
-* npm 10+
-* Git
-
-## 📦 Installation
-
-Clone the repository:
+## Clone and run
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
-```
-
-Go to the project directory:
-
-```bash
-cd <PROJECT_NAME>
-```
-
-Install dependencies:
-
-```bash
+git clone <repository-url>
+cd payontime-tw-v2
 npm install
-```
-
-## 🎨 Tailwind CSS
-
-This project uses **Tailwind CSS v4**.
-
-Tailwind CSS is integrated with Vite using the official Vite plugin.
-
-Install Tailwind CSS:
-
-```bash
-npm install tailwindcss @tailwindcss/vite
-```
-
-In the main CSS file:
-
-```css
-@import "tailwindcss";
-```
-
-And configure the Vite plugin:
-
-```js
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-
-export default defineConfig({
-  plugins: [
-    tailwindcss(),
-  ],
-})
-```
-
-## 🛠️ Development
-
-Start the development server:
-
-```bash
 npm run dev
 ```
 
-The application will normally be available at:
+Open the local URL printed by Vite (usually `http://localhost:5173`). The main page is `index.html`; the other pages can be opened at `/dashboard.html`, `/login.html`, and `/signup.html` on the same local server.
 
-```text
-http://localhost:5173
-```
+Do not open the HTML files directly with `file://`. Vite needs to serve the pages and compile Tailwind CSS.
 
-If your project uses a custom port, use the URL shown in the terminal.
+## Build and preview
 
-## 🏗️ Production Build
-
-Create an optimized production build:
+Create the production site in `dist/`:
 
 ```bash
 npm run build
@@ -125,133 +35,35 @@ Preview the production build locally:
 npm run preview
 ```
 
-## ✨ Features
+## Tailwind CSS v4
 
-* Fully responsive design
-* Mobile-first UI
-* Tailwind CSS utility classes
-* Modern and clean interface
-* Reusable components
-* Fast Vite development environment
-* Optimized production build
-* Cross-browser responsive layout
-
-## 📱 Responsive Design
-
-The UI is designed to work across:
-
-* 📱 Mobile devices
-* 📲 Tablets
-* 💻 Laptops
-* 🖥️ Desktop screens
-
-Tailwind's responsive utilities are used throughout the project.
-
-Example:
-
-```html
-<div class="w-full px-4 sm:px-6 lg:px-8">
-    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold">
-        Welcome
-    </h1>
-</div>
-```
-
-## 🎯 Development Guidelines
-
-### Use Tailwind Utilities
-
-Prefer Tailwind utility classes:
-
-```html
-<button class="rounded-lg bg-blue-600 px-5 py-3 text-white hover:bg-blue-700">
-    Submit
-</button>
-```
-
-Instead of writing unnecessary custom CSS:
+Tailwind CSS and its official Vite plugin are project dependencies. The plugin is configured in `vite.config.js`, and `src/style.css` starts with:
 
 ```css
-.my-button {
-    background: blue;
-    color: white;
-    padding: 12px 20px;
-}
+@import "tailwindcss";
 ```
 
-### Reusable Components
+Both `index.html` and `dashboard.html` load this local stylesheet. When adding Tailwind classes, Vite detects the classes and includes the generated styles during development and production builds. There is no Tailwind CDN script to configure.
 
-Keep repeated UI elements reusable whenever possible.
-
-For example:
+## Project files
 
 ```text
-components/
-├── Header
-├── Footer
-├── Button
-├── Modal
-├── Card
-└── Navbar
+index.html        Main website
+dashboard.html    User dashboard
+login.html        Login page
+signup.html       Sign-up page
+src/style.css     Tailwind entry point and shared styles
+src/              JavaScript modules and assets
+public/           Static public assets
+vite.config.js    Vite and Tailwind configuration
+package.json      Scripts and dependencies
 ```
 
-## 🔐 Environment Variables
+## Useful commands
 
-If the project requires environment variables, create a `.env` file:
-
-```env
-VITE_API_BASE_URL=https://example.com/api
-```
-
-Do not commit sensitive credentials or API keys to Git.
-
-Make sure `.env` is included in `.gitignore`:
-
-```gitignore
-.env
-.env.local
-```
-
-## 🧹 Code Quality
-
-Before pushing changes, make sure to:
-
-1. Check the UI on mobile and desktop.
-2. Test all interactive elements.
-3. Run the production build.
-4. Remove unused code.
-5. Check the browser console for errors.
-6. Verify all images and assets are loading correctly.
-
-## 🚀 Deployment
-
-The production build can be deployed to platforms such as:
-
-* Vercel
-* Netlify
-* Cloudflare Pages
-* Any static hosting/server
-
-Build the project first:
-
-```bash
-npm run build
-```
-
-The generated production files will be available in:
-
-```text
-dist/
-```
-
-## 📚 Resources
-
-* [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-* [Tailwind CSS Vite Installation](https://tailwindcss.com/docs/installation/using-vite)
-* [Vite Documentation](https://vite.dev/guide/)
-
-## 📄 License
-
-This project is developed for project/client use.
-
-All rights reserved.
+| Command | Purpose |
+| --- | --- |
+| `npm install` | Install dependencies after cloning |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Build all pages for production |
+| `npm run preview` | Serve the production build locally |
