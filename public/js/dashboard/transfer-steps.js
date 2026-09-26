@@ -12,28 +12,6 @@
 
       const recipientsData = {
         rec_1: {
-          name: "Amanuel Tesfay",
-          country: "Ethiopia",
-          phone: "+251 91 234 5678",
-          deliveryMethod: "Cash Pickup",
-          payoutDetails: "Cash pickup at partner location",
-          bankName: "",
-          bankAccountNumber: "",
-          tplusWalletNumber: "",
-          cityName: "Addis Ababa",
-        },
-        rec_2: {
-          name: "Rahim Ahmed",
-          country: "Bangladesh",
-          phone: "+880 17 0000 0000",
-          deliveryMethod: "bKash / Nagad Wallet",
-          payoutDetails: "Mobile wallet payout",
-          bankName: "",
-          bankAccountNumber: "",
-          tplusWalletNumber: "+880 17 0000 0000",
-          cityName: "Dhaka",
-        },
-        rec_3: {
           name: "MAXAMED CALI JAAMAC",
           country: "Somalia",
           phone: "252619333207",
@@ -44,7 +22,37 @@
           tplusWalletNumber: "",
           cityName: "Mogadishu",
         },
+        rec_2: {
+          name: "Brian Otieno",
+          country: "Kenya",
+          phone: "+254 712 345 678",
+          deliveryMethod: "M-Pesa",
+          payoutDetails: "M-Pesa wallet payout",
+          bankName: "",
+          bankAccountNumber: "",
+          tplusWalletNumber: "+254 712 345 678",
+          cityName: "Nairobi",
+        },
       };
+
+      function syncRecipientOptionsWithDestination() {
+        const recipientSelect = document.getElementById("recipient-select");
+        const destinationCountry = selectedReceive?.country;
+        Array.from(recipientSelect.options).forEach((option) => {
+          if (!option.value) {
+            option.hidden = false;
+            return;
+          }
+          option.hidden = Boolean(destinationCountry && recipientsData[option.value]?.country !== destinationCountry);
+        });
+        if (recipientSelect.selectedOptions[0]?.hidden) {
+          recipientSelect.value = "";
+          document.getElementById("tplus-recipient-phone").value = "";
+          document.getElementById("recipient-bank-account").value = "";
+          document.getElementById("tplus-recipient-status").classList.add("hidden");
+          renderRecipientCard();
+        }
+      }
 
       const countryFlags = {
         Sweden: "se", "Sweden & EU": "se", Somalia: "so", Kenya: "ke",
@@ -206,13 +214,6 @@
             recipientSelectFlag.src = `https://flagcdn.com/w40/${recipientFlagCode}.png`;
             recipientSelectFlag.alt = `${selectedRecipient.country} flag`;
           }
-          const recipientCurrency = currencies.find((currency) => currency.country === selectedRecipient.country);
-          if (recipientCurrency) {
-            selectedReceive = recipientCurrency;
-            configureDeliveryMethods(recipientCurrency.country, deliveryMethod.value);
-            document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(recipientCurrency.country)} ${recipientCurrency.country} ${recipientCurrency.code}`;
-            calculateTransfer();
-          }
           document.getElementById("rec-name").innerText = selectedRecipient.name;
           document.getElementById("rec-info").innerHTML =
             `${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country} | ${selectedRecipient.phone}`;
@@ -238,10 +239,6 @@
         } else {
           card.classList.add("hidden");
           document.getElementById("recipient-select-flag").classList.add("hidden");
-          if (typeof selectedReceive !== "undefined") {
-            selectedReceive = null;
-            calculateTransfer();
-          }
           document.getElementById("tplus-city").value = "";
         }
         updateTplusRecipientFields();
@@ -250,16 +247,38 @@
       function updateTplusRecipientFields() {
         const tplus = deliveryMethod.value === "tplus";
         const bankDeposit = deliveryMethod.value === "bank-deposit";
-        const recipientLookupMode = tplus || bankDeposit;
+        const mobileMoney = deliveryMethod.value === "mobile-money";
+        const recipientLookupMode = tplus || bankDeposit || mobileMoney;
         const recipientSelected = Boolean(document.getElementById("recipient-select").value);
         const selectedRecipient = recipientsData[document.getElementById("recipient-select").value];
-        document.getElementById("recipient-add-button").classList.toggle("hidden", recipientLookupMode);
+        document.getElementById("recipient-add-button").classList.toggle("hidden", tplus || bankDeposit);
         document.getElementById("tplus-recipient-lookup").classList.toggle("hidden", !recipientLookupMode);
-        document.getElementById("recipient-card-empty").classList.toggle("hidden", recipientLookupMode || recipientSelected);
+        document.getElementById("recipient-card-empty").classList.toggle("hidden", (recipientLookupMode && !mobileMoney) || recipientSelected);
         document.getElementById("tplus-city-wrapper").classList.toggle("hidden", !tplus || !recipientSelected);
         document.getElementById("tplus-city").required = tplus && recipientSelected;
         document.getElementById("bank-account-field").classList.toggle("hidden", !bankDeposit);
         document.getElementById("recipient-bank-account").required = bankDeposit;
+        const phoneLabel = document.querySelector('label[for="tplus-recipient-phone"]');
+        const phoneInput = document.getElementById("tplus-recipient-phone");
+        const testNumber = document.getElementById("recipient-test-number");
+        const testNumbersByCountry = {
+          Somalia: "252619333207",
+          Kenya: "+254 712 345 678",
+        };
+        if (mobileMoney) {
+          phoneLabel.firstChild.textContent = "Or send to a new recipient ";
+          phoneInput.placeholder = selectedReceive?.country === "Kenya"
+            ? "Please enter M-Pesa registered phone number"
+            : "Please enter mobile money registered phone number";
+        } else {
+          phoneLabel.firstChild.textContent = "Or send to a new recipient ";
+          phoneInput.placeholder = tplus
+            ? "Please enter T-plus registered phone number"
+            : "Please enter registered phone number";
+        }
+        const countryTestNumber = testNumbersByCountry[selectedReceive?.country];
+        testNumber.textContent = countryTestNumber ? `(Use this phone number for testing: ${countryTestNumber})` : "";
+        testNumber.classList.toggle("hidden", !countryTestNumber || (!tplus && !mobileMoney));
         if (recipientLookupMode && selectedRecipient) {
           document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
         }
@@ -287,6 +306,7 @@
         const enteredNumber = value.replace(/\D/g, "");
         if (!enteredNumber) return null;
         return Object.entries(recipientsData).find(([, recipient]) => {
+          if (selectedReceive && recipient.country !== selectedReceive.country) return false;
           const savedNumber = field === "phone" ? recipient.phone : recipient.bankAccountNumber;
           return savedNumber && savedNumber.replace(/\D/g, "") === enteredNumber;
         }) || null;

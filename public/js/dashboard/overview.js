@@ -14,27 +14,15 @@
         recipients: [
           {
             id: "1",
-            fullName: "Rahim Uddin",
-            country: "Bangladesh",
-            deliveryMethod: "bKash Wallet",
+            fullName: "MAXAMED CALI JAAMAC",
+            country: "Somalia",
+            deliveryMethod: "Bank",
           },
           {
             id: "2",
-            fullName: "Solomon Tekle",
-            country: "Eritrea",
-            deliveryMethod: "Cash Pickup",
-          },
-          {
-            id: "3",
-            fullName: "Amina Khatun",
-            country: "Bangladesh",
-            deliveryMethod: "Bank Transfer",
-          },
-          {
-            id: "4",
-            fullName: "Nega Zerai",
-            country: "Eritrea",
-            deliveryMethod: "Eribank Payout",
+            fullName: "Brian Otieno",
+            country: "Kenya",
+            deliveryMethod: "M-Pesa",
           },
         ],
         transactions: [

@@ -73,8 +73,11 @@
               option.className = "px-3 py-1.5 text-xs font-semibold rounded-lg hover:bg-slate-100 cursor-pointer flex items-center justify-between";
               option.innerHTML = `<span class="inline-flex items-center gap-2">${countryFlagMarkup(curr.country)} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
               option.addEventListener("click", () => {
-                if (type === "receive") selectedReceive = curr;
-                if (type === "receive") configureDeliveryMethods(curr.country);
+                if (type === "receive") {
+                  selectedReceive = curr;
+                  configureDeliveryMethods(curr.country);
+                  if (typeof syncRecipientOptionsWithDestination === "function") syncRecipientOptionsWithDestination();
+                }
                 selectedLabel.innerHTML = `${countryFlagMarkup(curr.country)} ${curr.country} ${curr.code}`;
                 menu.classList.add("hidden");
                 calculateTransfer();
@@ -161,6 +164,7 @@
         if (receiveCurrency) {
           selectedReceive = receiveCurrency;
           configureDeliveryMethods(receiveCurrency.country, transferDraft.deliveryMethod);
+          if (typeof syncRecipientOptionsWithDestination === "function") syncRecipientOptionsWithDestination();
           document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(receiveCurrency.country)} ${receiveCurrency.country} ${receiveCurrency.code}`;
         }
 
@@ -175,6 +179,7 @@
         if (!receiveCurrency) configureDeliveryMethods("", transferDraft.deliveryMethod);
 
         calculateTransfer("restore");
+        if (typeof updateTplusRecipientFields === "function") updateTplusRecipientFields();
       }
 
       sendAmountInput.addEventListener("input", () => calculateTransfer("send"));
