@@ -209,7 +209,8 @@
           const recipientCurrency = currencies.find((currency) => currency.country === selectedRecipient.country);
           if (recipientCurrency) {
             selectedReceive = recipientCurrency;
-            document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(recipientCurrency.country)} ${recipientCurrency.country} · USD`;
+            configureDeliveryMethods(recipientCurrency.country, deliveryMethod.value);
+            document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(recipientCurrency.country)} ${recipientCurrency.country} ${recipientCurrency.code}`;
             calculateTransfer();
           }
           document.getElementById("rec-name").innerText = selectedRecipient.name;

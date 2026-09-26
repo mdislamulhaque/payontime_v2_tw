@@ -72,7 +72,7 @@ const currencies = [
 ];
 
 const selectedSend = currencies[0];
-let selectedReceive = null;
+let selectedReceive = currencies.find((currency) => currency.country === 'Kenya');
 const SEK_TO_USD_RATE = 0.096;
 
 const sendAmountInput = document.getElementById("send-amount");
@@ -87,6 +87,27 @@ const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
 const inlineRate = document.getElementById("inline-rate");
+
+function configureDeliveryMethods(country) {
+  const methods = country === "Kenya"
+    ? [
+        { value: "mobile-money", label: "M-Pesa" },
+        { value: "cash-pickup", label: "Cash" },
+      ]
+    : [
+        { value: "tplus", label: "T-plus" },
+        { value: "mobile-money", label: "Mobile-money" },
+        { value: "bank-deposit", label: "Bank deposit" },
+        { value: "cash-pickup", label: "Cash pickup" },
+      ];
+  deliveryMethod.innerHTML = methods
+    .map(({ value, label }) => `<option value="${value}">${label}</option>`)
+    .join("");
+  deliveryMethod.value = methods[0].value;
+}
+
+document.getElementById("receive-selected-label").innerHTML = `${flagImageMarkup(selectedReceive.flagCode, selectedReceive.country)} ${selectedReceive.label}`;
+configureDeliveryMethods(selectedReceive.country);
 
 // --- Searchable Dropdown Generator ---
 function setupSearchableDropdown(type) {
@@ -111,7 +132,10 @@ function setupSearchableDropdown(type) {
       opt.innerHTML = `<span class="inline-flex items-center gap-2">${flagImageMarkup(curr.flagCode, curr.country)} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
-        if (type === "receive") selectedReceive = curr;
+        if (type === "receive") {
+          selectedReceive = curr;
+          configureDeliveryMethods(curr.country);
+        }
 
         selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} ${curr.label}`;
         menu.classList.add("hidden");
@@ -147,6 +171,12 @@ setupSearchableDropdown("receive");
 
 // --- Exchange Rate Calculator ---
 function calculateTransfer(changedField = "send") {
+  if (changedField === "receive" && receiveAmountInput.value.trim() === "") {
+    sendAmountInput.value = "";
+    transactionInfo.classList.add("hidden");
+    return;
+  }
+
   let amount = parseFloat(sendAmountInput.value);
   let received = parseFloat(receiveAmountInput.value);
   if (changedField === "receive" && Number.isFinite(received)) {

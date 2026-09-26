@@ -36,6 +36,26 @@
       const refreshBtn = document.getElementById("refresh-btn");
       const refreshIcon = document.getElementById("refresh-icon");
 
+      function configureDeliveryMethods(country, preferredMethod = "") {
+        const methods = country === "Kenya"
+          ? [
+              { value: "mobile-money", label: "M-Pesa" },
+              { value: "cash-pickup", label: "Cash" },
+            ]
+          : [
+              { value: "tplus", label: "T-plus" },
+              { value: "mobile-money", label: "Mobile-money" },
+              { value: "bank-deposit", label: "Bank deposit" },
+              { value: "cash-pickup", label: "Cash pickup" },
+            ];
+        deliveryMethod.innerHTML = methods
+          .map(({ value, label }) => `<option value="${value}">${label}</option>`)
+          .join("");
+        deliveryMethod.value = methods.some(({ value }) => value === preferredMethod)
+          ? preferredMethod
+          : methods[0].value;
+      }
+
       function setupSearchableDropdown(type) {
         const btn = document.getElementById(`${type}-select-btn`);
         const menu = document.getElementById(`${type}-menu`);
@@ -54,9 +74,11 @@
               option.innerHTML = `<span class="inline-flex items-center gap-2">${countryFlagMarkup(curr.country)} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
               option.addEventListener("click", () => {
                 if (type === "receive") selectedReceive = curr;
+                if (type === "receive") configureDeliveryMethods(curr.country);
                 selectedLabel.innerHTML = `${countryFlagMarkup(curr.country)} ${curr.country} ${curr.code}`;
                 menu.classList.add("hidden");
                 calculateTransfer();
+                if (typeof updateTplusRecipientFields === "function") updateTplusRecipientFields();
               });
               optionsContainer.appendChild(option);
             });
@@ -138,6 +160,7 @@
         const receiveCurrency = currencies.find((currency) => currency.country === transferDraft.receiveCountry);
         if (receiveCurrency) {
           selectedReceive = receiveCurrency;
+          configureDeliveryMethods(receiveCurrency.country, transferDraft.deliveryMethod);
           document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(receiveCurrency.country)} ${receiveCurrency.country} ${receiveCurrency.code}`;
         }
 
@@ -149,10 +172,7 @@
         restoreAmount(sendAmountInput, transferDraft.sendAmount);
         restoreAmount(receiveAmountInput, transferDraft.receiveAmount);
 
-        const validDeliveryMethods = ["tplus", "mobile-money", "bank-deposit", "cash-pickup"];
-        if (validDeliveryMethods.includes(transferDraft.deliveryMethod)) {
-          deliveryMethod.value = transferDraft.deliveryMethod;
-        }
+        if (!receiveCurrency) configureDeliveryMethods("", transferDraft.deliveryMethod);
 
         calculateTransfer("restore");
       }
@@ -172,7 +192,7 @@
         document.getElementById("receive-search").value = "";
         document.getElementById("send-menu").classList.add("hidden");
         document.getElementById("receive-menu").classList.add("hidden");
-        deliveryMethod.value = "tplus";
+        configureDeliveryMethods(selectedReceive?.country || "");
         calculateTransfer();
       });
 
