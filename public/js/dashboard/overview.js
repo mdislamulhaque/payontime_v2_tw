@@ -97,14 +97,9 @@
       // UI Initializers & Renderers
       function initUser() {
         const firstChar = state.user.fullName.charAt(0);
-        document.getElementById("userAvatarSidebar").innerText = firstChar;
         document.getElementById("userAvatarHeader").innerText = firstChar;
-        document.getElementById("userNameSidebar").innerText =
-          state.user.fullName;
         document.getElementById("userNameHeader").innerText =
           state.user.fullName;
-        document.getElementById("headerWelcome").innerText =
-          `Welcome back, ${state.user.fullName.split(" ")[0]} 👋`;
       }
 
       function renderNotifications() {
@@ -196,34 +191,9 @@
       function switchTab(tabId) {
         state.dashboardTab = tabId;
 
-        // Only sidebar items receive active navigation styling.
-        // Header profile and dashboard call-to-action buttons keep their own styles.
-        document.querySelectorAll("#sidebar .nav-btn[data-tab]").forEach((btn) => {
+        document.querySelectorAll(".dashboard-topnav [data-tab], .dashboard-mobile-menu [data-tab]").forEach((btn) => {
           const isTarget = btn.getAttribute("data-tab") === tabId;
-          if (isTarget) {
-            btn.classList.add(
-              "bg-[#36b647]",
-              "text-white",
-              "shadow-lg",
-              "shadow-green-500/20",
-            );
-            btn.classList.remove(
-              "text-slate-300",
-              "hover:bg-slate-800",
-              "bg-slate-50",
-              "hover:bg-slate-100",
-            );
-          } else {
-            btn.classList.remove(
-              "bg-[#36b647]",
-              "text-white",
-              "shadow-lg",
-              "shadow-green-500/20",
-            );
-            if (!btn.classList.contains("border")) {
-              btn.classList.add("text-slate-300", "hover:bg-slate-800");
-            }
-          }
+          btn.classList.toggle("active", isTarget);
         });
 
         // Toggle Active Tab Content Area
@@ -235,37 +205,6 @@
           activeContent.classList.remove("hidden");
         }
 
-        // Close Mobile Sidebar upon navigation
-        closeMobileSidebar();
-      }
-
-      // Mobile Sidebar Handlers
-      function openMobileSidebar() {
-        document
-          .getElementById("sidebar")
-          .classList.remove("-translate-x-full");
-        document.getElementById("mobileBackdrop").classList.remove("hidden");
-        document.getElementById("toggleMobileSidebar").setAttribute("aria-expanded", "true");
-      }
-
-      function closeMobileSidebar() {
-        document.getElementById("sidebar").classList.add("-translate-x-full");
-        document.getElementById("mobileBackdrop").classList.add("hidden");
-        document.getElementById("toggleMobileSidebar").setAttribute("aria-expanded", "false");
-      }
-
-      function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        const toggle = document.getElementById("toggleMobileSidebar");
-        if (window.matchMedia("(min-width: 1024px)").matches) {
-          const collapsed = document.getElementById("dashboardShell").classList.toggle("sidebar-collapsed");
-          toggle.setAttribute("aria-expanded", String(!collapsed));
-          return;
-        }
-        const isOpen = !sidebar.classList.contains("-translate-x-full");
-        if (isOpen) closeMobileSidebar();
-        else openMobileSidebar();
-        toggle.setAttribute("aria-expanded", String(!isOpen));
       }
 
       // Modal Handlers
@@ -324,16 +263,15 @@
           }
         });
 
-        // Sidebar Toggles
-        document
-          .getElementById("toggleMobileSidebar")
-          .addEventListener("click", toggleSidebar);
-        document
-          .getElementById("closeSidebarMobile")
-          .addEventListener("click", closeMobileSidebar);
-        document
-          .getElementById("mobileBackdrop")
-          .addEventListener("click", closeMobileSidebar);
+        const mobileNavToggle = document.getElementById("mobileNavToggle");
+        const mobileMenu = document.querySelector(".dashboard-mobile-menu");
+        mobileNavToggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = !mobileMenu.classList.contains("hidden");
+          mobileMenu.classList.toggle("hidden");
+          mobileNavToggle.setAttribute("aria-expanded", String(!isOpen));
+          mobileNavToggle.setAttribute("aria-label", isOpen ? "Open dashboard menu" : "Close dashboard menu");
+        });
 
         // Tab Buttons Listener
         document.addEventListener("click", (e) => {
@@ -341,8 +279,34 @@
           if (navBtn) {
             const tab = navBtn.getAttribute("data-tab");
             switchTab(tab);
+            mobileMenu.classList.add("hidden");
+            mobileNavToggle.setAttribute("aria-expanded", "false");
+            mobileNavToggle.setAttribute("aria-label", "Open dashboard menu");
           }
         });
+
+        const profileMenuBtn = document.getElementById("profileMenuBtn");
+        const profileDropdown = document.getElementById("profileDropdown");
+        profileMenuBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = !profileDropdown.classList.contains("hidden");
+          profileDropdown.classList.toggle("hidden");
+          profileMenuBtn.setAttribute("aria-expanded", String(!isOpen));
+        });
+        document.addEventListener("click", (e) => {
+          if (!profileDropdown.contains(e.target) && !profileMenuBtn.contains(e.target)) {
+            profileDropdown.classList.add("hidden");
+            profileMenuBtn.setAttribute("aria-expanded", "false");
+          }
+          if (!mobileMenu.contains(e.target) && !mobileNavToggle.contains(e.target)) {
+            mobileMenu.classList.add("hidden");
+            mobileNavToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+          window.location.href = "/login.html";
+        });
+        if (window.lucide) lucide.createIcons();
 
         // Notification Dropdown Toggle
         const notifBellBtn = document.getElementById("notifBellBtn");
@@ -379,6 +343,8 @@
         const availableTabs = ["overview", "send", "recipients", "transactions", "profile"];
         if (availableTabs.includes(requestedTab)) {
           switchTab(requestedTab);
+        } else {
+          switchTab("send");
         }
       });
     

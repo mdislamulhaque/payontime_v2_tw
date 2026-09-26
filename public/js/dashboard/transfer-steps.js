@@ -139,6 +139,27 @@
         renderStepper();
       }
 
+      function updateStepButtonStates() {
+        const amount = Number.parseFloat(sendAmountInput.value) || 0;
+        const transferReady = Boolean(selectedSend && selectedReceive && amount > 0);
+        const recipientId = document.getElementById("recipient-select").value;
+        const purposeReady = Boolean(selectedPurpose || document.getElementById("purpose-select").value);
+        const payoutMethod = document.getElementById("payment-method-select").value;
+        const deliveryReady = deliveryMethod.value !== "tplus" || !recipientId || Boolean(document.getElementById("tplus-city").value);
+        const bankReady = deliveryMethod.value !== "bank-deposit" || !recipientId || Boolean(document.getElementById("recipient-bank-account").value.trim());
+        const recipientReady = Boolean(recipientId && purposeReady && payoutMethod && deliveryReady && bankReady);
+        const termsReady = document.getElementById("terms-agree").checked;
+        const paymentForm = document.querySelector("#step-4 form");
+
+        document.querySelector('#step-1 button[onclick="goToStep(2)"]').disabled = !transferReady;
+        document.querySelector('#step-2 button[onclick="goToStep(3)"]').disabled = !recipientReady;
+        document.querySelector('#step-3 button[onclick="goToStep(4)"]').disabled = !termsReady;
+        document.querySelector("#step-4 form button[type=submit]").disabled = !(payoutMethod && paymentForm.checkValidity());
+      }
+
+      document.addEventListener("input", updateStepButtonStates);
+      document.addEventListener("change", updateStepButtonStates);
+
 
       function updateReviewSummary() {
         const recipient = recipientsData[document.getElementById("recipient-select").value];
@@ -291,7 +312,7 @@
         const purposeSelect = document.getElementById("purpose-select");
         purposeSelect.innerHTML = '<option value="" disabled>Select transfer purpose</option>' + purposes.map((purpose) => '<option value="' + purpose + '">' + purpose + '</option>').join("");
         purposeSelect.value = selectedPurpose;
-        purposeSelect.addEventListener("change", () => { selectedPurpose = purposeSelect.value; });
+        purposeSelect.addEventListener("change", () => { selectedPurpose = purposeSelect.value; updateStepButtonStates(); });
       }
 
       // Payment method selection is made in Recipient and controls the Pay form.
@@ -324,4 +345,3 @@
       // On Load Initializers
       renderStepper();
       renderPurposes();
-    

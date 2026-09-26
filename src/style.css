@@ -31,6 +31,20 @@ canvas {
   max-width: 100%;
 }
 
+@media (max-width: 1023px) {
+  #hero .hero-content-grid {
+    gap: 1.5rem;
+  }
+
+  #hero .hero-calculator {
+    order: 1;
+  }
+
+  #hero .hero-copy {
+    order: 2;
+  }
+}
+
 @media (max-width: 640px) {
   .calculator-card {
     padding: 1rem !important;

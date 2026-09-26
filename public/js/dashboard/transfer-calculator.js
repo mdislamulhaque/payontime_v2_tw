@@ -105,6 +105,7 @@
           feeText.textContent = "-";
           totalText.textContent = "-";
           recipientReceivesText.textContent = "-";
+          if (typeof updateStepButtonStates === "function") updateStepButtonStates();
           return;
         }
         const feesByMethod = { "tplus": 0, "mobile-money": 10, "bank-deposit": 15, "cash-pickup": 20 };
@@ -120,6 +121,7 @@
         const payButtonText = document.getElementById("btn-pay-text");
         if (paymentTotal) paymentTotal.textContent = totalText.textContent;
         if (payButtonText) payButtonText.textContent = `Pay ${(amount + fee).toFixed(2)} ${selectedSend.code}`;
+        if (typeof updateStepButtonStates === "function") updateStepButtonStates();
       }
 
       function restoreLandingTransfer() {
@@ -177,4 +179,5 @@
       // Initial Run
       calculateTransfer();
       updateTplusRecipientFields();
+      if (typeof updateStepButtonStates === "function") updateStepButtonStates();
     
