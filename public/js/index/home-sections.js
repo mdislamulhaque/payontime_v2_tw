@@ -113,7 +113,7 @@ function setupSearchableDropdown(type) {
       opt.addEventListener("click", () => {
         if (type === "receive") selectedReceive = curr;
 
-        selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} ${curr.label}`;
+        selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} Sending to ${curr.country}`;
         menu.classList.add("hidden");
         calculateTransfer("send");
       });
@@ -161,27 +161,19 @@ function calculateTransfer(changedField = "send") {
     receiveAmountInput.value = "";
   }
   transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
+  const fee = amount * 0.02;
+  feeText.textContent = amount > 0 ? fee.toFixed(2) : "";
+  totalText.textContent = amount > 0 ? (amount + fee).toFixed(2) : "";
   if (!selectedReceive) {
     amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
     rateText.textContent = "Select a receiving country to see the rate";
-    feeText.textContent = "-";
-    totalText.textContent = "-";
     recipientReceivesText.textContent = "-";
     return;
   }
-  const feesByMethod = {
-    "tplus": 0,
-    "mobile-money": 10,
-    "bank-deposit": 15,
-    "cash-pickup": 20
-  };
-  const fee = feesByMethod[deliveryMethod.value] ?? 0;
   const exchangeRate = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
   inlineRate.textContent = exchangeRate;
   rateText.textContent = exchangeRate;
   amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
-  feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
-  totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
   recipientReceivesText.textContent = `${received.toFixed(2)} USD`;
 }
 

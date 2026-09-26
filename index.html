@@ -210,12 +210,23 @@
                             </div>
 
                             <!-- Inputs Form -->
-                            <div class="space-y-4">
+                            <div class="calculator-form space-y-4">
+                                <!-- Destination selector -->
+                                <div class="relative calculator-destination" id="receive-dropdown-wrapper">
+                                    <button type="button" id="receive-select-btn" class="w-full min-h-14 bg-white border border-slate-300 py-3 px-3 text-sm text-left rounded-lg flex items-center justify-between gap-2 hover:bg-slate-50 cursor-pointer">
+                                        <span id="receive-selected-label">Choose a country</span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 text-orange-600"></i>
+                                    </button>
+                                    <div id="receive-menu" class="hidden absolute right-0 top-full mt-2 w-full bg-white border border-slate-100 rounded-xl shadow-xl z-50 p-2 space-y-2">
+                                        <input type="text" id="receive-search" placeholder="Search country..." class="w-full px-2.5 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-orange-400">
+                                        <div id="receive-options" class="max-h-36 overflow-y-auto space-y-1"></div>
+                                    </div>
+                                </div>
                                 <!-- You Send Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">I'm sending (SEK)</label>
-                                    <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-red-200 transition-all p-1.5">
-                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-3 text-md font-black text-slate-900 focus:outline-none">
+                                    <label class="text-xs text-slate-600 absolute left-3 top-2 z-10">You send</label>
+                                    <div class="mobile-currency-row flex items-center border-2 border-slate-300 rounded-lg bg-white focus-within:border-green-500 transition-all px-3 py-1.5">
+                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-0 text-lg font-bold text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
@@ -235,37 +246,26 @@
 
                                 <!-- Exchange Rate -->
                                 <div class="flex justify-center my-2 relative z-10">
-                                    <span id="inline-rate" class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">1 SEK = 0.096 USD</span>
+                                    <span id="inline-rate" class="w-full text-center px-3 py-2 rounded-lg bg-slate-200 text-slate-900 text-sm font-bold">1 SEK = 0.096 USD</span>
                                 </div>
 
                                 <!-- They Receive Input -->
                                 <div class="relative">
-                                    <label class="text-[10px] font-bold text-slate-400 uppercase absolute left-4 top-2 z-10">Recipient receives (USD)</label>
-                                    <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5">
-                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-3 text-md font-black text-green-600 focus:outline-none">
+                                    <label class="text-xs text-slate-600 absolute left-3 top-2 z-10">They receive</label>
+                                    <div class="mobile-currency-row flex items-center border-2 border-slate-300 rounded-lg bg-white px-3 py-1.5">
+                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent pt-4 pb-1 px-0 text-lg font-bold text-slate-900 focus:outline-none">
 
                                         <!-- Custom Searchable Select (Receive) -->
-                                        <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
-                                            <button type="button" id="receive-select-btn" class="h-full bg-white border-0 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm">
-                                                <span id="receive-selected-label">Select country</span>
-                                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
-                                            </button>
-
-                                            <!-- Dropdown Menu -->
-                                            <div id="receive-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl z-50 p-2 space-y-2">
-                                                <input type="text" id="receive-search" placeholder="Search country..." class="w-full px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-red-400">
-                                                <div id="receive-options" class="max-h-36 overflow-y-auto space-y-1"></div>
-                                            </div>
-                                        </div>
+                                        <div class="shrink-0 self-stretch flex items-center border-l border-slate-200 pl-3 text-sm font-medium text-slate-800"><img src="https://flagcdn.com/w40/us.png" alt="Currency flag" class="w-6 h-auto"> USD</div>
                                     </div>
                                 </div>
 
                                 <!-- Delivery Method -->
-                                <div>
-                                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Delivery Method</label>
+                                <div class="payout-row">
+                                    <label class="block text-xs text-slate-600 mb-1">Payout option</label>
                                     <div class="relative">
-                                        <select id="delivery-method" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3 pr-8 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer appearance-none">
-                                            <option value="tplus">T-plus</option>
+                                        <select id="delivery-method" class="w-full bg-white border border-slate-300 rounded-lg py-2.5 px-3 pr-8 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-green-500 cursor-pointer appearance-none">
+                                            <option value="tplus">T-puls</option>
                                             <option value="mobile-money">Mobile-money</option>
                                             <option value="bank-deposit">Bank deposit</option>
                                             <option value="cash-pickup">Cash pickup</option>
@@ -274,8 +274,13 @@
                                     </div>
                                 </div>
 
+                                <div class="calculator-fee-row">
+                                    <span class="calculator-fee-label">Fee <span class="calculator-fee-info" tabindex="0" aria-label="Fee rate: 2 percent" data-tip="2%">i</span></span>
+                                    <span class="calculator-fee-amount"><span id="fee-text" class="calculator-fee-value"></span><span>SEK</span></span>
+                                </div>
+
                                 <!-- Calculation Breakdown -->
-                                <div id="transaction-info" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                                <div id="transaction-info" class="hidden ">
                                     <div class="flex justify-between text-xs">
                                         <span class="text-slate-400 font-medium">Amount to send</span>
                                         <span class="text-slate-900 font-bold" id="amount-text">0.00 SEK</span>
@@ -284,27 +289,15 @@
                                         <span class="text-slate-400 font-medium">Exchange Rate</span>
                                         <span class="text-slate-900 font-bold" id="rate-text">1 USD = 117.5 BDT</span>
                                     </div>
-                                    <div class="flex justify-between text-xs">
-                                        <span class="text-slate-400 font-medium">Our fee</span>
-                                        <span class="text-green-600 font-bold" id="fee-text">0 SEK</span>
-                                    </div>
-                                    <div class="rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 space-y-2.5 shadow-sm ring-1 ring-emerald-100">
-                                        <div class="flex justify-between items-center text-sm">
-                                            <span class="text-slate-700 font-bold">Total to pay</span>
-                                            <span class="text-emerald-800 font-extrabold" id="total-text">0 SEK</span>
-                                        </div>
-                                        <div class="flex justify-between items-center text-sm border-t border-emerald-200 pt-2">
-                                            <span class="text-slate-600 font-semibold">Recipient receives</span>
-                                            <span class="text-slate-900 font-extrabold" id="recipient-receives-text">0.000 USD</span>
-                                        </div>
-                                    </div>
+                                    <span id="recipient-receives-text" class="hidden">0.000 USD</span>
                                 </div>
 
-                                <!-- CTA Button -->
-                                <button id="send-now-btn" class="w-full py-2 bg-[#108d2c] text-white font-bold rounded-2xl shadow-lg shadow-green-200 hover:bg-[#0b671f] transition-all flex items-center justify-center gap-2 text-base cursor-pointer">
-                                    <span>Send Money Now</span>
-                                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                </button>
+                                <div class="calculator-footer">
+                                    <div class="calculator-total"><span>Total to pay</span><strong><span id="total-text"></span> SEK</strong></div>
+                                    <button id="send-now-btn" class="w-full py-2 bg-[#108d2c] text-white font-bold rounded-2xl shadow-lg shadow-green-200 hover:bg-[#0b671f] transition-all flex items-center justify-center gap-2 text-base cursor-pointer">
+                                        <span>Continue</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
