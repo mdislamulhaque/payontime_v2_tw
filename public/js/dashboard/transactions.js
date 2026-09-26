@@ -119,9 +119,19 @@
       }
 
       // Filter Logic
+      function getTransactionDateISO(tx) {
+        if (tx.dateISO) return tx.dateISO;
+        const match = tx.date.match(/^([A-Za-z]{3})\s+(\d{1,2}),\s+(\d{4})/);
+        if (!match) return "";
+        const month = new Date(`${match[1]} 1, ${match[3]}`).getMonth() + 1;
+        return `${match[3]}-${String(month).padStart(2, "0")}-${match[2].padStart(2, "0")}`;
+      }
+
       function filterTransactions() {
         const q = document.getElementById("searchInput").value.toLowerCase();
         const status = document.getElementById("statusFilter").value;
+        const fromDate = document.getElementById("fromDate").value;
+        const toDate = document.getElementById("toDate").value;
 
         const filtered = transactions.filter((tx) => {
           const matchesSearch =
@@ -130,12 +140,27 @@
             tx.recipientPhone.toLowerCase().includes(q);
 
           const matchesStatus = status === "All" || tx.status === status;
+          const transactionDate = getTransactionDateISO(tx);
+          const matchesDate = (!fromDate || (transactionDate && transactionDate >= fromDate)) &&
+            (!toDate || (transactionDate && transactionDate <= toDate));
 
-          return matchesSearch && matchesStatus;
+          return matchesSearch && matchesStatus && matchesDate;
         });
 
         renderTable(filtered);
       }
+
+      function resetTransactionFilters() {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("statusFilter").value = "All";
+        document.getElementById("fromDate").value = "";
+        document.getElementById("toDate").value = "";
+        filterTransactions();
+      }
+
+      document
+        .getElementById("reset-transaction-filters-btn")
+        .addEventListener("click", resetTransactionFilters);
 
       // Delete Logic
       function deleteTx(id) {
@@ -225,4 +250,3 @@
 
       // Initial Render
       renderTable(transactions);
-    
