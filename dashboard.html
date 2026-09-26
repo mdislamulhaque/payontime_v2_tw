@@ -35,6 +35,12 @@
       #notifBellBtn { background: #f1f5f9 !important; color: var(--brand-navy) !important; }
       #profileMenuBtn, #logoutBtn { background: #fff !important; color: var(--brand-navy) !important; }
       #logoutBtn:hover { background: #f1f5f9 !important; }
+      #close-add-recipient, #close-recipient-modal, #close-view-modal {
+        display: inline-flex; width: 2.25rem !important; height: 2.25rem; padding: 0 !important;
+        align-items: center; justify-content: center; border-radius: 9999px !important;
+        background: var(--brand-green) !important; color: #fff !important;
+      }
+      #add-recipient-modal > div, #recipient-modal > div { max-height: calc(100dvh - 2rem); overflow-y: auto; }
       @media (max-width: 760px) {
         .dashboard-header { grid-template-columns: 1fr auto auto; gap: .5rem; }
         .dashboard-header > a img { width: 7rem; }
@@ -801,11 +807,11 @@
                     </div>
 
                     <div id="tplus-recipient-lookup" class="hidden">
-                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient mobile number <span class="font-medium text-slate-400">(Test: 252619333207)</span></label>
+                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Or send to a new recipient <span class="font-medium text-slate-400">(Use this phone number for testing: 252619333207)</span></label>
                       <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
                       <div id="bank-account-field" class="hidden mt-4">
-                        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-slate-400">(Test: 31052160)</span></label>
+                        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-slate-400">(Use this account bank number for testing: 31052160)</span></label>
                         <input id="recipient-bank-account" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div>
                     </div>
@@ -991,6 +997,7 @@
                       </div>
                       <button
                         type="button"
+                        id="close-add-recipient"
                         onclick="closeAddRecipientModal()"
                         class="close-action p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
                       >
@@ -1023,6 +1030,7 @@
                           >
                           <input
                             type="text"
+                            id="quick-recipient-first-name"
                             required
                             placeholder="e.g. John"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
@@ -1035,6 +1043,7 @@
                           >
                           <input
                             type="text"
+                            id="quick-recipient-last-name"
                             required
                             placeholder="e.g. Doe"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
@@ -1066,36 +1075,40 @@
                           </select>
                           </div>
                         </div>
-                        <div>
+                         <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">City Name</label>
+                        <input type="text" id="quick-recipient-city" placeholder="Enter city" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+                      </div>
+                        
+                      </div>
+
+                      <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
                             >Phone Number</label
                           >
                           <input
                             type="tel"
+                            id="quick-recipient-phone"
                             required
                             placeholder="+123 456 7890"
                             class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
                           />
                         </div>
-                      </div>
 
                       <div>
-                        <label
-                          class="block text-xs font-bold text-slate-700 mb-1"
-                          >Payout Method</label
-                        >
-                        <select
-                          required
-                          class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
-                        >
-                          <option value="bank">Bank Deposit</option>
-                          <option value="cash">Cash Pickup</option>
-                          <option value="wallet">
-                            Mobile Wallet (bKash/Nagad/etc.)
-                          </option>
-                        </select>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Bank Name</label>
+                        <input type="text" id="quick-recipient-bank-name" placeholder="e.g. Chase Bank" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div>
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Bank Account Number</label>
+                        <input type="text" id="quick-recipient-bank-account" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+                      </div>
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
+                        <input type="tel" id="quick-recipient-wallet-number" placeholder="Enter T-plus wallet number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+                      </div>
+                     
 
                       <div
                         class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100"
@@ -2014,7 +2027,7 @@
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
-                  <span>+ Add New Recipient</span>
+                  <span>Add New Recipient</span>
                 </button>
               </div>
 
@@ -2064,7 +2077,7 @@
                         <th class="p-4">Recipient Name</th>
                         <th class="p-4">Country</th>
                         <th class="p-4">Phone Number</th>
-                        <th class="p-4">Payout Method & Details</th>
+                        <th class="p-4">Recipient Details</th>
                         <th class="p-4">Date Added</th>
                         <th class="p-4 text-right">Actions</th>
                       </tr>
@@ -2098,6 +2111,8 @@
                       Add New Recipient
                     </h3>
                     <button
+                      type="button"
+                      id="close-recipient-modal"
                       onclick="closeRecipientModal()"
                       class="close-action text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer"
                     >
@@ -2154,7 +2169,12 @@
                           />
                         </div>
                       </div>
-                      <div>
+                       <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">City Name</label>
+                        <input type="text" id="form-city-name" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="e.g. New York" />
+                      </div>
+                    </div>
+                    <div>
                         <label
                           class="block text-xs font-bold text-slate-700 mb-1"
                           >Phone Number</label
@@ -2167,25 +2187,8 @@
                           placeholder="e.g. +1 555-0192"
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-1"
-                        >Delivery Method</label
-                      >
-                      <select
-                        id="form-method"
-                        onchange="togglePayoutFields()"
-                        class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
-                      >
-                        <option value="Bank Deposit">Bank Deposit</option>
-                        <option value="Mobile Wallet">Mobile Wallet</option>
-                        <option value="Cash Pickup">Cash Pickup</option>
-                      </select>
-                    </div>
-
-                    <!-- Bank Details -->
-                    <div id="bank-fields" class="space-y-3">
+                    <div class="space-y-3">
                       <div>
                         <label
                           class="block text-xs font-bold text-slate-700 mb-1"
@@ -2201,28 +2204,20 @@
                       <div>
                         <label
                           class="block text-xs font-bold text-slate-700 mb-1"
-                          >Account Number / IBAN</label
+                          >Bank Account Number</label
                         >
                         <input
                           type="text"
-                          id="form-account-number"
+                          id="form-bank-account-number"
                           class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
                           placeholder="e.g. 9876543210"
                         />
                       </div>
-                    </div>
-
-                    <!-- Wallet Details -->
-                    <div id="wallet-fields" class="hidden">
-                      <label class="block text-xs font-bold text-slate-700 mb-1"
-                        >Mobile Wallet Number</label
-                      >
-                      <input
-                        type="text"
-                        id="form-wallet-number"
-                        class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
-                        placeholder="e.g. +1 555-9988"
-                      />
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
+                        <input type="tel" id="form-wallet-number" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="e.g. +1 555-9988" />
+                      </div>
+                     
                     </div>
 
                     <div
@@ -2261,6 +2256,8 @@
                       Recipient Details
                     </h3>
                     <button
+                      type="button"
+                      id="close-view-modal"
                       onclick="closeViewModal()"
                       class="close-action text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer"
                     >
@@ -2306,20 +2303,10 @@
                           class="font-bold text-slate-800 font-mono"
                         ></span>
                       </div>
-                      <div class="flex justify-between">
-                        <span class="text-slate-400">Delivery Method:</span
-                        ><span
-                          id="view-method"
-                          class="font-bold text-slate-900"
-                        ></span>
-                      </div>
-                      <div class="flex justify-between">
-                        <span class="text-slate-400">Account / Details:</span
-                        ><span
-                          id="view-details"
-                          class="font-bold text-slate-800"
-                        ></span>
-                      </div>
+                      <div class="flex justify-between"><span class="text-slate-400">Bank Name:</span><span id="view-bank-name" class="font-bold text-slate-800"></span></div>
+                      <div class="flex justify-between"><span class="text-slate-400">Bank Account Number:</span><span id="view-bank-account" class="font-bold text-slate-800"></span></div>
+                      <div class="flex justify-between"><span class="text-slate-400">T-plus Wallet Number:</span><span id="view-wallet-number" class="font-bold text-slate-800"></span></div>
+                      <div class="flex justify-between"><span class="text-slate-400">City Name:</span><span id="view-city-name" class="font-bold text-slate-800"></span></div>
                       <div class="flex justify-between">
                         <span class="text-slate-400">Date Added:</span
                         ><span

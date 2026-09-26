@@ -6,10 +6,10 @@
           email: "sarah.j@example.com",
           country: "United States",
           phone: "+1 555-0192",
-          deliveryMethod: "Bank Deposit",
-          accountNumber: "9876543210",
+          bankAccountNumber: "9876543210",
+          tplusWalletNumber: "",
           bankName: "Chase Bank",
-          mobileWalletNumber: "",
+          cityName: "New York",
           createdAt: "Oct 24, 2024",
         },
         {
@@ -18,10 +18,10 @@
           email: "",
           country: "Singapore",
           phone: "+65 9123 4567",
-          deliveryMethod: "Mobile Wallet",
-          accountNumber: "",
+          bankAccountNumber: "",
+          tplusWalletNumber: "+65 9123 4567",
           bankName: "",
-          mobileWalletNumber: "+65 9123 4567",
+          cityName: "Singapore",
           createdAt: "Nov 02, 2024",
         },
       ];
@@ -44,11 +44,12 @@
 
         data.forEach((rec) => {
           const initial = rec.fullName.charAt(0).toUpperCase();
-          const details = rec.accountNumber
-            ? `Acc: ${rec.accountNumber} (${rec.bankName || "Bank"})`
-            : rec.mobileWalletNumber
-              ? `Wallet: ${rec.mobileWalletNumber}`
-              : "Cash Counter Pickup";
+          const details = [
+            rec.bankName && `Bank: ${rec.bankName}`,
+            (rec.bankAccountNumber || rec.accountNumber) && `Bank account: ${rec.bankAccountNumber || rec.accountNumber}`,
+            (rec.tplusWalletNumber || rec.mobileWalletNumber) && `T-plus wallet: ${rec.tplusWalletNumber || rec.mobileWalletNumber}`,
+            rec.cityName && `City: ${rec.cityName}`,
+          ].filter(Boolean).join(" · ") || "—";
 
           const tr = document.createElement("tr");
           tr.className = "hover:bg-slate-50/80 transition-colors";
@@ -75,8 +76,7 @@
         </td>
         <td class="p-4 font-mono text-slate-800 font-semibold">${rec.phone}</td>
         <td class="p-4">
-          <span class="font-bold text-slate-900 block">${rec.deliveryMethod}</span>
-          <span class="text-[11px] text-slate-500">${details}</span>
+          <span class="text-[11px] text-slate-600">${details}</span>
         </td>
         <td class="p-4 text-slate-500 font-medium">${rec.createdAt}</td>
         <td class="p-4 text-right">
@@ -114,21 +114,10 @@
         filterRecipients();
       }
 
-      function togglePayoutFields() {
-        const method = document.getElementById("form-method").value;
-        document
-          .getElementById("bank-fields")
-          .classList.toggle("hidden", method !== "Bank Deposit");
-        document
-          .getElementById("wallet-fields")
-          .classList.toggle("hidden", method !== "Mobile Wallet");
-      }
-
       function openAddModal() {
         document.getElementById("modal-title").innerText = "Add New Recipient";
         document.getElementById("recipient-id").value = "";
         document.getElementById("recipient-form").reset();
-        togglePayoutFields();
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
 
@@ -143,14 +132,13 @@
         document.getElementById("form-country").value = rec.country;
         updateFormCountryFlag(rec.country);
         document.getElementById("form-phone").value = rec.phone;
-        document.getElementById("form-method").value = rec.deliveryMethod;
         document.getElementById("form-bank-name").value = rec.bankName || "";
-        document.getElementById("form-account-number").value =
-          rec.accountNumber || "";
+        document.getElementById("form-bank-account-number").value =
+          rec.bankAccountNumber || rec.accountNumber || "";
         document.getElementById("form-wallet-number").value =
-          rec.mobileWalletNumber || "";
+          rec.tplusWalletNumber || rec.mobileWalletNumber || "";
+        document.getElementById("form-city-name").value = rec.cityName || "";
 
-        togglePayoutFields();
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
 
@@ -165,12 +153,10 @@
         document.getElementById("view-email").innerText = rec.email || "N/A";
         document.getElementById("view-country").innerHTML = `${countryFlagMarkup(rec.country)} ${rec.country}`;
         document.getElementById("view-phone").innerText = rec.phone;
-        document.getElementById("view-method").innerText = rec.deliveryMethod;
-        document.getElementById("view-details").innerText = rec.accountNumber
-          ? `Acc: ${rec.accountNumber} (${rec.bankName || "Bank"})`
-          : rec.mobileWalletNumber
-            ? `Wallet: ${rec.mobileWalletNumber}`
-            : "Cash Pickup";
+        document.getElementById("view-bank-name").innerText = rec.bankName || "—";
+        document.getElementById("view-bank-account").innerText = rec.bankAccountNumber || rec.accountNumber || "—";
+        document.getElementById("view-wallet-number").innerText = rec.tplusWalletNumber || rec.mobileWalletNumber || "—";
+        document.getElementById("view-city-name").innerText = rec.cityName || "—";
         document.getElementById("view-created").innerText = rec.createdAt;
 
         document.getElementById("view-modal").classList.remove("hidden");
@@ -193,11 +179,11 @@
           email: document.getElementById("form-email").value,
           country: document.getElementById("form-country").value,
           phone: document.getElementById("form-phone").value,
-          deliveryMethod: document.getElementById("form-method").value,
           bankName: document.getElementById("form-bank-name").value,
-          accountNumber: document.getElementById("form-account-number").value,
-          mobileWalletNumber:
+          bankAccountNumber: document.getElementById("form-bank-account-number").value,
+          tplusWalletNumber:
             document.getElementById("form-wallet-number").value,
+          cityName: document.getElementById("form-city-name").value,
           createdAt: id
             ? recipients.find((r) => r.id === id)?.createdAt || "Just Now"
             : "Just Now",
@@ -222,4 +208,3 @@
 
       // Initial Execution
       renderRecipients();
-    

@@ -17,6 +17,10 @@
           phone: "+251 91 234 5678",
           deliveryMethod: "Cash Pickup",
           payoutDetails: "Cash pickup at partner location",
+          bankName: "",
+          bankAccountNumber: "",
+          tplusWalletNumber: "",
+          cityName: "Addis Ababa",
         },
         rec_2: {
           name: "Rahim Ahmed",
@@ -24,6 +28,10 @@
           phone: "+880 17 0000 0000",
           deliveryMethod: "bKash / Nagad Wallet",
           payoutDetails: "Mobile wallet payout",
+          bankName: "",
+          bankAccountNumber: "",
+          tplusWalletNumber: "+880 17 0000 0000",
+          cityName: "Dhaka",
         },
         rec_3: {
           name: "MAXAMED CALI JAAMAC",
@@ -32,6 +40,9 @@
           deliveryMethod: "Bank",
           payoutDetails: "Bank account: 31052160",
           bankAccountNumber: "31052160",
+          bankName: "Dahabshiil Bank",
+          tplusWalletNumber: "",
+          cityName: "Mogadishu",
         },
       };
 
@@ -209,8 +220,10 @@
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${selectedRecipient.name}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country}</span></div>
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${selectedRecipient.phone}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${selectedRecipient.deliveryMethod}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${selectedRecipient.payoutDetails}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Bank name</span><span class="font-semibold text-slate-900">${selectedRecipient.bankName || "—"}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Bank account</span><span class="font-semibold text-slate-900">${selectedRecipient.bankAccountNumber || "—"}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">T-plus wallet</span><span class="font-semibold text-slate-900">${selectedRecipient.tplusWalletNumber || "—"}</span></div>
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">City</span><span class="font-semibold text-slate-900">${selectedRecipient.cityName || "—"}</span></div>
             </div>`;
           if (deliveryMethod.value === "tplus" || deliveryMethod.value === "bank-deposit") {
             document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
@@ -219,7 +232,7 @@
           if (deliveryMethod.value === "bank-deposit") {
             document.getElementById("recipient-bank-account").value = selectedRecipient.bankAccountNumber || "";
           }
-          updateTplusCityOptions(selectedRecipient.country);
+          updateTplusCityOptions(selectedRecipient.country, selectedRecipient.cityName);
 
         } else {
           card.classList.add("hidden");
@@ -254,16 +267,19 @@
         }
       }
 
-      function updateTplusCityOptions(country) {
+      function updateTplusCityOptions(country, preferredCity = "") {
         const citySelect = document.getElementById("tplus-city");
         const citiesByCountry = {
           Ethiopia: ["Addis Ababa", "Dire Dawa", "Hawassa", "Mekelle"],
           Bangladesh: ["Dhaka", "Chattogram", "Khulna", "Sylhet"],
           Kenya: ["Nairobi", "Mombasa", "Kisumu", "Nakuru"],
           Somalia: ["Mogadishu", "Hargeisa", "Kismayo", "Bosaso"],
+          India: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
+          Philippines: ["Manila", "Cebu City", "Davao City"],
         };
-        const cities = citiesByCountry[country] || [];
+        const cities = [...new Set([...(citiesByCountry[country] || []), preferredCity].filter(Boolean))];
         citySelect.innerHTML = '<option value="" disabled selected>City</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join("");
+        if (preferredCity) citySelect.value = preferredCity;
       }
 
       function findRecipientByNumber(value, field) {
