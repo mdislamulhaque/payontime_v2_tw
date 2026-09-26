@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="bg-slate-100 font-sans text-slate-900 antialiased">
+<body class="bg-slate-100 font-sans text-slate-900 antialiased overflow-x-hidden">
 
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md text-slate-900 border-b border-slate-200 shadow-sm transition-all">
     
@@ -121,12 +121,12 @@
     </div>
   </header>
 
- <div class="bg-slate-100 font-sans text-slate-900 antialiased scroll-smooth">
+ <div id="index-page-content" class="bg-slate-100 font-sans text-slate-900 antialiased scroll-smooth">
     <main class="max-w-7xl mx-auto px-4 sm:px-4 py-2 space-y-16">
         <!-- hero section  -->
         <section id="hero" class="relative  text-slate-900  overflow-hidden">
             <!-- Background soft glow -->
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto  sm:px-6 relative z-10">
                 <div class="hero-content-grid grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -316,7 +316,7 @@
         <!-- Why Choose Us Section -->
         <section id="why-us" class="py-20">
              <!-- Background soft glow -->
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 <!-- Section Header -->
@@ -408,7 +408,7 @@
         <!-- Our Services Section -->
         <section id="services" class="py-20">
              <!-- Background soft glow -->
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
                 <!-- Section Header -->
@@ -538,7 +538,7 @@
         <!-- Debit Card Suite Section -->
         <section id="debit-card" class="py-20 overflow-hidden relative">
              <!-- Background soft glow -->
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -759,7 +759,7 @@
         <!-- Mobile App Section -->
         <section id="app" class="py-20 overflow-hidden relative">
             <!-- Background soft glow -->
-            <div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-50 0/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-50 0/5 rounded-full blur-[140px] pointer-events-none"></div>
             <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none"></div>
 
             <div class="max-w-8xl mx-auto px-4 sm:px-6 relative z-10">
@@ -1070,7 +1070,7 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 overflow-hidden relative">
             <!-- Background soft glow -->
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2  h-[600px] bg-green-500/5 rounded-full blur-[140px] pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -1217,7 +1217,7 @@
                     <div class="text-slate-500 text-xs font-bold uppercase tracking-widest">
                         Our Partners
                     </div>
-                    <div class="flex items-center gap-6 opacity-80 hover:opacity-100 transition-all">
+                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-6 opacity-80 hover:opacity-100 transition-all">
                         <span class="text-white font-black italic tracking-tighter text-xl">VISA</span>
                         <span class="text-white font-black italic tracking-tighter text-xl">mastercard</span>
                         <span class="text-white font-bold tracking-tight text-xl text-pink-400">bKash</span>
