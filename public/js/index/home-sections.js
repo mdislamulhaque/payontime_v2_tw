@@ -67,8 +67,8 @@ renderDots();
 // Available Currencies List
 const currencies = [
   { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se' },
-  { country: 'Somalia', code: 'SOS', label: 'Somalia · USD', flagCode: 'so' },
-  { country: 'Kenya', code: 'KES', label: 'Kenya · USD', flagCode: 'ke' }
+  { country: 'Somalia', code: 'USD', label: 'Somalia · USD', flagCode: 'so' },
+  { country: 'Kenya', code: 'KES', label: 'Kenya · KES', flagCode: 'ke' }
 ];
 
 const selectedSend = currencies[0];

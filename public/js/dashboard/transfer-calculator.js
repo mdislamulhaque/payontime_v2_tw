@@ -17,7 +17,7 @@
         { country: "Kenya", code: "KES", label: "Kenya - KES", rateToBase: 0.0077 },
         { country: "Ethiopia", code: "ETB", label: "Ethiopia - ETB", rateToBase: 0.0069 },
         { country: "Eritrea", code: "ERN", label: "Eritrea - ERN", rateToBase: 0.056 },
-        { country: "Somalia", code: "SOS", label: "Somalia - SOS", rateToBase: 0.00175 },
+        { country: "Somalia", code: "USD", label: "Somalia - USD", rateToBase: 1 },
       ];
 
       let selectedSend = currencies[0];
@@ -54,7 +54,7 @@
               option.innerHTML = `<span class="inline-flex items-center gap-2">${countryFlagMarkup(curr.country)} ${curr.country}</span><span class="text-slate-400 text-[10px]">${curr.code}</span>`;
               option.addEventListener("click", () => {
                 if (type === "receive") selectedReceive = curr;
-                selectedLabel.innerHTML = `${countryFlagMarkup(curr.country)} ${curr.country} · ${type === "receive" ? "USD" : curr.code}`;
+                selectedLabel.innerHTML = `${countryFlagMarkup(curr.country)} ${curr.country} ${curr.code}`;
                 menu.classList.add("hidden");
                 calculateTransfer();
               });
@@ -138,7 +138,7 @@
         const receiveCurrency = currencies.find((currency) => currency.country === transferDraft.receiveCountry);
         if (receiveCurrency) {
           selectedReceive = receiveCurrency;
-          document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(receiveCurrency.country)} ${receiveCurrency.country} Â· USD`;
+          document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(receiveCurrency.country)} ${receiveCurrency.country} ${receiveCurrency.code}`;
         }
 
         const restoreAmount = (input, value) => {
