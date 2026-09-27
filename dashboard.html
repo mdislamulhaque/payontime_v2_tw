@@ -993,14 +993,14 @@
                   class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto"
                 >
                   <div
-                    class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 p-6 sm:p-8 space-y-6 relative transition-all transform scale-100"
+                    class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 p-6 sm:p-8 space-y-2 relative transition-all transform scale-100"
                   >
                     <!-- Modal Header -->
                     <div
                       class="flex items-center justify-between pb-4 border-b border-slate-100"
                     >
                       <div>
-                        <h3 class="text-lg font-extrabold text-slate-900">
+                        <h3 class="text-lg font-extrabold text-slate-900 text-start">
                           Add New Recipient
                         </h3>
                         <p class="text-xs text-slate-500">
@@ -1032,13 +1032,24 @@
                     <form
                       id="add-recipient-form"
                       onsubmit="handleSaveRecipient(event)"
-                      class="space-y-4"
+                      class="space-y-2"
                     >
-                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
+                        <div class="flex rounded-xl border border-slate-200 bg-slate-50 focus-within:ring-2 focus-within:ring-[#36b647]">
+                          <img id="quick-country-code-flag" src="https://flagcdn.com/w40/ke.png" class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />
+                          <select id="quick-recipient-country-code" class="w-20 bg-transparent border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold" aria-label="Phone country code" onchange="updateQuickRecipientCountry(this.value)">
+                            <option value="SO">+252</option><option value="KE" selected>+254</option>
+                          </select>
+                          <input type="tel" id="quick-recipient-phone" required placeholder="Phone number" class="min-w-0 flex-1 bg-transparent p-3 text-xs text-slate-900 outline-none" />
+                        </div>
+                        <p class="mt-1 text-[10px] font-bold text-red-600">Test: Somalia +252 619333207 · Kenya +254 712345678</p>
+                      </div>
+                      <div class="grid grid-cols-1 gap-3">
                         <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
-                            >First Name</label
+                            >First Name <span class="text-red-500">*</span></label
                           >
                           <input
                             type="text"
@@ -1049,9 +1060,13 @@
                           />
                         </div>
                         <div>
+                          <label class="block text-xs font-bold text-slate-700 mb-1">Middle Name <span class="text-slate-400 font-normal">(Optional)</span></label>
+                          <input type="text" id="quick-recipient-middle-name" placeholder="Middle name" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900" />
+                        </div>
+                        <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
-                            >Last Name</label
+                            >Last Name <span class="text-red-500">*</span></label
                           >
                           <input
                             type="text"
@@ -1063,52 +1078,20 @@
                         </div>
                       </div>
 
-                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <label
-                            class="block text-xs font-bold text-slate-700 mb-1"
-                            >Country</label
-                          >
-                          <div class="flex items-center gap-2">
-                            <img id="recipient-country-flag" class="hidden w-7 h-auto rounded-sm mr-1.5" alt="Country flag" />
-                          <select
-                            id="recipient-modal-country"
-                            required
-                            onchange="updateRecipientCountryFlag(this.value)"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
-                          >
-                            <option value="" disabled selected>
-                              Select Country
-                            </option>
-                            <option value="ET">Ethiopia</option>
-                            <option value="BD">Bangladesh</option>
-                            <option value="IN">India</option>
-                            <option value="PH">Philippines</option>
-                          </select>
-                          </div>
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">City <span class="text-red-500">*</span></label>
+                        <div class="flex items-center gap-2">
+                          <select id="quick-recipient-city" required class="min-w-0 flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900"><option value="">Select city</option></select>
+                          <span id="quick-recipient-country-display" class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"><img src="https://flagcdn.com/w40/ke.png" class="w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />Kenya</span>
                         </div>
-                         <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">City Name</label>
-                        <input type="text" id="quick-recipient-city" placeholder="Enter city" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div>
-                        
+                      <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Address <span class="text-slate-400 font-normal">(Optional)</span></label>
+                        <input type="text" id="quick-recipient-address" placeholder="Enter address" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900" />
                       </div>
 
-                      <div>
-                          <label
-                            class="block text-xs font-bold text-slate-700 mb-1"
-                            >Phone Number</label
-                          >
-                          <input
-                            type="tel"
-                            id="quick-recipient-phone"
-                            required
-                            placeholder="+123 456 7890"
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
-                          />
-                        </div>
-
-                      <div>
+                      <!-- Hidden for now: bank and wallet details -->
+                      <!-- <div>
                         <label class="block text-xs font-bold text-slate-700 mb-1">Bank Name</label>
                         <input type="text" id="quick-recipient-bank-name" placeholder="e.g. Chase Bank" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div>
@@ -1117,9 +1100,9 @@
                         <input type="text" id="quick-recipient-bank-account" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div>
                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
+                        <label id="quick-wallet-label" class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
                         <input type="tel" id="quick-recipient-wallet-number" placeholder="Enter T-plus wallet number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
-                      </div>
+                      </div> -->
                      
 
                       <div
@@ -1134,7 +1117,9 @@
                         </button>
                         <button
                           type="submit"
-                          class="py-2.5 px-6 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white text-xs font-extrabold shadow-md shadow-green-500/20"
+                          id="quick-recipient-save"
+                          disabled
+                          class="py-2.5 px-6 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white text-xs font-extrabold shadow-md shadow-green-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Save & Select
                         </button>
@@ -2119,7 +2104,7 @@
                 class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               >
                 <div
-                  class="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5 border border-slate-100"
+                  class="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl space-y-2 border border-slate-100"
                 >
                   <div
                     class="flex items-center justify-between pb-3 border-b border-slate-100"
@@ -2148,19 +2133,22 @@
                     <input type="hidden" id="recipient-id" />
 
                     <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-1"
-                        >Full Name</label
-                      >
-                      <input
-                        type="text"
-                        id="form-name"
-                        required
-                        class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
-                        placeholder="e.g. Sarah Jenkins"
-                      />
+                      <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
+                      <div class="flex rounded-xl border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-[#36b647]/20">
+                        <img id="form-country-code-flag" src="https://flagcdn.com/w40/ke.png" class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />
+                        <select id="form-country-code" class="w-20 border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold" aria-label="Phone country code" onchange="updateFormRecipientCountry(this.value)"><option value="SO">+252</option><option value="KE" selected>+254</option></select>
+                        <input type="tel" id="form-phone" required class="min-w-0 flex-1 p-3 text-xs text-slate-900 outline-none" placeholder="Phone number" />
+                      </div>
+                      <p class="mt-1 text-[10px] font-bold text-red-600">Test: Somalia +252 619333207 · Kenya +254 712345678</p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3">
+                      <div><label class="block text-xs font-bold text-slate-700 mb-1">First Name <span class="text-red-500">*</span></label><input type="text" id="form-first-name" required class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
+                      <div><label class="block text-xs font-bold text-slate-700 mb-1">Middle Name <span class="text-slate-400 font-normal">(Optional)</span></label><input type="text" id="form-middle-name" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
+                      <div><label class="block text-xs font-bold text-slate-700 mb-1">Last Name <span class="text-red-500">*</span></label><input type="text" id="form-last-name" required class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
                     </div>
 
-                    <div>
+                    <!-- Hidden for now: email field -->
+                    <!-- <div>
                       <label class="block text-xs font-bold text-slate-700 mb-1"
                         >Email Address (Optional)</label
                       >
@@ -2170,45 +2158,16 @@
                         class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
                         placeholder="e.g. sarah@example.com"
                       />
-                    </div>
+                    </div> -->
 
-                    <div class="grid grid-cols-2 gap-3">
-                      <div>
-                        <label
-                          class="block text-xs font-bold text-slate-700 mb-1"
-                          >Country</label
-                        >
-                        <div class="flex items-center gap-2">
-                          <img id="form-country-flag" class="hidden w-7 h-auto rounded-sm mr-1.5" alt="Country flag" />
-                          <input
-                            type="text"
-                            id="form-country"
-                            required
-                            class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
-                            placeholder="e.g. United States"
-                          />
-                        </div>
-                      </div>
-                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">City Name</label>
-                        <input type="text" id="form-city-name" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="e.g. New York" />
-                      </div>
-                    </div>
                     <div>
-                        <label
-                          class="block text-xs font-bold text-slate-700 mb-1"
-                          >Phone Number</label
-                        >
-                        <input
-                          type="text"
-                          id="form-phone"
-                          required
-                          class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-[#36b647]/20 focus:border-[#36b647] outline-none"
-                          placeholder="e.g. +1 555-0192"
-                        />
-                      </div>
+                      <label class="block text-xs font-bold text-slate-700 mb-1">City <span class="text-red-500">*</span></label>
+                      <div class="flex items-center gap-2"><select id="form-city-name" required class="min-w-0 flex-1 p-3 rounded-xl border border-slate-200 text-xs text-slate-900"><option value="">Select city</option></select><span id="form-country-display" class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"><img src="https://flagcdn.com/w40/ke.png" class="w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />Kenya</span></div>
+                    </div>
+                    <div><label class="block text-xs font-bold text-slate-700 mb-1">Address <span class="text-slate-400 font-normal">(Optional)</span></label><input type="text" id="form-address" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="Enter address" /></div>
 
-                    <div class="space-y-3">
+                    <!-- Hidden for now: bank and wallet details -->
+                    <!-- <div class="space-y-3">
                       <div>
                         <label
                           class="block text-xs font-bold text-slate-700 mb-1"
@@ -2234,11 +2193,11 @@
                         />
                       </div>
                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
+                        <label id="form-wallet-label" class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
                         <input type="tel" id="form-wallet-number" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="e.g. +1 555-9988" />
                       </div>
                      
-                    </div>
+                    </div> -->
 
                     <div
                       class="flex justify-end gap-3 pt-4 border-t border-slate-100"
@@ -2252,7 +2211,9 @@
                       </button>
                       <button
                         type="submit"
-                        class="py-2.5 px-5 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white text-xs font-bold shadow-md cursor-pointer"
+                        id="recipient-form-save"
+                        disabled
+                        class="py-2.5 px-5 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white text-xs font-bold shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Save Recipient
                       </button>
@@ -2267,7 +2228,7 @@
                 class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               >
                 <div
-                  class="bg-white w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5 border border-slate-100"
+                  class="bg-white w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl space-y-2 border border-slate-100"
                 >
                   <div
                     class="flex items-center justify-between pb-3 border-b border-slate-100"

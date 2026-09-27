@@ -66,18 +66,6 @@
         return code ? `<img src="https://flagcdn.com/w40/${code}.png" alt="${altText} flag" class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5" loading="lazy">` : "";
       }
 
-      function updateFormCountryFlag(country) {
-        const image = document.getElementById("form-country-flag");
-        const name = Object.keys(countryFlags).find((candidate) => candidate.toLowerCase() === country.trim().toLowerCase());
-        image.classList.toggle("hidden", !name);
-        if (name) {
-          image.src = `https://flagcdn.com/w40/${countryFlags[name]}.png`;
-          image.alt = `${name} flag`;
-        }
-      }
-
-      document.getElementById("form-country").addEventListener("input", (event) => updateFormCountryFlag(event.target.value));
-
       Object.entries(recipientsData).forEach(([recipientId, recipient]) => {
         const option = document.querySelector(`#recipient-select option[value="${recipientId}"]`);
         if (option) option.textContent = `${recipient.name} | ${recipient.phone}`;

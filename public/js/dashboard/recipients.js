@@ -119,6 +119,9 @@
         document.getElementById("modal-title").innerText = "Add New Recipient";
         document.getElementById("recipient-id").value = "";
         document.getElementById("recipient-form").reset();
+        document.getElementById("form-country-code").value = "KE";
+        updateFormRecipientCountry("KE");
+        updateRecipientSaveButtons();
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
 
@@ -128,17 +131,17 @@
 
         document.getElementById("modal-title").innerText = "Edit Recipient";
         document.getElementById("recipient-id").value = rec.id;
-        document.getElementById("form-name").value = rec.fullName;
-        document.getElementById("form-email").value = rec.email || "";
-        document.getElementById("form-country").value = rec.country;
-        updateFormCountryFlag(rec.country);
-        document.getElementById("form-phone").value = rec.phone;
-        document.getElementById("form-bank-name").value = rec.bankName || "";
-        document.getElementById("form-bank-account-number").value =
-          rec.bankAccountNumber || rec.accountNumber || "";
-        document.getElementById("form-wallet-number").value =
-          rec.tplusWalletNumber || rec.mobileWalletNumber || "";
+        const nameParts = rec.fullName.split(/\s+/);
+        document.getElementById("form-first-name").value = nameParts.shift() || "";
+        document.getElementById("form-last-name").value = nameParts.pop() || "";
+        document.getElementById("form-middle-name").value = nameParts.join(" ");
+        const countryCode = rec.country === "Kenya" ? "KE" : "SO";
+        document.getElementById("form-country-code").value = countryCode;
+        document.getElementById("form-phone").value = rec.phone.replace(/\D/g, "").replace(countryCode === "KE" ? /^254/ : /^252/, "");
+        updateFormRecipientCountry(countryCode, rec.cityName || "");
         document.getElementById("form-city-name").value = rec.cityName || "";
+        document.getElementById("form-address").value = rec.address || "";
+        updateRecipientSaveButtons();
 
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
@@ -174,17 +177,21 @@
       function handleFormSubmit(e) {
         e.preventDefault();
         const id = document.getElementById("recipient-id").value;
+        const countryCode = document.getElementById("form-country-code").value;
+        const recipientCountry = recipientCountries[countryCode];
+        const fullName = ["first-name", "middle-name", "last-name"].map((part) => document.getElementById(`form-${part}`).value.trim()).filter(Boolean).join(" ");
+        const existingRecipient = id ? recipients.find((r) => r.id === id) : null;
         const recData = {
           id: id || Date.now().toString(),
-          fullName: document.getElementById("form-name").value,
-          email: document.getElementById("form-email").value,
-          country: document.getElementById("form-country").value,
-          phone: document.getElementById("form-phone").value,
-          bankName: document.getElementById("form-bank-name").value,
-          bankAccountNumber: document.getElementById("form-bank-account-number").value,
-          tplusWalletNumber:
-            document.getElementById("form-wallet-number").value,
+          fullName,
+          email: existingRecipient?.email || "",
+          country: recipientCountry.name,
+          phone: `${recipientCountry.dial} ${recipientPhoneDigits(document.getElementById("form-phone").value)}`,
+          bankName: existingRecipient?.bankName || "",
+          bankAccountNumber: existingRecipient?.bankAccountNumber || existingRecipient?.accountNumber || "",
+          tplusWalletNumber: existingRecipient?.tplusWalletNumber || existingRecipient?.mobileWalletNumber || "",
           cityName: document.getElementById("form-city-name").value,
+          address: document.getElementById("form-address").value.trim(),
           createdAt: id
             ? recipients.find((r) => r.id === id)?.createdAt || "Just Now"
             : "Just Now",
