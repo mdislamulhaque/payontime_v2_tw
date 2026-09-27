@@ -26,6 +26,7 @@
       const sendAmountInput = document.getElementById("send-amount");
       const receiveAmountInput = document.getElementById("receive-amount");
       const rateText = document.getElementById("rate-text");
+      const receiveAmountLabel = document.getElementById("receive-amount-label");
       const totalText = document.getElementById("total-text");
       const amountText = document.getElementById("amount-text");
       const feeText = document.getElementById("fee-text");
@@ -110,11 +111,13 @@
       function calculateTransfer(changedField = "send") {
         let amount = parseFloat(sendAmountInput.value);
         let receiveAmount = parseFloat(receiveAmountInput.value);
+        const receiveRateToBase = selectedReceive?.rateToBase ?? 1;
+        const receiveCode = selectedReceive?.code ?? "USD";
         if (changedField === "receive" && Number.isFinite(receiveAmount)) {
-          amount = receiveAmount / SEK_TO_USD_RATE;
+          amount = (receiveAmount * receiveRateToBase) / SEK_TO_USD_RATE;
           sendAmountInput.value = amount ? amount.toFixed(2) : "";
         } else if (changedField === "send" && Number.isFinite(amount)) {
-          receiveAmount = amount * SEK_TO_USD_RATE;
+          receiveAmount = (amount * SEK_TO_USD_RATE) / receiveRateToBase;
           receiveAmountInput.value = receiveAmount ? receiveAmount.toFixed(2) : "";
         } else if (!Number.isFinite(amount)) {
           amount = 0;
@@ -124,6 +127,7 @@
         const ready = Boolean(selectedSend && selectedReceive && amount > 0);
         transactionInfo.classList.toggle("hidden", !ready);
         if (!selectedSend || !selectedReceive) {
+          if (receiveAmountLabel) receiveAmountLabel.textContent = "Recipient receives (USD)";
           amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
           rateText.textContent = "1 SEK = 0.096 USD";
           inlineRate.textContent = "1 SEK = 0.096 USD";
@@ -135,13 +139,15 @@
         }
         const feesByMethod = { "tplus": 0, "mobile-money": 10, "bank-deposit": 15, "cash-pickup": 20 };
         const fee = feesByMethod[deliveryMethod.value] ?? 0;
-        const exchangeRateText = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
+        const exchangeRate = SEK_TO_USD_RATE / receiveRateToBase;
+        const exchangeRateText = `1 SEK = ${exchangeRate.toFixed(2)} ${receiveCode}`;
+        if (receiveAmountLabel) receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
         rateText.textContent = exchangeRateText;
         inlineRate.textContent = exchangeRateText;
         amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
         feeText.textContent = `${fee.toFixed(2)} ${selectedSend.code}`;
         totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
-        recipientReceivesText.textContent = `${receiveAmount.toFixed(2)} USD`;
+        recipientReceivesText.textContent = `${receiveAmount.toFixed(2)} ${receiveCode}`;
         const paymentTotal = document.getElementById("payment-total-amount");
         const payButtonText = document.getElementById("btn-pay-text");
         if (paymentTotal) paymentTotal.textContent = totalText.textContent;

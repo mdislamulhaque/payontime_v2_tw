@@ -66,9 +66,9 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se' },
-  { country: 'Somalia', code: 'USD', label: 'Somalia · USD', flagCode: 'so' },
-  { country: 'Kenya', code: 'KES', label: 'Kenya · KES', flagCode: 'ke' }
+  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se', rateToBase: 0.096 },
+  { country: 'Somalia', code: 'USD', label: 'Somalia · USD', flagCode: 'so', rateToBase: 1 },
+  { country: 'Kenya', code: 'KES', label: 'Kenya · KES', flagCode: 'ke', rateToBase: 0.0077 }
 ];
 
 const selectedSend = currencies[0];
@@ -87,6 +87,7 @@ const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
 const inlineRate = document.getElementById("inline-rate");
+const receiveAmountLabel = document.getElementById("receive-amount-label");
 
 function configureDeliveryMethods(country) {
   const methods = country === "Kenya"
@@ -179,11 +180,13 @@ function calculateTransfer(changedField = "send") {
 
   let amount = parseFloat(sendAmountInput.value);
   let received = parseFloat(receiveAmountInput.value);
+  const receiveRateToBase = selectedReceive?.rateToBase ?? 1;
+  const receiveCode = selectedReceive?.code ?? "USD";
   if (changedField === "receive" && Number.isFinite(received)) {
-    amount = received / SEK_TO_USD_RATE;
+    amount = (received * receiveRateToBase) / SEK_TO_USD_RATE;
     sendAmountInput.value = amount ? amount.toFixed(2) : "";
   } else if (Number.isFinite(amount)) {
-    received = amount * SEK_TO_USD_RATE;
+    received = (amount * SEK_TO_USD_RATE) / receiveRateToBase;
     receiveAmountInput.value = received ? received.toFixed(2) : "";
   } else {
     amount = 0;
@@ -206,13 +209,14 @@ function calculateTransfer(changedField = "send") {
     "cash-pickup": 20
   };
   const fee = feesByMethod[deliveryMethod.value] ?? 0;
-  const exchangeRate = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
+  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
+  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
   inlineRate.textContent = exchangeRate;
   rateText.textContent = exchangeRate;
   amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
   feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
   totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
-  recipientReceivesText.textContent = `${received.toFixed(2)} USD`;
+  recipientReceivesText.textContent = `${received.toFixed(2)} ${receiveCode}`;
 }
 
 // Input Listeners
