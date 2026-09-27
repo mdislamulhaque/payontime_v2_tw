@@ -281,6 +281,12 @@
           profileDropdown.classList.toggle("hidden");
           profileMenuBtn.setAttribute("aria-expanded", String(!isOpen));
         });
+        profileDropdown.addEventListener("click", (e) => {
+          if (e.target.closest(".profile-dropdown-item")) {
+            profileDropdown.classList.add("hidden");
+            profileMenuBtn.setAttribute("aria-expanded", "false");
+          }
+        });
         document.addEventListener("click", (e) => {
           if (!profileDropdown.contains(e.target) && !profileMenuBtn.contains(e.target)) {
             profileDropdown.classList.add("hidden");

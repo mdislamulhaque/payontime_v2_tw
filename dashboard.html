@@ -34,7 +34,12 @@
       .dashboard-mobile-menu { display: none; }
       #notifBellBtn { background: #f1f5f9 !important; color: var(--brand-navy) !important; }
       #profileMenuBtn, #logoutBtn { background: #fff !important; color: var(--brand-navy) !important; }
-      #logoutBtn:hover { background: #f1f5f9 !important; }
+      #logoutBtn:hover { background: #fef2f2 !important; color: #dc2626 !important; }
+      #profileDropdown .profile-dropdown-item { background: #fff !important; color: var(--brand-navy) !important; transition: color .15s ease; }
+      #profileDropdown .profile-dropdown-item { cursor: pointer; }
+      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover { background: var(--brand-green) !important; color: #fff !important; }
+      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover svg { color: #fff !important; }
+      #profileDropdown #logoutBtn:hover svg { color: #dc2626 !important; }
       #close-add-recipient, #close-recipient-modal, #close-view-modal {
         display: inline-flex; width: 2.25rem !important; height: 2.25rem; padding: 0 !important;
         align-items: center; justify-content: center; border-radius: 9999px !important;
@@ -153,8 +158,13 @@
                 <span id="userNameHeader" class="hidden text-xs font-bold text-slate-900 sm:block">Ahmed Islam</span>
                 <i data-lucide="chevron-down" class="h-4 w-4 text-slate-500"></i>
               </button>
-              <div id="profileDropdown" class="absolute right-0 mt-2 hidden w-44 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl z-50">
-                <button id="logoutBtn" type="button" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50"><i data-lucide="log-out" class="h-4 w-4"></i><span>Logout</span></button>
+              <div id="profileDropdown" class="absolute right-0 mt-2 hidden w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl z-50">
+                <button type="button" data-tab="profile" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="user-round" class="h-4 w-4 text-slate-500"></i><span>Profile</span></button>
+                <button type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="file-text" class="h-4 w-4 text-slate-500"></i><span>Documents</span></button>
+                <button type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="tag" class="h-4 w-4 text-slate-500"></i><span>Discount Codes</span></button>
+                <button type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="share-2" class="h-4 w-4 text-slate-500"></i><span>Referral Code</span></button>
+                <div class="my-1 border-t border-slate-100"></div>
+                <button id="logoutBtn" type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="log-out" class="h-4 w-4 text-slate-500"></i><span>Logout</span></button>
               </div>
             </div>
           </div>
