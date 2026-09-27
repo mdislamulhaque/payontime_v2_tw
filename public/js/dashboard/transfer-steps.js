@@ -134,8 +134,8 @@
           alert("Choose both countries and enter an amount first.");
           return;
         }
-        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value) || (deliveryMethod.value === "bank-deposit" && !document.getElementById("recipient-bank-account").value.trim()))) {
-          alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, and payout method to continue." : "Choose a recipient, transfer purpose, and payout method to continue.");
+        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("source-of-income").value || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value) || (deliveryMethod.value === "bank-deposit" && !document.getElementById("recipient-bank-account").value.trim()))) {
+          alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, source of income, and payout method to continue." : "Choose a recipient, transfer purpose, source of income, and payout method to continue.");
           return;
         }
         if (stepNum === 4 && !document.getElementById("terms-agree").checked) {
@@ -166,7 +166,8 @@
         const payoutMethod = document.getElementById("payment-method-select").value;
         const deliveryReady = deliveryMethod.value !== "tplus" || !recipientId || Boolean(document.getElementById("tplus-city").value);
         const bankReady = deliveryMethod.value !== "bank-deposit" || !recipientId || Boolean(document.getElementById("recipient-bank-account").value.trim());
-        const recipientReady = Boolean(recipientId && purposeReady && payoutMethod && deliveryReady && bankReady);
+        const incomeReady = Boolean(document.getElementById("source-of-income").value);
+        const recipientReady = Boolean(recipientId && purposeReady && incomeReady && payoutMethod && deliveryReady && bankReady);
         const termsReady = document.getElementById("terms-agree").checked;
         const paymentForm = document.querySelector("#step-4 form");
 
@@ -194,6 +195,8 @@
         document.getElementById("review-rec-payout").textContent = recipient.payoutDetails;
         document.getElementById("review-rec-delivery").textContent = recipient.deliveryMethod;
         document.getElementById("review-rec-purpose").textContent = selectedPurpose;
+        document.getElementById("review-source-of-income").textContent = document.getElementById("source-of-income").value;
+        document.getElementById("review-transfer-remarks").textContent = document.getElementById("transfer-remarks").value.trim() || "-";
         document.getElementById("review-payment-method").textContent = document.getElementById("payment-method-select").selectedOptions[0].text;
       }
 
