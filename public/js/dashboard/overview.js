@@ -334,7 +334,7 @@
         restoreLandingTransfer();
 
         const requestedTab = new URLSearchParams(window.location.search).get("tab");
-        const availableTabs = ["overview", "send", "recipients", "transactions", "profile"];
+        const availableTabs = ["overview", "send", "recipients", "transactions", "profile", "documents", "referral-code"];
         if (availableTabs.includes(requestedTab)) {
           switchTab(requestedTab);
         } else {
