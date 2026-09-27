@@ -3025,6 +3025,24 @@
                 <div><p class="text-xs text-slate-500">Expiry date</p><p class="mt-1 text-sm font-bold text-slate-900">05 Jul 2031</p></div>
               </div>
             </article>
+            <article class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+              <div class="mb-5 border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-2">
+                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"><i data-lucide="shield-check" class="h-5 w-5"></i></span>
+                  <h3 class="text-lg font-extrabold text-slate-900">KYC Questionnaire</h3>
+                </div>
+                <p class="mt-2 text-sm text-slate-500">Help us get to know more about you. Your information is kept safe.</p>
+              </div>
+              <form id="kyc-questionnaire-form" class="space-y-4">
+                <div><label for="kyc-destination" class="mb-1.5 block text-xs font-semibold text-slate-700">Where do you usually send money to? <span class="text-red-500">*</span></label><select id="kyc-destination" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Kenya</option><option>Somalia</option><option>Other</option></select></div>
+                <div><label for="kyc-recipient-relationship" class="mb-1.5 block text-xs font-semibold text-slate-700">Who do you usually send money to? <span class="text-red-500">*</span></label><select id="kyc-recipient-relationship" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Family member</option><option>Friend</option><option>Business associate</option><option>Other</option></select></div>
+                <div><label for="kyc-monthly-amount" class="mb-1.5 block text-xs font-semibold text-slate-700">Monthly estimated amount you will send? <span class="text-red-500">*</span></label><select id="kyc-monthly-amount" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Under 1,000 SEK</option><option>1,000–5,000 SEK</option><option>5,001–10,000 SEK</option><option>Over 10,000 SEK</option></select></div>
+                <div><label for="kyc-monthly-transactions" class="mb-1.5 block text-xs font-semibold text-slate-700">Estimated transactions per month? <span class="text-red-500">*</span></label><select id="kyc-monthly-transactions" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>1–2</option><option>3–5</option><option>6–10</option><option>More than 10</option></select></div>
+                <div><label for="kyc-source-funds" class="mb-1.5 block text-xs font-semibold text-slate-700">Source of Funds <span class="text-red-500">*</span></label><select id="kyc-source-funds" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Employment income</option><option>Self-employment or business</option><option>Savings</option><option>Pension</option><option>Other</option></select></div>
+                <div><label for="kyc-pep-status" class="mb-1.5 block text-xs font-semibold text-slate-700">Are you, an immediate family member, or a close associate a politically exposed person (PEP)? <span class="text-red-500">*</span></label><select id="kyc-pep-status" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>No</option><option>Yes</option></select></div>
+                <div class="flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between"><p id="kyc-questionnaire-status" aria-live="polite" class="text-xs font-semibold text-green-700"></p><button id="kyc-questionnaire-submit" type="submit" disabled class="rounded-xl bg-[#36b647] px-6 py-3 text-sm font-bold text-white hover:bg-[#2d963b] disabled:cursor-not-allowed disabled:opacity-50">Submit</button></div>
+              </form>
+            </article>
           </section>
 
           <section id="tab-referral-code" class="tab-content hidden space-y-6">
@@ -3072,5 +3090,6 @@
     <!-- JavaScript functionality -->
     <script src="/js/dashboard/profile.js"></script>
     <script src="/js/dashboard/referral-documents.js"></script>
+    <script src="/js/dashboard/kyc-questionnaire.js"></script>
   </body>
 </html>
