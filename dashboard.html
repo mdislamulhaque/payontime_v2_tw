@@ -14,53 +14,193 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="./src/style.css" />
     <style>
-      body { font-family: "Plus Jakarta Sans", sans-serif; }
-      label { text-align: left !important; }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      label {
+        text-align: left !important;
+      }
 
       :root {
         --brand-navy: #071b79;
         --brand-green: #36b647;
         --brand-green-hover: #2d963b;
       }
-      .bg-slate-900 { background-color: var(--brand-navy) !important; }
-      .text-slate-900 { color: var(--brand-navy) !important; }
-      .text-\[\#36b647\], .text-green-600, .text-green-700, .text-emerald-600 { color: var(--brand-green) !important; }
-      button:not(.nav-btn) { background-color: var(--brand-green) !important; color: #ffffff !important; }
-      .dashboard-topnav .topnav-btn { position: relative; display: inline-flex; align-items: center; gap: .55rem; white-space: nowrap; padding: .65rem .45rem; color: #334155 !important; background: transparent !important; font-size: .95rem; font-weight: 600; }
-      .dashboard-topnav .topnav-btn svg { width: 1.3rem; height: 1.3rem; }
-      .dashboard-topnav .topnav-btn.active { color: var(--brand-navy) !important; }
-      .dashboard-topnav .topnav-btn.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--brand-green); }
-      button.mobile-nav-toggle { display: none; background: #f1f5f9 !important; color: var(--brand-navy) !important; padding: .6rem; border-radius: .65rem; }
-      .dashboard-mobile-menu { display: none; }
-      #notifBellBtn { background: #f1f5f9 !important; color: var(--brand-navy) !important; }
-      #profileMenuBtn, #logoutBtn { background: #fff !important; color: var(--brand-navy) !important; }
-      #logoutBtn:hover { background: #fef2f2 !important; color: #dc2626 !important; }
-      #profileDropdown .profile-dropdown-item { background: #fff !important; color: var(--brand-navy) !important; transition: color .15s ease; }
-      #profileDropdown .profile-dropdown-item { cursor: pointer; }
-      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover { background: var(--brand-green) !important; color: #fff !important; }
-      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover svg { color: #fff !important; }
-      #profileDropdown #logoutBtn:hover svg { color: #dc2626 !important; }
-      #copy-referral-code, #share-referral-code { background: #fff !important; color: var(--brand-navy) !important; }
-      #copy-referral-code:hover, #share-referral-code:hover { background: #fff !important; color: var(--brand-green) !important; }
-      #close-add-recipient, #close-recipient-modal, #close-view-modal {
-        display: inline-flex; width: 2.25rem !important; height: 2.25rem; padding: 0 !important;
-        align-items: center; justify-content: center; border-radius: 9999px !important;
-        background: var(--brand-green) !important; color: #fff !important;
+      .bg-slate-900 {
+        background-color: var(--brand-navy) !important;
       }
-      #add-recipient-modal > div, #recipient-modal > div { max-height: calc(100dvh - 2rem); overflow-y: auto; }
+      .text-slate-900 {
+        color: var(--brand-navy) !important;
+      }
+      .text-\[\#36b647\],
+      .text-green-600,
+      .text-green-700,
+      .text-emerald-600 {
+        color: var(--brand-green) !important;
+      }
+      button:not(.nav-btn) {
+        background-color: var(--brand-green) !important;
+        color: #ffffff !important;
+      }
+      .dashboard-topnav .topnav-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        white-space: nowrap;
+        padding: 0.65rem 0.45rem;
+        color: #334155 !important;
+        background: transparent !important;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      .dashboard-topnav .topnav-btn svg {
+        width: 1.3rem;
+        height: 1.3rem;
+      }
+      .dashboard-topnav .topnav-btn.active {
+        color: var(--brand-navy) !important;
+      }
+      .dashboard-topnav .topnav-btn.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--brand-green);
+      }
+      button.mobile-nav-toggle {
+        display: none;
+        background: #f1f5f9 !important;
+        color: var(--brand-navy) !important;
+        padding: 0.6rem;
+        border-radius: 0.65rem;
+      }
+      .dashboard-mobile-menu {
+        display: none;
+      }
+      #notifBellBtn {
+        background: #f1f5f9 !important;
+        color: var(--brand-navy) !important;
+      }
+      #profileMenuBtn,
+      #logoutBtn {
+        background: #fff !important;
+        color: var(--brand-navy) !important;
+      }
+      #logoutBtn:hover {
+        background: #fef2f2 !important;
+        color: #dc2626 !important;
+      }
+      #profileDropdown .profile-dropdown-item {
+        background: #fff !important;
+        color: var(--brand-navy) !important;
+        transition: color 0.15s ease;
+      }
+      #profileDropdown .profile-dropdown-item {
+        cursor: pointer;
+      }
+      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover {
+        background: var(--brand-green) !important;
+        color: #fff !important;
+      }
+      #profileDropdown .profile-dropdown-item:not(#logoutBtn):hover svg {
+        color: #fff !important;
+      }
+      #profileDropdown #logoutBtn:hover svg {
+        color: #dc2626 !important;
+      }
+      #copy-referral-code,
+      #share-referral-code {
+        background: #fff !important;
+        color: var(--brand-navy) !important;
+      }
+      #copy-referral-code:hover,
+      #share-referral-code:hover {
+        background: #fff !important;
+        color: var(--brand-green) !important;
+      }
+      #close-add-recipient,
+      #close-recipient-modal,
+      #close-view-modal {
+        display: inline-flex;
+        width: 2.25rem !important;
+        height: 2.25rem;
+        padding: 0 !important;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px !important;
+        background: var(--brand-green) !important;
+        color: #fff !important;
+      }
+      #add-recipient-modal > div,
+      #recipient-modal > div {
+        max-height: calc(100dvh - 2rem);
+        overflow-y: auto;
+      }
       @media (max-width: 760px) {
-        .dashboard-header { grid-template-columns: 1fr auto auto; gap: .5rem; }
-        .dashboard-header > a img { width: 7rem; }
-        .dashboard-header-actions > div:first-child { display: none; }
-        .dashboard-topnav { display: none; }
-        button.mobile-nav-toggle { display: inline-flex; align-items: center; justify-content: center; grid-column: 2; grid-row: 1; }
-        .dashboard-header-actions { grid-column: 3; grid-row: 1; }
-        .dashboard-mobile-menu:not(.hidden) { position: absolute; top: calc(100% + .35rem); left: .75rem; z-index: 60; display: flex; flex-direction: column; width: min(15rem, calc(100vw - 1.5rem)); padding: .4rem; border: 1px solid #e2e8f0; border-radius: .85rem; background: white; box-shadow: 0 12px 32px rgb(15 23 42 / 14%); }
-        button.mobile-menu-item { display: flex; align-items: center; gap: .7rem; width: 100%; padding: .7rem .75rem; border-radius: .55rem; background: white !important; color: #334155 !important; text-align: left; }
-        button.mobile-menu-item.active { color: var(--brand-navy) !important; background: #f0fdf4 !important; }
-        .mobile-menu-item svg { width: 1.1rem; height: 1.1rem; }
+        .dashboard-header {
+          grid-template-columns: 1fr auto auto;
+          gap: 0.5rem;
+        }
+        .dashboard-header > a img {
+          width: 7rem;
+        }
+        .dashboard-header-actions > div:first-child {
+          display: none;
+        }
+        .dashboard-topnav {
+          display: none;
+        }
+        button.mobile-nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          grid-column: 2;
+          grid-row: 1;
+        }
+        .dashboard-header-actions {
+          grid-column: 3;
+          grid-row: 1;
+        }
+        .dashboard-mobile-menu:not(.hidden) {
+          position: absolute;
+          top: calc(100% + 0.35rem);
+          left: 0.75rem;
+          z-index: 60;
+          display: flex;
+          flex-direction: column;
+          width: min(15rem, calc(100vw - 1.5rem));
+          padding: 0.4rem;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.85rem;
+          background: white;
+          box-shadow: 0 12px 32px rgb(15 23 42 / 14%);
+        }
+        button.mobile-menu-item {
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+          width: 100%;
+          padding: 0.7rem 0.75rem;
+          border-radius: 0.55rem;
+          background: white !important;
+          color: #334155 !important;
+          text-align: left;
+        }
+        button.mobile-menu-item.active {
+          color: var(--brand-navy) !important;
+          background: #f0fdf4 !important;
+        }
+        .mobile-menu-item svg {
+          width: 1.1rem;
+          height: 1.1rem;
+        }
       }
-      button:hover:not(:disabled) { filter: brightness(0.96); }
+      button:hover:not(:disabled) {
+        filter: brightness(0.96);
+      }
       button.danger-action,
       button[title*="Delete"] {
         background-color: #fee2e2 !important;
@@ -68,105 +208,364 @@
         color: #b91c1c !important;
       }
       button.danger-action:hover,
-      button[title*="Delete"]:hover { background-color: #fecaca !important; }
-      input:focus, select:focus, textarea:focus {
+      button[title*="Delete"]:hover {
+        background-color: #fecaca !important;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
         --tw-ring-color: var(--brand-green) !important;
         border-color: var(--brand-green) !important;
       }
-      input[type="checkbox"], input[type="radio"] { accent-color: var(--brand-green); }
-      #tab-send label.text-xs { font-size: .875rem !important; line-height: 1.25rem; }
-      #tab-send button:disabled { cursor: not-allowed !important; opacity: .48 !important; filter: grayscale(.2); box-shadow: none !important; }
-      *, *::before, *::after { box-sizing: border-box; }
-      html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-      body { min-width: 280px; }
-      body > div { min-width: 0; }
-      img, svg, video, canvas { max-width: 100%; }
-      input, select, textarea, button { max-width: 100%; }
-      .overflow-x-auto { max-width: 100%; -webkit-overflow-scrolling: touch; }
-      .overflow-x-auto table { min-width: 640px; }
-      #step-7, #modalPrintArea, #txModal > div { min-width: 0; }
-      #receipt-recipient-name, #receipt-id, #modalPrintArea span { overflow-wrap: anywhere; }
+      input[type="checkbox"],
+      input[type="radio"] {
+        accent-color: var(--brand-green);
+      }
+      #tab-send label.text-xs {
+        font-size: 0.875rem !important;
+        line-height: 1.25rem;
+      }
+      #tab-send button:disabled {
+        cursor: not-allowed !important;
+        opacity: 0.48 !important;
+        filter: grayscale(0.2);
+        box-shadow: none !important;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        min-width: 280px;
+      }
+      body > div {
+        min-width: 0;
+      }
+      img,
+      svg,
+      video,
+      canvas {
+        max-width: 100%;
+      }
+      input,
+      select,
+      textarea,
+      button {
+        max-width: 100%;
+      }
+      .overflow-x-auto {
+        max-width: 100%;
+        -webkit-overflow-scrolling: touch;
+      }
+      .overflow-x-auto table {
+        min-width: 640px;
+      }
+      #step-7,
+      #modalPrintArea,
+      #txModal > div {
+        min-width: 0;
+      }
+      #receipt-recipient-name,
+      #receipt-id,
+      #modalPrintArea span {
+        overflow-wrap: anywhere;
+      }
       @media (max-width: 640px) {
-        main { min-width: 0; }
-        .step-container { padding: 1rem !important; border-radius: 1rem !important; }
-        #step-7 { padding: 1.25rem !important; }
-        #step-7 > div:nth-of-type(3) { padding: 1rem !important; }
-        #txModal { padding: .5rem !important; }
-        #txModal > div { max-height: calc(100dvh - 1rem) !important; border-radius: 1rem !important; }
-        #modalPrintArea { padding: 1rem !important; }
+        main {
+          min-width: 0;
+        }
+        .step-container {
+          padding: 1rem !important;
+          border-radius: 1rem !important;
+        }
+        #step-7 {
+          padding: 1.25rem !important;
+        }
+        #step-7 > div:nth-of-type(3) {
+          padding: 1rem !important;
+        }
+        #txModal {
+          padding: 0.5rem !important;
+        }
+        #txModal > div {
+          max-height: calc(100dvh - 1rem) !important;
+          border-radius: 1rem !important;
+        }
+        #modalPrintArea {
+          padding: 1rem !important;
+        }
       }
       @media (max-width: 380px) {
-        #step-7 h2 { font-size: 1.25rem !important; line-height: 1.5rem !important; }
-        #step-7 .grid.grid-cols-2 { grid-template-columns: minmax(0, 1fr) !important; }
-        #modalPrintArea .flex.justify-between { gap: .75rem; }
+        #step-7 h2 {
+          font-size: 1.25rem !important;
+          line-height: 1.5rem !important;
+        }
+        #step-7 .grid.grid-cols-2 {
+          grid-template-columns: minmax(0, 1fr) !important;
+        }
+        #modalPrintArea .flex.justify-between {
+          gap: 0.75rem;
+        }
       }
       @media print {
-        html, body { width: auto; max-width: none; min-width: 0; overflow: visible; background: #fff !important; }
-        body * { visibility: hidden !important; }
-        #step-7, #step-7 *, #modalPrintArea, #modalPrintArea * { visibility: visible !important; }
-        #step-7, #modalPrintArea { position: absolute !important; inset: 0 auto auto 0 !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; overflow: visible !important; }
-        #step-7 > div:last-child, #modalPrintArea button, #txModal button { display: none !important; }
-        #txModal { position: static !important; display: block !important; padding: 0 !important; background: #fff !important; }
-        #txModal > div { display: block !important; width: 100% !important; max-width: none !important; max-height: none !important; border: 0 !important; box-shadow: none !important; overflow: visible !important; }
-        .overflow-x-auto { overflow: visible !important; }
-        * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+        html,
+        body {
+          width: auto;
+          max-width: none;
+          min-width: 0;
+          overflow: visible;
+          background: #fff !important;
+        }
+        body * {
+          visibility: hidden !important;
+        }
+        #step-7,
+        #step-7 *,
+        #modalPrintArea,
+        #modalPrintArea * {
+          visibility: visible !important;
+        }
+        #step-7,
+        #modalPrintArea {
+          position: absolute !important;
+          inset: 0 auto auto 0 !important;
+          width: 100% !important;
+          max-width: none !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          border: 0 !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          overflow: visible !important;
+        }
+        #step-7 > div:last-child,
+        #modalPrintArea button,
+        #txModal button {
+          display: none !important;
+        }
+        #txModal {
+          position: static !important;
+          display: block !important;
+          padding: 0 !important;
+          background: #fff !important;
+        }
+        #txModal > div {
+          display: block !important;
+          width: 100% !important;
+          max-width: none !important;
+          max-height: none !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          overflow: visible !important;
+        }
+        .overflow-x-auto {
+          overflow: visible !important;
+        }
+        * {
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
       }
-      </style>
+    </style>
   </head>
   <body class="bg-[#F8FAFC] text-slate-900 antialiased min-h-screen">
     <div id="dashboardShell" class="min-h-screen flex">
       <div class="flex-1 flex flex-col min-w-0">
-        <header class="dashboard-header sticky top-0 z-30 grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-slate-200 bg-white px-4 py-3 shadow-sm sm:px-8">
-          <a href="/index.html" class="flex items-center" aria-label="Pay On Time home">
-            <img src="./public/logo.png" alt="Pay On Time" class="w-36 h-auto object-contain" />
+        <header
+          class="dashboard-header sticky top-0 z-30 grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-slate-200 bg-white px-4 py-3 shadow-sm sm:px-8"
+        >
+          <a
+            href="/index.html"
+            class="flex items-center"
+            aria-label="Pay On Time home"
+          >
+            <img
+              src="./public/logo.png"
+              alt="Pay On Time"
+              class="w-36 h-auto object-contain"
+            />
           </a>
-          <nav class="dashboard-topnav flex min-w-0 items-center justify-center gap-2 sm:gap-6" aria-label="Dashboard navigation">
-            <button type="button" data-tab="send" class="topnav-btn"><i data-lucide="arrow-left-right"></i><span>Transfer</span></button>
-            <button type="button" data-tab="transactions" class="topnav-btn"><i data-lucide="clock-3"></i><span>History</span></button>
-            <button type="button" data-tab="recipients" class="topnav-btn"><i data-lucide="users-round"></i><span>Recipients</span></button>
-            <button type="button" data-tab="profile" class="topnav-btn"><i data-lucide="user-round"></i><span>My profile</span></button>
+          <nav
+            class="dashboard-topnav flex min-w-0 items-center justify-center gap-2 sm:gap-6"
+            aria-label="Dashboard navigation"
+          >
+            <button type="button" data-tab="send" class="topnav-btn">
+              <i data-lucide="arrow-left-right"></i><span>Transfer</span>
+            </button>
+            <button type="button" data-tab="transactions" class="topnav-btn">
+              <i data-lucide="clock-3"></i><span>History</span>
+            </button>
+            <button type="button" data-tab="recipients" class="topnav-btn">
+              <i data-lucide="users-round"></i><span>Recipients</span>
+            </button>
+            <button type="button" data-tab="profile" class="topnav-btn">
+              <i data-lucide="user-round"></i><span>My profile</span>
+            </button>
           </nav>
-          <button id="mobileNavToggle" type="button" class="mobile-nav-toggle" aria-label="Open dashboard menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+          <button
+            id="mobileNavToggle"
+            type="button"
+            class="mobile-nav-toggle"
+            aria-label="Open dashboard menu"
+            aria-expanded="false"
+          >
+            <i data-lucide="menu"></i>
+          </button>
 
           <div class="dashboard-mobile-menu hidden">
-            <button type="button" data-tab="send" class="mobile-menu-item"><i data-lucide="arrow-left-right"></i><span>Transfer</span></button>
-            <button type="button" data-tab="transactions" class="mobile-menu-item"><i data-lucide="clock-3"></i><span>History</span></button>
-            <button type="button" data-tab="recipients" class="mobile-menu-item"><i data-lucide="users-round"></i><span>Recipients</span></button>
-            <button type="button" data-tab="profile" class="mobile-menu-item"><i data-lucide="user-round"></i><span>My profile</span></button>
+            <button type="button" data-tab="send" class="mobile-menu-item">
+              <i data-lucide="arrow-left-right"></i><span>Transfer</span>
+            </button>
+            <button
+              type="button"
+              data-tab="transactions"
+              class="mobile-menu-item"
+            >
+              <i data-lucide="clock-3"></i><span>History</span>
+            </button>
+            <button
+              type="button"
+              data-tab="recipients"
+              class="mobile-menu-item"
+            >
+              <i data-lucide="users-round"></i><span>Recipients</span>
+            </button>
+            <button type="button" data-tab="profile" class="mobile-menu-item">
+              <i data-lucide="user-round"></i><span>My profile</span>
+            </button>
           </div>
 
-          <div class="dashboard-header-actions flex items-center justify-end gap-2">
-            <div class="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 sm:flex">
-              <img id="language-flag" src="https://flagcdn.com/w40/gb.png" alt="English flag" class="w-6 h-auto rounded-sm" />
-              <select id="languageSelector" aria-label="Select language" class="max-w-[6rem] border-0 bg-transparent py-2 pl-0 pr-4 text-xs font-bold text-slate-700 focus:outline-none focus:ring-0">
-                <option value="en">English</option><option value="sv">Swedish</option>
+          <div
+            class="dashboard-header-actions flex items-center justify-end gap-2"
+          >
+            <div
+              class="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 sm:flex"
+            >
+              <img
+                id="language-flag"
+                src="https://flagcdn.com/w40/gb.png"
+                alt="English flag"
+                class="w-6 h-auto rounded-sm"
+              />
+              <select
+                id="languageSelector"
+                aria-label="Select language"
+                class="max-w-[6rem] border-0 bg-transparent py-2 pl-0 pr-4 text-xs font-bold text-slate-700 focus:outline-none focus:ring-0"
+              >
+                <option value="en">English</option>
+                <option value="sv">Swedish</option>
               </select>
             </div>
             <div class="relative">
-              <button id="notifBellBtn" type="button" class="relative rounded-xl bg-slate-100 p-2.5 text-slate-700" aria-label="Notifications">
-                <i data-lucide="bell" class="h-4 w-4"></i><span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#36b647]"></span>
+              <button
+                id="notifBellBtn"
+                type="button"
+                class="relative rounded-xl bg-slate-100 p-2.5 text-slate-700"
+                aria-label="Notifications"
+              >
+                <i data-lucide="bell" class="h-4 w-4"></i
+                ><span
+                  class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#36b647]"
+                ></span>
               </button>
-              <div id="notifDropdown" class="absolute right-0 mt-3 hidden w-80 rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl z-50">
-                <div class="mb-3 flex items-center justify-between border-b border-slate-100 pb-3">
-                  <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-900">Notifications</h4>
-                  <button id="closeNotifBtn" type="button" class="close-action p-1 text-slate-400" aria-label="Close notifications"><i data-lucide="x" class="h-4 w-4"></i></button>
+              <div
+                id="notifDropdown"
+                class="absolute right-0 mt-3 hidden w-80 rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl z-50"
+              >
+                <div
+                  class="mb-3 flex items-center justify-between border-b border-slate-100 pb-3"
+                >
+                  <h4
+                    class="text-xs font-extrabold uppercase tracking-wider text-slate-900"
+                  >
+                    Notifications
+                  </h4>
+                  <button
+                    id="closeNotifBtn"
+                    type="button"
+                    class="close-action p-1 text-slate-400"
+                    aria-label="Close notifications"
+                  >
+                    <i data-lucide="x" class="h-4 w-4"></i>
+                  </button>
                 </div>
                 <div class="space-y-3" id="notifListContainer"></div>
               </div>
             </div>
             <div class="relative">
-              <button id="profileMenuBtn" type="button" class="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-1.5" aria-label="Profile menu" aria-expanded="false">
-                <span id="userAvatarHeader" class="flex h-9 w-9 items-center justify-center rounded-full bg-[#36b647] text-xs font-bold text-white">T</span>
-                <span id="userNameHeader" class="hidden text-xs font-bold text-slate-900 sm:block">Ahmed Islam</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 text-slate-500"></i>
+              <button
+                id="profileMenuBtn"
+                type="button"
+                class="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-1.5"
+                aria-label="Profile menu"
+                aria-expanded="false"
+              >
+                <span
+                  id="userAvatarHeader"
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-[#36b647] text-xs font-bold text-white"
+                  >T</span
+                >
+                <span
+                  id="userNameHeader"
+                  class="hidden text-xs font-bold text-slate-900 sm:block"
+                  >Ahmed Islam</span
+                >
+                <i
+                  data-lucide="chevron-down"
+                  class="h-4 w-4 text-slate-500"
+                ></i>
               </button>
-              <div id="profileDropdown" class="absolute right-0 mt-2 hidden w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl z-50">
-                <button type="button" data-tab="profile" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="user-round" class="h-4 w-4 text-slate-500"></i><span>Profile</span></button>
-                <button type="button" data-tab="documents" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="file-text" class="h-4 w-4 text-slate-500"></i><span>Documents</span></button>
-                <button type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="tag" class="h-4 w-4 text-slate-500"></i><span>Discount Codes</span></button>
-                <button type="button" data-tab="referral-code" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="share-2" class="h-4 w-4 text-slate-500"></i><span>Referral Code</span></button>
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-2 hidden w-48 rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl z-50"
+              >
+                <button
+                  type="button"
+                  data-tab="profile"
+                  class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"
+                >
+                  <i data-lucide="user-round" class="h-4 w-4 text-slate-500"></i
+                  ><span>Profile</span>
+                </button>
+                <button
+                  type="button"
+                  data-tab="documents"
+                  class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"
+                >
+                  <i data-lucide="file-text" class="h-4 w-4 text-slate-500"></i
+                  ><span>Documents</span>
+                </button>
+                <button
+                  type="button"
+                  class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"
+                >
+                  <i data-lucide="tag" class="h-4 w-4 text-slate-500"></i
+                  ><span>Discount Codes</span>
+                </button>
+                <button
+                  type="button"
+                  data-tab="referral-code"
+                  class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"
+                >
+                  <i data-lucide="share-2" class="h-4 w-4 text-slate-500"></i
+                  ><span>Referral Code</span>
+                </button>
                 <div class="my-1 border-t border-slate-100"></div>
-                <button id="logoutBtn" type="button" class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"><i data-lucide="log-out" class="h-4 w-4 text-slate-500"></i><span>Logout</span></button>
+                <button
+                  id="logoutBtn"
+                  type="button"
+                  class="profile-dropdown-item flex w-full items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold"
+                >
+                  <i data-lucide="log-out" class="h-4 w-4 text-slate-500"></i
+                  ><span>Logout</span>
+                </button>
               </div>
             </div>
           </div>
@@ -308,7 +707,9 @@
                     class="text-xs font-bold text-[#36b647] uppercase tracking-wider"
                     >Express Transfer</span
                   >
-                  <h4 class="text-lg font-bold mt-1 text-black">Send Money Now</h4>
+                  <h4 class="text-lg font-bold mt-1 text-black">
+                    Send Money Now
+                  </h4>
                 </div>
 
                 <button
@@ -539,14 +940,9 @@
           </div>
 
           <!-- send-money Tabs -->
-          <div
-            id="tab-send"
-            class="tab-content hidden  text-center"
-          >
+          <div id="tab-send" class="tab-content hidden text-center">
             <div class="max-w-4xl mx-auto space-y-6">
-              <div
-                class=" pt-2"
-              style="margin-bottom: 10px;">
+              <div class="pt-2" style="margin-bottom: 10px">
                 <div
                   id="stepper-bar"
                   class="flex items-center justify-between"
@@ -560,7 +956,7 @@
                 >
                   <div class="space-y-4">
                     <div
-                      class="calculator-card w-full max-w-full bg-white rounded-3xl  border border-slate-100 p-3 sm:p-4 z-10 relative"
+                      class="calculator-card w-full max-w-full bg-white rounded-3xl border border-slate-100 p-3 sm:p-4 z-10 relative"
                     >
                       <!-- Header -->
                       <!-- <div
@@ -599,7 +995,7 @@
                             >I'm sending (SEK)</label
                           >
                           <div
-                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 focus-within:border-green-200 transition-all "
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 focus-within:border-green-200 transition-all"
                           >
                             <input
                               type="number"
@@ -607,7 +1003,7 @@
                               min="0"
                               step="0.01"
                               placeholder="0.00"
-                              class="w-1/2 min-w-0 bg-transparent  font-medium text-slate-900 focus:outline-none"
+                              class="w-1/2 min-w-0 bg-transparent font-medium text-slate-900 focus:outline-none"
                             />
 
                             <!-- Custom Searchable Select (Send) -->
@@ -622,7 +1018,14 @@
                                 aria-label="Sending country: Sweden"
                                 class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 cursor-not-allowed opacity-80 shadow-sm"
                               >
-                                <span id="send-selected-label"><img src="https://flagcdn.com/w40/se.png" alt="Sweden flag" class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5"> Sweden · SEK</span>
+                                <span id="send-selected-label"
+                                  ><img
+                                    src="https://flagcdn.com/w40/se.png"
+                                    alt="Sweden flag"
+                                    class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5"
+                                  />
+                                  Sweden · SEK</span
+                                >
                                 <i
                                   data-lucide="chevron-down"
                                   class="w-3.5 h-3.5 text-slate-500"
@@ -651,7 +1054,11 @@
 
                         <!-- Exchange Rate -->
                         <div class="flex justify-center my-2 relative z-10">
-                          <span id="inline-rate" class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">1 SEK = 0.096 USD</span>
+                          <span
+                            id="inline-rate"
+                            class="px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold"
+                            >1 SEK = 0.096 USD</span
+                          >
                         </div>
 
                         <!-- They Receive Input -->
@@ -662,7 +1069,7 @@
                             >Recipient receives (USD)</label
                           >
                           <div
-                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 "
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50"
                           >
                             <input
                               type="number"
@@ -683,7 +1090,9 @@
                                 id="receive-select-btn"
                                 class="w-full h-full min-w-0 bg-white border-l border-slate-200 py-1.5 px-3 text-xs font-bold rounded-xl flex items-center justify-between gap-1.5 hover:bg-slate-100 cursor-pointer shadow-sm"
                               >
-                                <span id="receive-selected-label">Select country</span>
+                                <span id="receive-selected-label"
+                                  >Select country</span
+                                >
                                 <i
                                   data-lucide="chevron-down"
                                   class="w-3.5 h-3.5 text-slate-500"
@@ -734,10 +1143,32 @@
                         </div>
 
                         <!-- Calculation Breakdown -->
-                        <div id="transaction-info" style="margin: 0 !important;" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
-                          <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Our fee</span><span class="text-green-600 font-bold" id="fee-text">0 SEK</span></div>
+                        <div
+                          id="transaction-info"
+                          style="margin: 0 !important"
+                          class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2"
+                        >
+                          <div class="flex justify-between text-xs">
+                            <span class="text-slate-400 font-medium"
+                              >Our fee</span
+                            ><span
+                              class="text-green-600 font-bold"
+                              id="fee-text"
+                              >0 SEK</span
+                            >
+                          </div>
                           <div class="">
-                            <div class="flex justify-between items-center text-sm"><span class="text-slate-700 font-bold">Total to pay</span><span class="text-emerald-800 font-extrabold" id="total-text">0 SEK</span></div>
+                            <div
+                              class="flex justify-between items-center text-sm"
+                            >
+                              <span class="text-slate-700 font-bold"
+                                >Total to pay</span
+                              ><span
+                                class="text-emerald-800 font-extrabold"
+                                id="total-text"
+                                >0 SEK</span
+                              >
+                            </div>
                           </div>
                         </div>
                         <div class="hidden" aria-hidden="true">
@@ -752,7 +1183,7 @@
                       <button
                         onclick="goToStep(2)"
                         disabled
-                        class="py-2  px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all"
+                        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all"
                       >
                         Next: Recipient →
                       </button>
@@ -761,246 +1192,340 @@
                 </div>
 
                 <div
-  id="step-2"
-  class="step-container hidden bg-white p-3 sm:p-4 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
->
-  <div class="space-y-4">
-    <!-- Dropdown Selector Row -->
-    <div>
-      <label class="block text-xs font-bold text-slate-700 mb-1.5">
-        Select Recipient
-      </label>
-      <div class="flex items-center gap-2">
-        <img
-          id="recipient-select-flag"
-          class="hidden w-6 h-auto rounded-sm mr-1.5"
-          alt="Recipient country flag"
-        />
-        <select
-          id="recipient-select"
-          onchange="renderRecipientCard()"
-          class="min-w-0 flex-1 w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
-        >
-          <option value="" disabled selected>
-            -- Choose Recipient --
-          </option>
-          <option value="rec_1">MAXAMED CALI JAAMAC | 252619333207</option>
-          <option value="rec_2">Brian Otieno | +254 712 345 678</option>
-        </select>
+                  id="step-2"
+                  class="step-container hidden bg-white p-3 sm:p-4 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
+                >
+                  <div class="space-y-4">
+                    <!-- Dropdown Selector Row -->
+                    <div>
+                      <label
+                        class="block text-xs font-bold text-slate-700 mb-1.5"
+                      >
+                        Select Recipient
+                      </label>
+                      <div class="flex items-center gap-2">
+                        <img
+                          id="recipient-select-flag"
+                          class="hidden w-6 h-auto rounded-sm mr-1.5"
+                          alt="Recipient country flag"
+                        />
+                        <select
+                          id="recipient-select"
+                          onchange="renderRecipientCard()"
+                          class="min-w-0 flex-1 w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        >
+                          <option value="" disabled selected>
+                            -- Choose Recipient --
+                          </option>
+                          <option value="rec_1">
+                            MAXAMED CALI JAAMAC | 252619333207
+                          </option>
+                          <option value="rec_2">
+                            Brian Otieno | +254 712 345 678
+                          </option>
+                        </select>
 
-        <!-- Integrated Add Recipient Modal Trigger Icon Button -->
-        <button
-          id="recipient-add-button"
-          type="button"
-          onclick="openAddRecipientModal()"
-          class="p-2 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white transition-colors shrink-0 shadow-md shadow-green-500/20"
-          title="Add New Recipient"
-        >
-          <svg
-            class="w-5 h-5"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-            ></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <line x1="19" y1="8" x2="19" y2="14"></line>
-            <line x1="22" y1="11" x2="16" y2="11"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
+                        <!-- Integrated Add Recipient Modal Trigger Icon Button -->
+                        <button
+                          id="recipient-add-button"
+                          type="button"
+                          onclick="openAddRecipientModal()"
+                          class="p-2 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white transition-colors shrink-0 shadow-md shadow-green-500/20"
+                          title="Add New Recipient"
+                        >
+                          <svg
+                            class="w-5 h-5"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path
+                              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                            ></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <line x1="19" y1="8" x2="19" y2="14"></line>
+                            <line x1="22" y1="11" x2="16" y2="11"></line>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
 
-    <div id="tplus-recipient-lookup" class="hidden">
-      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Or send to a new recipient <span id="recipient-test-number" class="font-medium text-[#b63636]"></span></label>
-      <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
-      <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
-      <div id="bank-account-field" class="hidden mt-4">
-        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-[#b63636]">(Use this account bank number for testing: 31052160)</span></label>
-        <input id="recipient-bank-account" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
-      </div>
-    </div>
+                    <div id="tplus-recipient-lookup" class="hidden">
+                      <label
+                        for="tplus-recipient-phone"
+                        class="block text-xs font-bold text-slate-700 mb-1.5"
+                        >Or send to a new recipient
+                        <span
+                          id="recipient-test-number"
+                          class="font-medium text-[#b63636]"
+                        ></span
+                      ></label>
+                      <input
+                        id="tplus-recipient-phone"
+                        type="tel"
+                        inputmode="tel"
+                        autocomplete="tel"
+                        placeholder="Enter saved recipient's mobile number"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                      />
+                      <p
+                        id="tplus-recipient-status"
+                        class="hidden mt-1.5 text-xs text-amber-600"
+                      ></p>
+                      <div id="bank-account-field" class="hidden mt-4">
+                        <label
+                          for="recipient-bank-account"
+                          class="block text-xs font-bold text-slate-700 mb-1.5"
+                          >Bank account number
+                          <span class="font-medium text-[#b63636]"
+                            >(Use this account bank number for testing:
+                            31052160)</span
+                          ></label
+                        >
+                        <input
+                          id="recipient-bank-account"
+                          type="text"
+                          inputmode="numeric"
+                          autocomplete="off"
+                          placeholder="Enter bank account number"
+                          class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        />
+                      </div>
+                    </div>
 
-    <!-- Selected Recipient Preview Card -->
-    <div
-      id="recipient-card-display"
-      class="hidden px-3 pb-3 rounded-2xl bg-green-50/50 border border-green-100 space-y-3"
-    >
-      <div class="flex items-center justify-between hidden">
-        <div class="flex items-center gap-3 hidden">
-          <div
-            id="rec-avatar"
-            class="w-10 h-10 rounded-2xl bg-[#36b647] text-white font-black flex items-center justify-center text-sm shadow"
-          >
-            A
-          </div>
-          <div>
-            <h4
-              id="rec-name"
-              class="text-sm font-extrabold text-slate-900"
-            >
-              MAXAMED CALI JAAMAC
-            </h4>
-            <p
-              id="rec-info"
-              class="text-xs text-slate-600 flex items-center gap-1"
-            >
-              <svg
-                class="w-3 h-3 text-[#36b647]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"
-                ></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>Ethiopia • +251 91 234 5678</span>
-            </p>
-          </div>
-        </div>
+                    <!-- Selected Recipient Preview Card -->
+                    <div
+                      id="recipient-card-display"
+                      class="hidden px-3 pb-3 rounded-2xl bg-green-50/50 border border-green-100 space-y-3"
+                    >
+                      <div class="flex items-center justify-between hidden">
+                        <div class="flex items-center gap-3 hidden">
+                          <div
+                            id="rec-avatar"
+                            class="w-10 h-10 rounded-2xl bg-[#36b647] text-white font-black flex items-center justify-center text-sm shadow"
+                          >
+                            A
+                          </div>
+                          <div>
+                            <h4
+                              id="rec-name"
+                              class="text-sm font-extrabold text-slate-900"
+                            >
+                              MAXAMED CALI JAAMAC
+                            </h4>
+                            <p
+                              id="rec-info"
+                              class="text-xs text-slate-600 flex items-center gap-1"
+                            >
+                              <svg
+                                class="w-3 h-3 text-[#36b647]"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"
+                                ></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                              </svg>
+                              <span>Ethiopia • +251 91 234 5678</span>
+                            </p>
+                          </div>
+                        </div>
 
-        <span
-          class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold hidden"
-        >
-          Verified Recipient
-        </span>
-      </div>
+                        <span
+                          class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold hidden"
+                        >
+                          Verified Recipient
+                        </span>
+                      </div>
 
-      <div
-        id="rec-details"
-        class="pt-2 border-t border-green-100/80 text-xs text-slate-700 space-y-1"
-      >
-        <!-- Dynamic Delivery Details -->
-      </div>
-    </div>
+                      <div
+                        id="rec-details"
+                        class="pt-2 border-t border-green-100/80 text-xs text-slate-700 space-y-1"
+                      >
+                        <!-- Dynamic Delivery Details -->
+                      </div>
+                    </div>
 
-    <div id="tplus-city-wrapper" class="hidden">
-      <label for="tplus-city" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient City</label>
-      <select id="tplus-city" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-        <option value="" selected disabled>City</option>
-      </select>
-    </div>
+                    <div id="tplus-city-wrapper" class="hidden">
+                      <label
+                        for="tplus-city"
+                        class="block text-xs font-bold text-slate-700 mb-1.5"
+                        >Recipient City</label
+                      >
+                      <select
+                        id="tplus-city"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                      >
+                        <option value="" selected disabled>City</option>
+                      </select>
+                    </div>
 
-    <!-- Empty State Placeholder -->
-    <div
-      id="recipient-card-empty"
-      class="p-8 text-center bg-slate-50 border border-slate-200/80 rounded-2xl"
-    >
-      <svg
-        class="w-8 h-8 text-slate-300 mx-auto mb-2"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path
-          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-        ></path>
-        <circle cx="9" cy="7" r="4"></circle>
-        <path d="M22 21v-2a4 4 0 0 3-3.87"></path>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-      </svg>
-      <p id="recipient-empty-message" class="text-xs text-slate-500">
-        No recipient selected yet. Choose one from the dropdown
-        or click the Red '+' button to add.
-      </p>
-    </div>
+                    <!-- Empty State Placeholder -->
+                    <div
+                      id="recipient-card-empty"
+                      class="p-8 text-center bg-slate-50 border border-slate-200/80 rounded-2xl"
+                    >
+                      <svg
+                        class="w-8 h-8 text-slate-300 mx-auto mb-2"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                        ></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                      <p
+                        id="recipient-empty-message"
+                        class="text-xs text-slate-500"
+                      >
+                        No recipient selected yet. Choose one from the dropdown
+                        or click the Red '+' button to add.
+                      </p>
+                    </div>
 
-    <!-- 2 Column Layout for the 4 Bottom Fields -->
-    <section id="recipient-details-fields" class="hidden pt-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div>
-        <label for="purpose-select" class="block text-xs font-bold text-slate-700 mb-1.5">Transfer purpose</label>
-        <select id="purpose-select" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></select>
-      </div>
-      <div>
-        <label for="source-of-income" class="block text-xs font-bold text-slate-700 mb-1.5">Source of Income <span class="text-red-500">*</span></label>
-        <select id="source-of-income" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-          <option value="" selected disabled>Select source of income</option>
-          <option value="Employment">Employment</option>
-          <option value="Self-employed">Self-employed</option>
-          <option value="Business">Business</option>
-          <option value="Savings">Savings</option>
-          <option value="Pension">Pension</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label for="transfer-remarks" class="block text-xs font-bold text-slate-700 mb-1.5">Remarks <span class="text-slate-400 font-normal">(Optional)</span></label>
-        <textarea id="transfer-remarks" rows="1" placeholder="Remarks" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></textarea>
-      </div>
-      <div>
-        <label for="payment-method-select" class="block text-xs font-bold text-slate-700 mb-1.5">Payment method</label>
-        <select id="payment-method-select" required onchange="switchPaymentMethod(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-          <option value="" disabled selected>Choose payment method</option>
-          <option value="cash">Cash</option>
-          <option value="card">Debit or Credit</option>
-          <option value="bank">Bank</option>
-          <option value="swish">Swish</option>
-        </select>
-      </div>
-    </section>
+                    <!-- 2 Column Layout for the 4 Bottom Fields -->
+                    <section
+                      id="recipient-details-fields"
+                      class="hidden pt-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    >
+                      <div>
+                        <label
+                          for="purpose-select"
+                          class="block text-xs font-bold text-slate-700 mb-1.5"
+                          >Transfer purpose</label
+                        >
+                        <select
+                          id="purpose-select"
+                          required
+                          class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        ></select>
+                      </div>
+                      <div>
+                        <label
+                          for="source-of-income"
+                          class="block text-xs font-bold text-slate-700 mb-1.5"
+                          >Source of Income
+                          <span class="text-red-500">*</span></label
+                        >
+                        <select
+                          id="source-of-income"
+                          required
+                          class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        >
+                          <option value="" selected disabled>
+                            Select source of income
+                          </option>
+                          <option value="Employment">Employment</option>
+                          <option value="Self-employed">Self-employed</option>
+                          <option value="Business">Business</option>
+                          <option value="Savings">Savings</option>
+                          <option value="Pension">Pension</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          for="transfer-remarks"
+                          class="block text-xs font-bold text-slate-700 mb-1.5"
+                          >Remarks
+                          <span class="text-slate-400 font-normal"
+                            >(Optional)</span
+                          ></label
+                        >
+                        <textarea
+                          id="transfer-remarks"
+                          rows="1"
+                          placeholder="Remarks"
+                          class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        ></textarea>
+                      </div>
+                      <div>
+                        <label
+                          for="payment-method-select"
+                          class="block text-xs font-bold text-slate-700 mb-1.5"
+                          >Payment method</label
+                        >
+                        <select
+                          id="payment-method-select"
+                          required
+                          onchange="switchPaymentMethod(this.value)"
+                          class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+                        >
+                          <option value="" disabled selected>
+                            Choose payment method
+                          </option>
+                          <option value="cash">Cash</option>
+                          <option value="card">Debit or Credit</option>
+                          <option value="bank">Bank</option>
+                          <option value="swish">Swish</option>
+                        </select>
+                      </div>
+                    </section>
 
-    <!-- Navigation Buttons -->
-    <div
-      class="pt-4 flex items-center justify-between border-t border-slate-100"
-    >
-      <button
-        type="button"
-        onclick="goToStep(1)"
-        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
-      >
-        <svg
-          class="w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="19" y1="12" x2="5" y2="12"></line>
-          <polyline points="12 19 5 12 12 5"></polyline>
-        </svg>
-        <span>Previous</span>
-      </button>
+                    <!-- Navigation Buttons -->
+                    <div
+                      class="pt-4 flex items-center justify-between border-t border-slate-100"
+                    >
+                      <button
+                        type="button"
+                        onclick="goToStep(1)"
+                        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
+                      >
+                        <svg
+                          class="w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="19" y1="12" x2="5" y2="12"></line>
+                          <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Previous</span>
+                      </button>
 
-      <button
-        type="button"
-        onclick="goToStep(3)"
-        disabled
-        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
-      >
-        <span>Next: Review</span>
-        <svg
-          class="w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </button>
-    </div>
-  </div>
-</div>
+                      <button
+                        type="button"
+                        onclick="goToStep(3)"
+                        disabled
+                        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
+                      >
+                        <span>Next: Review</span>
+                        <svg
+                          class="w-4 h-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
                 <!-- ========================================== -->
                 <!-- ADD RECIPIENT MODAL                        -->
@@ -1017,7 +1542,9 @@
                       class="flex items-center justify-between pb-4 border-b border-slate-100"
                     >
                       <div>
-                        <h3 class="text-lg font-extrabold text-slate-900 text-start">
+                        <h3
+                          class="text-lg font-extrabold text-slate-900 text-start"
+                        >
                           Add New Recipient
                         </h3>
                         <p class="text-xs text-slate-500">
@@ -1052,21 +1579,47 @@
                       class="space-y-2"
                     >
                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
-                        <div class="flex rounded-xl border border-slate-200 bg-slate-50 focus-within:ring-2 focus-within:ring-[#36b647]">
-                          <img id="quick-country-code-flag" src="https://flagcdn.com/w40/ke.png" class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />
-                          <select id="quick-recipient-country-code" class="w-20 bg-transparent border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold" aria-label="Phone country code" onchange="updateQuickRecipientCountry(this.value)">
-                            <option value="SO">+252</option><option value="KE" selected>+254</option>
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >Phone Number
+                          <span class="text-red-500">*</span></label
+                        >
+                        <div
+                          class="flex rounded-xl border border-slate-200 bg-slate-50 focus-within:ring-2 focus-within:ring-[#36b647]"
+                        >
+                          <img
+                            id="quick-country-code-flag"
+                            src="https://flagcdn.com/w40/ke.png"
+                            class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm"
+                            alt="Kenya flag"
+                          />
+                          <select
+                            id="quick-recipient-country-code"
+                            class="w-20 bg-transparent border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold"
+                            aria-label="Phone country code"
+                            onchange="updateQuickRecipientCountry(this.value)"
+                          >
+                            <option value="SO">+252</option>
+                            <option value="KE" selected>+254</option>
                           </select>
-                          <input type="tel" id="quick-recipient-phone" required placeholder="Phone number" class="min-w-0 flex-1 bg-transparent p-3 text-xs text-slate-900 outline-none" />
+                          <input
+                            type="tel"
+                            id="quick-recipient-phone"
+                            required
+                            placeholder="Phone number"
+                            class="min-w-0 flex-1 bg-transparent p-3 text-xs text-slate-900 outline-none"
+                          />
                         </div>
-                        <p class="mt-1 text-[10px] font-bold text-red-600">Test: Somalia +252 619333207 · Kenya +254 712345678</p>
+                        <p class="mt-1 text-[10px] font-bold text-red-600">
+                          Test: Somalia +252 619333207 · Kenya +254 712345678
+                        </p>
                       </div>
                       <div class="grid grid-cols-1 gap-3">
                         <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
-                            >First Name <span class="text-red-500">*</span></label
+                            >First Name
+                            <span class="text-red-500">*</span></label
                           >
                           <input
                             type="text"
@@ -1077,13 +1630,25 @@
                           />
                         </div>
                         <div>
-                          <label class="block text-xs font-bold text-slate-700 mb-1">Middle Name <span class="text-slate-400 font-normal">(Optional)</span></label>
-                          <input type="text" id="quick-recipient-middle-name" placeholder="Middle name" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900" />
+                          <label
+                            class="block text-xs font-bold text-slate-700 mb-1"
+                            >Middle Name
+                            <span class="text-slate-400 font-normal"
+                              >(Optional)</span
+                            ></label
+                          >
+                          <input
+                            type="text"
+                            id="quick-recipient-middle-name"
+                            placeholder="Middle name"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900"
+                          />
                         </div>
                         <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
-                            >Last Name <span class="text-red-500">*</span></label
+                            >Last Name
+                            <span class="text-red-500">*</span></label
                           >
                           <input
                             type="text"
@@ -1096,15 +1661,43 @@
                       </div>
 
                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">City <span class="text-red-500">*</span></label>
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >City <span class="text-red-500">*</span></label
+                        >
                         <div class="flex items-center gap-2">
-                          <select id="quick-recipient-city" required class="min-w-0 flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900"><option value="">Select city</option></select>
-                          <span id="quick-recipient-country-display" class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"><img src="https://flagcdn.com/w40/ke.png" class="w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />Kenya</span>
+                          <select
+                            id="quick-recipient-city"
+                            required
+                            class="min-w-0 flex-1 bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900"
+                          >
+                            <option value="">Select city</option>
+                          </select>
+                          <span
+                            id="quick-recipient-country-display"
+                            class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"
+                            ><img
+                              src="https://flagcdn.com/w40/ke.png"
+                              class="w-6 h-4 object-cover rounded-sm"
+                              alt="Kenya flag"
+                            />Kenya</span
+                          >
                         </div>
                       </div>
                       <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Address <span class="text-slate-400 font-normal">(Optional)</span></label>
-                        <input type="text" id="quick-recipient-address" placeholder="Enter address" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900" />
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >Address
+                          <span class="text-slate-400 font-normal"
+                            >(Optional)</span
+                          ></label
+                        >
+                        <input
+                          type="text"
+                          id="quick-recipient-address"
+                          placeholder="Enter address"
+                          class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900"
+                        />
                       </div>
 
                       <!-- Hidden for now: bank and wallet details -->
@@ -1120,7 +1713,6 @@
                         <label id="quick-wallet-label" class="block text-xs font-bold text-slate-700 mb-1">T-plus Wallet Number</label>
                         <input type="tel" id="quick-recipient-wallet-number" placeholder="Enter T-plus wallet number" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
                       </div> -->
-                     
 
                       <div
                         class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100"
@@ -1177,7 +1769,28 @@
                           <line x1="10" y1="9" x2="8" y2="9"></line>
                         </svg>
                         <span>1. Transfer Details</span>
-                        <button type="button" onclick="goToStep(1)" title="Edit transfer details" aria-label="Edit transfer details" class="table-action absolute top-3 right-3 z-10 p-1.5 rounded-lg"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg></button>
+                        <button
+                          type="button"
+                          onclick="goToStep(1)"
+                          title="Edit transfer details"
+                          aria-label="Edit transfer details"
+                          class="table-action absolute top-3 right-3 z-10 p-1.5 rounded-lg"
+                        >
+                          <svg
+                            class="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M12 20h9" />
+                            <path
+                              d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"
+                            />
+                          </svg>
+                        </button>
                       </h4>
 
                       <div class="space-y-2 pt-1 border-t border-slate-200/60">
@@ -1249,7 +1862,28 @@
                           <path d="m9 12 2 2 4-4"></path>
                         </svg>
                         <span>2. Recipient Details</span>
-                        <button type="button" onclick="goToStep(2)" title="Edit recipient details" aria-label="Edit recipient details" class="table-action absolute top-3 right-3 z-10 p-1.5 rounded-lg"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg></button>
+                        <button
+                          type="button"
+                          onclick="goToStep(2)"
+                          title="Edit recipient details"
+                          aria-label="Edit recipient details"
+                          class="table-action absolute top-3 right-3 z-10 p-1.5 rounded-lg"
+                        >
+                          <svg
+                            class="w-4 h-4"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path d="M12 20h9" />
+                            <path
+                              d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"
+                            />
+                          </svg>
+                        </button>
                       </h4>
 
                       <div class="space-y-2 pt-1 border-t border-slate-200/60">
@@ -1291,11 +1925,19 @@
 
                         <div class="hidden flex justify-between">
                           <span class="text-slate-500">Payout Details:</span>
-                          <span id="review-rec-payout" class="font-bold text-slate-900">-</span>
+                          <span
+                            id="review-rec-payout"
+                            class="font-bold text-slate-900"
+                            >-</span
+                          >
                         </div>
                         <div class="hidden flex justify-between">
                           <span class="text-slate-500">Payment Method:</span>
-                          <span id="review-payment-method" class="font-bold text-slate-900">-</span>
+                          <span
+                            id="review-payment-method"
+                            class="font-bold text-slate-900"
+                            >-</span
+                          >
                         </div>
                         <div class="hidden flex justify-between">
                           <span class="text-slate-500">Transfer Purpose:</span>
@@ -1307,20 +1949,26 @@
                         </div>
                         <div class="hidden flex justify-between">
                           <span class="text-slate-500">Source of Income:</span>
-                          <span id="review-source-of-income" class="font-bold text-slate-900">-</span>
+                          <span
+                            id="review-source-of-income"
+                            class="font-bold text-slate-900"
+                            >-</span
+                          >
                         </div>
                         <div class="hidden flex justify-between">
                           <span class="text-slate-500">Remarks:</span>
-                          <span id="review-transfer-remarks" class="font-bold text-slate-900">-</span>
+                          <span
+                            id="review-transfer-remarks"
+                            class="font-bold text-slate-900"
+                            >-</span
+                          >
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <!-- Compliance Questions -->
-                  <div
-                    class=""
-                  >
+                  <div class="">
                     <!-- <h4
                       class="font-extrabold text-white text-sm flex items-center gap-2"
                     >
@@ -1350,10 +1998,12 @@
                           id="terms-agree"
                           class="mt-0.5 rounded accent-[#36b647] focus:ring-[#36b647]"
                         />
-                        <span class="text-slate-600 text-xs font-medium leading-tight">
-                          I agree and accept the payontime Money Transfer Terms &
-                          Conditions, Privacy Policy, and Anti-Money Laundering
-                          (AML) declaration.
+                        <span
+                          class="text-slate-600 text-xs font-medium leading-tight"
+                        >
+                          I agree and accept the payontime Money Transfer Terms
+                          & Conditions, Privacy Policy, and Anti-Money
+                          Laundering (AML) declaration.
                         </span>
                       </label>
                     </div>
@@ -1384,11 +2034,11 @@
                       <span>Previous</span>
                     </button>
 
-                      <button
-                        type="button"
-                        onclick="goToStep(4)"
-                        disabled
-                        class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
+                    <button
+                      type="button"
+                      onclick="goToStep(4)"
+                      disabled
+                      class="py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
                     >
                       <span>Proceed to Payment</span>
                       <!-- ArrowRight Icon -->
@@ -1494,7 +2144,9 @@
                         </div>
                       </div>
 
-                      <div class="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
+                      <div
+                        class="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3"
+                      >
                         <div>
                           <label
                             class="block text-xs font-bold text-slate-700 mb-1"
@@ -1564,8 +2216,14 @@
                       </p>
                     </div>
 
-                    <div id="payment-other-form" class="hidden p-6 rounded-2xl bg-slate-50 border border-slate-200/80 text-center">
-                      <p id="payment-other-label" class="text-xs font-semibold text-slate-700"></p>
+                    <div
+                      id="payment-other-form"
+                      class="hidden p-6 rounded-2xl bg-slate-50 border border-slate-200/80 text-center"
+                    >
+                      <p
+                        id="payment-other-label"
+                        class="text-xs font-semibold text-slate-700"
+                      ></p>
                     </div>
 
                     <!-- Navigation Buttons -->
@@ -1625,17 +2283,281 @@
                 </div>
 
                 <div
-                  id="step-6"
-                  class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6 max-w-lg mx-auto"
+  id="step-6"
+  class="step-container hidden bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-md space-y-4 max-w-sm mx-auto"
+>
+  <!-- Header with Icon & Hint Badge -->
+  <div class="text-center space-y-1.5">
+    <div
+      class="w-10 h-10 rounded-2xl bg-green-50 text-[#36b647] flex items-center justify-center mx-auto shadow-xs"
+    >
+      <!-- Lock Icon -->
+      <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect
+          width="18"
+          height="11"
+          x="3"
+          y="11"
+          rx="2"
+          ry="2"
+        ></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+
+    <p
+      class="text-xs text-slate-500 max-w-xs mx-auto leading-normal"
+    >
+      We sent a 6-digit 3D Secure verification code to your
+      registered phone ending in
+      <span id="otp-phone-tail" class="font-bold text-slate-900"
+        >4567</span
+      >.
+    </p>
+
+    <!-- Test Hint Badge -->
+    <div
+      class="inline-block px-2.5 py-0.5 bg-amber-50 border border-amber-200 rounded-full text-[10px] text-amber-800 font-semibold"
+    >
+      💡 Demo Mode: Pre-filled with test code
+      <span class="font-extrabold">123456</span>
+    </div>
+  </div>
+
+  <!-- 6-Digit Separate Inputs -->
+  <div
+    class="flex justify-center gap-1.5 my-3"
+    id="otp-inputs-container"
+  >
+    <input
+      type="text"
+      maxlength="1"
+      value="1"
+      oninput="handleOtpInput(this, 0)"
+      onkeydown="handleOtpKeyDown(this, event, 0)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+    <input
+      type="text"
+      maxlength="1"
+      value="2"
+      oninput="handleOtpInput(this, 1)"
+      onkeydown="handleOtpKeyDown(this, event, 1)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+    <input
+      type="text"
+      maxlength="1"
+      value="3"
+      oninput="handleOtpInput(this, 2)"
+      onkeydown="handleOtpKeyDown(this, event, 2)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+    <input
+      type="text"
+      maxlength="1"
+      value="4"
+      oninput="handleOtpInput(this, 3)"
+      onkeydown="handleOtpKeyDown(this, event, 3)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+    <input
+      type="text"
+      maxlength="1"
+      value="5"
+      oninput="handleOtpInput(this, 4)"
+      onkeydown="handleOtpKeyDown(this, event, 4)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+    <input
+      type="text"
+      maxlength="1"
+      value="6"
+      oninput="handleOtpInput(this, 5)"
+      onkeydown="handleOtpKeyDown(this, event, 5)"
+      class="w-9 h-10 text-center text-lg font-black rounded-xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
+    />
+  </div>
+
+  <!-- Timer & Resend Container -->
+  <div
+    class="text-center text-xs text-slate-500"
+    id="otp-timer-container"
+  >
+    Resend code in
+    <span id="otp-timer" class="font-bold text-slate-900"
+      >60s</span
+    >
+  </div>
+
+  <!-- Verify & Submit Button -->
+  <button
+    type="button"
+    id="verify-btn"
+    onclick="verifyOTP()"
+    class="w-full py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-sm rounded-xl shadow-md shadow-green-500/20 transition-all flex items-center justify-center gap-2"
+  >
+    <!-- ShieldCheck Icon -->
+    <svg
+      class="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+      ></path>
+      <path d="m9 12 2 2 4-4"></path>
+    </svg>
+    <span>Verify & Complete Payment</span>
+  </button>
+</div>
+
+                <div
+                  id="step-7"
+                  class="step-container hidden bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-md space-y-3.5 max-w-sm mx-auto text-center"
                 >
-                  <!-- Header with Icon & Hint Badge -->
-                  <div class="text-center space-y-2">
-                    <div
-                      class="w-14 h-14 rounded-3xl bg-green-50 text-[#36b647] flex items-center justify-center mx-auto shadow-md"
+                  <!-- Success Animated Checkmark Icon -->
+                  <div
+                    class="w-11 h-11 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-md shadow-emerald-500/10"
+                  >
+                    <!-- CheckCircle2 Icon -->
+                    <svg
+                      class="w-6 h-6"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     >
-                      <!-- Lock Icon -->
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </div>
+
+                  <div class="space-y-1">
+                    <span
+                      class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider"
+                    >
+                      Payment Verified
+                    </span>
+                    <h2
+                      class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug"
+                    >
+                      Money Transfer Completed!
+                    </h2>
+                    <p class="text-[11px] text-slate-500">
+                      Tracking ID:
+                      <span
+                        id="receipt-id"
+                        class="font-mono font-extrabold text-slate-900"
+                      >
+                        HID-88492025
+                      </span>
+                    </p>
+                  </div>
+
+                  <!-- Summary Card -->
+                  <div
+                    class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 text-left space-y-2 text-[11px]"
+                  >
+                    <div
+                      class="flex justify-between items-center pb-2 border-b border-slate-200/80"
+                    >
+                      <span
+                        class="font-bold text-slate-400 uppercase tracking-wider text-[9px]"
+                      >
+                        Recipient
+                      </span>
+                      <span
+                        id="receipt-recipient-name"
+                        class="font-extrabold text-slate-900 text-xs"
+                      >
+                        Recipient Name
+                      </span>
+                    </div>
+
+                    <div
+                      class="grid grid-cols-2 gap-2 py-1.5 bg-white p-2 rounded-lg border border-slate-200/60"
+                    >
+                      <div>
+                        <span class="text-slate-400 block text-[9px]"
+                          >Sent Amount</span
+                        >
+                        <span
+                          id="receipt-send-amount"
+                          class="font-extrabold text-slate-900 text-xs"
+                        >
+                          100.00 CHF
+                        </span>
+                      </div>
+                      <div>
+                        <span class="text-slate-400 block text-[9px]"
+                          >Recipient Receives</span
+                        >
+                        <span
+                          id="receipt-receive-amount"
+                          class="font-extrabold text-emerald-700 text-xs"
+                        >
+                          112.50 USD
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="space-y-1 pt-0.5 text-slate-600">
+                      <div class="flex justify-between">
+                        <span>Delivery Method:</span>
+                        <span
+                          id="receipt-delivery-method"
+                          class="font-bold text-slate-900"
+                        >
+                          Bank Transfer
+                        </span>
+                      </div>
+
+                      <div class="flex justify-between">
+                        <span>Exchange Rate:</span>
+                        <span
+                          id="receipt-exchange-rate"
+                          class="font-bold text-slate-900"
+                        >
+                          1 CHF = 1.125 USD
+                        </span>
+                      </div>
+
+                      <div class="flex justify-between">
+                        <span>Estimated Payout:</span>
+                        <span class="font-bold text-emerald-600"
+                          >⚡ Instant (Under 60s)</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div
+                    class="flex flex-wrap items-center justify-center gap-1.5 pt-1"
+                  >
+                    <!-- Print Button -->
+                    <button
+                      onclick="handleReceiptPrint()"
+                      class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] flex items-center gap-1.5 transition-all"
+                    >
+                      <!-- Printer Icon -->
                       <svg
-                        class="w-7 h-7"
+                        class="w-3.5 h-3.5"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -1643,340 +2565,90 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       >
-                        <rect
-                          width="18"
-                          height="11"
-                          x="3"
-                          y="11"
-                          rx="2"
-                          ry="2"
-                        ></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path
+                          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+                        ></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
                       </svg>
-                    </div>
+                      <span>Print</span>
+                    </button>
 
-                    <p
-                      class="text-xs text-slate-500 max-w-sm mx-auto leading-relaxed"
+                    <!-- Download PDF Button -->
+                    <button
+                      onclick="handleReceiptDownload()"
+                      class="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] flex items-center gap-1.5 transition-all"
                     >
-                      We sent a 6-digit 3D Secure verification code to your
-                      registered phone ending in
-                      <span id="otp-phone-tail" class="font-bold text-slate-900"
-                        >4567</span
-                      >.
-                    </p>
+                      <!-- Download Icon -->
+                      <svg
+                        class="w-3.5 h-3.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                        ></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                      </svg>
+                      <span>PDF</span>
+                    </button>
 
-                    <!-- Test Hint Badge -->
-                    <div
-                      class="inline-block px-3 py-1 bg-amber-50 border border-amber-200 rounded-full text-[11px] text-amber-800 font-semibold"
+                    <!-- Send Again Button -->
+                    <button
+                      onclick="handleSendAgain()"
+                      class="py-2 px-3.5 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white font-bold text-[11px] shadow-md shadow-green-500/15 flex items-center gap-1.5 transition-all"
                     >
-                      💡 Demo Mode: Pre-filled with test code
-                      <span class="font-extrabold">123456</span>
-                    </div>
+                      <!-- RefreshCw Icon -->
+                      <svg
+                        class="w-3.5 h-3.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                        ></path>
+                        <path d="M3 3v5h5"></path>
+                        <path
+                          d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"
+                        ></path>
+                        <path d="M16 16h5v5"></path>
+                      </svg>
+                      <span>Send Again</span>
+                    </button>
                   </div>
 
-                  <!-- 6-Digit Separate Inputs -->
-                  <div
-                    class="flex justify-center gap-2.5 my-6"
-                    id="otp-inputs-container"
-                  >
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="1"
-                      oninput="handleOtpInput(this, 0)"
-                      onkeydown="handleOtpKeyDown(this, event, 0)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="2"
-                      oninput="handleOtpInput(this, 1)"
-                      onkeydown="handleOtpKeyDown(this, event, 1)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="3"
-                      oninput="handleOtpInput(this, 2)"
-                      onkeydown="handleOtpKeyDown(this, event, 2)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="4"
-                      oninput="handleOtpInput(this, 3)"
-                      onkeydown="handleOtpKeyDown(this, event, 3)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="5"
-                      oninput="handleOtpInput(this, 4)"
-                      onkeydown="handleOtpKeyDown(this, event, 4)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                    <input
-                      type="text"
-                      maxlength="1"
-                      value="6"
-                      oninput="handleOtpInput(this, 5)"
-                      onkeydown="handleOtpKeyDown(this, event, 5)"
-                      class="w-11 h-13 text-center text-xl font-black rounded-2xl bg-slate-50 border border-slate-300 text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647] focus:bg-white shadow-xs"
-                    />
-                  </div>
-
-                  <!-- Timer & Resend Container -->
-                  <div
-                    class="text-center text-xs text-slate-500"
-                    id="otp-timer-container"
-                  >
-                    Resend code in
-                    <span id="otp-timer" class="font-bold text-slate-900"
-                      >60s</span
+                  <!-- Bottom Navigation Link -->
+                  <div class="pt-2 border-t border-slate-100">
+                    <button
+                      onclick="returnToDashboard()"
+                      class="text-[11px] font-extrabold text-slate-600 hover:text-slate-900 hover:underline flex items-center justify-center gap-1 mx-auto p-2 rounded-xl"
                     >
+                      <span>Dashboard Overview</span>
+                      <!-- ArrowRight Icon -->
+                      <svg
+                        class="w-3 h-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </button>
                   </div>
-
-                  <!-- Verify & Submit Button -->
-                  <button
-                    type="button"
-                    id="verify-btn"
-                    onclick="verifyOTP()"
-                    class="w-full py-2 px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-sm rounded-xl shadow-xl shadow-green-500/20 transition-all flex items-center justify-center gap-2"
-                  >
-                    <!-- ShieldCheck Icon -->
-                    <svg
-                      class="w-5 h-5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-                      ></path>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg>
-                    <span>Verify & Complete Payment</span>
-                  </button>
                 </div>
-
-                <div
-  id="step-7"
-  class="step-container hidden bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-md space-y-3.5 max-w-sm mx-auto text-center"
->
-  <!-- Success Animated Checkmark Icon -->
-  <div
-    class="w-11 h-11 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-md shadow-emerald-500/10"
-  >
-    <!-- CheckCircle2 Icon -->
-    <svg
-      class="w-6 h-6"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-    </svg>
-  </div>
-
-  <div class="space-y-1">
-    <span
-      class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider"
-    >
-      Payment Verified
-    </span>
-    <h2
-      class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug"
-    >
-      Money Transfer Completed!
-    </h2>
-    <p class="text-[11px] text-slate-500">
-      Tracking ID:
-      <span
-        id="receipt-id"
-        class="font-mono font-extrabold text-slate-900"
-      >
-        HID-88492025
-      </span>
-    </p>
-  </div>
-
-  <!-- Summary Card -->
-  <div
-    class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 text-left space-y-2 text-[11px]"
-  >
-    <div
-      class="flex justify-between items-center pb-2 border-b border-slate-200/80"
-    >
-      <span
-        class="font-bold text-slate-400 uppercase tracking-wider text-[9px]"
-      >
-        Recipient
-      </span>
-      <span
-        id="receipt-recipient-name"
-        class="font-extrabold text-slate-900 text-xs"
-      >
-        Recipient Name
-      </span>
-    </div>
-
-    <div
-      class="grid grid-cols-2 gap-2 py-1.5 bg-white p-2 rounded-lg border border-slate-200/60"
-    >
-      <div>
-        <span class="text-slate-400 block text-[9px]">Sent Amount</span>
-        <span
-          id="receipt-send-amount"
-          class="font-extrabold text-slate-900 text-xs"
-        >
-          100.00 CHF
-        </span>
-      </div>
-      <div>
-        <span class="text-slate-400 block text-[9px]">Recipient Receives</span>
-        <span
-          id="receipt-receive-amount"
-          class="font-extrabold text-emerald-700 text-xs"
-        >
-          112.50 USD
-        </span>
-      </div>
-    </div>
-
-    <div class="space-y-1 pt-0.5 text-slate-600">
-      <div class="flex justify-between">
-        <span>Delivery Method:</span>
-        <span
-          id="receipt-delivery-method"
-          class="font-bold text-slate-900"
-        >
-          Bank Transfer
-        </span>
-      </div>
-
-      <div class="flex justify-between">
-        <span>Exchange Rate:</span>
-        <span
-          id="receipt-exchange-rate"
-          class="font-bold text-slate-900"
-        >
-          1 CHF = 1.125 USD
-        </span>
-      </div>
-
-      <div class="flex justify-between">
-        <span>Estimated Payout:</span>
-        <span class="font-bold text-emerald-600">⚡ Instant (Under 60s)</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Action Buttons -->
-  <div class="flex flex-wrap items-center justify-center gap-1.5 pt-1">
-    <!-- Print Button -->
-    <button
-      onclick="handleReceiptPrint()"
-      class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] flex items-center gap-1.5 transition-all"
-    >
-      <!-- Printer Icon -->
-      <svg
-        class="w-3.5 h-3.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="6 9 6 2 18 2 18 9"></polyline>
-        <path
-          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-        ></path>
-        <rect x="6" y="14" width="12" height="8"></rect>
-      </svg>
-      <span>Print</span>
-    </button>
-
-    <!-- Download PDF Button -->
-    <button
-      onclick="handleReceiptDownload()"
-      class="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] flex items-center gap-1.5 transition-all"
-    >
-      <!-- Download Icon -->
-      <svg
-        class="w-3.5 h-3.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      <span>PDF</span>
-    </button>
-
-    <!-- Send Again Button -->
-    <button
-      onclick="handleSendAgain()"
-      class="py-2 px-3.5 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white font-bold text-[11px] shadow-md shadow-green-500/15 flex items-center gap-1.5 transition-all"
-    >
-      <!-- RefreshCw Icon -->
-      <svg
-        class="w-3.5 h-3.5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-        <path d="M3 3v5h5"></path>
-        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
-        <path d="M16 16h5v5"></path>
-      </svg>
-      <span>Send Again</span>
-    </button>
-  </div>
-
-  <!-- Bottom Navigation Link -->
-  <div class="pt-2 border-t border-slate-100">
-    <button
-      onclick="returnToDashboard()"
-      class="text-[11px] font-extrabold text-slate-600 hover:text-slate-900 hover:underline flex items-center justify-center gap-1 mx-auto"
-    >
-      <span>Dashboard Overview</span>
-      <!-- ArrowRight Icon -->
-      <svg
-        class="w-3 h-3"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-        <polyline points="12 5 19 12 12 19"></polyline>
-      </svg>
-    </button>
-  </div>
-</div>
               </div>
             </div>
           </div>
@@ -2137,18 +2809,75 @@
                     <input type="hidden" id="recipient-id" />
 
                     <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number <span class="text-red-500">*</span></label>
-                      <div class="flex rounded-xl border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-[#36b647]/20">
-                        <img id="form-country-code-flag" src="https://flagcdn.com/w40/ke.png" class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />
-                        <select id="form-country-code" class="w-20 border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold" aria-label="Phone country code" onchange="updateFormRecipientCountry(this.value)"><option value="SO">+252</option><option value="KE" selected>+254</option></select>
-                        <input type="tel" id="form-phone" required class="min-w-0 flex-1 p-3 text-xs text-slate-900 outline-none" placeholder="Phone number" />
+                      <label class="block text-xs font-bold text-slate-700 mb-1"
+                        >Phone Number <span class="text-red-500">*</span></label
+                      >
+                      <div
+                        class="flex rounded-xl border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-[#36b647]/20"
+                      >
+                        <img
+                          id="form-country-code-flag"
+                          src="https://flagcdn.com/w40/ke.png"
+                          class="ml-3 mt-3 w-6 h-4 object-cover rounded-sm"
+                          alt="Kenya flag"
+                        />
+                        <select
+                          id="form-country-code"
+                          class="w-20 border-r border-slate-200 rounded-l-xl p-3 text-xs font-bold"
+                          aria-label="Phone country code"
+                          onchange="updateFormRecipientCountry(this.value)"
+                        >
+                          <option value="SO">+252</option>
+                          <option value="KE" selected>+254</option>
+                        </select>
+                        <input
+                          type="tel"
+                          id="form-phone"
+                          required
+                          class="min-w-0 flex-1 p-3 text-xs text-slate-900 outline-none"
+                          placeholder="Phone number"
+                        />
                       </div>
-                      <p class="mt-1 text-[10px] font-bold text-red-600">Test: Somalia +252 619333207 · Kenya +254 712345678</p>
+                      <p class="mt-1 text-[10px] font-bold text-red-600">
+                        Test: Somalia +252 619333207 · Kenya +254 712345678
+                      </p>
                     </div>
                     <div class="grid grid-cols-1 gap-3">
-                      <div><label class="block text-xs font-bold text-slate-700 mb-1">First Name <span class="text-red-500">*</span></label><input type="text" id="form-first-name" required class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
-                      <div><label class="block text-xs font-bold text-slate-700 mb-1">Middle Name <span class="text-slate-400 font-normal">(Optional)</span></label><input type="text" id="form-middle-name" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
-                      <div><label class="block text-xs font-bold text-slate-700 mb-1">Last Name <span class="text-red-500">*</span></label><input type="text" id="form-last-name" required class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" /></div>
+                      <div>
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >First Name <span class="text-red-500">*</span></label
+                        ><input
+                          type="text"
+                          id="form-first-name"
+                          required
+                          class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >Middle Name
+                          <span class="text-slate-400 font-normal"
+                            >(Optional)</span
+                          ></label
+                        ><input
+                          type="text"
+                          id="form-middle-name"
+                          class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label
+                          class="block text-xs font-bold text-slate-700 mb-1"
+                          >Last Name <span class="text-red-500">*</span></label
+                        ><input
+                          type="text"
+                          id="form-last-name"
+                          required
+                          class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
+                        />
+                      </div>
                     </div>
 
                     <!-- Hidden for now: email field -->
@@ -2165,10 +2894,40 @@
                     </div> -->
 
                     <div>
-                      <label class="block text-xs font-bold text-slate-700 mb-1">City <span class="text-red-500">*</span></label>
-                      <div class="flex items-center gap-2"><select id="form-city-name" required class="min-w-0 flex-1 p-3 rounded-xl border border-slate-200 text-xs text-slate-900"><option value="">Select city</option></select><span id="form-country-display" class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"><img src="https://flagcdn.com/w40/ke.png" class="w-6 h-4 object-cover rounded-sm" alt="Kenya flag" />Kenya</span></div>
+                      <label class="block text-xs font-bold text-slate-700 mb-1"
+                        >City <span class="text-red-500">*</span></label
+                      >
+                      <div class="flex items-center gap-2">
+                        <select
+                          id="form-city-name"
+                          required
+                          class="min-w-0 flex-1 p-3 rounded-xl border border-slate-200 text-xs text-slate-900"
+                        >
+                          <option value="">Select city</option></select
+                        ><span
+                          id="form-country-display"
+                          class="shrink-0 flex items-center gap-1.5 text-xs font-bold text-slate-700"
+                          ><img
+                            src="https://flagcdn.com/w40/ke.png"
+                            class="w-6 h-4 object-cover rounded-sm"
+                            alt="Kenya flag"
+                          />Kenya</span
+                        >
+                      </div>
                     </div>
-                    <div><label class="block text-xs font-bold text-slate-700 mb-1">Address <span class="text-slate-400 font-normal">(Optional)</span></label><input type="text" id="form-address" class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none" placeholder="Enter address" /></div>
+                    <div>
+                      <label class="block text-xs font-bold text-slate-700 mb-1"
+                        >Address
+                        <span class="text-slate-400 font-normal"
+                          >(Optional)</span
+                        ></label
+                      ><input
+                        type="text"
+                        id="form-address"
+                        class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-900 outline-none"
+                        placeholder="Enter address"
+                      />
+                    </div>
 
                     <!-- Hidden for now: bank and wallet details -->
                     <!-- <div class="space-y-3">
@@ -2288,10 +3047,34 @@
                           class="font-bold text-slate-800 font-mono"
                         ></span>
                       </div>
-                      <div class="flex justify-between"><span class="text-slate-400">Bank Name:</span><span id="view-bank-name" class="font-bold text-slate-800"></span></div>
-                      <div class="flex justify-between"><span class="text-slate-400">Bank Account Number:</span><span id="view-bank-account" class="font-bold text-slate-800"></span></div>
-                      <div class="flex justify-between"><span class="text-slate-400">T-plus Wallet Number:</span><span id="view-wallet-number" class="font-bold text-slate-800"></span></div>
-                      <div class="flex justify-between"><span class="text-slate-400">City Name:</span><span id="view-city-name" class="font-bold text-slate-800"></span></div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-400">Bank Name:</span
+                        ><span
+                          id="view-bank-name"
+                          class="font-bold text-slate-800"
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-400">Bank Account Number:</span
+                        ><span
+                          id="view-bank-account"
+                          class="font-bold text-slate-800"
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-400">T-plus Wallet Number:</span
+                        ><span
+                          id="view-wallet-number"
+                          class="font-bold text-slate-800"
+                        ></span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-slate-400">City Name:</span
+                        ><span
+                          id="view-city-name"
+                          class="font-bold text-slate-800"
+                        ></span>
+                      </div>
                       <div class="flex justify-between">
                         <span class="text-slate-400">Date Added:</span
                         ><span
@@ -2383,13 +3166,27 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                  <label class="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
+                  <label
+                    class="flex items-center gap-2 text-[11px] font-semibold text-slate-500"
+                  >
                     <span>From</span>
-                    <input id="fromDate" type="date" onchange="filterTransactions()" class="min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-700 focus:outline-none" />
+                    <input
+                      id="fromDate"
+                      type="date"
+                      onchange="filterTransactions()"
+                      class="min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-700 focus:outline-none"
+                    />
                   </label>
-                  <label class="flex items-center gap-2 text-[11px] font-semibold text-slate-500">
+                  <label
+                    class="flex items-center gap-2 text-[11px] font-semibold text-slate-500"
+                  >
                     <span>To</span>
-                    <input id="toDate" type="date" onchange="filterTransactions()" class="min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-700 focus:outline-none" />
+                    <input
+                      id="toDate"
+                      type="date"
+                      onchange="filterTransactions()"
+                      class="min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-700 focus:outline-none"
+                    />
                   </label>
                 </div>
 
@@ -2997,65 +3794,264 @@
           </div>
           <section id="tab-documents" class="tab-content hidden space-y-6">
             <div>
-              <h2 class="text-xl font-extrabold text-slate-900">Uploaded documents</h2>
-              <p class="mt-1 text-sm text-slate-500">Manage your identity documents and track their verification status.</p>
+              <h2 class="text-xl font-extrabold text-slate-900">
+                Uploaded documents
+              </h2>
+              <p class="mt-1 text-sm text-slate-500">
+                Manage your identity documents and track their verification
+                status.
+              </p>
             </div>
-            <article class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <article
+              class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+            >
               <div class="flex items-start gap-3">
-                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"><i data-lucide="file-text" class="h-5 w-5"></i></span>
+                <span
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"
+                  ><i data-lucide="file-text" class="h-5 w-5"></i
+                ></span>
                 <div class="min-w-0 flex-1">
                   <h3 class="font-bold text-slate-900">National ID</h3>
                   <p class="mt-0.5 text-xs text-slate-500">Uploaded document</p>
                 </div>
               </div>
               <div class="mt-4 flex flex-wrap gap-2">
-                <span class="inline-flex items-center gap-1 rounded-full border border-green-200 bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700"><i data-lucide="circle-check" class="h-3.5 w-3.5"></i>Approved</span>
-                <span class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-600">Valid</span>
+                <span
+                  class="inline-flex items-center gap-1 rounded-full border border-green-200 bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700"
+                  ><i data-lucide="circle-check" class="h-3.5 w-3.5"></i
+                  >Approved</span
+                >
+                <span
+                  class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-600"
+                  >Valid</span
+                >
               </div>
-              <div class="mt-5 grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-2">
-                <div><p class="text-xs text-slate-500">Document number</p><p class="mt-1 text-sm font-bold text-slate-900">197401104711</p></div>
-                <div><p class="text-xs text-slate-500">Expiry date</p><p class="mt-1 text-sm font-bold text-slate-900">05 Jul 2031</p></div>
+              <div
+                class="mt-5 grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 sm:grid-cols-2"
+              >
+                <div>
+                  <p class="text-xs text-slate-500">Document number</p>
+                  <p class="mt-1 text-sm font-bold text-slate-900">
+                    197401104711
+                  </p>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-500">Expiry date</p>
+                  <p class="mt-1 text-sm font-bold text-slate-900">
+                    05 Jul 2031
+                  </p>
+                </div>
               </div>
             </article>
-            <article class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <article
+              class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+            >
               <div class="mb-5 border-b border-slate-100 pb-4">
                 <div class="flex items-center gap-2">
-                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"><i data-lucide="shield-check" class="h-5 w-5"></i></span>
-                  <h3 class="text-lg font-extrabold text-slate-900">KYC Questionnaire</h3>
+                  <span
+                    class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"
+                    ><i data-lucide="shield-check" class="h-5 w-5"></i
+                  ></span>
+                  <h3 class="text-lg font-extrabold text-slate-900">
+                    KYC Questionnaire
+                  </h3>
                 </div>
-                <p class="mt-2 text-sm text-slate-500">Help us get to know more about you. Your information is kept safe.</p>
+                <p class="mt-2 text-sm text-slate-500">
+                  Help us get to know more about you. Your information is kept
+                  safe.
+                </p>
               </div>
               <form id="kyc-questionnaire-form" class="space-y-4">
-                <div><label for="kyc-destination" class="mb-1.5 block text-xs font-semibold text-slate-700">Where do you usually send money to? <span class="text-red-500">*</span></label><select id="kyc-destination" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Kenya</option><option>Somalia</option><option>Other</option></select></div>
-                <div><label for="kyc-recipient-relationship" class="mb-1.5 block text-xs font-semibold text-slate-700">Who do you usually send money to? <span class="text-red-500">*</span></label><select id="kyc-recipient-relationship" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Family member</option><option>Friend</option><option>Business associate</option><option>Other</option></select></div>
-                <div><label for="kyc-monthly-amount" class="mb-1.5 block text-xs font-semibold text-slate-700">Monthly estimated amount you will send? <span class="text-red-500">*</span></label><select id="kyc-monthly-amount" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Under 1,000 SEK</option><option>1,000–5,000 SEK</option><option>5,001–10,000 SEK</option><option>Over 10,000 SEK</option></select></div>
-                <div><label for="kyc-monthly-transactions" class="mb-1.5 block text-xs font-semibold text-slate-700">Estimated transactions per month? <span class="text-red-500">*</span></label><select id="kyc-monthly-transactions" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>1–2</option><option>3–5</option><option>6–10</option><option>More than 10</option></select></div>
-                <div><label for="kyc-source-funds" class="mb-1.5 block text-xs font-semibold text-slate-700">Source of Funds <span class="text-red-500">*</span></label><select id="kyc-source-funds" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>Employment income</option><option>Self-employment or business</option><option>Savings</option><option>Pension</option><option>Other</option></select></div>
-                <div><label for="kyc-pep-status" class="mb-1.5 block text-xs font-semibold text-slate-700">Are you, an immediate family member, or a close associate a politically exposed person (PEP)? <span class="text-red-500">*</span></label><select id="kyc-pep-status" required class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"><option value="" selected disabled>Select answer</option><option>No</option><option>Yes</option></select></div>
-                <div class="flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between"><p id="kyc-questionnaire-status" aria-live="polite" class="text-xs font-semibold text-green-700"></p><button id="kyc-questionnaire-submit" type="submit" disabled class="rounded-xl bg-[#36b647] px-6 py-3 text-sm font-bold text-white hover:bg-[#2d963b] disabled:cursor-not-allowed disabled:opacity-50">Submit</button></div>
+                <div>
+                  <label
+                    for="kyc-destination"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Where do you usually send money to?
+                    <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-destination"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>Kenya</option>
+                    <option>Somalia</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="kyc-recipient-relationship"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Who do you usually send money to?
+                    <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-recipient-relationship"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>Family member</option>
+                    <option>Friend</option>
+                    <option>Business associate</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="kyc-monthly-amount"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Monthly estimated amount you will send?
+                    <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-monthly-amount"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>Under 1,000 SEK</option>
+                    <option>1,000–5,000 SEK</option>
+                    <option>5,001–10,000 SEK</option>
+                    <option>Over 10,000 SEK</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="kyc-monthly-transactions"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Estimated transactions per month?
+                    <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-monthly-transactions"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>1–2</option>
+                    <option>3–5</option>
+                    <option>6–10</option>
+                    <option>More than 10</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="kyc-source-funds"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Source of Funds <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-source-funds"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>Employment income</option>
+                    <option>Self-employment or business</option>
+                    <option>Savings</option>
+                    <option>Pension</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="kyc-pep-status"
+                    class="mb-1.5 block text-xs font-semibold text-slate-700"
+                    >Are you, an immediate family member, or a close associate a
+                    politically exposed person (PEP)?
+                    <span class="text-red-500">*</span></label
+                  ><select
+                    id="kyc-pep-status"
+                    required
+                    class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none focus:border-[#36b647] focus:ring-2 focus:ring-green-100"
+                  >
+                    <option value="" selected disabled>Select answer</option>
+                    <option>No</option>
+                    <option>Yes</option>
+                  </select>
+                </div>
+                <div
+                  class="flex flex-col gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <p
+                    id="kyc-questionnaire-status"
+                    aria-live="polite"
+                    class="text-xs font-semibold text-green-700"
+                  ></p>
+                  <button
+                    id="kyc-questionnaire-submit"
+                    type="submit"
+                    disabled
+                    class="rounded-xl bg-[#36b647] px-6 py-3 text-sm font-bold text-white hover:bg-[#2d963b] disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Submit
+                  </button>
+                </div>
               </form>
             </article>
           </section>
 
           <section id="tab-referral-code" class="tab-content hidden space-y-6">
             <div>
-              <h2 class="text-xl font-extrabold text-slate-900">Referral Code</h2>
-              <p class="mt-1 text-sm text-slate-500">Generate a code to share with friends.</p>
+              <h2 class="text-xl font-extrabold text-slate-900">
+                Referral Code
+              </h2>
+              <p class="mt-1 text-sm text-slate-500">
+                Generate a code to share with friends.
+              </p>
             </div>
-            <article class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <article
+              class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+            >
               <div class="flex items-start gap-3">
-                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"><i data-lucide="users-round" class="h-5 w-5"></i></span>
-                <div><h3 class="font-bold text-slate-900">Invite friends</h3><p class="mt-1 text-xs text-slate-500">Create your personal referral code, then copy or share it.</p></div>
+                <span
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"
+                  ><i data-lucide="users-round" class="h-5 w-5"></i
+                ></span>
+                <div>
+                  <h3 class="font-bold text-slate-900">Invite friends</h3>
+                  <p class="mt-1 text-xs text-slate-500">
+                    Create your personal referral code, then copy or share it.
+                  </p>
+                </div>
               </div>
               <div class="mt-5 flex flex-col gap-3 sm:flex-row">
-                <input id="referral-code-value" type="text" readonly placeholder="Generate a referral code" class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-extrabold tracking-wider text-slate-900 placeholder:font-medium placeholder:tracking-normal" />
-                <button id="generate-referral-code" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#36b647] px-4 py-3 text-sm font-bold text-white hover:bg-[#2d963b]"><i data-lucide="sparkles" class="h-4 w-4"></i>Generate code</button>
+                <input
+                  id="referral-code-value"
+                  type="text"
+                  readonly
+                  placeholder="Generate a referral code"
+                  class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-extrabold tracking-wider text-slate-900 placeholder:font-medium placeholder:tracking-normal"
+                />
+                <button
+                  id="generate-referral-code"
+                  type="button"
+                  class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#36b647] px-4 py-3 text-sm font-bold text-white hover:bg-[#2d963b]"
+                >
+                  <i data-lucide="sparkles" class="h-4 w-4"></i>Generate code
+                </button>
               </div>
               <div class="mt-3 flex flex-wrap gap-2">
-                <button id="copy-referral-code" type="button" disabled class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"><i data-lucide="copy" class="h-4 w-4"></i>Copy code</button>
-                <button id="share-referral-code" type="button" disabled class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"><i data-lucide="share-2" class="h-4 w-4"></i>Share</button>
+                <button
+                  id="copy-referral-code"
+                  type="button"
+                  disabled
+                  class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <i data-lucide="copy" class="h-4 w-4"></i>Copy code
+                </button>
+                <button
+                  id="share-referral-code"
+                  type="button"
+                  disabled
+                  class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <i data-lucide="share-2" class="h-4 w-4"></i>Share
+                </button>
               </div>
-              <p id="referral-code-status" aria-live="polite" class="mt-3 min-h-5 text-xs font-semibold text-green-700"></p>
+              <p
+                id="referral-code-status"
+                aria-live="polite"
+                class="mt-3 min-h-5 text-xs font-semibold text-green-700"
+              ></p>
             </article>
           </section>
         </main>
