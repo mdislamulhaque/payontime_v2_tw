@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         elements.forEach(function (selector) {
 
-            const elementsFound = document.querySelectorAll(selector);
+            const elementsFound =
+                document.querySelectorAll(selector);
 
             elementsFound.forEach(function (element) {
                 element.style.display = 'none';
@@ -38,17 +39,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // LANGUAGE TOGGLE
     // =====================================================
 
-    languageToggleBtn.addEventListener('click', function (e) {
+    if (languageToggleBtn && languageDropdown) {
 
-        e.stopPropagation();
+        languageToggleBtn.addEventListener('click', function (e) {
 
-        const isVisible =
-            languageDropdown.style.display === 'block';
+            e.stopPropagation();
 
-        languageDropdown.style.display =
-            isVisible ? 'none' : 'block';
+            const isVisible =
+                languageDropdown.style.display === 'block';
 
-    });
+            languageDropdown.style.display =
+                isVisible ? 'none' : 'block';
+
+        });
+
+    }
 
 
     // =====================================================
@@ -57,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function setGoogleTranslateLanguage(lang) {
 
-        const select = document.querySelector('.goog-te-combo');
+        const select =
+            document.querySelector('.goog-te-combo');
 
         if (!select) {
             return false;
@@ -104,12 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Update flag
-        currentFlag.src =
-            `https://flagcdn.com/w40/${flagCode}.png`;
+        if (currentFlag) {
+
+            currentFlag.src =
+                `https://flagcdn.com/w40/${flagCode}.png`;
+
+        }
 
         // Update language text
-        currentLanguage.textContent =
-            languageText;
+        if (currentLanguage) {
+
+            currentLanguage.textContent =
+                languageText;
+
+        }
+
     }
 
 
@@ -134,28 +149,37 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update current flag
             // ---------------------------------------------
 
-            currentFlag.src =
-                `https://flagcdn.com/w40/${flagCode}.png`;
+            if (currentFlag && flagCode) {
+
+                currentFlag.src =
+                    `https://flagcdn.com/w40/${flagCode}.png`;
+
+            }
 
 
             // ---------------------------------------------
             // Update current language text
             // ---------------------------------------------
 
-            if (lang === 'en') {
+            if (currentLanguage) {
 
-                currentLanguage.textContent =
-                    'English';
+                if (lang === 'en') {
 
-            } else if (lang === 'sv') {
+                    currentLanguage.textContent =
+                        'English';
 
-                currentLanguage.textContent =
-                    'Swedish';
+                } else if (lang === 'sv') {
 
-            } else if (lang === 'ti') {
+                    currentLanguage.textContent =
+                        'Swedish';
 
-                currentLanguage.textContent =
-                    'Tigrinya';
+                } else if (lang === 'ti') {
+
+                    currentLanguage.textContent =
+                        'Tigrinya';
+
+                }
+
             }
 
 
@@ -170,6 +194,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             // ---------------------------------------------
+            // Close dropdown
+            // ---------------------------------------------
+
+            if (languageDropdown) {
+
+                languageDropdown.style.display =
+                    'none';
+
+            }
+
+
+            // ---------------------------------------------
             // Trigger Google Translate
             // ---------------------------------------------
 
@@ -178,11 +214,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             // ---------------------------------------------
-            // If Google Translate is not loaded yet,
-            // try again several times
+            // Reload function
             // ---------------------------------------------
 
-            if (!translated) {
+            function reloadPage() {
+
+                setTimeout(function () {
+
+                    window.location.reload();
+
+                }, 300);
+
+            }
+
+
+            // ---------------------------------------------
+            // If Google Translate is already loaded
+            // ---------------------------------------------
+
+            if (translated) {
+
+                reloadPage();
+
+            }
+
+
+            // ---------------------------------------------
+            // If Google Translate is not loaded yet
+            // Try again several times
+            // ---------------------------------------------
+
+            else {
 
                 let attempts = 0;
 
@@ -194,23 +256,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         const success =
                             setGoogleTranslateLanguage(lang);
 
+
                         if (success || attempts >= 20) {
 
                             clearInterval(
                                 retryTranslate
                             );
+
+                            reloadPage();
+
                         }
 
                     }, 500);
+
             }
-
-
-            // ---------------------------------------------
-            // Close dropdown
-            // ---------------------------------------------
-
-            languageDropdown.style.display =
-                'none';
 
         });
 
@@ -223,8 +282,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('click', function () {
 
-        languageDropdown.style.display =
-            'none';
+        if (languageDropdown) {
+
+            languageDropdown.style.display =
+                'none';
+
+        }
 
     });
 
@@ -271,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 clearInterval(
                     translateInterval
                 );
+
             }
 
         }, 500);
