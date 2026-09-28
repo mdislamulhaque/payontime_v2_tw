@@ -464,15 +464,15 @@ canvas {
 }
 
 #step-1 .mobile-currency-row {
-  padding: 0.25rem !important;
+  /* padding: 0.25rem !important; */
   border-width: 1px !important;
   border-radius: 0.875rem !important;
 }
 
 #step-1 .calculator-card .mobile-currency-row > input {
-  min-height: 2.75rem !important;
+  min-height: 1rem !important;
   padding: 0.45rem 0.6rem !important;
-  font-size: 1.0625rem !important;
+  font-size: 1rem !important;
   line-height: 1.25rem !important;
 }
 
@@ -607,5 +607,22 @@ canvas {
 }
 
 
+@media (max-width: 640px) {
+    .mobile-currency-row > input {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+        padding-top: .5rem !important;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #index-page-content .index-calculation-continue {
+        min-height: 1.5rem !important;
+        border-radius: 1rem;
+        font-size: 1.125rem;
+    }
+}
 
 

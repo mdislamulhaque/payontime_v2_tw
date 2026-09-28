@@ -546,7 +546,7 @@
             <div class="max-w-4xl mx-auto space-y-6">
               <div
                 class=" pt-2"
-              >
+              style="margin-bottom: 10px;">
                 <div
                   id="stepper-bar"
                   class="flex items-center justify-between"
@@ -563,7 +563,7 @@
                       class="calculator-card w-full max-w-full bg-white rounded-3xl  border border-slate-100 p-6 sm:p-8 z-10 relative"
                     >
                       <!-- Header -->
-                      <div
+                      <!-- <div
                         class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100"
                       >
                         <h2
@@ -588,10 +588,10 @@
                           ></i>
                           <span class="hidden sm:inline">Refresh</span>
                         </button>
-                      </div>
+                      </div> -->
 
                       <!-- Inputs Form -->
-                      <div class="space-y-4">
+                      <div class="space-y-2">
                         <!-- You Send Input -->
                         <div class="relative">
                           <label
@@ -599,7 +599,7 @@
                             >I'm sending (SEK)</label
                           >
                           <div
-                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 focus-within:border-green-200 transition-all p-1.5"
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 focus-within:border-green-200 transition-all "
                           >
                             <input
                               type="number"
@@ -607,7 +607,7 @@
                               min="0"
                               step="0.01"
                               placeholder="0.00"
-                              class="w-1/2 min-w-0 bg-transparent pt-3 pb-1 px-3 text-xl font-black text-slate-900 focus:outline-none"
+                              class="w-1/2 min-w-0 bg-transparent  font-medium text-slate-900 focus:outline-none"
                             />
 
                             <!-- Custom Searchable Select (Send) -->
@@ -662,7 +662,7 @@
                             >Recipient receives (USD)</label
                           >
                           <div
-                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-2xl bg-slate-50 p-1.5"
+                            class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 "
                           >
                             <input
                               type="number"
@@ -670,7 +670,7 @@
                               min="0"
                               step="0.01"
                               placeholder="0.00"
-                              class="w-1/2 min-w-0 bg-transparent pt-3 pb-1 px-3 text-xl font-black text-[#36b647] focus:outline-none cursor-default"
+                              class="w-1/2 min-w-0 bg-transparent font-medium text-[#36b647] focus:outline-none cursor-default"
                             />
 
                             <!-- Custom Searchable Select (Receive) -->
@@ -734,9 +734,9 @@
                         </div>
 
                         <!-- Calculation Breakdown -->
-                        <div id="transaction-info" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
+                        <div id="transaction-info" style="margin: 0 !important;" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
                           <div class="flex justify-between text-xs"><span class="text-slate-400 font-medium">Our fee</span><span class="text-green-600 font-bold" id="fee-text">0 SEK</span></div>
-                          <div class="rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 space-y-2.5 shadow-sm ring-1 ring-emerald-100">
+                          <div class="">
                             <div class="flex justify-between items-center text-sm"><span class="text-slate-700 font-bold">Total to pay</span><span class="text-emerald-800 font-extrabold" id="total-text">0 SEK</span></div>
                           </div>
                         </div>
@@ -748,11 +748,11 @@
                       </div>
                     </div>
 
-                    <div class="pt-4 flex justify-end">
+                    <div class="flex justify-end">
                       <button
                         onclick="goToStep(2)"
                         disabled
-                        class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all"
+                        class="py-2  px-4 bg-[#36b647] hover:bg-[#2d963b] text-white font-medium text-xs rounded-xl shadow-xl shadow-green-500/20 transition-all"
                       >
                         Next: Recipient →
                       </button>
