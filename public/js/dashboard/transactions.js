@@ -101,7 +101,7 @@
           </td>
           <td class="p-4 text-right">
             <div class="flex items-center justify-end gap-1.5">
-              <button onclick="openModal('${tx.id}')" title="View Receipt" class="table-action p-1.5 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 transition-colors">
+              <button onclick="openModal('${tx.id}')" title="View Receipt" class="table-action p-1.5 rounded-lg bg-green-50 hover:bg-green-100 text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
                 </svg>
