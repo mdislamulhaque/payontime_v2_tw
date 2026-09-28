@@ -41,7 +41,9 @@ const langDropdown = document.getElementById('lang-dropdown');
 const langOptionsContainer = document.getElementById('lang-options');
 const activeFlag = document.getElementById('active-flag');
 const activeLangCode = document.getElementById('active-lang-code');
-activeFlag.innerHTML = flagImageMarkup('gb', 'English');
+if (activeFlag) {
+  activeFlag.innerHTML = flagImageMarkup('gb', 'English');
+}
 
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -61,6 +63,8 @@ const brandLogo = document.getElementById('brand-logo');
 // Language Dropdown
 // ================================
 function renderLanguageOptions() {
+  if (!langOptionsContainer) return;
+
   langOptionsContainer.innerHTML = '';
 
   languages.forEach((lang) => {
@@ -109,16 +113,18 @@ function renderLanguageOptions() {
 // ================================
 // Language Dropdown Toggle
 // ================================
-langBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
+if (langBtn && langDropdown) {
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
 
-  isLangOpen = !isLangOpen;
+    isLangOpen = !isLangOpen;
 
-  langDropdown.classList.toggle(
-    'hidden',
-    !isLangOpen
-  );
-});
+    langDropdown.classList.toggle(
+      'hidden',
+      !isLangOpen
+    );
+  });
+}
 
 
 // Close language dropdown when clicking outside
