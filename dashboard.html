@@ -1767,229 +1767,216 @@
                 </div>
 
                 <div
-                  id="step-7"
-                  class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6 max-w-2xl mx-auto text-center"
-                >
-                  <!-- Success Animated Checkmark Icon -->
-                  <div
-                    class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-emerald-500/20"
-                  >
-                    <!-- CheckCircle2 Icon -->
-                    <svg
-                      class="w-12 h-12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                  </div>
+  id="step-7"
+  class="step-container hidden bg-white p-4 sm:p-5 rounded-3xl border border-slate-200/80 shadow-md space-y-3.5 max-w-sm mx-auto text-center"
+>
+  <!-- Success Animated Checkmark Icon -->
+  <div
+    class="w-11 h-11 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-md shadow-emerald-500/10"
+  >
+    <!-- CheckCircle2 Icon -->
+    <svg
+      class="w-6 h-6"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+  </div>
 
-                  <div>
-                    <span
-                      class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider"
-                    >
-                      Payment Verified
-                    </span>
-                    <h2
-                      class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2"
-                    >
-                      Money Transfer Completed Successfully!
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                      Tracking ID:
-                      <span
-                        id="receipt-id"
-                        class="font-mono font-extrabold text-slate-900"
-                      >
-                        HID-88492025
-                      </span>
-                    </p>
-                  </div>
+  <div class="space-y-1">
+    <span
+      class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider"
+    >
+      Payment Verified
+    </span>
+    <h2
+      class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug"
+    >
+      Money Transfer Completed!
+    </h2>
+    <p class="text-[11px] text-slate-500">
+      Tracking ID:
+      <span
+        id="receipt-id"
+        class="font-mono font-extrabold text-slate-900"
+      >
+        HID-88492025
+      </span>
+    </p>
+  </div>
 
-                  <!-- Summary Card -->
-                  <div
-                    class="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-left space-y-3 text-xs"
-                  >
-                    <div
-                      class="flex justify-between items-center pb-3 border-b border-slate-200/80"
-                    >
-                      <span
-                        class="font-bold text-slate-500 uppercase tracking-wider text-[10px]"
-                      >
-                        Recipient
-                      </span>
-                      <span
-                        id="receipt-recipient-name"
-                        class="font-extrabold text-slate-900 text-sm"
-                      >
-                        Recipient Name
-                      </span>
-                    </div>
+  <!-- Summary Card -->
+  <div
+    class="bg-slate-50 border border-slate-200/80 rounded-xl p-3 text-left space-y-2 text-[11px]"
+  >
+    <div
+      class="flex justify-between items-center pb-2 border-b border-slate-200/80"
+    >
+      <span
+        class="font-bold text-slate-400 uppercase tracking-wider text-[9px]"
+      >
+        Recipient
+      </span>
+      <span
+        id="receipt-recipient-name"
+        class="font-extrabold text-slate-900 text-xs"
+      >
+        Recipient Name
+      </span>
+    </div>
 
-                    <div
-                      class="grid grid-cols-1 min-[420px]:grid-cols-2 gap-4 py-2 bg-white p-3 rounded-xl border border-slate-200/60"
-                    >
-                      <div>
-                        <span class="text-slate-400 block text-[10px]"
-                          >Sent Amount</span
-                        >
-                        <span
-                          id="receipt-send-amount"
-                          class="font-extrabold text-slate-900 text-sm"
-                        >
-                          100.00 CHF
-                        </span>
-                      </div>
-                      <div>
-                        <span class="text-slate-400 block text-[10px]"
-                          >Recipient Receives</span
-                        >
-                        <span
-                          id="receipt-receive-amount"
-                          class="font-extrabold text-emerald-700 text-sm"
-                        >
-                          112.50 USD
-                        </span>
-                      </div>
-                    </div>
+    <div
+      class="grid grid-cols-2 gap-2 py-1.5 bg-white p-2 rounded-lg border border-slate-200/60"
+    >
+      <div>
+        <span class="text-slate-400 block text-[9px]">Sent Amount</span>
+        <span
+          id="receipt-send-amount"
+          class="font-extrabold text-slate-900 text-xs"
+        >
+          100.00 CHF
+        </span>
+      </div>
+      <div>
+        <span class="text-slate-400 block text-[9px]">Recipient Receives</span>
+        <span
+          id="receipt-receive-amount"
+          class="font-extrabold text-emerald-700 text-xs"
+        >
+          112.50 USD
+        </span>
+      </div>
+    </div>
 
-                    <div class="space-y-1.5 pt-2 text-slate-600">
-                      <div class="flex justify-between">
-                        <span>Delivery Method:</span>
-                        <span
-                          id="receipt-delivery-method"
-                          class="font-bold text-slate-900"
-                          >Bank Transfer</span
-                        >
-                      </div>
+    <div class="space-y-1 pt-0.5 text-slate-600">
+      <div class="flex justify-between">
+        <span>Delivery Method:</span>
+        <span
+          id="receipt-delivery-method"
+          class="font-bold text-slate-900"
+        >
+          Bank Transfer
+        </span>
+      </div>
 
-                      <div class="flex justify-between">
-                        <span>Exchange Rate:</span>
-                        <span
-                          id="receipt-exchange-rate"
-                          class="font-bold text-slate-900"
-                        >
-                          1 CHF = 1.125 USD
-                        </span>
-                      </div>
+      <div class="flex justify-between">
+        <span>Exchange Rate:</span>
+        <span
+          id="receipt-exchange-rate"
+          class="font-bold text-slate-900"
+        >
+          1 CHF = 1.125 USD
+        </span>
+      </div>
 
-                      <div class="flex justify-between">
-                        <span>Estimated Payout Time:</span>
-                        <span class="font-bold text-emerald-600"
-                          >⚡ Instant (Under 60s)</span
-                        >
-                      </div>
-                    </div>
-                  </div>
+      <div class="flex justify-between">
+        <span>Estimated Payout:</span>
+        <span class="font-bold text-emerald-600">⚡ Instant (Under 60s)</span>
+      </div>
+    </div>
+  </div>
 
-                  <!-- Action Buttons -->
-                  <div
-                    class="flex flex-wrap items-center justify-center gap-3 pt-2"
-                  >
-                    <!-- Print Button -->
-                    <button
-                      onclick="handleReceiptPrint()"
-                      class="py-3 px-5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center gap-2 transition-all"
-                    >
-                      <!-- Printer Icon -->
-                      <svg
-                        class="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                        <path
-                          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-                        ></path>
-                        <rect x="6" y="14" width="12" height="8"></rect>
-                      </svg>
-                      <span>Print Receipt</span>
-                    </button>
+  <!-- Action Buttons -->
+  <div class="flex flex-wrap items-center justify-center gap-1.5 pt-1">
+    <!-- Print Button -->
+    <button
+      onclick="handleReceiptPrint()"
+      class="py-2 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-[11px] flex items-center gap-1.5 transition-all"
+    >
+      <!-- Printer Icon -->
+      <svg
+        class="w-3.5 h-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+        <path
+          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+        ></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      <span>Print</span>
+    </button>
 
-                    <!-- Download PDF Button -->
-                    <button
-                      onclick="handleReceiptDownload()"
-                      class="py-3 px-5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-2 transition-all"
-                    >
-                      <!-- Download Icon -->
-                      <svg
-                        class="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                        ></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                      </svg>
-                      <span>Download PDF</span>
-                    </button>
+    <!-- Download PDF Button -->
+    <button
+      onclick="handleReceiptDownload()"
+      class="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] flex items-center gap-1.5 transition-all"
+    >
+      <!-- Download Icon -->
+      <svg
+        class="w-3.5 h-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      <span>PDF</span>
+    </button>
 
-                    <!-- Send Again Button -->
-                    <button
-                      onclick="handleSendAgain()"
-                      class="py-3 px-5 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white font-bold text-xs shadow-lg shadow-green-500/20 flex items-center gap-2 transition-all"
-                    >
-                      <!-- RefreshCw Icon -->
-                      <svg
-                        class="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-                        ></path>
-                        <path d="M3 3v5h5"></path>
-                        <path
-                          d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"
-                        ></path>
-                        <path d="M16 16h5v5"></path>
-                      </svg>
-                      <span>Send Money Again</span>
-                    </button>
-                  </div>
+    <!-- Send Again Button -->
+    <button
+      onclick="handleSendAgain()"
+      class="py-2 px-3.5 rounded-xl bg-[#36b647] hover:bg-[#2d963b] text-white font-bold text-[11px] shadow-md shadow-green-500/15 flex items-center gap-1.5 transition-all"
+    >
+      <!-- RefreshCw Icon -->
+      <svg
+        class="w-3.5 h-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+        <path d="M3 3v5h5"></path>
+        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+        <path d="M16 16h5v5"></path>
+      </svg>
+      <span>Send Again</span>
+    </button>
+  </div>
 
-                  <!-- Bottom Navigation Link -->
-                  <div class="pt-4 border-t border-slate-100">
-                    <button
-                      onclick="returnToDashboard()"
-                      class="text-xs font-extrabold text-slate-600 hover:text-slate-900 hover:underline flex items-center justify-center gap-1 mx-auto"
-                    >
-                      <span>Return to Dashboard Overview</span>
-                      <!-- ArrowRight Icon -->
-                      <svg
-                        class="w-3.5 h-3.5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+  <!-- Bottom Navigation Link -->
+  <div class="pt-2 border-t border-slate-100">
+    <button
+      onclick="returnToDashboard()"
+      class="text-[11px] font-extrabold text-slate-600 hover:text-slate-900 hover:underline flex items-center justify-center gap-1 mx-auto"
+    >
+      <span>Dashboard Overview</span>
+      <!-- ArrowRight Icon -->
+      <svg
+        class="w-3 h-3"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
               </div>
             </div>
           </div>
