@@ -16,6 +16,11 @@
     <style>
       body { font-family: "Plus Jakarta Sans", sans-serif; }
       label { text-align: left !important; }
+      .language-toggle-btn { background: #fff !important; color: #0f172a !important; }
+      .language-option { background: #fff !important; color: #0f172a !important; }
+      .language-option:hover { background: #f1f5f9 !important; }
+      .goog-te-banner-frame { display: none !important; }
+      body { top: 0 !important; }
 
       :root {
         --brand-navy: #071b79;
@@ -112,6 +117,123 @@
         * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
       }
       </style>
+        <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+                pageLanguage: "en",
+                includedLanguages: "en,sv",
+            },
+            "google_translate_element"
+        );
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Hidden div (Google needs it internally) -->
+<div id="google_translate_element" style="display: none"></div>
+<style>
+    /* Google Translate Widget Hide */
+    .goog-te-banner-frame {
+        display: none !important;
+    }
+
+    body {
+        top: 0px !important;
+    }
+
+    .goog-te-menu-value {
+        display: none !important;
+    }
+
+    .goog-te-gadget {
+        font-size: 0 !important;
+    }
+
+    .skiptranslate {
+        display: none !important;
+    }
+
+    /* Custom Language Toggle Styles */
+    .language-toggle {
+        position: relative;
+    }
+
+    .language-toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid #e9ecef;
+        padding: 6px 12px;
+        border-radius: 8px;
+        /* background: white; */
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .language-toggle-btn:hover {
+        border-color: #6c757d;
+    }
+
+    .language-toggle-dropdown {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 8px;
+        width: 140px;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 1030;
+        overflow: hidden;
+    }
+
+    .sticky-top {
+        z-index: px !important;
+    }
+
+    .language-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 10px 12px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: #f8f9fa;
+    }
+
+    .language-option.active {
+        background-color: #e7f1ff;
+        color: #0d6efd;
+    }
+
+    .language-flag {
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+        border-radius: 2px;
+    }
+
+    .language-text {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .img-box {
+        border-radius: 50% !important;
+        height: 34px;
+        width: 34px;
+        overflow: hidden;
+    }
+    li.nav-item.dropdown {
+        list-style: none;
+    }
+</style>
   </head>
   <body class="bg-[#F8FAFC] text-slate-900 antialiased min-h-screen">
     <div id="dashboardShell" class="min-h-screen flex">
@@ -136,12 +258,37 @@
           </div>
 
           <div class="dashboard-header-actions flex items-center justify-end gap-2">
-            <div class="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 sm:flex">
+            <!-- <div class="hidden items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 sm:flex">
               <img id="language-flag" src="https://flagcdn.com/w40/se.png" alt="Swedish flag" class="w-6 h-auto rounded-sm" />
               <select id="languageSelector" aria-label="Select language" class="max-w-[6rem] border-0 bg-transparent py-2 pl-0 pr-4 text-xs font-bold text-slate-700 focus:outline-none focus:ring-0">
                 <option value="sv" selected>Swedish</option><option value="en">English</option>
               </select>
-            </div>
+            </div> -->
+            <li class="nav-item dropdown">
+                        <div class="language-toggle">
+                            <button type="button" class="language-toggle-btn" id="languageToggleBtn" aria-haspopup="true" aria-expanded="false">
+                                <img src="https://flagcdn.com/w40/se.png" alt="Swedish" class="language-flag" id="currentFlag">
+                                <span class="language-text" id="currentLanguage">Swedish</span>
+                                <i class="bi bi-globe"></i>
+                            </button>
+
+                            <div class="language-toggle-dropdown" id="languageDropdown" style="display: none;">
+                                <button class="language-option" data-lang="en" data-flag="gb">
+                                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="language-flag">
+                                    <span class="language-text">English</span>
+                                </button>
+                                <button class="language-option" data-lang="sv" data-flag="se">
+                                    <img src="https://flagcdn.com/w40/se.png" alt="Swedish" class="language-flag">
+                                    <span class="language-text">Swedish</span>
+                                </button>
+                                <!-- ⭐ New Added: Tigrinya -->
+                                <!-- <button class="language-option" data-lang="ti" data-flag="er">
+                                    <img src="https://flagcdn.com/w40/er.png" alt="Tigrinya" class="language-flag">
+                                    <span class="language-text">Tigrinya</span>
+                                </button> -->
+                            </div>
+                        </div>
+                    </li>
             <div class="relative">
               <button id="notifBellBtn" type="button" class="relative rounded-xl bg-slate-100 p-2.5 text-slate-700" aria-label="Notifications">
                 <i data-lucide="bell" class="h-4 w-4"></i><span class="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#36b647]"></span>
