@@ -471,7 +471,7 @@ canvas {
 
 #step-1 .calculator-card .mobile-currency-row > input {
   min-height: 2.75rem !important;
-  padding: 0.9rem 0.6rem 0.2rem !important;
+  padding: 0.45rem 0.6rem !important;
   font-size: 1.0625rem !important;
   line-height: 1.25rem !important;
 }
@@ -498,5 +498,7 @@ canvas {
   padding: 0.75rem !important;
   border-radius: 1rem !important;
 }
+
+
 
 
