@@ -7,6 +7,123 @@
   <title>payontime</title>
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="/src/style.css" />
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+                pageLanguage: "en",
+                includedLanguages: "en,sv",
+            },
+            "google_translate_element"
+        );
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- Hidden div (Google needs it internally) -->
+<div id="google_translate_element" style="display: none"></div>
+<style>
+    /* Google Translate Widget Hide */
+    .goog-te-banner-frame {
+        display: none !important;
+    }
+
+    body {
+        top: 0px !important;
+    }
+
+    .goog-te-menu-value {
+        display: none !important;
+    }
+
+    .goog-te-gadget {
+        font-size: 0 !important;
+    }
+
+    .skiptranslate {
+        display: none !important;
+    }
+
+    /* Custom Language Toggle Styles */
+    .language-toggle {
+        position: relative;
+    }
+
+    .language-toggle-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 2px solid #e9ecef;
+        padding: 6px 12px;
+        border-radius: 8px;
+        /* background: white; */
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .language-toggle-btn:hover {
+        border-color: #6c757d;
+    }
+
+    .language-toggle-dropdown {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 8px;
+        width: 140px;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        z-index: 1030;
+        overflow: hidden;
+    }
+
+    .sticky-top {
+        z-index: px !important;
+    }
+
+    .language-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 10px 12px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .language-option:hover {
+        background-color: #f8f9fa;
+    }
+
+    .language-option.active {
+        background-color: #e7f1ff;
+        color: #0d6efd;
+    }
+
+    .language-flag {
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+        border-radius: 2px;
+    }
+
+    .language-text {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .img-box {
+        border-radius: 50% !important;
+        height: 34px;
+        width: 34px;
+        overflow: hidden;
+    }
+    li.nav-item.dropdown {
+        list-style: none;
+    }
+</style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-900 antialiased overflow-x-hidden">
 
@@ -62,18 +179,43 @@
       <div class="flex items-center gap-4">
         
         <div class="relative">
-          <button id="lang-btn" class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200 cursor-pointer hover:bg-slate-200/70 transition-colors">
+          <!-- <button id="lang-btn" class="flex items-center gap-2 bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200 cursor-pointer hover:bg-slate-200/70 transition-colors">
             <span id="active-flag" class="inline-flex items-center"></span>
             <span id="active-lang-code" class="text-xs font-bold text-slate-700 uppercase">EN</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-500"></i>
-          </button>
+          </button> -->
 
-          <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1 z-50">
+          <!-- <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden py-1 z-50">
             <div class="px-3 py-1.5 text-[10px] uppercase font-bold text-slate-400 border-b border-slate-100">
               Select Language
             </div>
             <div id="lang-options"></div>
-          </div>
+          </div> -->
+          <li class="nav-item dropdown">
+                        <div class="language-toggle">
+                            <button class="language-toggle-btn" id="languageToggleBtn">
+                                <img src="https://flagcdn.com/w40/se.png" alt="Swedish" class="language-flag" id="currentFlag">
+                                <span class="language-text" id="currentLanguage">Swedish</span>
+                                <i class="bi bi-globe"></i>
+                            </button>
+
+                            <div class="language-toggle-dropdown" id="languageDropdown" style="display: none;">
+                                <button class="language-option" data-lang="en" data-flag="gb">
+                                    <img src="https://flagcdn.com/w40/gb.png" alt="English" class="language-flag">
+                                    <span class="language-text">English</span>
+                                </button>
+                                <button class="language-option" data-lang="sv" data-flag="se">
+                                    <img src="https://flagcdn.com/w40/se.png" alt="Swedish" class="language-flag">
+                                    <span class="language-text">Swedish</span>
+                                </button>
+                                <!-- ⭐ New Added: Tigrinya -->
+                                <!-- <button class="language-option" data-lang="ti" data-flag="er">
+                                    <img src="https://flagcdn.com/w40/er.png" alt="Tigrinya" class="language-flag">
+                                    <span class="language-text">Tigrinya</span>
+                                </button> -->
+                            </div>
+                        </div>
+                    </li>
         </div>
 
         <div id="logged-out-view" class="hidden sm:flex items-center gap-3">

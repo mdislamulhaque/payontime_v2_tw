@@ -66,7 +66,8 @@
         });
 
         // Initialize with saved language
-        const savedLang = localStorage.getItem('preferred-language') || 'en';
+        const storedLang = localStorage.getItem('preferred-language');
+        const savedLang = ['en', 'sv'].includes(storedLang) ? storedLang : 'sv';
         const savedFlagCode = savedLang === 'en' ? 'gb' : 'se';
         const savedLanguageText = savedLang === 'en' ? 'English' : 'Swedish';
 

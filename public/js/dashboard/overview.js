@@ -228,7 +228,7 @@
         const supportedLanguages = ["en", "sv"];
         try {
           const savedLanguage = localStorage.getItem("payontime-language");
-          if (supportedLanguages.includes(savedLanguage)) languageSelector.value = savedLanguage;
+          languageSelector.value = supportedLanguages.includes(savedLanguage) ? savedLanguage : "sv";
         } catch (error) {
           // Keep the selector usable when browser storage is unavailable.
         }
