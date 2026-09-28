@@ -193,9 +193,11 @@
         const val = document.getElementById("recipient-select").value;
         const card = document.getElementById("recipient-card-display");
         const emptyState = document.getElementById("recipient-card-empty");
+        const recipientDetailsFields = document.getElementById("recipient-details-fields");
         const selectedRecipient = recipientsData[val];
 
         if (val && selectedRecipient) {
+          recipientDetailsFields.classList.remove("hidden");
           card.classList.remove("hidden");
           emptyState.classList.add("hidden");
           const recipientSelectFlag = document.getElementById("recipient-select-flag");
@@ -211,12 +213,11 @@
           document.getElementById("rec-details").innerHTML = `
             <div class="space-y-2 text-start">
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${selectedRecipient.name}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country}</span></div>
+              
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${selectedRecipient.phone}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Bank name</span><span class="font-semibold text-slate-900">${selectedRecipient.bankName || "—"}</span></div>
+              
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Bank account</span><span class="font-semibold text-slate-900">${selectedRecipient.bankAccountNumber || "—"}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">T-plus wallet</span><span class="font-semibold text-slate-900">${selectedRecipient.tplusWalletNumber || "—"}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">City</span><span class="font-semibold text-slate-900">${selectedRecipient.cityName || "—"}</span></div>
+         
             </div>`;
           if (deliveryMethod.value === "tplus" || deliveryMethod.value === "bank-deposit") {
             document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
@@ -228,6 +229,7 @@
           updateTplusCityOptions(selectedRecipient.country, selectedRecipient.cityName);
 
         } else {
+          recipientDetailsFields.classList.add("hidden");
           card.classList.add("hidden");
           document.getElementById("recipient-select-flag").classList.add("hidden");
           document.getElementById("tplus-city").value = "";

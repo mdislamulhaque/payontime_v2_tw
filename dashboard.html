@@ -761,243 +761,246 @@
                 </div>
 
                 <div
-                  id="step-2"
-                  class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
-                >
-                  <div class="space-y-4">
-                    <!-- Dropdown Selector Row -->
-                    <div>
-                      <label
-                        class="block text-xs font-bold text-slate-700 mb-1.5"
-                      >
-                        Select Recipient
-                      </label>
-                      <div class="flex items-center gap-2">
-                        <img id="recipient-select-flag" class="hidden w-6 h-auto rounded-sm mr-1.5" alt="Recipient country flag" />
-                        <select
-                          id="recipient-select"
-                          onchange="renderRecipientCard()"
-                          class="min-w-0 flex-1 w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
-                        >
-                          <option value="" disabled selected>
-                            -- Choose Recipient --
-                          </option>
-                          <option value="rec_1">MAXAMED CALI JAAMAC | 252619333207</option>
-                          <option value="rec_2">Brian Otieno | +254 712 345 678</option>
-                        </select>
+  id="step-2"
+  class="step-container hidden bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-md space-y-6"
+>
+  <div class="space-y-4">
+    <!-- Dropdown Selector Row -->
+    <div>
+      <label class="block text-xs font-bold text-slate-700 mb-1.5">
+        Select Recipient
+      </label>
+      <div class="flex items-center gap-2">
+        <img
+          id="recipient-select-flag"
+          class="hidden w-6 h-auto rounded-sm mr-1.5"
+          alt="Recipient country flag"
+        />
+        <select
+          id="recipient-select"
+          onchange="renderRecipientCard()"
+          class="min-w-0 flex-1 w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"
+        >
+          <option value="" disabled selected>
+            -- Choose Recipient --
+          </option>
+          <option value="rec_1">MAXAMED CALI JAAMAC | 252619333207</option>
+          <option value="rec_2">Brian Otieno | +254 712 345 678</option>
+        </select>
 
-                        <!-- Integrated Add Recipient Modal Trigger Icon Button -->
-                        <button
-                          id="recipient-add-button"
-                          type="button"
-                          onclick="openAddRecipientModal()"
-                          class="p-3.5 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white transition-colors shrink-0 shadow-md shadow-green-500/20"
-                          title="Add New Recipient"
-                        >
-                          <svg
-                            class="w-5 h-5"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path
-                              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                            ></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <line x1="19" y1="8" x2="19" y2="14"></line>
-                            <line x1="22" y1="11" x2="16" y2="11"></line>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
+        <!-- Integrated Add Recipient Modal Trigger Icon Button -->
+        <button
+          id="recipient-add-button"
+          type="button"
+          onclick="openAddRecipientModal()"
+          class="p-2 rounded-2xl bg-[#36b647] hover:bg-[#2d963b] text-white transition-colors shrink-0 shadow-md shadow-green-500/20"
+          title="Add New Recipient"
+        >
+          <svg
+            class="w-5 h-5"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+            ></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <line x1="19" y1="8" x2="19" y2="14"></line>
+            <line x1="22" y1="11" x2="16" y2="11"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
 
-                    <div id="tplus-recipient-lookup" class="hidden">
-                      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Or send to a new recipient <span id="recipient-test-number" class="font-medium text-[#b63636]"></span></label>
-                      <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
-                      <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
-                      <div id="bank-account-field" class="hidden mt-4">
-                        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-[#b63636]">(Use this account bank number for testing: 31052160)</span></label>
-                        <input id="recipient-bank-account" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
-                      </div>
-                    </div>
+    <div id="tplus-recipient-lookup" class="hidden">
+      <label for="tplus-recipient-phone" class="block text-xs font-bold text-slate-700 mb-1.5">Or send to a new recipient <span id="recipient-test-number" class="font-medium text-[#b63636]"></span></label>
+      <input id="tplus-recipient-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter saved recipient's mobile number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+      <p id="tplus-recipient-status" class="hidden mt-1.5 text-xs text-amber-600"></p>
+      <div id="bank-account-field" class="hidden mt-4">
+        <label for="recipient-bank-account" class="block text-xs font-bold text-slate-700 mb-1.5">Bank account number <span class="font-medium text-[#b63636]">(Use this account bank number for testing: 31052160)</span></label>
+        <input id="recipient-bank-account" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter bank account number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]" />
+      </div>
+    </div>
 
-                    <!-- Selected Recipient Preview Card -->
-                    <div
-                      id="recipient-card-display"
-                      class="hidden p-5 rounded-2xl bg-green-50/50 border border-green-100 space-y-3"
-                    >
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div
-                            id="rec-avatar"
-                            class="w-10 h-10 rounded-2xl bg-[#36b647] text-white font-black flex items-center justify-center text-sm shadow"
-                          >
-                            A
-                          </div>
-                          <div>
-                            <h4
-                              id="rec-name"
-                              class="text-sm font-extrabold text-slate-900"
-                            >
-                              MAXAMED CALI JAAMAC
-                            </h4>
-                            <p
-                              id="rec-info"
-                              class="text-xs text-slate-600 flex items-center gap-1"
-                            >
-                              <svg
-                                class="w-3 h-3 text-[#36b647]"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <path
-                                  d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"
-                                ></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                              </svg>
-                              <span>Ethiopia • +251 91 234 5678</span>
-                            </p>
-                          </div>
-                        </div>
+    <!-- Selected Recipient Preview Card -->
+    <div
+      id="recipient-card-display"
+      class="hidden px-3 pb-3 rounded-2xl bg-green-50/50 border border-green-100 space-y-3"
+    >
+      <div class="flex items-center justify-between hidden">
+        <div class="flex items-center gap-3 hidden">
+          <div
+            id="rec-avatar"
+            class="w-10 h-10 rounded-2xl bg-[#36b647] text-white font-black flex items-center justify-center text-sm shadow"
+          >
+            A
+          </div>
+          <div>
+            <h4
+              id="rec-name"
+              class="text-sm font-extrabold text-slate-900"
+            >
+              MAXAMED CALI JAAMAC
+            </h4>
+            <p
+              id="rec-info"
+              class="text-xs text-slate-600 flex items-center gap-1"
+            >
+              <svg
+                class="w-3 h-3 text-[#36b647]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"
+                ></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Ethiopia • +251 91 234 5678</span>
+            </p>
+          </div>
+        </div>
 
-                        <span
-                          class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold"
-                        >
-                          Verified Recipient
-                        </span>
-                      </div>
+        <span
+          class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold hidden"
+        >
+          Verified Recipient
+        </span>
+      </div>
 
-                      <div
-                        id="rec-details"
-                        class="pt-2 border-t border-green-100/80 text-xs text-slate-700 space-y-1"
-                      >
-                        <!-- Dynamic Delivery Details -->
-                      </div>
-                    </div>
+      <div
+        id="rec-details"
+        class="pt-2 border-t border-green-100/80 text-xs text-slate-700 space-y-1"
+      >
+        <!-- Dynamic Delivery Details -->
+      </div>
+    </div>
 
-                    <div id="tplus-city-wrapper" class="hidden">
-                      <label for="tplus-city" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient City</label>
-                      <select id="tplus-city" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-3.5 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-                        <option value="" selected disabled>City</option>
-                      </select>
-                    </div>
+    <div id="tplus-city-wrapper" class="hidden">
+      <label for="tplus-city" class="block text-xs font-bold text-slate-700 mb-1.5">Recipient City</label>
+      <select id="tplus-city" class="w-full bg-slate-50 border border-slate-200 rounded-2xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
+        <option value="" selected disabled>City</option>
+      </select>
+    </div>
 
-                    <!-- Empty State Placeholder -->
-                    <div
-                      id="recipient-card-empty"
-                      class="p-8 text-center bg-slate-50 border border-slate-200/80 rounded-2xl"
-                    >
-                      <svg
-                        class="w-8 h-8 text-slate-300 mx-auto mb-2"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                        ></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                      </svg>
-                      <p id="recipient-empty-message" class="text-xs text-slate-500">
-                        No recipient selected yet. Choose one from the dropdown
-                        or click the Red '+' button to add.
-                      </p>
-                    </div>
+    <!-- Empty State Placeholder -->
+    <div
+      id="recipient-card-empty"
+      class="p-8 text-center bg-slate-50 border border-slate-200/80 rounded-2xl"
+    >
+      <svg
+        class="w-8 h-8 text-slate-300 mx-auto mb-2"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+        ></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M22 21v-2a4 4 0 0 3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <p id="recipient-empty-message" class="text-xs text-slate-500">
+        No recipient selected yet. Choose one from the dropdown
+        or click the Red '+' button to add.
+      </p>
+    </div>
 
-                    <section class="pt-5 border-t border-slate-100 space-y-4">
-                      <div>
-                        <label for="purpose-select" class="block text-xs font-bold text-slate-700 mb-1.5">Transfer purpose</label>
-                        <select id="purpose-select" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></select>
-                      </div>
-                      <div>
-                        <label for="source-of-income" class="block text-xs font-bold text-slate-700 mb-1.5">Source of Income <span class="text-red-500">*</span></label>
-                        <select id="source-of-income" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-                          <option value="" selected disabled>Select source of income</option>
-                          <option value="Employment">Employment</option>
-                          <option value="Self-employed">Self-employed</option>
-                          <option value="Business">Business</option>
-                          <option value="Savings">Savings</option>
-                          <option value="Pension">Pension</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label for="transfer-remarks" class="block text-xs font-bold text-slate-700 mb-1.5">Remarks <span class="text-slate-400 font-normal">(Optional)</span></label>
-                        <textarea id="transfer-remarks" rows="2" placeholder="Remarks" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></textarea>
-                      </div>
-                      <div>
-                        <label for="payment-method-select" class="block text-xs font-bold text-slate-700 mb-1.5">Payment method</label>
-                        <select id="payment-method-select" required onchange="switchPaymentMethod(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
-                          <option value="" disabled selected>Choose payment method</option>
-                          <option value="cash">Cash</option>
-                          <option value="card">Debit or Credit</option>
-                          <option value="bank">Bank</option>
-                          <option value="swish">Swish</option>
-                        </select>
-                      </div>
-                    </section>
+    <!-- 2 Column Layout for the 4 Bottom Fields -->
+    <section id="recipient-details-fields" class="hidden pt-5 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="purpose-select" class="block text-xs font-bold text-slate-700 mb-1.5">Transfer purpose</label>
+        <select id="purpose-select" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></select>
+      </div>
+      <div>
+        <label for="source-of-income" class="block text-xs font-bold text-slate-700 mb-1.5">Source of Income <span class="text-red-500">*</span></label>
+        <select id="source-of-income" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
+          <option value="" selected disabled>Select source of income</option>
+          <option value="Employment">Employment</option>
+          <option value="Self-employed">Self-employed</option>
+          <option value="Business">Business</option>
+          <option value="Savings">Savings</option>
+          <option value="Pension">Pension</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="transfer-remarks" class="block text-xs font-bold text-slate-700 mb-1.5">Remarks <span class="text-slate-400 font-normal">(Optional)</span></label>
+        <textarea id="transfer-remarks" rows="1" placeholder="Remarks" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#36b647]"></textarea>
+      </div>
+      <div>
+        <label for="payment-method-select" class="block text-xs font-bold text-slate-700 mb-1.5">Payment method</label>
+        <select id="payment-method-select" required onchange="switchPaymentMethod(this.value)" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#36b647]">
+          <option value="" disabled selected>Choose payment method</option>
+          <option value="cash">Cash</option>
+          <option value="card">Debit or Credit</option>
+          <option value="bank">Bank</option>
+          <option value="swish">Swish</option>
+        </select>
+      </div>
+    </section>
 
-                    <!-- Navigation Buttons -->
-                    <div
-                      class="pt-4 flex items-center justify-between border-t border-slate-100"
-                    >
-                      <button
-                        type="button"
-                        onclick="goToStep(1)"
-                        class="py-3 px-6 rounded-2xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-1.5"
-                      >
-                        <svg
-                          class="w-4 h-4"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <line x1="19" y1="12" x2="5" y2="12"></line>
-                          <polyline points="12 19 5 12 12 5"></polyline>
-                        </svg>
-                        <span>Previous</span>
-                      </button>
+    <!-- Navigation Buttons -->
+    <div
+      class="pt-4 flex items-center justify-between border-t border-slate-100"
+    >
+      <button
+        type="button"
+        onclick="goToStep(1)"
+        class="py-2.5 px-5 rounded-2xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 flex items-center gap-1.5"
+      >
+        <svg
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Previous</span>
+      </button>
 
-                      <button
-                        type="button"
-                        onclick="goToStep(3)"
-                        disabled
-                        class="py-3.5 px-8 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2"
-                      >
-                        <span>Next: Review</span>
-                        <svg
-                          class="w-4 h-4"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                          <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+      <button
+        type="button"
+        onclick="goToStep(3)"
+        disabled
+        class="py-2.5 px-6 bg-[#36b647] hover:bg-[#2d963b] text-white font-extrabold text-xs rounded-2xl shadow-xl shadow-green-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
+      >
+        <span>Next: Review</span>
+        <svg
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
 
                 <!-- ========================================== -->
                 <!-- ADD RECIPIENT MODAL                        -->
