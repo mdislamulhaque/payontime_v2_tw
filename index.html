@@ -215,7 +215,7 @@
                                 <div class="relative">
                                     <label class="calculator-field-label block mb-1 text-[10px] font-bold text-slate-500 uppercase tracking-wide">I'm sending (SEK)</label>
                                     <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 focus-within:border-red-200 transition-all ">
-                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent  text-md  text-slate-900 focus:outline-none px-3">
+                                        <input type="number" id="send-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent  text-md  text-slate-900 focus:outline-none px-3 font-medium">
 
                                         <!-- Custom Searchable Select (Send) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="send-dropdown-wrapper">
@@ -242,7 +242,7 @@
                                 <div class="relative">
                                     <label id="receive-amount-label" class="calculator-field-label block mb-1 text-[10px] font-bold text-slate-500 uppercase tracking-wide">Recipient receives (KES)</label>
                                     <div class="mobile-currency-row flex items-center border-2 border-slate-100 rounded-xl bg-slate-50 ">
-                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md  text-green-600 focus:outline-none">
+                                        <input type="number" id="receive-amount" min="0" step="0.01" placeholder="0.00" class="w-full bg-transparent px-3 text-md  text-green-600 focus:outline-none font-medium">
 
                                         <!-- Custom Searchable Select (Receive) -->
                                         <div class="shrink-0 self-stretch flex items-stretch border-l border-slate-200 pl-2 relative" id="receive-dropdown-wrapper">
@@ -273,24 +273,22 @@
                                 </div>
 
                                 <!-- Calculation Breakdown -->
-                                <div id="transaction-info" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-100 space-y-2">
-                                    <div class="flex justify-between text-xs">
-                                        <span class="text-slate-400 font-medium">Our fee</span>
-                                        <span class="text-green-600 font-bold" id="fee-text">0 SEK</span>
+                                <div id="transaction-info" class="index-calculation-summary">
+                                    <div class="index-calculation-fee">
+                                        <span class="inline-flex items-center gap-2">
+                                            <span>Fee</span>
+                                            <span class="index-fee-info" title="Transfer fee depends on the delivery method" aria-label="Transfer fee information">i</span>
+                                        </span>
+                                        <span id="fee-text">0 SEK</span>
                                     </div>
-                                    <div class="rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 space-y-2.5 shadow-sm ring-1 ring-emerald-100">
-                                        <div class="flex justify-between items-center text-sm">
-                                            <span class="text-slate-700 font-bold">Total to pay</span>
-                                            <span class="text-emerald-800 font-extrabold" id="total-text">0 SEK</span>
+                                    <div class="index-calculation-bottom">
+                                        <div class="index-calculation-total">
+                                            <span>Total to pay</span>
+                                            <strong id="total-text">0.00 SEK</strong>
                                         </div>
+                                        <button id="send-now-btn" type="button" class="index-calculation-continue">Continue</button>
                                     </div>
                                 </div>
-
-                                <!-- CTA Button -->
-                                <button id="send-now-btn" class="w-full py-2 bg-[#108d2c] text-white font-bold rounded-2xl shadow-lg shadow-green-200 hover:bg-[#0b671f] transition-all flex items-center justify-center gap-2 text-base cursor-pointer">
-                                    <span>Send Money Now</span>
-                                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                                </button>
                             </div>
                         </div>
                     </div>

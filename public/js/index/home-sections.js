@@ -79,7 +79,6 @@ const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
 const totalText = document.getElementById("total-text");
 const feeText = document.getElementById("fee-text");
-const transactionInfo = document.getElementById("transaction-info");
 const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
@@ -171,7 +170,8 @@ setupSearchableDropdown("receive");
 function calculateTransfer(changedField = "send") {
   if (changedField === "receive" && receiveAmountInput.value.trim() === "") {
     sendAmountInput.value = "";
-    transactionInfo.classList.add("hidden");
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
     return;
   }
 
@@ -190,10 +190,17 @@ function calculateTransfer(changedField = "send") {
     received = 0;
     receiveAmountInput.value = "";
   }
-  transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
   if (!selectedReceive) {
-    feeText.textContent = "-";
-    totalText.textContent = "-";
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
+    return;
+  }
+  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
+  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
+  inlineRate.textContent = exchangeRate;
+  if (amount <= 0) {
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
     return;
   }
   const feesByMethod = {
@@ -203,9 +210,6 @@ function calculateTransfer(changedField = "send") {
     "cash-pickup": 20
   };
   const fee = feesByMethod[deliveryMethod.value] ?? 0;
-  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
-  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
-  inlineRate.textContent = exchangeRate;
   feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
   totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
 }
