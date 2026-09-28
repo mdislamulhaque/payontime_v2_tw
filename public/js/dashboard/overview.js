@@ -224,68 +224,7 @@
         renderRecentTransactions();
         renderQuickRecipients();
 
-        const languageToggleBtn = document.getElementById("languageToggleBtn");
-        const languageDropdown = document.getElementById("languageDropdown");
-        const currentLanguage = document.getElementById("currentLanguage");
-        const languageFlag = document.getElementById("currentFlag");
-        const supportedLanguages = ["en", "sv"];
-        let selectedLanguage = "sv";
-        try {
-          // Replace the previous English default once, then honor user choices.
-          if (localStorage.getItem("dashboard-language-default-v3") !== "1") {
-            localStorage.setItem("payontime-language", "sv");
-            localStorage.setItem("dashboard-language-default-v3", "1");
-          }
-          const savedLanguage = localStorage.getItem("payontime-language");
-          selectedLanguage = supportedLanguages.includes(savedLanguage) ? savedLanguage : "sv";
-        } catch (error) {
-          // Keep the selector usable when browser storage is unavailable.
-        }
-        const updateLanguageFlag = () => {
-          const language = selectedLanguage === "sv" ? "Swedish" : "English";
-          const flagCode = selectedLanguage === "sv" ? "se" : "gb";
-          languageFlag.src = `https://flagcdn.com/w40/${flagCode}.png`;
-          languageFlag.alt = `${language} flag`;
-          currentLanguage.textContent = language;
-        };
-        updateLanguageFlag();
-        document.documentElement.lang = selectedLanguage;
-
-        const applyGoogleTranslation = (attempt = 0) => {
-          const translateSelect = document.querySelector(".goog-te-combo");
-          if (!translateSelect) {
-            if (attempt < 20) window.setTimeout(() => applyGoogleTranslation(attempt + 1), 250);
-            return;
-          }
-          translateSelect.value = selectedLanguage;
-          translateSelect.dispatchEvent(new Event("change", { bubbles: true }));
-        };
-        languageToggleBtn.addEventListener("click", (event) => {
-          event.stopPropagation();
-          const open = languageDropdown.style.display === "block";
-          languageDropdown.style.display = open ? "none" : "block";
-          languageToggleBtn.setAttribute("aria-expanded", String(!open));
-        });
-        document.querySelectorAll("#languageDropdown .language-option").forEach((option) => {
-          option.addEventListener("click", () => {
-            selectedLanguage = option.dataset.lang;
-            updateLanguageFlag();
-            document.documentElement.lang = selectedLanguage;
-            try {
-              localStorage.setItem("payontime-language", selectedLanguage);
-            } catch (error) {
-              // The selected language remains active for this page view.
-            }
-            languageDropdown.style.display = "none";
-            languageToggleBtn.setAttribute("aria-expanded", "false");
-            applyGoogleTranslation();
-          });
-        });
-        document.addEventListener("click", () => {
-          languageDropdown.style.display = "none";
-          languageToggleBtn.setAttribute("aria-expanded", "false");
-        });
-        applyGoogleTranslation();
+       
 
         const mobileNavToggle = document.getElementById("mobileNavToggle");
         const mobileMenu = document.querySelector(".dashboard-mobile-menu");

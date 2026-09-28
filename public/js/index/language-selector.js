@@ -1,94 +1,295 @@
-// Language switching and Google Translate integration.
-    document.addEventListener('DOMContentLoaded', function() {
-        const languageToggleBtn = document.getElementById('languageToggleBtn');
-        const languageDropdown = document.getElementById('languageDropdown');
-        const currentFlag = document.getElementById('currentFlag');
-        const currentLanguage = document.getElementById('currentLanguage');
-        const languageOptions = document.querySelectorAll('.language-option');
+document.addEventListener('DOMContentLoaded', function () {
 
-        // Hide Google Translate widget
-        function hideGoogleTranslate() {
-            const elements = [
-                '.goog-te-banner-frame',
-                '.goog-te-menu-value',
-                '.skiptranslate',
-                '.goog-te-banner'
-            ];
+    const languageToggleBtn = document.getElementById('languageToggleBtn');
+    const languageDropdown = document.getElementById('languageDropdown');
+    const currentFlag = document.getElementById('currentFlag');
+    const currentLanguage = document.getElementById('currentLanguage');
+    const languageOptions = document.querySelectorAll('.language-option');
 
-            elements.forEach(selector => {
-                const element = document.querySelector(selector);
-                if (element) {
-                    element.style.display = 'none';
-                }
+
+    // =====================================================
+    // HIDE GOOGLE TRANSLATE WIDGET
+    // =====================================================
+
+    function hideGoogleTranslate() {
+
+        const elements = [
+            '.goog-te-banner-frame',
+            '.goog-te-menu-value',
+            '.skiptranslate',
+            '.goog-te-banner'
+        ];
+
+        elements.forEach(function (selector) {
+
+            const elementsFound = document.querySelectorAll(selector);
+
+            elementsFound.forEach(function (element) {
+                element.style.display = 'none';
             });
 
-            document.body.style.top = '0';
-        }
-
-        // Toggle dropdown
-        languageToggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isVisible = languageDropdown.style.display === 'block';
-            languageDropdown.style.display = isVisible ? 'none' : 'block';
         });
 
-        // Handle language change
-        languageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const lang = this.getAttribute('data-lang');
-                const flagCode = this.getAttribute('data-flag');
+        document.body.style.top = '0';
+    }
 
-                // Update current display
-                currentFlag.src = `https://flagcdn.com/w40/${flagCode}.png`;
-                currentLanguage.textContent = lang === 'en' ? 'English' : 'Swedish';
 
-                // Trigger Google Translate
-                const select = document.querySelector('.goog-te-combo');
-                if (select) {
-                    select.value = lang;
-                    const event = new Event('change', {
-                        bubbles: true
-                    });
-                    select.dispatchEvent(event);
-                }
+    // =====================================================
+    // LANGUAGE TOGGLE
+    // =====================================================
 
-                // Hide dropdown
-                languageDropdown.style.display = 'none';
+    languageToggleBtn.addEventListener('click', function (e) {
 
-                // Save to localStorage
-                localStorage.setItem('preferred-language', lang);
-            });
-        });
+        e.stopPropagation();
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function() {
-            languageDropdown.style.display = 'none';
-        });
+        const isVisible =
+            languageDropdown.style.display === 'block';
 
-        // Initialize with saved language
-        // Migrate the previous English default to Swedish once. After this,
-        // keep honoring the language the user explicitly selects.
-        if (localStorage.getItem('language-default-v2') !== '1') {
-            localStorage.setItem('preferred-language', 'sv');
-            localStorage.setItem('language-default-v2', '1');
-        }
-        const storedLang = localStorage.getItem('preferred-language');
-        const savedLang = ['en', 'sv'].includes(storedLang) ? storedLang : 'sv';
-        const savedFlagCode = savedLang === 'en' ? 'gb' : 'se';
-        const savedLanguageText = savedLang === 'en' ? 'English' : 'Swedish';
+        languageDropdown.style.display =
+            isVisible ? 'none' : 'block';
 
-        currentFlag.src = `https://flagcdn.com/w40/${savedFlagCode}.png`;
-        currentLanguage.textContent = savedLanguageText;
-
-        // Set Google Translate to saved language
-        const select = document.querySelector('.goog-te-combo');
-        if (select) {
-            select.value = savedLang;
-        }
-
-        // Continuously hide Google Translate elements
-        setInterval(hideGoogleTranslate, 500);
-
-        // Initial hide
-        hideGoogleTranslate();
     });
+
+
+    // =====================================================
+    // GOOGLE TRANSLATE FUNCTION
+    // =====================================================
+
+    function setGoogleTranslateLanguage(lang) {
+
+        const select = document.querySelector('.goog-te-combo');
+
+        if (!select) {
+            return false;
+        }
+
+        // Set selected language
+        select.value = lang;
+
+        // Trigger Google Translate
+        const event = new Event('change', {
+            bubbles: true
+        });
+
+        select.dispatchEvent(event);
+
+        return true;
+    }
+
+
+    // =====================================================
+    // UPDATE CURRENT LANGUAGE DISPLAY
+    // =====================================================
+
+    function updateLanguageDisplay(lang) {
+
+        let flagCode = 'se';
+        let languageText = 'Swedish';
+
+        if (lang === 'en') {
+
+            flagCode = 'gb';
+            languageText = 'English';
+
+        } else if (lang === 'sv') {
+
+            flagCode = 'se';
+            languageText = 'Swedish';
+
+        } else if (lang === 'ti') {
+
+            flagCode = 'er';
+            languageText = 'Tigrinya';
+
+        }
+
+        // Update flag
+        currentFlag.src =
+            `https://flagcdn.com/w40/${flagCode}.png`;
+
+        // Update language text
+        currentLanguage.textContent =
+            languageText;
+    }
+
+
+    // =====================================================
+    // LANGUAGE OPTIONS CLICK
+    // =====================================================
+
+    languageOptions.forEach(function (option) {
+
+        option.addEventListener('click', function (e) {
+
+            e.stopPropagation();
+
+            const lang =
+                this.getAttribute('data-lang');
+
+            const flagCode =
+                this.getAttribute('data-flag');
+
+
+            // ---------------------------------------------
+            // Update current flag
+            // ---------------------------------------------
+
+            currentFlag.src =
+                `https://flagcdn.com/w40/${flagCode}.png`;
+
+
+            // ---------------------------------------------
+            // Update current language text
+            // ---------------------------------------------
+
+            if (lang === 'en') {
+
+                currentLanguage.textContent =
+                    'English';
+
+            } else if (lang === 'sv') {
+
+                currentLanguage.textContent =
+                    'Swedish';
+
+            } else if (lang === 'ti') {
+
+                currentLanguage.textContent =
+                    'Tigrinya';
+            }
+
+
+            // ---------------------------------------------
+            // Save selected language
+            // ---------------------------------------------
+
+            localStorage.setItem(
+                'preferred-language',
+                lang
+            );
+
+
+            // ---------------------------------------------
+            // Trigger Google Translate
+            // ---------------------------------------------
+
+            const translated =
+                setGoogleTranslateLanguage(lang);
+
+
+            // ---------------------------------------------
+            // If Google Translate is not loaded yet,
+            // try again several times
+            // ---------------------------------------------
+
+            if (!translated) {
+
+                let attempts = 0;
+
+                const retryTranslate =
+                    setInterval(function () {
+
+                        attempts++;
+
+                        const success =
+                            setGoogleTranslateLanguage(lang);
+
+                        if (success || attempts >= 20) {
+
+                            clearInterval(
+                                retryTranslate
+                            );
+                        }
+
+                    }, 500);
+            }
+
+
+            // ---------------------------------------------
+            // Close dropdown
+            // ---------------------------------------------
+
+            languageDropdown.style.display =
+                'none';
+
+        });
+
+    });
+
+
+    // =====================================================
+    // CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+    // =====================================================
+
+    document.addEventListener('click', function () {
+
+        languageDropdown.style.display =
+            'none';
+
+    });
+
+
+    // =====================================================
+    // GET SAVED LANGUAGE
+    // DEFAULT = SWEDISH
+    // =====================================================
+
+    const savedLang =
+        localStorage.getItem('preferred-language') || 'sv';
+
+
+    // =====================================================
+    // UPDATE LANGUAGE DISPLAY ON PAGE LOAD
+    // =====================================================
+
+    updateLanguageDisplay(savedLang);
+
+
+    // =====================================================
+    // AUTOMATICALLY SET GOOGLE TRANSLATE LANGUAGE
+    // =====================================================
+
+    let translateAttempts = 0;
+
+    const translateInterval =
+        setInterval(function () {
+
+            translateAttempts++;
+
+            const success =
+                setGoogleTranslateLanguage(savedLang);
+
+
+            // Stop when Google Translate is ready
+            // or after 30 attempts
+
+            if (
+                success ||
+                translateAttempts >= 30
+            ) {
+
+                clearInterval(
+                    translateInterval
+                );
+            }
+
+        }, 500);
+
+
+    // =====================================================
+    // CONTINUOUSLY HIDE GOOGLE TRANSLATE ELEMENTS
+    // =====================================================
+
+    setInterval(
+        hideGoogleTranslate,
+        500
+    );
+
+
+    // =====================================================
+    // INITIAL HIDE
+    // =====================================================
+
+    hideGoogleTranslate();
+
+});
