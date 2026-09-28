@@ -227,6 +227,11 @@
         const languageSelector = document.getElementById("languageSelector");
         const supportedLanguages = ["en", "sv"];
         try {
+          // Replace the previous English default once, then honor user choices.
+          if (localStorage.getItem("language-default-v2") !== "1") {
+            localStorage.setItem("payontime-language", "sv");
+            localStorage.setItem("language-default-v2", "1");
+          }
           const savedLanguage = localStorage.getItem("payontime-language");
           languageSelector.value = supportedLanguages.includes(savedLanguage) ? savedLanguage : "sv";
         } catch (error) {

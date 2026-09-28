@@ -66,6 +66,12 @@
         });
 
         // Initialize with saved language
+        // Migrate the previous English default to Swedish once. After this,
+        // keep honoring the language the user explicitly selects.
+        if (localStorage.getItem('language-default-v2') !== '1') {
+            localStorage.setItem('preferred-language', 'sv');
+            localStorage.setItem('language-default-v2', '1');
+        }
         const storedLang = localStorage.getItem('preferred-language');
         const savedLang = ['en', 'sv'].includes(storedLang) ? storedLang : 'sv';
         const savedFlagCode = savedLang === 'en' ? 'gb' : 'se';
