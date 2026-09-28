@@ -428,3 +428,75 @@ canvas {
   }
 }
 
+/* Keep the dashboard's first transfer calculator step compact. */
+#tab-send #step-1 {
+  gap: 0.5rem !important;
+  padding: 0.75rem !important;
+  border-radius: 1rem !important;
+}
+
+#step-1 > .space-y-4 > * + * {
+  margin-top: 0.5rem !important;
+}
+
+#step-1 .calculator-card {
+  padding: 0.875rem !important;
+  border-radius: 1rem !important;
+}
+
+#step-1 .calculator-card > .flex.items-center.justify-between {
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+#step-1 .calculator-card h2 {
+  font-size: 1.125rem !important;
+  line-height: 1.4 !important;
+}
+
+#step-1 .calculator-card > .space-y-4 > * + * {
+  margin-top: 0.65rem !important;
+}
+
+#step-1 .calculator-card .my-2 {
+  margin-top: 0.35rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+#step-1 .mobile-currency-row {
+  padding: 0.25rem !important;
+  border-width: 1px !important;
+  border-radius: 0.875rem !important;
+}
+
+#step-1 .calculator-card .mobile-currency-row > input {
+  min-height: 2.75rem !important;
+  padding: 0.9rem 0.6rem 0.2rem !important;
+  font-size: 1.0625rem !important;
+  line-height: 1.25rem !important;
+}
+
+#step-1 .mobile-currency-row #send-select-btn,
+#step-1 .mobile-currency-row #receive-select-btn {
+  padding: 0.4rem 0.5rem !important;
+  font-size: 0.7rem !important;
+  line-height: 1rem !important;
+}
+
+#step-1 #inline-rate {
+  padding: 0.2rem 0.55rem !important;
+  font-size: 0.7rem !important;
+}
+
+#step-1 #delivery-method {
+  min-height: 2.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.75rem !important;
+}
+
+#step-1 #transaction-info {
+  padding: 0.75rem !important;
+  border-radius: 1rem !important;
+}
+
+
