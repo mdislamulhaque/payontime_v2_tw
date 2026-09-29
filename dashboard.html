@@ -3990,68 +3990,55 @@
           </section>
 
           <section id="tab-referral-code" class="tab-content hidden space-y-6">
-            <div>
-              <h2 class="text-xl font-extrabold text-slate-900">
-                Referral Code
-              </h2>
-              <p class="mt-1 text-sm text-slate-500">
-                Generate a code to share with friends.
-              </p>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-[0.16em] text-[#36b647]">Invite. Earn. Repeat.</p>
+                <h2 class="mt-1 text-2xl font-extrabold text-slate-900">Referral &amp; Rewards</h2>
+                <p class="mt-1 text-sm text-slate-500">Share Payontime with people you know and follow your rewards here.</p>
+              </div>
+              <span class="inline-flex w-fit items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 text-xs font-bold text-green-700"><i data-lucide="circle-check" class="h-4 w-4"></i>Referrer account</span>
             </div>
-            <article
-              class="max-w-3xl rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
-            >
-              <div class="flex items-start gap-3">
-                <span
-                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-[#36b647]"
-                  ><i data-lucide="users-round" class="h-5 w-5"></i
-                ></span>
-                <div>
-                  <h3 class="font-bold text-slate-900">Invite friends</h3>
-                  <p class="mt-1 text-xs text-slate-500">
-                    Create your personal referral code, then copy or share it.
-                  </p>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-500">Successful referrals</span><i data-lucide="users-round" class="h-5 w-5 text-[#36b647]"></i></div><p class="mt-4 text-3xl font-extrabold text-slate-900">0</p><p class="mt-1 text-xs text-slate-400">Customers who completed requirements</p></article>
+              <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-500">Points earned</span><i data-lucide="sparkles" class="h-5 w-5 text-amber-500"></i></div><p class="mt-4 text-3xl font-extrabold text-slate-900">0 <span class="text-sm font-bold text-slate-400">pts</span></p><p class="mt-1 text-xs text-slate-400">From successful referrals</p></article>
+              <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-500">Pending rewards</span><i data-lucide="timer" class="h-5 w-5 text-amber-500"></i></div><p class="mt-4 text-3xl font-extrabold text-slate-900">0 <span class="text-sm font-bold text-slate-400">pts</span></p><p class="mt-1 text-xs text-slate-400">Awaiting eligibility or approval</p></article>
+              <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-500">Points redeemed</span><i data-lucide="wallet" class="h-5 w-5 text-[#071b79]"></i></div><p class="mt-4 text-3xl font-extrabold text-slate-900">0 <span class="text-sm font-bold text-slate-400">pts</span></p><p class="mt-1 text-xs text-slate-400">Already used from your rewards</p></article>
+            </div>
+
+            <div class="grid grid-cols-1 gap-5 xl:grid-cols-[1.5fr_1fr]">
+              <article class="overflow-hidden rounded-3xl bg-[#071b79] p-6 text-white shadow-lg sm:p-8">
+                <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="max-w-lg"><span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-green-200"><i data-lucide="gift" class="h-4 w-4"></i>Your invite link</span><h3 class="mt-4 text-xl font-extrabold">Good things are better shared</h3><p class="mt-2 text-sm leading-6 text-blue-100">Invite friends and family to Payontime. When a referral meets the program requirements, your reward will appear here.</p></div>
+                  <div class="mx-auto flex h-36 w-36 shrink-0 items-center justify-center rounded-xl border-8 border-white bg-white p-1 sm:mx-0"><img id="referral-qr-code" alt="Referral QR code" class="hidden h-full w-full object-contain" /><div id="referral-qr-empty" class="flex h-full w-full flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 text-center text-slate-400"><i data-lucide="qr-code" class="h-8 w-8"></i><span class="mt-1 text-[9px] font-semibold">CODE QR</span></div></div>
                 </div>
-              </div>
-              <div class="mt-5 flex flex-col gap-3 sm:flex-row">
-                <input
-                  id="referral-code-value"
-                  type="text"
-                  readonly
-                  placeholder="Generate a referral code"
-                  class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-extrabold tracking-wider text-slate-900 placeholder:font-medium placeholder:tracking-normal"
-                />
-                <button
-                  id="generate-referral-code"
-                  type="button"
-                  class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#36b647] px-4 py-3 text-sm font-bold text-white hover:bg-[#2d963b]"
-                >
-                  <i data-lucide="sparkles" class="h-4 w-4"></i>Generate code
-                </button>
-              </div>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <button
-                  id="copy-referral-code"
-                  type="button"
-                  disabled
-                  class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <i data-lucide="copy" class="h-4 w-4"></i>Copy code
-                </button>
-                <button
-                  id="share-referral-code"
-                  type="button"
-                  disabled
-                  class="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:border-green-300 hover:text-green-700 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <i data-lucide="share-2" class="h-4 w-4"></i>Share
-                </button>
-              </div>
-              <p
-                id="referral-code-status"
-                aria-live="polite"
-                class="mt-3 min-h-5 text-xs font-semibold text-green-700"
-              ></p>
+                <div class="mt-6 rounded-2xl bg-white p-4 text-slate-900 sm:p-5">
+                  <label for="referral-code-value" class="text-xs font-bold uppercase tracking-wider text-slate-500">Your referral code</label>
+                  <div class="mt-2 flex flex-col gap-3 sm:flex-row">
+                    <input id="referral-code-value" type="text" readonly placeholder="Your code will appear here" class="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-base font-extrabold tracking-[0.18em] text-slate-900 placeholder:text-sm placeholder:font-medium placeholder:tracking-normal" />
+                    <button id="generate-referral-code" type="button" class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#36b647] px-4 py-3 text-sm font-bold text-white hover:bg-[#2d963b]"><i data-lucide="sparkles" class="h-4 w-4"></i>Get my code</button>
+                  </div>
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    <button id="copy-referral-code" type="button" disabled class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"><i data-lucide="copy" class="h-4 w-4"></i>Copy code</button>
+                    <button id="share-referral-code" type="button" disabled class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"><i data-lucide="share-2" class="h-4 w-4"></i>Share invite</button>
+                  </div>
+                  <p id="referral-code-status" aria-live="polite" class="mt-2 min-h-5 text-xs font-semibold text-green-700"></p>
+                </div>
+              </article>
+              <article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-7">
+                <div class="flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 text-[#36b647]"><i data-lucide="circle-help" class="h-5 w-5"></i></span><div><h3 class="font-extrabold text-slate-900">How it works</h3><p class="text-xs text-slate-500">Three simple steps</p></div></div>
+                <ol class="mt-6 space-y-5">
+                  <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-extrabold text-green-700">1</span><div><p class="text-sm font-bold text-slate-800">Share your code</p><p class="mt-1 text-xs leading-5 text-slate-500">Send your code or invite link to someone new to Payontime.</p></div></li>
+                  <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-extrabold text-green-700">2</span><div><p class="text-sm font-bold text-slate-800">They join Payontime</p><p class="mt-1 text-xs leading-5 text-slate-500">Your referral is recorded when they sign up with your code.</p></div></li>
+                  <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green-50 text-xs font-extrabold text-green-700">3</span><div><p class="text-sm font-bold text-slate-800">Track your reward</p><p class="mt-1 text-xs leading-5 text-slate-500">Rewards are added after the referral meets the program criteria.</p></div></li>
+                </ol>
+                <div class="mt-6 flex gap-2 rounded-xl bg-slate-50 p-3 text-xs leading-5 text-slate-500"><i data-lucide="shield-check" class="mt-0.5 h-4 w-4 shrink-0 text-[#36b647]"></i><span>Your invitees’ personal information and transfer activity stay private. You’ll only see referral status and rewards.</span></div>
+              </article>
+            </div>
+
+            <article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div class="flex flex-col gap-2 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-extrabold text-slate-900">Referral history</h3><p class="mt-1 text-xs text-slate-500">Follow each referral’s progress and reward status.</p></div><button type="button" class="inline-flex w-fit items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600"><i data-lucide="list-filter" class="h-4 w-4"></i>All referrals <i data-lucide="chevron-down" class="h-3 w-3"></i></button></div>
+              <div class="overflow-x-auto"><table class="w-full min-w-[640px] text-left"><thead class="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-500"><tr><th class="px-5 py-3 font-bold">Referral</th><th class="px-5 py-3 font-bold">Date joined</th><th class="px-5 py-3 font-bold">Status</th><th class="px-5 py-3 text-right font-bold">Reward</th></tr></thead><tbody><tr><td colspan="4" class="px-5 py-12 text-center"><span class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-slate-50 text-slate-400"><i data-lucide="user-round-search" class="h-5 w-5"></i></span><p class="mt-3 text-sm font-bold text-slate-700">No referrals yet</p><p class="mt-1 text-xs text-slate-500">Share your code to see referral activity here.</p></td></tr></tbody></table></div>
             </article>
           </section>
         </main>
