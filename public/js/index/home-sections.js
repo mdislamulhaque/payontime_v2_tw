@@ -66,27 +66,45 @@ renderDots();
 // --- 2. CALCULATOR & FX RATE LOGIC ---
 // Available Currencies List
 const currencies = [
-  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se' },
-  { country: 'Somalia', code: 'SOS', label: 'Somalia · USD', flagCode: 'so' },
-  { country: 'Kenya', code: 'KES', label: 'Kenya · USD', flagCode: 'ke' }
+  { country: 'Sweden', code: 'SEK', label: 'Sweden · SEK', flagCode: 'se', rateToBase: 0.096 },
+  { country: 'Somalia', code: 'USD', label: 'Somalia · USD', flagCode: 'so', rateToBase: 1 },
+  { country: 'Kenya', code: 'KES', label: 'Kenya · KES', flagCode: 'ke', rateToBase: 0.0077 }
 ];
 
 const selectedSend = currencies[0];
-let selectedReceive = null;
+let selectedReceive = currencies.find((currency) => currency.country === 'Kenya');
 const SEK_TO_USD_RATE = 0.096;
 
 const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
-const rateText = document.getElementById("rate-text");
 const totalText = document.getElementById("total-text");
-const amountText = document.getElementById("amount-text");
 const feeText = document.getElementById("fee-text");
-const recipientReceivesText = document.getElementById("recipient-receives-text");
-const transactionInfo = document.getElementById("transaction-info");
 const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
 const inlineRate = document.getElementById("inline-rate");
+const receiveAmountLabel = document.getElementById("receive-amount-label");
+
+function configureDeliveryMethods(country) {
+  const methods = country === "Kenya"
+    ? [
+        { value: "mobile-money", label: "M-Pesa" },
+        { value: "cash-pickup", label: "Cash" },
+      ]
+    : [
+        { value: "tplus", label: "T-plus" },
+        { value: "mobile-money", label: "Mobile-money" },
+        { value: "bank-deposit", label: "Bank deposit" },
+        { value: "cash-pickup", label: "Cash pickup" },
+      ];
+  deliveryMethod.innerHTML = methods
+    .map(({ value, label }) => `<option value="${value}">${label}</option>`)
+    .join("");
+  deliveryMethod.value = methods[0].value;
+}
+
+document.getElementById("receive-selected-label").innerHTML = `${flagImageMarkup(selectedReceive.flagCode, selectedReceive.country)} ${selectedReceive.label}`;
+configureDeliveryMethods(selectedReceive.country);
 
 // --- Searchable Dropdown Generator ---
 function setupSearchableDropdown(type) {
@@ -111,7 +129,10 @@ function setupSearchableDropdown(type) {
       opt.innerHTML = `<span class="inline-flex items-center gap-2">${flagImageMarkup(curr.flagCode, curr.country)} ${curr.country}</span> <span class="text-slate-400 text-[10px]">${curr.code}</span>`;
       
       opt.addEventListener("click", () => {
-        if (type === "receive") selectedReceive = curr;
+        if (type === "receive") {
+          selectedReceive = curr;
+          configureDeliveryMethods(curr.country);
+        }
 
         selectedLabel.innerHTML = `${flagImageMarkup(curr.flagCode, curr.country)} Sending to ${curr.country}`;
         menu.classList.add("hidden");
@@ -147,34 +168,50 @@ setupSearchableDropdown("receive");
 
 // --- Exchange Rate Calculator ---
 function calculateTransfer(changedField = "send") {
+  if (changedField === "receive" && receiveAmountInput.value.trim() === "") {
+    sendAmountInput.value = "";
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
+    return;
+  }
+
   let amount = parseFloat(sendAmountInput.value);
   let received = parseFloat(receiveAmountInput.value);
+  const receiveRateToBase = selectedReceive?.rateToBase ?? 1;
+  const receiveCode = selectedReceive?.code ?? "USD";
   if (changedField === "receive" && Number.isFinite(received)) {
-    amount = received / SEK_TO_USD_RATE;
+    amount = (received * receiveRateToBase) / SEK_TO_USD_RATE;
     sendAmountInput.value = amount ? amount.toFixed(2) : "";
   } else if (Number.isFinite(amount)) {
-    received = amount * SEK_TO_USD_RATE;
+    received = (amount * SEK_TO_USD_RATE) / receiveRateToBase;
     receiveAmountInput.value = received ? received.toFixed(2) : "";
   } else {
     amount = 0;
     received = 0;
     receiveAmountInput.value = "";
   }
-  transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
-  const fee = amount * 0.02;
-  feeText.textContent = amount > 0 ? fee.toFixed(2) : "";
-  totalText.textContent = amount > 0 ? (amount + fee).toFixed(2) : "";
   if (!selectedReceive) {
-    amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
-    rateText.textContent = "Select a receiving country to see the rate";
-    recipientReceivesText.textContent = "-";
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
     return;
   }
-  const exchangeRate = `1 SEK = ${SEK_TO_USD_RATE.toFixed(3)} USD`;
+  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
+  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
   inlineRate.textContent = exchangeRate;
-  rateText.textContent = exchangeRate;
-  amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
-  recipientReceivesText.textContent = `${received.toFixed(2)} USD`;
+  if (amount <= 0) {
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
+    return;
+  }
+  const feesByMethod = {
+    "tplus": 0,
+    "mobile-money": 10,
+    "bank-deposit": 15,
+    "cash-pickup": 20
+  };
+  const fee = feesByMethod[deliveryMethod.value] ?? 0;
+  feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
+  totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
 }
 
 // Input Listeners

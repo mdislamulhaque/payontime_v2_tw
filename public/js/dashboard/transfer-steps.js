@@ -12,28 +12,47 @@
 
       const recipientsData = {
         rec_1: {
-          name: "Amanuel Tesfay",
-          country: "Ethiopia",
-          phone: "+251 91 234 5678",
-          deliveryMethod: "Cash Pickup",
-          payoutDetails: "Cash pickup at partner location",
-        },
-        rec_2: {
-          name: "Rahim Ahmed",
-          country: "Bangladesh",
-          phone: "+880 17 0000 0000",
-          deliveryMethod: "bKash / Nagad Wallet",
-          payoutDetails: "Mobile wallet payout",
-        },
-        rec_3: {
           name: "MAXAMED CALI JAAMAC",
           country: "Somalia",
           phone: "252619333207",
           deliveryMethod: "Bank",
           payoutDetails: "Bank account: 31052160",
           bankAccountNumber: "31052160",
+          bankName: "Dahabshiil Bank",
+          tplusWalletNumber: "",
+          cityName: "Mogadishu",
+        },
+        rec_2: {
+          name: "Brian Otieno",
+          country: "Kenya",
+          phone: "+254 712 345 678",
+          deliveryMethod: "M-Pesa",
+          payoutDetails: "M-Pesa wallet payout",
+          bankName: "",
+          bankAccountNumber: "",
+          tplusWalletNumber: "+254 712 345 678",
+          cityName: "Nairobi",
         },
       };
+
+      function syncRecipientOptionsWithDestination() {
+        const recipientSelect = document.getElementById("recipient-select");
+        const destinationCountry = selectedReceive?.country;
+        Array.from(recipientSelect.options).forEach((option) => {
+          if (!option.value) {
+            option.hidden = false;
+            return;
+          }
+          option.hidden = Boolean(destinationCountry && recipientsData[option.value]?.country !== destinationCountry);
+        });
+        if (recipientSelect.selectedOptions[0]?.hidden) {
+          recipientSelect.value = "";
+          document.getElementById("tplus-recipient-phone").value = "";
+          document.getElementById("recipient-bank-account").value = "";
+          document.getElementById("tplus-recipient-status").classList.add("hidden");
+          renderRecipientCard();
+        }
+      }
 
       const countryFlags = {
         Sweden: "se", "Sweden & EU": "se", Somalia: "so", Kenya: "ke",
@@ -46,18 +65,6 @@
         const code = countryFlags[country];
         return code ? `<img src="https://flagcdn.com/w40/${code}.png" alt="${altText} flag" class="inline-block w-8 h-auto rounded-sm align-middle mr-1.5" loading="lazy">` : "";
       }
-
-      function updateFormCountryFlag(country) {
-        const image = document.getElementById("form-country-flag");
-        const name = Object.keys(countryFlags).find((candidate) => candidate.toLowerCase() === country.trim().toLowerCase());
-        image.classList.toggle("hidden", !name);
-        if (name) {
-          image.src = `https://flagcdn.com/w40/${countryFlags[name]}.png`;
-          image.alt = `${name} flag`;
-        }
-      }
-
-      document.getElementById("form-country").addEventListener("input", (event) => updateFormCountryFlag(event.target.value));
 
       Object.entries(recipientsData).forEach(([recipientId, recipient]) => {
         const option = document.querySelector(`#recipient-select option[value="${recipientId}"]`);
@@ -89,7 +96,7 @@
 
           const stepHTML = `
           <div class="flex flex-col items-center gap-1">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center font-black text-xs transition-all ${circleBg}">
+            <div class="w-8 h-8 sm:w-7 sm:h-7 rounded-2xl flex items-center justify-center font-black text-xs transition-all ${circleBg}">
               ${isCompleted ? "✓" : step.number}
             </div>
             <span class="text-[10px] font-bold hidden md:inline ${isActive ? "text-slate-900" : "text-slate-400"}">${step.label}</span>
@@ -115,8 +122,8 @@
           alert("Choose both countries and enter an amount first.");
           return;
         }
-        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value) || (deliveryMethod.value === "bank-deposit" && !document.getElementById("recipient-bank-account").value.trim()))) {
-          alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, and payout method to continue." : "Choose a recipient, transfer purpose, and payout method to continue.");
+        if (stepNum === 3 && (!document.getElementById("recipient-select").value || !selectedPurpose || !document.getElementById("source-of-income").value || !document.getElementById("payment-method-select").value || (deliveryMethod.value === "tplus" && !document.getElementById("tplus-city").value) || (deliveryMethod.value === "bank-deposit" && !document.getElementById("recipient-bank-account").value.trim()))) {
+          alert(deliveryMethod.value === "tplus" ? "Choose a recipient, city, transfer purpose, source of income, and payout method to continue." : "Choose a recipient, transfer purpose, source of income, and payout method to continue.");
           return;
         }
         if (stepNum === 4 && !document.getElementById("terms-agree").checked) {
@@ -139,6 +146,28 @@
         renderStepper();
       }
 
+      function updateStepButtonStates() {
+        const amount = Number.parseFloat(sendAmountInput.value) || 0;
+        const transferReady = Boolean(selectedSend && selectedReceive && amount > 0);
+        const recipientId = document.getElementById("recipient-select").value;
+        const purposeReady = Boolean(selectedPurpose || document.getElementById("purpose-select").value);
+        const payoutMethod = document.getElementById("payment-method-select").value;
+        const deliveryReady = deliveryMethod.value !== "tplus" || !recipientId || Boolean(document.getElementById("tplus-city").value);
+        const bankReady = deliveryMethod.value !== "bank-deposit" || !recipientId || Boolean(document.getElementById("recipient-bank-account").value.trim());
+        const incomeReady = Boolean(document.getElementById("source-of-income").value);
+        const recipientReady = Boolean(recipientId && purposeReady && incomeReady && payoutMethod && deliveryReady && bankReady);
+        const termsReady = document.getElementById("terms-agree").checked;
+        const paymentForm = document.querySelector("#step-4 form");
+
+        document.querySelector('#step-1 button[onclick="goToStep(2)"]').disabled = !transferReady;
+        document.querySelector('#step-2 button[onclick="goToStep(3)"]').disabled = !recipientReady;
+        document.querySelector('#step-3 button[onclick="goToStep(4)"]').disabled = !termsReady;
+        document.querySelector("#step-4 form button[type=submit]").disabled = !(payoutMethod && paymentForm.checkValidity());
+      }
+
+      document.addEventListener("input", updateStepButtonStates);
+      document.addEventListener("change", updateStepButtonStates);
+
 
       function updateReviewSummary() {
         const recipient = recipientsData[document.getElementById("recipient-select").value];
@@ -154,6 +183,8 @@
         document.getElementById("review-rec-payout").textContent = recipient.payoutDetails;
         document.getElementById("review-rec-delivery").textContent = recipient.deliveryMethod;
         document.getElementById("review-rec-purpose").textContent = selectedPurpose;
+        document.getElementById("review-source-of-income").textContent = document.getElementById("source-of-income").value;
+        document.getElementById("review-transfer-remarks").textContent = document.getElementById("transfer-remarks").value.trim() || "-";
         document.getElementById("review-payment-method").textContent = document.getElementById("payment-method-select").selectedOptions[0].text;
       }
 
@@ -162,9 +193,11 @@
         const val = document.getElementById("recipient-select").value;
         const card = document.getElementById("recipient-card-display");
         const emptyState = document.getElementById("recipient-card-empty");
+        const recipientDetailsFields = document.getElementById("recipient-details-fields");
         const selectedRecipient = recipientsData[val];
 
         if (val && selectedRecipient) {
+          recipientDetailsFields.classList.remove("hidden");
           card.classList.remove("hidden");
           emptyState.classList.add("hidden");
           const recipientSelectFlag = document.getElementById("recipient-select-flag");
@@ -174,22 +207,17 @@
             recipientSelectFlag.src = `https://flagcdn.com/w40/${recipientFlagCode}.png`;
             recipientSelectFlag.alt = `${selectedRecipient.country} flag`;
           }
-          const recipientCurrency = currencies.find((currency) => currency.country === selectedRecipient.country);
-          if (recipientCurrency) {
-            selectedReceive = recipientCurrency;
-            document.getElementById("receive-selected-label").innerHTML = `${countryFlagMarkup(recipientCurrency.country)} ${recipientCurrency.country} · USD`;
-            calculateTransfer();
-          }
           document.getElementById("rec-name").innerText = selectedRecipient.name;
           document.getElementById("rec-info").innerHTML =
             `${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country} | ${selectedRecipient.phone}`;
           document.getElementById("rec-details").innerHTML = `
             <div class="space-y-2 text-start">
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Full name</span><span class="font-semibold text-slate-900">${selectedRecipient.name}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Country</span><span class="font-semibold text-slate-900">${countryFlagMarkup(selectedRecipient.country)} ${selectedRecipient.country}</span></div>
+              
               <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Phone</span><span class="font-semibold text-slate-900">${selectedRecipient.phone}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout method</span><span class="font-semibold text-slate-900">${selectedRecipient.deliveryMethod}</span></div>
-              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Payout details</span><span class="font-semibold text-slate-900">${selectedRecipient.payoutDetails}</span></div>
+              
+              <div class="grid grid-cols-[120px_minmax(0,1fr)] sm:grid-cols-[140px_minmax(0,1fr)] gap-3 items-start"><span class="font-bold text-slate-500">Bank account</span><span class="font-semibold text-slate-900">${selectedRecipient.bankAccountNumber || "—"}</span></div>
+         
             </div>`;
           if (deliveryMethod.value === "tplus" || deliveryMethod.value === "bank-deposit") {
             document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
@@ -198,15 +226,12 @@
           if (deliveryMethod.value === "bank-deposit") {
             document.getElementById("recipient-bank-account").value = selectedRecipient.bankAccountNumber || "";
           }
-          updateTplusCityOptions(selectedRecipient.country);
+          updateTplusCityOptions(selectedRecipient.country, selectedRecipient.cityName);
 
         } else {
+          recipientDetailsFields.classList.add("hidden");
           card.classList.add("hidden");
           document.getElementById("recipient-select-flag").classList.add("hidden");
-          if (typeof selectedReceive !== "undefined") {
-            selectedReceive = null;
-            calculateTransfer();
-          }
           document.getElementById("tplus-city").value = "";
         }
         updateTplusRecipientFields();
@@ -215,16 +240,38 @@
       function updateTplusRecipientFields() {
         const tplus = deliveryMethod.value === "tplus";
         const bankDeposit = deliveryMethod.value === "bank-deposit";
-        const recipientLookupMode = tplus || bankDeposit;
+        const mobileMoney = deliveryMethod.value === "mobile-money";
+        const recipientLookupMode = tplus || bankDeposit || mobileMoney;
         const recipientSelected = Boolean(document.getElementById("recipient-select").value);
         const selectedRecipient = recipientsData[document.getElementById("recipient-select").value];
-        document.getElementById("recipient-add-button").classList.toggle("hidden", recipientLookupMode);
+        document.getElementById("recipient-add-button").classList.toggle("hidden", tplus || bankDeposit);
         document.getElementById("tplus-recipient-lookup").classList.toggle("hidden", !recipientLookupMode);
-        document.getElementById("recipient-card-empty").classList.toggle("hidden", recipientLookupMode || recipientSelected);
+        document.getElementById("recipient-card-empty").classList.toggle("hidden", (recipientLookupMode && !mobileMoney) || recipientSelected);
         document.getElementById("tplus-city-wrapper").classList.toggle("hidden", !tplus || !recipientSelected);
         document.getElementById("tplus-city").required = tplus && recipientSelected;
         document.getElementById("bank-account-field").classList.toggle("hidden", !bankDeposit);
         document.getElementById("recipient-bank-account").required = bankDeposit;
+        const phoneLabel = document.querySelector('label[for="tplus-recipient-phone"]');
+        const phoneInput = document.getElementById("tplus-recipient-phone");
+        const testNumber = document.getElementById("recipient-test-number");
+        const testNumbersByCountry = {
+          Somalia: "252619333207",
+          Kenya: "+254 712 345 678",
+        };
+        if (mobileMoney) {
+          phoneLabel.firstChild.textContent = "Or send to a new recipient ";
+          phoneInput.placeholder = selectedReceive?.country === "Kenya"
+            ? "Please enter M-Pesa registered phone number"
+            : "Please enter mobile money registered phone number";
+        } else {
+          phoneLabel.firstChild.textContent = "Or send to a new recipient ";
+          phoneInput.placeholder = tplus
+            ? "Please enter T-plus registered phone number"
+            : "Please enter registered phone number";
+        }
+        const countryTestNumber = testNumbersByCountry[selectedReceive?.country];
+        testNumber.textContent = countryTestNumber ? `(Use this phone number for testing: ${countryTestNumber})` : "";
+        testNumber.classList.toggle("hidden", !countryTestNumber || (!tplus && !mobileMoney));
         if (recipientLookupMode && selectedRecipient) {
           document.getElementById("tplus-recipient-phone").value = selectedRecipient.phone;
         }
@@ -233,22 +280,26 @@
         }
       }
 
-      function updateTplusCityOptions(country) {
+      function updateTplusCityOptions(country, preferredCity = "") {
         const citySelect = document.getElementById("tplus-city");
         const citiesByCountry = {
           Ethiopia: ["Addis Ababa", "Dire Dawa", "Hawassa", "Mekelle"],
           Bangladesh: ["Dhaka", "Chattogram", "Khulna", "Sylhet"],
           Kenya: ["Nairobi", "Mombasa", "Kisumu", "Nakuru"],
           Somalia: ["Mogadishu", "Hargeisa", "Kismayo", "Bosaso"],
+          India: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
+          Philippines: ["Manila", "Cebu City", "Davao City"],
         };
-        const cities = citiesByCountry[country] || [];
+        const cities = [...new Set([...(citiesByCountry[country] || []), preferredCity].filter(Boolean))];
         citySelect.innerHTML = '<option value="" disabled selected>City</option>' + cities.map((city) => `<option value="${city}">${city}</option>`).join("");
+        if (preferredCity) citySelect.value = preferredCity;
       }
 
       function findRecipientByNumber(value, field) {
         const enteredNumber = value.replace(/\D/g, "");
         if (!enteredNumber) return null;
         return Object.entries(recipientsData).find(([, recipient]) => {
+          if (selectedReceive && recipient.country !== selectedReceive.country) return false;
           const savedNumber = field === "phone" ? recipient.phone : recipient.bankAccountNumber;
           return savedNumber && savedNumber.replace(/\D/g, "") === enteredNumber;
         }) || null;
@@ -291,7 +342,7 @@
         const purposeSelect = document.getElementById("purpose-select");
         purposeSelect.innerHTML = '<option value="" disabled>Select transfer purpose</option>' + purposes.map((purpose) => '<option value="' + purpose + '">' + purpose + '</option>').join("");
         purposeSelect.value = selectedPurpose;
-        purposeSelect.addEventListener("change", () => { selectedPurpose = purposeSelect.value; });
+        purposeSelect.addEventListener("change", () => { selectedPurpose = purposeSelect.value; updateStepButtonStates(); });
       }
 
       // Payment method selection is made in Recipient and controls the Pay form.
@@ -324,4 +375,3 @@
       // On Load Initializers
       renderStepper();
       renderPurposes();
-    

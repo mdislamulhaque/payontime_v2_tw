@@ -2,27 +2,28 @@
       let recipients = [
         {
           id: "1",
-          fullName: "Sarah Jenkins",
-          email: "sarah.j@example.com",
-          country: "United States",
-          phone: "+1 555-0192",
-          deliveryMethod: "Bank Deposit",
-          accountNumber: "9876543210",
-          bankName: "Chase Bank",
-          mobileWalletNumber: "",
-          createdAt: "Oct 24, 2024",
+          fullName: "MAXAMED CALI JAAMAC",
+          email: "",
+          country: "Somalia",
+          phone: "252619333207",
+          bankAccountNumber: "31052160",
+          tplusWalletNumber: "",
+          bankName: "Dahabshiil Bank",
+          cityName: "Mogadishu",
+          createdAt: "Just Now",
         },
         {
           id: "2",
-          fullName: "Michael Chen",
+          fullName: "Brian Otieno",
           email: "",
-          country: "Singapore",
-          phone: "+65 9123 4567",
-          deliveryMethod: "Mobile Wallet",
-          accountNumber: "",
+          country: "Kenya",
+          phone: "+254 712 345 678",
+          bankAccountNumber: "",
+          tplusWalletNumber: "",
+          mobileWalletNumber: "+254 712 345 678",
           bankName: "",
-          mobileWalletNumber: "+65 9123 4567",
-          createdAt: "Nov 02, 2024",
+          cityName: "Nairobi",
+          createdAt: "Just Now",
         },
       ];
 
@@ -44,11 +45,12 @@
 
         data.forEach((rec) => {
           const initial = rec.fullName.charAt(0).toUpperCase();
-          const details = rec.accountNumber
-            ? `Acc: ${rec.accountNumber} (${rec.bankName || "Bank"})`
-            : rec.mobileWalletNumber
-              ? `Wallet: ${rec.mobileWalletNumber}`
-              : "Cash Counter Pickup";
+          const details = [
+            rec.bankName && `Bank: ${rec.bankName}`,
+            (rec.bankAccountNumber || rec.accountNumber) && `Bank account: ${rec.bankAccountNumber || rec.accountNumber}`,
+            (rec.tplusWalletNumber || rec.mobileWalletNumber) && `T-plus wallet: ${rec.tplusWalletNumber || rec.mobileWalletNumber}`,
+            rec.cityName && `City: ${rec.cityName}`,
+          ].filter(Boolean).join(" · ") || "—";
 
           const tr = document.createElement("tr");
           tr.className = "hover:bg-slate-50/80 transition-colors";
@@ -75,8 +77,7 @@
         </td>
         <td class="p-4 font-mono text-slate-800 font-semibold">${rec.phone}</td>
         <td class="p-4">
-          <span class="font-bold text-slate-900 block">${rec.deliveryMethod}</span>
-          <span class="text-[11px] text-slate-500">${details}</span>
+          <span class="text-[11px] text-slate-600">${details}</span>
         </td>
         <td class="p-4 text-slate-500 font-medium">${rec.createdAt}</td>
         <td class="p-4 text-right">
@@ -114,21 +115,13 @@
         filterRecipients();
       }
 
-      function togglePayoutFields() {
-        const method = document.getElementById("form-method").value;
-        document
-          .getElementById("bank-fields")
-          .classList.toggle("hidden", method !== "Bank Deposit");
-        document
-          .getElementById("wallet-fields")
-          .classList.toggle("hidden", method !== "Mobile Wallet");
-      }
-
       function openAddModal() {
         document.getElementById("modal-title").innerText = "Add New Recipient";
         document.getElementById("recipient-id").value = "";
         document.getElementById("recipient-form").reset();
-        togglePayoutFields();
+        document.getElementById("form-country-code").value = "KE";
+        updateFormRecipientCountry("KE");
+        updateRecipientSaveButtons();
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
 
@@ -138,19 +131,18 @@
 
         document.getElementById("modal-title").innerText = "Edit Recipient";
         document.getElementById("recipient-id").value = rec.id;
-        document.getElementById("form-name").value = rec.fullName;
-        document.getElementById("form-email").value = rec.email || "";
-        document.getElementById("form-country").value = rec.country;
-        updateFormCountryFlag(rec.country);
-        document.getElementById("form-phone").value = rec.phone;
-        document.getElementById("form-method").value = rec.deliveryMethod;
-        document.getElementById("form-bank-name").value = rec.bankName || "";
-        document.getElementById("form-account-number").value =
-          rec.accountNumber || "";
-        document.getElementById("form-wallet-number").value =
-          rec.mobileWalletNumber || "";
+        const nameParts = rec.fullName.split(/\s+/);
+        document.getElementById("form-first-name").value = nameParts.shift() || "";
+        document.getElementById("form-last-name").value = nameParts.pop() || "";
+        document.getElementById("form-middle-name").value = nameParts.join(" ");
+        const countryCode = rec.country === "Kenya" ? "KE" : "SO";
+        document.getElementById("form-country-code").value = countryCode;
+        document.getElementById("form-phone").value = rec.phone.replace(/\D/g, "").replace(countryCode === "KE" ? /^254/ : /^252/, "");
+        updateFormRecipientCountry(countryCode, rec.cityName || "");
+        document.getElementById("form-city-name").value = rec.cityName || "";
+        document.getElementById("form-address").value = rec.address || "";
+        updateRecipientSaveButtons();
 
-        togglePayoutFields();
         document.getElementById("recipient-modal").classList.remove("hidden");
       }
 
@@ -165,12 +157,10 @@
         document.getElementById("view-email").innerText = rec.email || "N/A";
         document.getElementById("view-country").innerHTML = `${countryFlagMarkup(rec.country)} ${rec.country}`;
         document.getElementById("view-phone").innerText = rec.phone;
-        document.getElementById("view-method").innerText = rec.deliveryMethod;
-        document.getElementById("view-details").innerText = rec.accountNumber
-          ? `Acc: ${rec.accountNumber} (${rec.bankName || "Bank"})`
-          : rec.mobileWalletNumber
-            ? `Wallet: ${rec.mobileWalletNumber}`
-            : "Cash Pickup";
+        document.getElementById("view-bank-name").innerText = rec.bankName || "—";
+        document.getElementById("view-bank-account").innerText = rec.bankAccountNumber || rec.accountNumber || "—";
+        document.getElementById("view-wallet-number").innerText = rec.tplusWalletNumber || rec.mobileWalletNumber || "—";
+        document.getElementById("view-city-name").innerText = rec.cityName || "—";
         document.getElementById("view-created").innerText = rec.createdAt;
 
         document.getElementById("view-modal").classList.remove("hidden");
@@ -187,17 +177,21 @@
       function handleFormSubmit(e) {
         e.preventDefault();
         const id = document.getElementById("recipient-id").value;
+        const countryCode = document.getElementById("form-country-code").value;
+        const recipientCountry = recipientCountries[countryCode];
+        const fullName = ["first-name", "middle-name", "last-name"].map((part) => document.getElementById(`form-${part}`).value.trim()).filter(Boolean).join(" ");
+        const existingRecipient = id ? recipients.find((r) => r.id === id) : null;
         const recData = {
           id: id || Date.now().toString(),
-          fullName: document.getElementById("form-name").value,
-          email: document.getElementById("form-email").value,
-          country: document.getElementById("form-country").value,
-          phone: document.getElementById("form-phone").value,
-          deliveryMethod: document.getElementById("form-method").value,
-          bankName: document.getElementById("form-bank-name").value,
-          accountNumber: document.getElementById("form-account-number").value,
-          mobileWalletNumber:
-            document.getElementById("form-wallet-number").value,
+          fullName,
+          email: existingRecipient?.email || "",
+          country: recipientCountry.name,
+          phone: `${recipientCountry.dial} ${recipientPhoneDigits(document.getElementById("form-phone").value)}`,
+          bankName: existingRecipient?.bankName || "",
+          bankAccountNumber: existingRecipient?.bankAccountNumber || existingRecipient?.accountNumber || "",
+          tplusWalletNumber: existingRecipient?.tplusWalletNumber || existingRecipient?.mobileWalletNumber || "",
+          cityName: document.getElementById("form-city-name").value,
+          address: document.getElementById("form-address").value.trim(),
           createdAt: id
             ? recipients.find((r) => r.id === id)?.createdAt || "Just Now"
             : "Just Now",
@@ -222,4 +216,3 @@
 
       // Initial Execution
       renderRecipients();
-    

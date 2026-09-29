@@ -14,27 +14,15 @@
         recipients: [
           {
             id: "1",
-            fullName: "Rahim Uddin",
-            country: "Bangladesh",
-            deliveryMethod: "bKash Wallet",
+            fullName: "MAXAMED CALI JAAMAC",
+            country: "Somalia",
+            deliveryMethod: "Bank",
           },
           {
             id: "2",
-            fullName: "Solomon Tekle",
-            country: "Eritrea",
-            deliveryMethod: "Cash Pickup",
-          },
-          {
-            id: "3",
-            fullName: "Amina Khatun",
-            country: "Bangladesh",
-            deliveryMethod: "Bank Transfer",
-          },
-          {
-            id: "4",
-            fullName: "Nega Zerai",
-            country: "Eritrea",
-            deliveryMethod: "Eribank Payout",
+            fullName: "Brian Otieno",
+            country: "Kenya",
+            deliveryMethod: "M-Pesa",
           },
         ],
         transactions: [
@@ -191,7 +179,7 @@
       function switchTab(tabId) {
         state.dashboardTab = tabId;
 
-        document.querySelectorAll(".dashboard-topnav [data-tab]").forEach((btn) => {
+        document.querySelectorAll(".dashboard-topnav [data-tab], .dashboard-mobile-menu [data-tab]").forEach((btn) => {
           const isTarget = btn.getAttribute("data-tab") === tabId;
           btn.classList.toggle("active", isTarget);
         });
@@ -263,12 +251,25 @@
           }
         });
 
+        const mobileNavToggle = document.getElementById("mobileNavToggle");
+        const mobileMenu = document.querySelector(".dashboard-mobile-menu");
+        mobileNavToggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = !mobileMenu.classList.contains("hidden");
+          mobileMenu.classList.toggle("hidden");
+          mobileNavToggle.setAttribute("aria-expanded", String(!isOpen));
+          mobileNavToggle.setAttribute("aria-label", isOpen ? "Open dashboard menu" : "Close dashboard menu");
+        });
+
         // Tab Buttons Listener
         document.addEventListener("click", (e) => {
           const navBtn = e.target.closest("[data-tab]");
           if (navBtn) {
             const tab = navBtn.getAttribute("data-tab");
             switchTab(tab);
+            mobileMenu.classList.add("hidden");
+            mobileNavToggle.setAttribute("aria-expanded", "false");
+            mobileNavToggle.setAttribute("aria-label", "Open dashboard menu");
           }
         });
 
@@ -280,10 +281,20 @@
           profileDropdown.classList.toggle("hidden");
           profileMenuBtn.setAttribute("aria-expanded", String(!isOpen));
         });
+        profileDropdown.addEventListener("click", (e) => {
+          if (e.target.closest(".profile-dropdown-item")) {
+            profileDropdown.classList.add("hidden");
+            profileMenuBtn.setAttribute("aria-expanded", "false");
+          }
+        });
         document.addEventListener("click", (e) => {
           if (!profileDropdown.contains(e.target) && !profileMenuBtn.contains(e.target)) {
             profileDropdown.classList.add("hidden");
             profileMenuBtn.setAttribute("aria-expanded", "false");
+          }
+          if (!mobileMenu.contains(e.target) && !mobileNavToggle.contains(e.target)) {
+            mobileMenu.classList.add("hidden");
+            mobileNavToggle.setAttribute("aria-expanded", "false");
           }
         });
         document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -323,7 +334,7 @@
         restoreLandingTransfer();
 
         const requestedTab = new URLSearchParams(window.location.search).get("tab");
-        const availableTabs = ["overview", "send", "recipients", "transactions", "profile"];
+        const availableTabs = ["overview", "send", "recipients", "transactions", "profile", "documents", "referral-code"];
         if (availableTabs.includes(requestedTab)) {
           switchTab(requestedTab);
         } else {
