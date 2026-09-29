@@ -1,122 +1,84 @@
-// Sign-up page slider, validation, and password visibility.
-/* ── App Image Slider & Content ── */
-const slides = document.querySelectorAll('.app-slide');
-const dots   = document.querySelectorAll('.dot');
-const sliderTitle = document.getElementById('sliderTitle');
-const sliderDesc = document.getElementById('sliderDesc');
+// Client-side account and referral demo. Production registration must use a secure backend.
+const form = document.getElementById("signupForm");
+const message = document.getElementById("message");
+const initialReferralCode = new URLSearchParams(location.search).get("ref") || "";
 
-// Content for each slide
-const slideContents = [
-  {
-    title: "Send Money Worldwide Effortlessly.",
-    desc: "Enjoy guaranteed exchange rates and instant transfers to your loved ones anytime, anywhere."
-  },
-  {
-    title: "Track Your Transfers in Real-Time.",
-    desc: "Stay updated with live status notifications from transfer initiation to pickup."
-  },
-  {
-    title: "Lowest Transfer Fees Guaranteed.",
-    desc: "Transparent pricing with no hidden charges so your family gets more."
-  },
-  {
-    title: "Bank-Grade Security for Peace of Mind.",
-    desc: "Your transactions are shielded with 256-bit encryption and advanced fraud protection."
-  }
-];
-
-let current = 0;
-let timer;
-
-function goTo(idx) {
-  slides[current].classList.remove('active');
-  dots[current].classList.remove('active');
-  
-  current = idx;
-  
-  slides[current].classList.add('active');
-  dots[current].classList.add('active');
-
-  // Update text content with subtle animation
-  if (sliderTitle && sliderDesc) {
-    sliderTitle.textContent = slideContents[current].title;
-    sliderDesc.textContent = slideContents[current].desc;
-  }
+function showSignupMessage(text, success = false) {
+  message.textContent = text;
+  message.className = `mb-4 rounded-xl border p-3 text-xs font-medium ${success ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-red-200 bg-red-50 text-red-700"}`;
 }
 
-function next() { goTo((current + 1) % slides.length); }
-
-function startSlider() { timer = setInterval(next, 4000); }
-function stopSlider()  { clearInterval(timer); }
-
-dots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    stopSlider();
-    goTo(parseInt(dot.dataset.index));
-    startSlider();
-  });
-});
-
-startSlider();
-
-/* ── Login Form ── */
-const $ = id => document.getElementById(id);
-let mode = "email";
-
-$("emailTab").onclick = () => {
-  mode = "email";
-  $("emailTab").className = "flex-1 py-2.5 rounded-lg bg-white text-slate-900 shadow-sm font-bold transition-all";
-  $("smsTab").className   = "flex-1 py-2.5 rounded-lg hover:text-slate-900 transition-all";
-  $("identifierLabel").textContent = "Email Address";
-  $("identifier").type        = "email";
-  $("identifier").placeholder = "name@example.com";
+window.togglePassword = (id, button) => {
+  const input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+  button?.setAttribute("aria-label", input.type === "password" ? "Show password" : "Hide password");
 };
 
-$("smsTab").onclick = () => {
-  mode = "sms";
-  $("smsTab").className   = "flex-1 py-2.5 rounded-lg bg-white text-slate-900 shadow-sm font-bold transition-all";
-  $("emailTab").className = "flex-1 py-2.5 rounded-lg hover:text-slate-900 transition-all";
-  $("identifierLabel").textContent = "Registered Mobile Number";
-  $("identifier").type        = "tel";
-  $("identifier").placeholder = "+880 1XXXXXXXXX";
-};
-
-$("togglePassword").onclick = () => {
-  $("password").type = $("password").type === "password" ? "text" : "password";
-};
-
-function showMessage(text, success = false) {
-  $("message").textContent = text;
-  $("message").className = "mb-4 p-3 rounded-xl text-xs font-medium " +
-    (success ? "bg-emerald-50 border border-emerald-200 text-emerald-700"
-             : "bg-red-50 border border-red-200 text-red-700");
+if (initialReferralCode) {
+  const referralField = document.createElement("div");
+  referralField.innerHTML = `<label for="signup-referral-code" class="mb-1 block text-xs font-bold text-slate-700">Referral code <span class="font-medium text-slate-400">(optional)</span></label><input id="signup-referral-code" type="text" maxlength="24" value="${initialReferralCode.replace(/[&<>"']/g, "")}" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm font-bold uppercase tracking-wider" />`;
+  form.insertBefore(referralField, form.querySelector("button[type='submit']"));
 }
 
-$("forgot").onclick = e => {
-  e.preventDefault();
-  showMessage("Password reset functionality should be connected to your backend/API.");
-};
-
-$("loginForm").onsubmit = e => {
-  e.preventDefault();
-
-  const identifier = $("identifier").value.trim();
-  const password   = $("password").value;
-
-  const users = JSON.parse(localStorage.getItem("payOnTimeUsers") || "[]");
-  const user  = users.find(u =>
-    mode === "email"
-      ? u.email.toLowerCase() === identifier.toLowerCase() && u.password === password
-      : u.phone === identifier && u.password === password
-  );
-
-  if (!user) {
-    showMessage("Invalid login information. Please check your credentials.");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value;
+  if (password !== document.getElementById("confirmPassword").value) {
+    showSignupMessage("Passwords do not match.");
     return;
   }
-
-  localStorage.setItem("payOnTimeCurrentUser", JSON.stringify(user));
-  showMessage("Login successful! Redirecting...", true);
-
-  setTimeout(() => { window.location.href = "/"; }, 700);
-};
+  let users;
+  try { users = JSON.parse(localStorage.getItem("payOnTimeUsers") || "[]"); }
+  catch { users = []; }
+  if (users.some((user) => user.email?.toLowerCase() === email || user.phone === phone)) {
+    showSignupMessage("An account with this email or phone number already exists.");
+    return;
+  }
+  const codeInput = document.getElementById("signup-referral-code");
+  const referralCode = (codeInput?.value || initialReferralCode).trim().toUpperCase();
+  const user = {
+    id: crypto.randomUUID(), fullName: name, email, phone,
+    dob: document.getElementById("dob").value,
+    country: document.getElementById("country").value,
+    password, kycStatus: "Pending", createdAt: new Date().toISOString(), referrerEligible: true,
+  };
+  try {
+    const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    const createCode = () => {
+      const random = new Uint8Array(8);
+      crypto.getRandomValues(random);
+      return `POT-${Array.from(random, (byte) => alphabet[byte % alphabet.length]).join("")}`;
+    };
+    let assignedCode = createCode();
+    while (users.some((existing) => existing.referralCode === assignedCode)) assignedCode = createCode();
+    user.referralCode = assignedCode;
+    const inviter = users.find((existing) => existing.referralCode?.toUpperCase() === referralCode && existing.referrerEligible !== false);
+    users.push(user);
+    localStorage.setItem("payOnTimeUsers", JSON.stringify(users));
+    if (inviter && inviter.email.toLowerCase() !== email) {
+      const referrals = JSON.parse(localStorage.getItem("payontime-referral-store") || "[]");
+      if (!referrals.some((item) => item.inviteeEmail === email)) {
+        const rule = window.PAYONTIME_REFERRAL_RULE || { active: false, trigger: "registration", points: 0 };
+        const registrationQualifies = rule.active && rule.trigger === "registration";
+        referrals.push({
+          id: crypto.randomUUID(), referrerCode: inviter.referralCode,
+          inviteeEmail: email, inviteeLabel: `Customer ${assignedCode.slice(-4)}`,
+          status: registrationQualifies ? "Successful" : "Registered",
+          rewardStatus: rule.active ? "Pending" : "Not eligible",
+          points: registrationQualifies ? Number(rule.points) || 0 : 0,
+          createdAt: new Date().toISOString(),
+        });
+        localStorage.setItem("payontime-referral-store", JSON.stringify(referrals));
+      }
+    }
+    const registeredUser = user;
+    localStorage.setItem("payOnTimeCurrentUser", JSON.stringify(registeredUser));
+    showSignupMessage("Account created. Opening your dashboard…", true);
+    window.setTimeout(() => { location.href = "/dashboard.html?tab=referral-code"; }, 500);
+  } catch {
+    showSignupMessage("Could not create your account. Please try again.");
+  }
+});

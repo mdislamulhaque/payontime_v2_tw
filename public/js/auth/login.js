@@ -118,5 +118,5 @@ $("loginForm").onsubmit = e => {
   localStorage.setItem("payOnTimeCurrentUser", JSON.stringify(user));
   showMessage("Login successful! Redirecting...", true);
 
-  setTimeout(() => { window.location.href = "/"; }, 700);
+  setTimeout(() => { window.location.href = "/dashboard.html"; }, 700);
 };
