@@ -77,12 +77,8 @@ const SEK_TO_USD_RATE = 0.096;
 
 const sendAmountInput = document.getElementById("send-amount");
 const receiveAmountInput = document.getElementById("receive-amount");
-const rateText = document.getElementById("rate-text");
 const totalText = document.getElementById("total-text");
-const amountText = document.getElementById("amount-text");
 const feeText = document.getElementById("fee-text");
-const recipientReceivesText = document.getElementById("recipient-receives-text");
-const transactionInfo = document.getElementById("transaction-info");
 const deliveryMethod = document.getElementById("delivery-method");
 const refreshBtn = document.getElementById("refresh-btn");
 const refreshIcon = document.getElementById("refresh-icon");
@@ -174,7 +170,8 @@ setupSearchableDropdown("receive");
 function calculateTransfer(changedField = "send") {
   if (changedField === "receive" && receiveAmountInput.value.trim() === "") {
     sendAmountInput.value = "";
-    transactionInfo.classList.add("hidden");
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
     return;
   }
 
@@ -193,13 +190,17 @@ function calculateTransfer(changedField = "send") {
     received = 0;
     receiveAmountInput.value = "";
   }
-  transactionInfo.classList.toggle("hidden", !selectedReceive || amount <= 0);
   if (!selectedReceive) {
-    amountText.textContent = `${amount > 0 ? amount.toFixed(2) : "0.00"} SEK`;
-    rateText.textContent = "Select a receiving country to see the rate";
-    feeText.textContent = "-";
-    totalText.textContent = "-";
-    recipientReceivesText.textContent = "-";
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
+    return;
+  }
+  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
+  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
+  inlineRate.textContent = exchangeRate;
+  if (amount <= 0) {
+    feeText.textContent = "0 SEK";
+    totalText.textContent = "0.00 SEK";
     return;
   }
   const feesByMethod = {
@@ -209,14 +210,8 @@ function calculateTransfer(changedField = "send") {
     "cash-pickup": 20
   };
   const fee = feesByMethod[deliveryMethod.value] ?? 0;
-  const exchangeRate = `1 SEK = ${(SEK_TO_USD_RATE / receiveRateToBase).toFixed(2)} ${receiveCode}`;
-  receiveAmountLabel.textContent = `Recipient receives (${receiveCode})`;
-  inlineRate.textContent = exchangeRate;
-  rateText.textContent = exchangeRate;
-  amountText.textContent = `${amount.toFixed(2)} ${selectedSend.code}`;
   feeText.textContent = `${fee.toFixed(0)} ${selectedSend.code}`;
   totalText.textContent = `${(amount + fee).toFixed(2)} ${selectedSend.code}`;
-  recipientReceivesText.textContent = `${received.toFixed(2)} ${receiveCode}`;
 }
 
 // Input Listeners
